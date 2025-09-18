@@ -1,0 +1,8 @@
+../Core/Src/imu.c:18:6:I2C_Scan	3
+../Core/Src/imu.c:27:6:imu_init	1
+../Core/Src/imu.c:32:6:imu_read	1
+../Core/Src/imu.c:36:6:write	1
+../Core/Src/imu.c:44:6:accel_init	2
+../Core/Src/imu.c:56:6:gyro_init	2
+../Core/Src/imu.c:69:6:accel_read	2
+../Core/Src/imu.c:89:6:gyro_read	2
