@@ -27,11 +27,13 @@ void I2C_Scan(I2C_HandleTypeDef *I2Cx) {
 void imu_init(I2C_HandleTypeDef *I2Cx){
 	accel_init(I2Cx);
 	gyro_init(I2Cx);
+	mag_init(I2Cx);
 }
 
 void imu_read(I2C_HandleTypeDef *I2Cx){
 	accel_read(I2Cx);
 	gyro_read(I2Cx);
+	mag_read(I2Cx);
 }
 void write (uint8_t reg, uint8_t value, I2C_HandleTypeDef *I2Cx, uint8_t devaddress)
 {
@@ -68,14 +70,14 @@ void gyro_init (I2C_HandleTypeDef *I2Cx) {
 
 void mag_init (I2C_HandleTypeDef *I2Cx) {
     // check device ID WHO_AM_I
-	HAL_I2C_Mem_Read(I2Cx, GYRO_ADDR, GYRO_ID, 1, &chipid, 1, i2c_timeout);
+	HAL_I2C_Mem_Read(I2Cx, MAG_ADDR, MAG_ID, 1, &chipid, 1, i2c_timeout);
 	//mprint("chipid = %d\n", chipid);
-    if (chipid == 104)
+    if (chipid == 130)
     {
-    	write(GYRO_FS_SEL_REG, 0x18, I2Cx, GYRO_ADDR);  // data_format range= +- 4g
-    	write(GYRO_PWR_MANAG_REG, 0x80, I2Cx, GYRO_ADDR);  // reset all bits
-    	write(GYRO_PWR_MANAG_REG, 0x01, I2Cx, GYRO_ADDR);  // power_cntl measure and wake up
-    	mprint("GYRO wake up");
+    	write(MAG_CTRL_REG1, 0x80, I2Cx, MAG_ADDR);  // reset all bits
+    	HAL_Delay(10);
+    	write(MAG_CTRL_REG2, 0x41, I2Cx, MAG_ADDR); //power_cntl measure and wake up
+    	mprint("MAG wake up");
     }
 }
 
@@ -94,8 +96,8 @@ void accel_read(I2C_HandleTypeDef *I2Cx)
     imu.accel_ADXL345.y_g = imu.accel_ADXL345.y_raw * 0.0039;
     imu.accel_ADXL345.z_g = imu.accel_ADXL345.z_raw * 0.0039;
 
-    mprint("Acce_X = %.3f g; \r", imu.accel_ADXL345.x_g);
-    mprint("Acce_Y = %.3f g; \r", imu.accel_ADXL345.y_g);
+    mprint("Acce_X = %.3f g; ", imu.accel_ADXL345.x_g);
+    mprint("Acce_Y = %.3f g; ", imu.accel_ADXL345.y_g);
     mprint("Acce_Z = %.3f g \n", imu.accel_ADXL345.z_g);
 }
 
@@ -114,7 +116,34 @@ void gyro_read(I2C_HandleTypeDef *I2Cx)
     imu.gyro_ITG3205.y_dps = imu.gyro_ITG3205.y_raw / 16.4f;
     imu.gyro_ITG3205.z_dps = imu.gyro_ITG3205.z_raw / 16.4f;
 
-    mprint("Gyro_X = %.3f deg/s; \r", imu.gyro_ITG3205.x_dps);
-    mprint("Gyro_Y = %.3f deg/s; \r", imu.gyro_ITG3205.y_dps);
+    mprint("Gyro_X = %.3f deg/s; ", imu.gyro_ITG3205.x_dps);
+    mprint("Gyro_Y = %.3f deg/s; ", imu.gyro_ITG3205.y_dps);
     mprint("Gyro_Z = %.3f deg/s \n", imu.gyro_ITG3205.z_dps);
+}
+
+void mag_read(I2C_HandleTypeDef *I2Cx)
+{
+    if (HAL_I2C_Mem_Read(I2Cx, MAG_ADDR, MAG_DATAX0_REG, 1, data_mag, 6, i2c_timeout) != HAL_OK) {
+        mprint("I2C read error!\r\n");
+        return;
+    }
+
+    imu.mag_VCM5883L.x_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
+    imu.mag_VCM5883L.y_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
+    imu.mag_VCM5883L.z_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
+
+    // debug
+//    mprint("Raw: X=%d, Y=%d, Z=%d\n",
+//           imu.mag_VCM5883L.x_raw,
+//           imu.mag_VCM5883L.y_raw,
+//           imu.mag_VCM5883L.z_raw);
+
+    imu.mag_VCM5883L.x_uT = imu.mag_VCM5883L.x_raw * 0.0122f;
+    imu.mag_VCM5883L.y_uT = imu.mag_VCM5883L.y_raw * 0.0122f;
+    imu.mag_VCM5883L.z_uT = imu.mag_VCM5883L.z_raw * 0.0122f;
+
+
+    mprint("Mag_X = %.3f uT; ", imu.mag_VCM5883L.x_uT);
+    mprint("Mag_Y = %.3f uT; ", imu.mag_VCM5883L.y_uT);
+    mprint("Mag_Z = %.3f uT \n", imu.mag_VCM5883L.z_uT);
 }

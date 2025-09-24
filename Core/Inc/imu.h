@@ -33,12 +33,11 @@ typedef struct {
     accel_t accel_ADXL345;
     gyro_t gyro_ITG3205;
     mag_t mag_VCM5883L;
-    uint8_t status;       // 0=ok, 1=error
 } imu_t;
 #define RAD_TO_DEG 57.295779513082320876798154814105
 
 //Accele reg
-#define ACCE_ID 0x00
+#define ACCE_ID 0x00 // Chip ID register
 #define ACCE_POWER_CTL_REG 0x2D
 #define ACCE_BW_RATE_REG 0x2C
 #define ACCE_DATA_FORMAT_REG 0x31
@@ -48,10 +47,10 @@ typedef struct {
 #define ACCE_DATAY1_REG 0x35
 #define ACCE_DATAZ0_REG 0x36
 #define ACCE_DATAZ1_REG 0x37
-#define ACCE_ADDR (0x53 << 1)
+#define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x0C
 
 ////gyro reg
-#define GYRO_ID 0x00
+#define GYRO_ID 0x00 // Chip ID register
 #define GYRO_DLPF_CFG_REG    2
 #define GYRO_FS_SEL_REG      0x16
 #define GYRO_SMPLRT_DIV_REG  0x15
@@ -62,22 +61,20 @@ typedef struct {
 #define GYRO_DATAY1_REG 0x20
 #define GYRO_DATAZ0_REG 0x21
 #define GYRO_DATAZ1_REG 0x22
-#define GYRO_ADDR (0x68 << 1)
+#define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x0C
 
 ////mag reg
-#define MAG_ID 0x00
-#define GYRO_DLPF_CFG_REG    2
-#define GYRO_FS_SEL_REG      0x16
-#define GYRO_SMPLRT_DIV_REG  0x15
-#define GYRO_PWR_MANAG_REG   0x3E
-#define GYRO_DATAX0_REG 0x1D
-#define GYRO_DATAX1_REG 0x1E
-#define GYRO_DATAY0_REG 0x1F
-#define GYRO_DATAY1_REG 0x20
-#define GYRO_DATAZ0_REG 0x21
-#define GYRO_DATAZ1_REG 0x22
-#define MAG_ADDR (0x0C << 1)
-// ---- Khai báo biến toàn cục ----
+#define MAG_ID        0x0C   // Chip ID register
+#define MAG_ADDR          (0x0C << 1)  // I2C 7-bit address = 0x0C
+#define MAG_DATAX0_REG    0x00
+#define MAG_DATAX1_REG    0x01
+#define MAG_DATAY0_REG    0x02
+#define MAG_DATAY1_REG    0x03
+#define MAG_DATAZ0_REG    0x04
+#define MAG_DATAZ1_REG    0x05
+#define MAG_CTRL_REG2     0x0A
+#define MAG_CTRL_REG1     0x0B
+// ---- Declare IMU ----
 extern imu_t imu;
 
 // ---- INIT && READ && WRITE ----
