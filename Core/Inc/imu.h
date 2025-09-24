@@ -47,7 +47,7 @@ typedef struct {
 #define ACCE_DATAY1_REG 0x35
 #define ACCE_DATAZ0_REG 0x36
 #define ACCE_DATAZ1_REG 0x37
-#define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x0C
+#define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x53
 
 ////gyro reg
 #define GYRO_ID 0x00 // Chip ID register
@@ -61,7 +61,7 @@ typedef struct {
 #define GYRO_DATAY1_REG 0x20
 #define GYRO_DATAZ0_REG 0x21
 #define GYRO_DATAZ1_REG 0x22
-#define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x0C
+#define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x68
 
 ////mag reg
 #define MAG_ID        0x0C   // Chip ID register
