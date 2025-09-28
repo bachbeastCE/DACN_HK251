@@ -9,30 +9,13 @@
 #define INC_IMU_H_
 #include <stdint.h>
 #include "main.h"
-
-// ---- ACCELEROMETER ----
-typedef struct {
-    int16_t x_raw, y_raw, z_raw;
-    float x_g, y_g, z_g;
-} accel_t;
-
-// ---- GYROSCOPE ----
-typedef struct {
-	int16_t x_raw, y_raw, z_raw;
-	float x_dps, y_dps, z_dps;
-} gyro_t;
-
-// ---- MAGNETOMETER ----
-typedef struct {
-	int16_t x_raw, y_raw, z_raw;
-	float x_uT, y_uT, z_uT;
-} mag_t;
-
 // ---- IMU ----
 typedef struct {
-    accel_t accel_ADXL345;
-    gyro_t gyro_ITG3205;
-    mag_t mag_VCM5883L;
+	float ax, ay, az; //accel_ADXL345
+	float gx, gy, gz; //gyro_ITG3205
+	float mx, my, mz; //mag_VCM5883L
+    float pitch; //elevation
+    float yaw; //azimuth
 } imu_t;
 #define RAD_TO_DEG 57.295779513082320876798154814105
 
@@ -47,7 +30,10 @@ typedef struct {
 #define ACCE_DATAY1_REG 0x35
 #define ACCE_DATAZ0_REG 0x36
 #define ACCE_DATAZ1_REG 0x37
-#define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x53
+#define ACCE_OFSX_REG 0x1E
+#define ACCE_OFSY_REG 0x1F
+#define ACCE_OFSZ_REG 0x20
+#define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x0C
 
 ////gyro reg
 #define GYRO_ID 0x00 // Chip ID register
@@ -61,7 +47,7 @@ typedef struct {
 #define GYRO_DATAY1_REG 0x20
 #define GYRO_DATAZ0_REG 0x21
 #define GYRO_DATAZ1_REG 0x22
-#define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x68
+#define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x0C
 
 ////mag reg
 #define MAG_ID        0x0C   // Chip ID register
