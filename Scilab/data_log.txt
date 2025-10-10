@@ -1,0 +1,462 @@
+[2025-10-10 20:51:58.704] mea_pitch = -0.161 degree; mea_yaw = 244.486 degree; mea_roll = 0.264 degree; 
+pitch_update = -1.426 degree; yaw_update = 265.039 degree; roll_update = 1.871 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 265.038696289062500
+Distance: 10800.000000
+lat_tar = 0.069064448362423;  lon_tar = 0.068602154540554; azi_tar = 45.000041346597840
+
+##############################################################
+[2025-10-10 20:51:59.741] 
+mea_pitch = -0.162 degree; mea_yaw = 199.929 degree; mea_roll = 0.035 degree; 
+pitch_update = -1.062 degree; yaw_update = 216.587 degree; roll_update = 0.670 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 216.587036132812500
+Distance: 10900.000000
+lat_tar = 0.069703933677165;  lon_tar = 0.069237360294884; azi_tar = 45.000042115820754
+
+##############################################################
+[2025-10-10 20:52:00.263] 
+mea_pitch = -0.162 degree; mea_yaw = 101.744 degree; mea_roll = -0.424 degree; 
+pitch_update = -0.822 degree; yaw_update = 131.486 degree; roll_update = -0.041 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 131.486022949218750
+Distance: 11000.000000
+lat_tar = 0.070343418983108;  lon_tar = 0.069872566066349; azi_tar = 45.000042892133294
+
+##############################################################
+[2025-10-10 20:52:01.320] 
+mea_pitch = 0.067 degree; mea_yaw = 263.832 degree; mea_roll = 0.035 degree; 
+pitch_update = -0.018 degree; yaw_update = 229.604 degree; roll_update = -0.075 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 229.603866577148438
+Distance: 11100.000000
+lat_tar = 0.070982904280171;  lon_tar = 0.070507771855105; azi_tar = 45.000043675535466
+
+##############################################################
+[2025-10-10 20:52:01.847] 
+mea_pitch = 0.068 degree; mea_yaw = 259.220 degree; mea_roll = 0.035 degree; 
+pitch_update = -0.046 degree; yaw_update = 251.227 degree; roll_update = 0.811 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 251.227188110351562
+Distance: 11200.000000
+lat_tar = 0.071622389568273;  lon_tar = 0.071142977661311; azi_tar = 45.000044466027262
+
+##############################################################
+[2025-10-10 20:52:02.388] 
+mea_pitch = 0.297 degree; mea_yaw = 173.302 degree; mea_roll = -0.423 degree; 
+pitch_update = 0.193 degree; yaw_update = 192.988 degree; roll_update = -1.811 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 192.988037109375000
+Distance: 11300.000000
+lat_tar = 0.072261874847334;  lon_tar = 0.071778183485122; azi_tar = 45.000045263608683
+
+##############################################################
+[2025-10-10 20:52:03.445] 
+mea_pitch = -0.619 degree; mea_yaw = 135.892 degree; mea_roll = 0.264 degree; 
+pitch_update = 0.618 degree; yaw_update = 150.346 degree; roll_update = -0.900 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 150.346237182617188
+Distance: 11400.000000
+lat_tar = 0.072901360117272;  lon_tar = 0.072413389326697; azi_tar = 45.000046068279730
+
+##############################################################
+[2025-10-10 20:52:03.969] 
+mea_pitch = 0.068 degree; mea_yaw = 270.592 degree; mea_roll = -0.195 degree; 
+pitch_update = 0.500 degree; yaw_update = 239.541 degree; roll_update = -0.628 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 239.540557861328125
+Distance: 11500.000000
+lat_tar = 0.073540845378007;  lon_tar = 0.073048595186192; azi_tar = 45.000046880040415
+
+##############################################################
+[2025-10-10 20:52:04.508] 
+mea_pitch = -0.160 degree; mea_yaw = 29.150 degree; mea_roll = 0.035 degree; 
+pitch_update = 0.951 degree; yaw_update = 82.509 degree; roll_update = -1.825 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 82.508880615234375
+Distance: 11600.000000
+lat_tar = 0.074180330629459;  lon_tar = 0.073683801063764; azi_tar = 45.000047698890718
+
+##############################################################
+[2025-10-10 20:52:05.045] 
+mea_pitch = -0.160 degree; mea_yaw = 66.011 degree; mea_roll = 0.263 degree; 
+pitch_update = 0.059 degree; yaw_update = 69.783 degree; roll_update = -3.484 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 69.783287048339844
+Distance: 11700.000000
+lat_tar = 0.074819815871546;  lon_tar = 0.074319006959572; azi_tar = 45.000048524830653
+
+##############################################################
+[2025-10-10 20:52:06.090] 
+mea_pitch = -0.162 degree; mea_yaw = 22.678 degree; mea_roll = -0.426 degree; 
+pitch_update = -0.721 degree; yaw_update = 34.217 degree; roll_update = -3.068 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 34.217418670654297
+Distance: 11800.000000
+lat_tar = 0.075459301104188;  lon_tar = 0.074954212873772; azi_tar = 45.000049357860220
+
+##############################################################
+[2025-10-10 20:52:06.618] 
+mea_pitch = -0.161 degree; mea_yaw = 231.990 degree; mea_roll = -0.194 degree; 
+pitch_update = -0.511 degree; yaw_update = 181.537 degree; roll_update = -2.355 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 181.536544799804688
+Distance: 11900.000000
+lat_tar = 0.076098786327304;  lon_tar = 0.075589418806520; azi_tar = 45.000050197979419
+
+##############################################################
+[2025-10-10 20:52:07.154] 
+mea_pitch = -0.162 degree; mea_yaw = 35.744 degree; mea_roll = -0.424 degree; 
+pitch_update = -0.984 degree; yaw_update = 72.189 degree; roll_update = -5.808 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 72.189392089843750
+Distance: 12000.000000
+lat_tar = 0.076738271540814;  lon_tar = 0.076224624757975; azi_tar = 45.000051045188229
+
+##############################################################
+[2025-10-10 20:52:07.699] 
+mea_pitch = 11.763 degree; mea_yaw = 131.309 degree; mea_roll = 4.506 degree; 
+pitch_update = 1.204 degree; yaw_update = 113.264 degree; roll_update = -9.818 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 113.264114379882812
+Distance: 12100.000000
+lat_tar = 0.077377756744636;  lon_tar = 0.076859830728294; azi_tar = 45.000051899486692
+
+##############################################################
+[2025-10-10 20:52:08.264] 
+mea_pitch = -0.612 degree; mea_yaw = 163.183 degree; mea_roll = -0.192 degree; 
+pitch_update = -0.759 degree; yaw_update = 147.542 degree; roll_update = -53.259 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 147.541961669921875
+Distance: 12200.000000
+lat_tar = 0.078017241938690;  lon_tar = 0.077495036717634; azi_tar = 45.000052760874780
+
+##############################################################
+[2025-10-10 20:52:09.335] 
+mea_pitch = -0.161 degree; mea_yaw = 169.569 degree; mea_roll = 0.264 degree; 
+pitch_update = -0.840 degree; yaw_update = 163.614 degree; roll_update = -50.277 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 163.613708496093750
+Distance: 12300.000000
+lat_tar = 0.078656727122895;  lon_tar = 0.078130242726151; azi_tar = 45.000053629352493
+
+##############################################################
+[2025-10-10 20:52:11.420] 
+ACCE wake upGYRO wake upMAG wake upCalibration done!
+Aoffsetx: -14.525 g; Aoffsety: -229.981 g; Aoffsetz: 82.720 g;
+Goffsetx = -1463.302 degree/s; Goffsety = 267.340 degree/s; Goffsetz = -57.443 degree/s;
+Moffsetx = 500.260 Gauss; Moffsety = -1567.300 Gauss; Moffsetz = -438.522 Gauss;
+=============================================
+mea_pitch = -0.438 degree; mea_yaw = 112.877 degree; mea_roll = 9.596 degree; 
+pitch_update = 2.724 degree; yaw_update = 74.531 degree; roll_update = 154.946 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 74.531333923339844
+Distance: 500.000000
+lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+
+##############################################################
+[2025-10-10 20:52:12.489] 
+mea_pitch = -0.256 degree; mea_yaw = 96.956 degree; mea_roll = 10.991 degree; 
+pitch_update = -3.235 degree; yaw_update = 94.502 degree; roll_update = -110.579 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 94.501785278320312
+Distance: 600.000000
+lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+
+##############################################################
+[2025-10-10 20:52:13.020] 
+mea_pitch = 0.127 degree; mea_yaw = 252.918 degree; mea_roll = -3.141 degree; 
+pitch_update = -22.649 degree; yaw_update = 203.970 degree; roll_update = -154.406 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 203.969696044921875
+Distance: 700.000000
+lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+
+##############################################################
+[2025-10-10 20:52:14.072] 
+mea_pitch = -0.097 degree; mea_yaw = 90.309 degree; mea_roll = 4.063 degree; 
+pitch_update = -20.590 degree; yaw_update = 129.617 degree; roll_update = 43.581 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 129.617385864257812
+Distance: 800.000000
+lat_tar = 0.005115886312475;  lon_tar = 0.005081638645770; azi_tar = 45.000000226867364
+
+##############################################################
+[2025-10-10 20:52:14.598] 
+mea_pitch = -0.083 degree; mea_yaw = 95.743 degree; mea_roll = 11.091 degree; 
+pitch_update = -16.176 degree; yaw_update = 105.559 degree; roll_update = 129.263 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 105.559104919433594
+Distance: 900.000000
+lat_tar = 0.005755372099476;  lon_tar = 0.005716843480499; azi_tar = 45.000000287129005
+
+##############################################################
+[2025-10-10 20:52:15.149] 
+mea_pitch = 0.259 degree; mea_yaw = 282.933 degree; mea_roll = 12.331 degree; 
+pitch_update = -14.661 degree; yaw_update = 223.350 degree; roll_update = 42.159 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 223.350158691406250
+Distance: 1000.000000
+lat_tar = 0.006394857885750;  lon_tar = 0.006352048316644; azi_tar = 45.000000354480264
+
+##############################################################
+[2025-10-10 20:52:16.204] 
+mea_pitch = -0.101 degree; mea_yaw = 151.893 degree; mea_roll = -1.072 degree; 
+pitch_update = -26.995 degree; yaw_update = 180.284 degree; roll_update = -5.895 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 180.283828735351562
+Distance: 1100.000000
+lat_tar = 0.007034343671217;  lon_tar = 0.006987253154360; azi_tar = 45.000000428921119
+
+##############################################################
+[2025-10-10 20:52:16.737] 
+mea_pitch = 0.119 degree; mea_yaw = 230.547 degree; mea_roll = -1.361 degree; 
+pitch_update = -24.783 degree; yaw_update = 214.470 degree; roll_update = 7.239 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 214.469848632812500
+Distance: 1200.000000
+lat_tar = 0.007673829455796;  lon_tar = 0.007622457993806; azi_tar = 45.000000510451578
+
+##############################################################
+[2025-10-10 20:52:17.269] 
+mea_pitch = 0.377 degree; mea_yaw = 108.799 degree; mea_roll = -4.208 degree; 
+pitch_update = -22.857 degree; yaw_update = 145.011 degree; roll_update = -20.754 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 145.011077880859375
+Distance: 1300.000000
+lat_tar = 0.008313315239406;  lon_tar = 0.008257662835138; azi_tar = 45.000000599071647
+
+##############################################################
+[2025-10-10 20:52:18.353] 
+mea_pitch = -0.121 degree; mea_yaw = 79.277 degree; mea_roll = -5.378 degree; 
+pitch_update = 8.572 degree; yaw_update = 96.501 degree; roll_update = 122.264 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 96.500663757324219
+Distance: 1400.000000
+lat_tar = 0.008952801021967;  lon_tar = 0.008892867678513; azi_tar = 45.000000694781320
+
+##############################################################
+[2025-10-10 20:52:18.884] 
+mea_pitch = 0.140 degree; mea_yaw = 102.317 degree; mea_roll = -6.955 degree; 
+pitch_update = 7.622 degree; yaw_update = 101.000 degree; roll_update = 103.217 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 101.000495910644531
+Distance: 1500.000000
+lat_tar = 0.009592286803397;  lon_tar = 0.009528072524090; azi_tar = 45.000000797580597
+
+##############################################################
+[2025-10-10 20:52:19.414] 
+mea_pitch = 0.435 degree; mea_yaw = 257.276 degree; mea_roll = -8.891 degree; 
+pitch_update = 7.101 degree; yaw_update = 205.617 degree; roll_update = 125.987 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 205.616760253906250
+Distance: 1600.000000
+lat_tar = 0.010231772583617;  lon_tar = 0.010163277372024; azi_tar = 45.000000907469477
+
+##############################################################
+[2025-10-10 20:52:19.950] 
+mea_pitch = 0.735 degree; mea_yaw = 258.709 degree; mea_roll = -9.358 degree; 
+pitch_update = 5.333 degree; yaw_update = 241.577 degree; roll_update = 138.417 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 241.576980590820312
+Distance: 1700.000000
+lat_tar = 0.010871258362545;  lon_tar = 0.010798482222473; azi_tar = 45.000001024447975
+
+##############################################################
+[2025-10-10 20:52:21.026] 
+mea_pitch = 0.487 degree; mea_yaw = 100.196 degree; mea_roll = -12.238 degree; 
+pitch_update = 4.100 degree; yaw_update = 147.694 degree; roll_update = 173.648 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 147.693511962890625
+Distance: 1800.000000
+lat_tar = 0.011510744140101;  lon_tar = 0.011433687075595; azi_tar = 45.000001148516070
+
+##############################################################
+[2025-10-10 20:52:21.560] 
+mea_pitch = 0.486 degree; mea_yaw = 104.113 degree; mea_roll = -11.235 degree; 
+pitch_update = 2.562 degree; yaw_update = 119.175 degree; roll_update = -151.124 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 119.174667358398438
+Distance: 1900.000000
+lat_tar = 0.012150229916203;  lon_tar = 0.012068891931546; azi_tar = 45.000001279673775
+
+##############################################################
+[2025-10-10 20:52:22.089] 
+mea_pitch = 0.790 degree; mea_yaw = 112.704 degree; mea_roll = -11.666 degree; 
+pitch_update = 2.294 degree; yaw_update = 115.534 degree; roll_update = -118.738 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 115.534416198730469
+Distance: 2000.000000
+lat_tar = 0.012789715690772;  lon_tar = 0.012704096790484; azi_tar = 45.000001417921077
+
+##############################################################
+[2025-10-10 20:52:22.616] 
+mea_pitch = 1.118 degree; mea_yaw = 134.485 degree; mea_roll = -11.172 degree; 
+pitch_update = 2.251 degree; yaw_update = 129.042 degree; roll_update = -88.980 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 129.042221069335938
+Distance: 2100.000000
+lat_tar = 0.013429201463726;  lon_tar = 0.013339301652566; azi_tar = 45.000001563257989
+
+##############################################################
+[2025-10-10 20:52:23.154] 
+mea_pitch = -0.169 degree; mea_yaw = 61.243 degree; mea_roll = -19.196 degree; 
+pitch_update = 54.287 degree; yaw_update = 76.442 degree; roll_update = 2.647 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 76.442413330078125
+Distance: 2200.000000
+lat_tar = 0.014068687234985;  lon_tar = 0.013974506517949; azi_tar = 45.000001715684512
+
+##############################################################
+[2025-10-10 20:52:24.234] 
+mea_pitch = 0.329 degree; mea_yaw = 11.692 degree; mea_roll = 2.155 degree; 
+pitch_update = 60.402 degree; yaw_update = 34.426 degree; roll_update = 88.798 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 34.426319122314453
+Distance: 2300.000000
+lat_tar = 0.014708173004468;  lon_tar = 0.014609711386791; azi_tar = 45.000001875200631
+
+##############################################################
+[2025-10-10 20:52:24.764] 
+mea_pitch = 0.456 degree; mea_yaw = 327.519 degree; mea_roll = 7.966 degree; 
+pitch_update = 68.798 degree; yaw_update = 226.711 degree; roll_update = -14.726 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 226.711090087890625
+Distance: 2400.000000
+lat_tar = 0.015347658772094;  lon_tar = 0.015244916259247; azi_tar = 45.000002041806361
+
+##############################################################
+[2025-10-10 20:52:25.289] 
+mea_pitch = -1.000 degree; mea_yaw = 16.759 degree; mea_roll = -0.451 degree; 
+pitch_update = 45.466 degree; yaw_update = 91.033 degree; roll_update = -39.264 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 91.033432006835938
+Distance: 2500.000000
+lat_tar = 0.015987144537783;  lon_tar = 0.015880121135477; azi_tar = 45.000002215501709
+
+##############################################################
+[2025-10-10 20:52:25.852] 
+mea_pitch = -0.903 degree; mea_yaw = 83.596 degree; mea_roll = 4.034 degree; 
+pitch_update = 74.602 degree; yaw_update = 76.965 degree; roll_update = -81.332 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 76.964614868164062
+Distance: 2600.000000
+lat_tar = 0.016626630301453;  lon_tar = 0.016515326015637; azi_tar = 45.000002396286646
+
+##############################################################
+[2025-10-10 20:52:26.384] 
+mea_pitch = -1.805 degree; mea_yaw = 190.465 degree; mea_roll = 11.799 degree; 
+pitch_update = 99.662 degree; yaw_update = 150.121 degree; roll_update = -18.260 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 150.121093750000000
+Distance: 2700.000000
+lat_tar = 0.017266116063025;  lon_tar = 0.017150530899883; azi_tar = 45.000002584161201
+
+##############################################################
+[2025-10-10 20:52:32.078] 
+ACCE wake upGYRO wake upMAG wake upACCE wake upGYRO wake upMAG wake ÿACCE wake upGYRO wake upMAG wake upCalibration done!
+Aoffsetx: -58.467 g; Aoffsety: -52.341 g; Aoffsetz: 196.155 g;
+Goffsetx = -505.921 degree/s; Goffsety = 371.240 degree/s; Goffsetz = 726.589 degree/s;
+Moffsetx = 681.956 Gauss; Moffsety = -1918.944 Gauss; Moffsetz = 537.541 Gauss;
+=============================================
+mea_pitch = 1.437 degree; mea_yaw = 194.108 degree; mea_roll = 0.298 degree; 
+pitch_update = -69.589 degree; yaw_update = 125.200 degree; roll_update = -92.793 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 125.199630737304688
+Distance: 500.000000
+lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+
+##############################################################
+[2025-10-10 20:52:38.820] 
+mea_pitch = 0.805 degree; mea_yaw = 35.962 degree; mea_roll = 0.311 degree; 
+pitch_update = 6.868 degree; yaw_update = 64.387 degree; roll_update = -50.623 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 64.387405395507812
+Distance: öACCE wake upGYRO wake upMAG wake upCalibration done!
+Aoffsetx: -55.203 g; Aoffsety: -46.062 g; Aoffsetz: 193.511 g;
+Goffsetx = -598.363 degree/s; Goffsety = -99.298 degree/s; Goffsetz = -20.084 degree/s;
+Moffsetx = 617.883 Gauss; Moffsety = -1926.875 Gauss; Moffsetz = 553.389 Gauss;
+=============================================
+mea_pitch = -5.674 degree; mea_yaw = 183.707 degree; mea_roll = -0.937 degree; 
+pitch_update = -34.726 degree; yaw_update = 124.894 degree; roll_update = 63.181 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 124.893524169921875
+Distance: 500.000000
+lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+
+##############################################################
+[2025-10-10 20:52:39.866] 
+mea_pitch = 0.504 degree; mea_yaw = 219.007 degree; mea_roll = -0.443 degree; 
+pitch_update = 79.900 degree; yaw_update = 176.214 degree; roll_update = 113.378 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 176.213684082031250
+Distance: 600.000000
+lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+
+##############################################################
+[2025-10-10 20:52:40.390] 
+mea_pitch = 3.622 degree; mea_yaw = 40.605 degree; mea_roll = -25.591 degree; 
+pitch_update = 85.869 degree; yaw_update = 85.342 degree; roll_update = 77.774 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 85.342140197753906
+Distance: 700.000000
+lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+
+##############################################################
+[2025-10-10 20:52:48.141] 
+ACCE wake upGYRO wake upMAG wake upACCE wake upGYRO wake upMAG wake upCalibration done!
+Aoffsetx: -31.797 g; Aoffsety: -42.501 g; Aoffsetz: 200.656 g;
+Goffsetx = -456.822 degree/s; Goffsety = -248.203 degree/s; Goffsetz = 135.219 degree/s;
+Moffsetx = 626.995 Gauss; Moffsety = -1950.987 Gauss; Moffsetz = 579.782 Gauss;
+=============================================
+mea_pitch = 3.367 degree; mea_yaw = 133.241 degree; mea_roll = 1.934 degree; 
+pitch_update = 11.293 degree; yaw_update = 86.875 degree; roll_update = -2.939 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 86.874946594238281
+Distance: 500.000000
+lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+
+##############################################################
+[2025-10-10 20:52:49.187] 
+mea_pitch = 3.539 degree; mea_yaw = 79.483 degree; mea_roll = 1.456 degree; 
+pitch_update = 23.313 degree; yaw_update = 80.233 degree; roll_update = -9.858 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 80.232734680175781
+Distance: 600.000000
+lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+
+##############################################################
+[2025-10-10 20:52:49.746] 
+mea_pitch = 4.000 degree; mea_yaw = 58.873 degree; mea_roll = 1.910 degree; 
+pitch_update = 34.071 degree; yaw_update = 64.755 degree; roll_update = -14.551 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 64.755065917968750
+Distance: 700.000000
+lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+
+##############################################################
+[2025-10-10 20:52:50.794] 
+mea_pitch = 3.566 degree; mea_yaw = 63.484 degree; mea_roll = 1.693 degree; 
+pitch_update = 45.420 degree; yaw_update = 62.235 degree; roll_update = -18.848 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 62.234710693359375
+Distance: 800.000000
+lat_tar = 0.005115886312475;  lon_tar = 0.005081638645770; azi_tar = 45.000000226867364
+
+##############################################################
+[2025-10-10 20:52:51.326] 
+mea_pitch = 3.301 degree; mea_yaw = 40.034 degree; mea_roll = 2.119 degree; 
+pitch_update = 58.604 degree; yaw_update = 46.174 degree; roll_update = -24.299 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 46.173854827880859
+Distance: 900.000000
+lat_tar = 0.005755372099476;  lon_tar = 0.005716843480499; azi_tar = 45.000000287129005
+
+##############################################################
+[2025-10-10 20:52:51.867] 
+mea_pitch = 3.791 degree; mea_yaw = 105.085 degree; mea_roll = 1.918 degree; 
+pitch_update = 73.189 degree; yaw_update = 83.802 degree; roll_update = -29.426 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 83.801574707031250
+Distance: 1000.000000
+lat_tar = 0.006394857885750;  lon_tar = 0.006352048316644; azi_tar = 45.000000354480264
+
+##############################################################
+[2025-10-10 20:52:52.922] 
+mea_pitch = 3.313 degree; mea_yaw = 344.606 degree; mea_roll = 2.575 degree; 
+pitch_update = 88.941 degree; yaw_update = 254.631 degree; roll_update = -36.841 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 254.630584716796875
+Distance: 1100.000000
+lat_tar = 0.007034343671217;  lon_tar = 0.006987253154360; azi_tar = 45.000000428921119
+
+##############################################################
+[2025-10-10 20:52:53.451] 
+mea_pitch = 4.224 degree; mea_yaw = 110.264 degree; mea_roll = 1.909 degree; 
+pitch_update = 106.187 degree; yaw_update = 157.505 degree; roll_update = -43.804 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 157.504989624023438
+Distance: 1200.000000
+lat_tar = 0.007673829455796;  lon_tar = 0.007622457993806; azi_tar = 45.000000510451578
+
+##############################################################
+[2025-10-10 20:52:53.981] 
+mea_pitch = 3.327 degree; mea_yaw = 92.888 degree; mea_roll = 2.360 degree; 
+pitch_update = 124.392 degree; yaw_update = 113.258 degree; roll_update = -50.502 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 113.257873535156250
+Distance: 1300.000000
+lat_tar = 0.008313315239406;  lon_tar = 0.008257662835138; azi_tar = 45.000000599071647
+
+##############################################################
+[2025-10-10 20:52:54.530] 
+mea_pitch = 3.103 degree; mea_yaw = 10.614 degree; mea_roll = 1.911 degree; 
+pitch_update = 142.201 degree; yaw_update = 43.357 degree; roll_update = -56.887 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 43.357307434082031
+Distance: 1400.000000
+lat_tar = 0.008952801021967;  lon_tar = 0.008892867678513; azi_tar = 45.000000694781320
+
+##############################################################
+[2025-10-10 20:52:55.603] 
+mea_pitch = 3.776 degree; mea_yaw = 56.860 degree; mea_roll = 1.910 degree; 
+pitch_update = 159.736 degree; yaw_update = 50.661 degree; roll_update = -62.547 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 50.661285400390625
+Distance: 1500.000000
+lat_tar = 0.009592286803397;  lon_tar = 0.009528072524090; azi_tar = 45.000000797580597
+
+##############################################################
+[2025-10-10 20:52:56.172] 
+mea_pitch = 3.791 degree; mea_yaw = 52.201 degree; mea_roll = 2.143 degree; 
+pitch_update = 177.534 degree; yaw_update = 50.176 degree; roll_update = -69.462 degree; 
+lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 50.175765991210938
+Distance: 1600.000000
+lat_tar = 0.010231772583617;  lon_tar = 0.010163277372024; azi_tar = 45.000000907469477
+
+##############################################################

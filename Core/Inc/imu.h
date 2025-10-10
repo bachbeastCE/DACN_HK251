@@ -9,15 +9,27 @@
 #define INC_IMU_H_
 #include <stdint.h>
 #include "main.h"
+#include <string.h>
+#include <math.h>
+
 // ---- IMU ----
 typedef struct {
 	float ax, ay, az; //accel_ADXL345
+	float aoffsetx, aoffsety, aoffsetz;
 	float gx, gy, gz; //gyro_ITG3205
+	float goffsetx, goffsety, goffsetz;
 	float mx, my, mz; //mag_VCM5883L
+	float moffsetx, moffsety, moffsetz;
     float pitch; //elevation
     float yaw; //azimuth
+    float roll;
 } imu_t;
+extern imu_t imu;
+
+#define PI 3.14159265358979323846f
 #define RAD_TO_DEG 57.295779513082320876798154814105
+
+
 
 //Accele reg
 #define ACCE_ID 0x00 // Chip ID register
@@ -61,7 +73,7 @@ typedef struct {
 #define MAG_CTRL_REG2     0x0A
 #define MAG_CTRL_REG1     0x0B
 // ---- Declare IMU ----
-extern imu_t imu;
+
 
 // ---- INIT && READ && WRITE ----
 void write (uint8_t reg, uint8_t value, I2C_HandleTypeDef *I2Cx, uint8_t devaddress);
@@ -78,4 +90,7 @@ void imu_init(I2C_HandleTypeDef *I2Cx);
 void imu_read(I2C_HandleTypeDef *I2Cx);
 // Scan address
 void I2C_Scan(I2C_HandleTypeDef *I2Cx);
+void calibrate(I2C_HandleTypeDef *I2Cx);
+
+
 #endif /* INC_IMU_H_ */

@@ -18,12 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdio.h>
-#include <stdarg.h>
-#include <imu.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <stdarg.h>
+#include <ukf.h>
+#include <gps.h>
+#include <geodesic.h>
+//#include <geodesic.h>
+//#include <gps.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,8 +51,13 @@ DMA_HandleTypeDef hdma_i2c1_tx;
 DMA_HandleTypeDef hdma_i2c1_rx;
 
 UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
+char tx_buffer[100];
+
+char test_buffer[512] = "$GNRMC,133858.000,A,1047.344152,N,10635.340624,E,0.35,66.20,180925,,,A,V*3C\r\n";
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,23 +66,85 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char buffer[562];
+
 void mprint (const char* format, ...){
+	char buffer[562];
     va_list args;
     va_start(args, format);
     int len = vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
 
     if(len > 0) {
-        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, HAL_MAX_DELAY);
     }
 }
+//void mprint(char *buffer, size_t buf_size, const char *format, ...) {
+//    va_list args;
+//    va_start(args, format);
+//    int len = vsnprintf(buffer, buf_size, format, args);
+//    va_end(args);
+//
+//    if (len > 0) {
+//        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, HAL_MAX_DELAY);
+//    }
+//}
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
+	if(huart->Instance == USART2){
+		uart2_idx = Size;
+		uart2_tranfer_count++;
+		//sprintf(tx_buffer, "Time: %d -> Tranfer:%d\r\n\n",uart2_tranfer_count,uart2_idx);
+		//HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
+
+		receive_Raw_Data(uart2_rx_buffer, Size);
+		HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uart2_rx_buffer, UART2_BUFFER_SIZE);
+
+//
+//		HAL_UART_Transmit(&huart2, uart3_rx_buffer, Size, 100);
+//
+//		sprintf(tx_buffer, "\r\n");
+//		HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
+
+//		if(use_gps_buffer == 0)
+//		{
+//			memcpy(gps_buffer_1, uart3_rx_buffer, Size);
+//			gps_buffer_1[Size] = '\0';   // kết thúc chuỗi
+//			use_gps_buffer = 1;          // lần tới ghi vào buffer 2
+//			sprintf(tx_buffer, "BUF 1 WRITE\r\n");
+//			HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
+//		}
+//		else
+//		{
+//			memcpy(gps_buffer_2, uart3_rx_buffer, Size);
+//			gps_buffer_2[Size] = '\0';
+//			use_gps_buffer = 0;          // lần tới ghi vào buffer 1
+//			sprintf(tx_buffer, "BUF 2 WRITE\r\n");
+//			HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
+//		}
+//
+//		new_gps_data = 1;  // báo main có dữ liệu mới
+
+
+
+
+
+
+		// Restart DMA để tiếp tục nhận dữ liệu
+
+	}
+}
+
+//int __io_putchar(int ch)
+//{
+//    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+//    return ch;
+//}
 /* USER CODE END 0 */
 
 /**
@@ -108,18 +179,48 @@ int main(void)
   MX_DMA_Init();
   MX_I2C1_Init();
   MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_Delay(500);
+  ukfInit(&ukf, &hi2c1);
+  HAL_Delay(1000);
+  HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uart2_rx_buffer, UART2_BUFFER_SIZE); //2 Scenarios: Buffer full & Idle Status
+  //RMC_t rmc;
+  double a = 6378137, f = 1.0/298.257223563; /* WGS84 */
+  double lat1, lon1, azi1, lat2, lon2, azi2, s12;
+  struct geod_geodesic g;
+
+  lat1 = coordinates_tmp.Lat;
+  lon1 = coordinates_tmp.Lon;
+  azi1 = 45;
+  s12 = 500;
+
+  geod_init(&g, a, f);
   /* USER CODE END 2 */
-  imu_init(&hi2c1);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+//  float a = 0.0f;
+//  float b = 0.0f;
+//  float c = 0.0f;
+//  float d = 0.0f;
   while (1)
   {
+	  imu_read(&hi2c1);
+	  update_GPS_Data();
+//	  if (update_GPS_Data() != 0){
+//		  return;
+//	  }
+	  ukf_filter(&ukf, &imu);
+	  geod_direct(&g, lat1, lon1, azi1, s12, &lat2, &lon2, &azi2);
+	  mprint("lat_obser = %.15f;  lon_obser = %.15f; azi1_obser = %.15f\r\n", lat1, lon1, ukf.x[2]);
+	  mprint("Distance: %f\r\n", s12);
+	  mprint("lat_tar = %.15f;  lon_tar = %.15f; azi_tar = %.15f\r\n", lat2, lon2, azi2);
+	  s12+=100;
+	  mprint("#\n");
+	  HAL_Delay(500);
     /* USER CODE END WHILE */
-	imu_read(&hi2c1);
 
-	HAL_Delay(3000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -145,7 +246,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 16;
+  RCC_OscInitStruct.PLL.PLLN = 192;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -155,12 +261,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
   }
@@ -234,6 +340,39 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -249,6 +388,9 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+  /* DMA1_Stream5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
 }
 
