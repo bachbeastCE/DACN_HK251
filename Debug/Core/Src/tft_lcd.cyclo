@@ -1,2 +1,0 @@
-../Core/Src/tft_lcd.c:12:6:tft_lcd_test	3
-../Core/Src/tft_lcd.c:87:6:tft_lcd_print_gps_imu_info	1
