@@ -87,35 +87,35 @@ void tft_lcd_test() {
 void tft_lcd_print_gps_imu_info(){
 	uint16_t y = 0;
 
-	snprintf(buffer, sizeof(buffer), "Loc_lon: %.5f", loc_gps_lon);
+	snprintf(buffer, sizeof(buffer), "Loc_lon: %.7f", loc_gps_lon);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_lat: %.5f", loc_gps_lat);
+	snprintf(buffer, sizeof(buffer), "Loc_lat: %.7f", loc_gps_lat);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_alt: %.5f", loc_gps_alt);
+	snprintf(buffer, sizeof(buffer), "Loc_alt: %.7f", loc_gps_alt);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_azi: %.5f", loc_azi);
+	snprintf(buffer, sizeof(buffer), "Loc_azi: %.7f", loc_azi);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_pit: %.5f", loc_pitch);
+	snprintf(buffer, sizeof(buffer), "Loc_pit: %.7f", loc_pitch);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_rol: %.5f", loc_roll);
+	snprintf(buffer, sizeof(buffer), "Loc_rol: %.7f", loc_roll);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
 
 	// TAG
-	snprintf(buffer, sizeof(buffer), "Tag_lon: %.5f", tag_gps_lon);
+	snprintf(buffer, sizeof(buffer), "Tag_lon: %.7f", tag_gps_lon);
 	ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Tag_lat: %.5f", tag_gps_lat);
+	snprintf(buffer, sizeof(buffer), "Tag_lat: %.7f", tag_gps_lat);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Tag_alt: %.5f", tag_gps_alt);
+	snprintf(buffer, sizeof(buffer), "Tag_alt: %.7f", tag_gps_alt);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Tag_dis: %.5f", tag_distance);
+	snprintf(buffer, sizeof(buffer), "Tag_dis: %.7f", tag_distance);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 }
 
