@@ -1,4 +1,4 @@
-/* USER CODE BEGIN Header */
+ /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : main.c
@@ -21,10 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h>
-#include "st7735.h"
-#include "fonts.h"
-#include "testimg.h"
+#include "global.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -196,13 +193,117 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   ST7735_Init();
+  ST7735_FillScreen(ST7735_BLACK);
+
+  char buffer[50];
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  loop();
+	  //loop();
+	  HAL_Delay(25);
+
+	  loc_gps_lon   += 0.2;
+	  loc_gps_lat   += 0.2;
+	  loc_gps_alt   += 0.2;
+	  loc_azi       += 0.2;
+	  loc_pitch     += 0.2;
+	  loc_yaw       += 0.2;
+	  loc_roll      += 0.2;
+
+	  tag_gps_lon   += 0.2;
+	  tag_gps_lat   += 0.2;
+	  tag_gps_alt   += 0.2;
+	  tag_distance  += 0.2;
+
+	  // LOCAL
+	  uint16_t y = 0;
+
+	  snprintf(buffer, sizeof(buffer), "Loc_lon: %.5f", loc_gps_lon);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Loc_lat: %.5f", loc_gps_lat);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Loc_alt: %.5f", loc_gps_alt);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Loc_azi: %.5f", loc_azi);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Loc_pit: %.5f", loc_pitch);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Loc_rol: %.5f", loc_roll);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_MAGENTA, ST7735_BLACK);
+
+	  // TAG
+	  snprintf(buffer, sizeof(buffer), "Tag_lon: %.5f", tag_gps_lon);
+	  ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Tag_lat: %.5f", tag_gps_lat);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Tag_alt: %.5f", tag_gps_alt);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+
+	  snprintf(buffer, sizeof(buffer), "Tag_dis: %.5f", tag_distance);
+	  ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+
+
+/*
+//	  uint16_t y = 0;
+//	  uint16_t col1 = 0;
+//	  uint16_t col2 = 70;
+//
+//	  ST7735_WriteString(25, y, "LOCAL", Font_7x10, ST7735_YELLOW, ST7735_BLACK);
+//	  y += 15;
+//
+//	  snprintf(buffer, sizeof(buffer), "Lon: %.4f", loc_gps_lon);
+//	  ST7735_WriteString(col1, y, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+//	  snprintf(buffer, sizeof(buffer), "Pit: %.4f", loc_pitch);
+//	  ST7735_WriteString(col2, y, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Lat: %.4f", loc_gps_lat);
+//	  ST7735_WriteString(col1, y, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+//	  snprintf(buffer, sizeof(buffer), "Yaw: %.2f", loc_yaw);
+//	  ST7735_WriteString(col2, y, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Alt: %.2f", loc_gps_alt);
+//	  ST7735_WriteString(col1, y, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+//	  snprintf(buffer, sizeof(buffer), "Roll: %.2f", loc_roll);
+//	  ST7735_WriteString(col2, y, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Azi: %.1f", loc_azi);
+//	  ST7735_WriteString(col1, y, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+//	  y += 15;
+//
+//	  // ====== PHẦN 2: TAG ======
+//	  ST7735_WriteString(25, y, "TAG", Font_7x10, ST7735_YELLOW, ST7735_BLACK);
+//	  y += 15;
+//
+//	  snprintf(buffer, sizeof(buffer), "Lon: %.6f", tag_gps_lon);
+//	  ST7735_WriteString(0, y, buffer, Font_7x10, ST7735_RED, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Lat: %.6f", tag_gps_lat);
+//	  ST7735_WriteString(0, y, buffer, Font_7x10, ST7735_RED, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Alt: %.2f", tag_gps_alt);
+//	  ST7735_WriteString(0, y, buffer, Font_7x10, ST7735_RED, ST7735_BLACK);
+//	  y += 12;
+//
+//	  snprintf(buffer, sizeof(buffer), "Dis: %.2f m", tag_distance);
+//	  ST7735_WriteString(0, y, buffer, Font_7x10, ST7735_WHITE, ST7735_BLACK);
+*/
+
+
 	  /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

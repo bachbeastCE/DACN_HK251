@@ -17,7 +17,6 @@
 #define ST7735_SPI_PORT hspi1
 extern SPI_HandleTypeDef ST7735_SPI_PORT;
 
-
 #define ST7735_CS_Pin        GPIO_PIN_4
 #define ST7735_CS_GPIO_Port  GPIOA
 #define ST7735_RES_Pin       GPIO_PIN_0
