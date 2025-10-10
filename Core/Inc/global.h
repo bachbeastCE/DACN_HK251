@@ -8,13 +8,6 @@
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
 
-#include <stdio.h>
-#include <string.h>
-#include <main.h>
-#include "st7735.h"
-#include "fonts.h"
-#include "testimg.h"
-
 extern double loc_gps_lon; 	//GPS LOCAL LONGTITUDE
 extern double loc_gps_lat; 	//GPS LOCAL LATITUDE
 extern double loc_gps_alt; 	//GPS LOCAL ALTITUDE
