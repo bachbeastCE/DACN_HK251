@@ -134,8 +134,6 @@ typedef struct {
     int Time_M;
     int Time_S;
     char Status;      // 'A' = fix, 'V' = no fix
-    double Lat;       // độ thập phân
-    double Lon;       // độ thập phân
     double Lat;       // decimal degree
     double Lon;       // decimal degree
     char Lat_area;    // 'N' hoặc 'S'

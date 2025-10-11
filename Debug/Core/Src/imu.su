@@ -1,0 +1,11 @@
+../Core/Src/imu.c:17:6:I2C_Scan	24	static
+../Core/Src/imu.c:26:6:imu_init	16	static
+../Core/Src/imu.c:33:6:imu_read	40	static
+../Core/Src/imu.c:54:6:write	32	static
+../Core/Src/imu.c:62:6:accel_init	32	static
+../Core/Src/imu.c:74:6:gyro_init	32	static
+../Core/Src/imu.c:87:6:mag_init	32	static
+../Core/Src/imu.c:100:6:accel_read	40	static
+../Core/Src/imu.c:120:6:gyro_read	40	static
+../Core/Src/imu.c:141:6:mag_read	40	static
+../Core/Src/imu.c:169:6:calibrate	280	static

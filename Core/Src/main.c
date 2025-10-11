@@ -101,8 +101,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
 		//sprintf(tx_buffer, "Time: %d -> Tranfer:%d\r\n\n",uart2_tranfer_count,uart2_idx);
 		//HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
 
-		receive_Raw_Data(uart2_rx_buffer, Size);
-		HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uart2_rx_buffer, UART2_BUFFER_SIZE);
+		//receive_Raw_Data(uart2_rx_buffer, Size);
+		//HAL_UARTEx_ReceiveToIdle_DMA(&huart2, uart2_rx_buffer, UART2_BUFFER_SIZE);
 
 /* USER CODE END 0 */
 

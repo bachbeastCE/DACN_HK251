@@ -268,33 +268,33 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
     return 0;
 }
 
-void GPS_GGA_Print(GGA_t *gga){
-    char tmp[256];
-    int len = snprintf(tmp, sizeof(tmp),
-        "GGA: Lat=%.6f %c, Lon=%.6f %c\r\n"
-        " FixQuality=%d, NumSV=%d, HDOP=%.2f\r\n"
-        " Altitude=%.3f m, GeoidSep=%.3f m\r\n",
-        gga->Lat, gga->Lat_area,
-        gga->Lon, gga->Lon_area,
-        gga->FixQuality, gga->NumSV, gga->HDOP,
-        gga->Altitude, gga->GeoidSep
-    );
-    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-}
-
-void print_Coordinates(COORDINATES_t *coordinates) {
-    mprint(
-        "Lat: %.6f %c, Lon: %.6f %c\r\n",
-        coordinates->Lat, coordinates->Lat_area,
-        coordinates->Lon, coordinates->Lon_area
-    );
-    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-}
-
-void GPS_Coordinates_Print(COORDINATES_t * coordinates){
-	char tmp[50];
-	int len = snprintf(tmp, sizeof(tmp),
-		"Lat: %.6f %c, Lon: %.6f %c\r\n",
-		coordinates->Lat, coordinates->Lat_area, coordinates->Lon, coordinates->Lon_area);
-	HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-}
+//void GPS_GGA_Print(GGA_t *gga){
+//    char tmp[256];
+//    int len = snprintf(tmp, sizeof(tmp),
+//        "GGA: Lat=%.6f %c, Lon=%.6f %c\r\n"
+//        " FixQuality=%d, NumSV=%d, HDOP=%.2f\r\n"
+//        " Altitude=%.3f m, GeoidSep=%.3f m\r\n",
+//        gga->Lat, gga->Lat_area,
+//        gga->Lon, gga->Lon_area,
+//        gga->FixQuality, gga->NumSV, gga->HDOP,
+//        gga->Altitude, gga->GeoidSep
+//    );
+//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+//}
+//
+//void print_Coordinates(COORDINATES_t *coordinates) {
+//    mprint(
+//        "Lat: %.6f %c, Lon: %.6f %c\r\n",
+//        coordinates->Lat, coordinates->Lat_area,
+//        coordinates->Lon, coordinates->Lon_area
+//    );
+//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+//}
+//
+//void GPS_Coordinates_Print(COORDINATES_t * coordinates){
+//	char tmp[50];
+//	int len = snprintf(tmp, sizeof(tmp),
+//		"Lat: %.6f %c, Lon: %.6f %c\r\n",
+//		coordinates->Lat, coordinates->Lat_area, coordinates->Lon, coordinates->Lon_area);
+//	HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+//}

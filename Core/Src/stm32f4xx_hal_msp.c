@@ -271,11 +271,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
     */
-<<<<<<< HEAD
-    GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
-=======
+
     GPIO_InitStruct.Pin = GPS_RX_Pin|GPS_TX_Pin;
->>>>>>> gps_update
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -351,11 +348,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
     PA2     ------> USART2_TX
     PA3     ------> USART2_RX
     */
-<<<<<<< HEAD
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
-=======
+
     HAL_GPIO_DeInit(GPIOA, GPS_RX_Pin|GPS_TX_Pin);
->>>>>>> gps_update
 
     /* USART2 DMA DeInit */
     HAL_DMA_DeInit(huart->hdmarx);
