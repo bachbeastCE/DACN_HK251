@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 /*
  * gps.h
  *
@@ -7,24 +6,16 @@
  *      Author: ASUS
  */
 
->>>>>>> gps_update
 #ifndef _GPS_H_
 #define _GPS_H_
 
 #include <math.h>
-<<<<<<< HEAD
 #include <main.h>
-=======
->>>>>>> gps_update
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include "global.h"
-<<<<<<< HEAD
-//#include "global.h"
-=======
-#include "main.h"
 
 //======================== CONFIG =================================//
 #define GPS_UART_PORT huart2
@@ -40,7 +31,7 @@ extern uint8_t gps_uart_idx;
 extern uint8_t gps_uart_tranfer_count;
 extern uint8_t gps_uart_copy_flag;
 extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
->>>>>>> gps_update
+
 
 //======================== COMMAND =================================//
 
@@ -110,16 +101,6 @@ extern volatile uint32_t __gps_ctrl_reg;
 #define GPS_READ_BIT     (1U << 0)   // bit 0
 #define GPS_WRITE_BIT    (1U << 1)   // bit 1
 #define GPS_ALT_BIT      (1U << 2)   // bit 2
-<<<<<<< HEAD
-#define GPS_INMODE_MASK  (3U << 3)   // bit 3-4 (2 bit)
-
-// ===== IN_MODE values =====
-#define GPS_INMODE_ALL       (0U)
-#define GPS_INMODE_RMC_ONLY  (1U)
-#define GPS_INMODE_GGA_ONLY  (2U)
-#define GPS_INMODE_RMC_GGA   (3U)
-=======
->>>>>>> gps_update
 
 // Check
 #define gps_ctrl_check(bit)     (__gps_ctrl_reg & (bit))
@@ -130,23 +111,10 @@ extern volatile uint32_t __gps_ctrl_reg;
 // Clear
 #define gps_ctrl_clear(bit)     (__gps_ctrl_reg &= ~(bit))
 
-<<<<<<< HEAD
-// ===== Macros IN_MODE =====
-#define gps_set_inmode(mode)   \
-    (__gps_ctrl_reg = (__gps_ctrl_reg & ~GPS_INMODE_MASK) | ((mode)<<3) )
-
-#define gps_get_inmode       \
-    ((__gps_ctrl_reg & GPS_INMODE_MASK) >> 3)
-
-//#define delay_ms(__ms) HAL_Delay(__ms)
-
-//======================== ERROR =================================//
-#define GPS_OKAY 0
-=======
 #define delay_ms(__ms) HAL_Delay(__ms)
 
 //======================== ERROR =================================//
->>>>>>> gps_update
+
 #define GPS_ALT_BUFFER 1
 #define GPS_TIMEOUT 2
 #define GPS_BUFFER_OVERFLOW 3
@@ -154,35 +122,22 @@ extern volatile uint32_t __gps_ctrl_reg;
 //======================== DATA STRUCT  =================================//
 
 typedef struct {
-<<<<<<< HEAD
-	double Lat;       // vĩ độ (decimal degree)
-	double Lon;       // kinh độ (decimal degree)
-    char Lat_area;    // 'N' hoặc 'S'
-    char Lon_area;    // 'E' hoặc 'W'
-} COORDINATES_t;
-
-extern COORDINATES_t coordinates_tmp;
-=======
 	double Lat;       // Latitude (decimal degree)
 	double Lon;       // Longtiude (decimal degree)
     char Lat_area;    // 'N' or 'S'
     char Lon_area;    // 'E' or 'W'
 } COORDINATES_t;
 
->>>>>>> gps_update
 typedef struct {
     char TalkerID[3]; // GP, GN, GL, GA, ...
     int Time_H;
     int Time_M;
     int Time_S;
     char Status;      // 'A' = fix, 'V' = no fix
-<<<<<<< HEAD
     double Lat;       // độ thập phân
     double Lon;       // độ thập phân
-=======
     double Lat;       // decimal degree
     double Lon;       // decimal degree
->>>>>>> gps_update
     char Lat_area;    // 'N' hoặc 'S'
     char Lon_area;    // 'E' hoặc 'W'
     double SOG;       // knots
@@ -206,7 +161,6 @@ typedef struct {
     double GeoidSep;  // chênh lệch geoid (m)
 } GGA_t;
 
-<<<<<<< HEAD
 //======================== VARIABLE  =================================//
 #define GPS_BUFFER_SIZE 256
 #define MAX_SENTENCE 128
@@ -224,7 +178,7 @@ uint8_t get_Coordinates (COORDINATES_t *result);
 void print_RMC(RMC_t * rmc);
 void print_GGA(GGA_t * gga);
 void print_Coordinates(COORDINATES_t * coordinates);
-=======
+
 //======================== FUNCTION  =================================//
 
 uint8_t GPS_CaculateChecksum(const char *sentence);
@@ -240,6 +194,5 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
 void GPS_RMC_Print(RMC_t * rmc);
 void GPS_GGA_Print(GGA_t * gga);
 void GPS_Coordinates_Print(COORDINATES_t * coordinates);
->>>>>>> gps_update
 
 #endif
