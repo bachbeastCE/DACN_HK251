@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdarg.h>
 #include <ukf.h>
@@ -28,6 +29,11 @@
 #include <geodesic.h>
 //#include <geodesic.h>
 //#include <gps.h>
+=======
+#include "global.h"
+#include "tft_lcd.h"
+#include "gps.h"
+>>>>>>> gps_update
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,8 +53,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
-DMA_HandleTypeDef hdma_i2c1_tx;
-DMA_HandleTypeDef hdma_i2c1_rx;
+
+SPI_HandleTypeDef hspi1;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -57,22 +63,31 @@ DMA_HandleTypeDef hdma_usart2_rx;
 /* USER CODE BEGIN PV */
 char tx_buffer[100];
 
+<<<<<<< HEAD
 char test_buffer[512] = "$GNRMC,133858.000,A,1047.344152,N,10635.340624,E,0.35,66.20,180925,,,A,V*3C\r\n";
+=======
+>>>>>>> gps_update
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
-static void MX_I2C1_Init(void);
 static void MX_USART1_UART_Init(void);
+<<<<<<< HEAD
 static void MX_USART2_UART_Init(void);
+=======
+static void MX_SPI1_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_I2C1_Init(void);
+>>>>>>> gps_update
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+<<<<<<< HEAD
 
 void mprint (const char* format, ...){
 	char buffer[562];
@@ -129,10 +144,30 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
 //		}
 //
 //		new_gps_data = 1;  // báo main có dữ liệu mới
+=======
+//char buffer[562];
+//void mprint (const char* format, ...){
+//    va_list args;
+//    va_start(args, format);
+//    int len = vsnprintf(buffer, sizeof(buffer), format, args);
+//    va_end(args);
+//
+//    if(len > 0) {
+//        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, 1000);
+//    }
+//}
+
+void UART1_PrintAAAA(void)
+{
+    const char *msg = "AAAA\r\n";
+    HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), 1000);
+}
+>>>>>>> gps_update
 
 
 
 
+<<<<<<< HEAD
 
 
 		// Restart DMA để tiếp tục nhận dữ liệu
@@ -145,6 +180,8 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
 //    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
 //    return ch;
 //}
+=======
+>>>>>>> gps_update
 /* USER CODE END 0 */
 
 /**
@@ -177,8 +214,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_I2C1_Init();
   MX_USART1_UART_Init();
+<<<<<<< HEAD
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(500);
@@ -196,6 +233,24 @@ int main(void)
   s12 = 500;
 
   geod_init(&g, a, f);
+=======
+  MX_SPI1_Init();
+  MX_USART2_UART_Init();
+  MX_I2C1_Init();
+  /* USER CODE BEGIN 2 */
+  ST7735_Init();
+  GPS_Init();
+  //RMC_t RMC;
+  //GGA_t GGA;
+  COORDINATES_t coordinates;
+
+  ST7735_FillScreen(ST7735_BLACK);
+
+
+  int count = 0;
+
+
+>>>>>>> gps_update
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -206,6 +261,7 @@ int main(void)
 //  float d = 0.0f;
   while (1)
   {
+<<<<<<< HEAD
 	  imu_read(&hi2c1);
 	  update_GPS_Data();
 //	  if (update_GPS_Data() != 0){
@@ -219,6 +275,42 @@ int main(void)
 	  s12+=100;
 	  mprint("#\n");
 	  HAL_Delay(500);
+=======
+		  GPS_Data_Update();
+		  	  GPS_Coordinates_Get(&coordinates);
+		  	  loc_gps_lon = coordinates.Lon;
+		  	  loc_gps_lat = coordinates.Lat;
+
+
+
+
+
+
+
+//	  //loc_gps_lon   += 0.2;
+//	  //loc_gps_lat   += 0.2;
+	  loc_gps_alt   += 0.2;
+	  loc_azi       += 0.2;
+	  loc_pitch     += 0.2;
+	  loc_yaw       += 0.2;
+	  loc_roll      += 0.2;
+
+	  tag_gps_lon   += 0.2;
+	  tag_gps_lat   += 0.2;
+	  tag_gps_alt   += 0.2;
+	  tag_distance  += 0.2;
+	  count++;
+
+	  tft_lcd_print_gps_imu_info();
+	  HAL_Delay(1000);
+
+
+
+
+
+
+
+>>>>>>> gps_update
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -243,6 +335,7 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
+<<<<<<< HEAD
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -250,6 +343,14 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 16;
   RCC_OscInitStruct.PLL.PLLN = 192;
+=======
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 12;
+  RCC_OscInitStruct.PLL.PLLN = 96;
+>>>>>>> gps_update
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -262,11 +363,19 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+<<<<<<< HEAD
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
+=======
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+>>>>>>> gps_update
   {
     Error_Handler();
   }
@@ -288,7 +397,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 400000;
+  hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -303,6 +412,44 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief SPI1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI1_Init(void)
+{
+
+  /* USER CODE BEGIN SPI1_Init 0 */
+
+  /* USER CODE END SPI1_Init 0 */
+
+  /* USER CODE BEGIN SPI1_Init 1 */
+
+  /* USER CODE END SPI1_Init 1 */
+  /* SPI1 parameter configuration*/
+  hspi1.Instance = SPI1;
+  hspi1.Init.Mode = SPI_MODE_MASTER;
+  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi1.Init.CRCPolynomial = 10;
+  if (HAL_SPI_Init(&hspi1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI1_Init 2 */
+
+  /* USER CODE END SPI1_Init 2 */
 
 }
 
@@ -382,12 +529,15 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+<<<<<<< HEAD
   /* DMA1_Stream0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
   /* DMA1_Stream1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+=======
+>>>>>>> gps_update
   /* DMA1_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
@@ -407,19 +557,40 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_GREEN_Pin */
-  GPIO_InitStruct.Pin = LED_GREEN_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(TFT_CS_GPIO_Port, TFT_CS_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, TFT_RES_Pin|TFT_DC_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_GREEN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : TFT_CS_Pin */
+  GPIO_InitStruct.Pin = TFT_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(TFT_CS_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : TFT_RES_Pin TFT_DC_Pin */
+  GPIO_InitStruct.Pin = TFT_RES_Pin|TFT_DC_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
@@ -428,6 +599,28 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+    if (huart->Instance == USART2)
+    {
+//        gps_uart_idx = Size;
+//        gps_uart_tranfer_count++;
+
+//		sprintf(tx_buffer, "Time: %d -> Tranfer:%d\r\n\n",
+//				gps_uart_tranfer_count, gps_uart_idx);
+//		HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
+
+        // 👉 Toggle LED mỗi khi nhận được 1 gói dữ liệu từ GPS
+        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+        // Xử lý dữ liệu nhận được
+        GPS_ReceiveRawData(gps_uart_rx_buffer, Size);
+
+        // Bật lại DMA nhận tiếp
+        HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
+        __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
+    }
+}
 /* USER CODE END 4 */
 
 /**

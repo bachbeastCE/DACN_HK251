@@ -55,13 +55,19 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+<<<<<<< HEAD
 void DMA1_Stream0_IRQHandler(void);
 void DMA1_Stream1_IRQHandler(void);
+=======
+>>>>>>> gps_update
 void DMA1_Stream5_IRQHandler(void);
 void TIM4_IRQHandler(void);
 void I2C1_EV_IRQHandler(void);
 void I2C1_ER_IRQHandler(void);
+<<<<<<< HEAD
 void USART1_IRQHandler(void);
+=======
+>>>>>>> gps_update
 void USART2_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 

@@ -7,14 +7,93 @@
 
 #include "gps.h"
 
+<<<<<<< HEAD
 volatile uint32_t __gps_ctrl_reg = 0x18;
+=======
+volatile uint32_t __gps_ctrl_reg = 0x07;
+
+uint8_t gps_uart_idx = 0;
+uint8_t gps_uart_tranfer_count = 0;
+uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
+>>>>>>> gps_update
 uint8_t gps_main_buffer[GPS_BUFFER_SIZE];
 uint8_t gps_alt_buffer[GPS_BUFFER_SIZE];
 GGA_t gga_tmp = {0};
 RMC_t rmc_tmp = {0};
 COORDINATES_t coordinates_tmp = {0};
+<<<<<<< HEAD
 char sentence[MAX_SENTENCE] = {0};
 
+=======
+uint8_t gps_uart_copy_flag = 0;
+char sentence[MAX_SENTENCE] = {0};
+
+uint8_t GPS_CaculateChecksum(const char *sentence)
+{
+    uint8_t checksum = 0;
+    int i = 0;
+
+    // Nếu bắt đầu bằng '$' thì bỏ qua
+    if (sentence[0] == '$')
+        sentence++;
+
+    // XOR tất cả ký tự cho đến khi gặp '*' hoặc kết thúc chuỗi
+    while (sentence[i] != '\0' && sentence[i] != '*')
+    {
+        checksum ^= (uint8_t)sentence[i];
+        i++;
+    }
+
+    return checksum;
+}
+
+uint8_t GPS_SendCommand(const char *data)
+{
+    char buffer[128];
+    uint8_t checksum;
+    int len;
+
+    // Nếu chuỗi chưa có '$', ta thêm vào
+    if (data[0] != '$')
+    {
+        snprintf(buffer, sizeof(buffer), "$%s", data);
+        data = buffer; // trỏ lại buffer mới
+    }
+
+    // Tính checksum cho câu lệnh
+    checksum = GPS_CaculateChecksum(data);
+
+    // Ghép chuỗi hoàn chỉnh: <lệnh>*<checksum>\r\n
+    char finalCmd[128];
+    len = snprintf(finalCmd, sizeof(finalCmd), "%s*%02X\r\n", data, checksum);
+
+    // Gửi qua UART
+    if (HAL_UART_Transmit(&GPS_UART_PORT, (uint8_t *)finalCmd, len, 1000) == HAL_OK)
+        return 0;
+    else
+        return 1;
+}
+
+uint8_t GPS_Init()
+{
+    // Gửi 4 lệnh khởi tạo đến GPS
+    GPS_SendCommand("$PAIR062,1,0");
+    HAL_Delay(100); // delay nhỏ giữa các lệnh
+
+    GPS_SendCommand("$PAIR062,2,0");
+    HAL_Delay(100);
+
+    GPS_SendCommand("$PAIR062,3,0");
+    HAL_Delay(100);
+
+    GPS_SendCommand("$PAIR062,5,0");
+    HAL_Delay(100);
+
+    HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
+
+    return 0;
+}
+>>>>>>> gps_update
 
 RMC_t parseRMC(const char* sentence) {
     RMC_t data = {0};
@@ -105,6 +184,7 @@ GGA_t parseGGA(const char* sentence) {
     return data;
 }
 
+<<<<<<< HEAD
 uint8_t send_Command(char *data){
 	return 0;
 }
@@ -113,6 +193,11 @@ uint8_t receive_Raw_Data(uint8_t* uart_rx_buffer,uint16_t size){
 	if(size > GPS_BUFFER_SIZE) return GPS_BUFFER_OVERFLOW;
 	if(gps_ctrl_check(GPS_READ_BIT)){
 		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
+=======
+uint8_t GPS_ReceiveRawData(uint8_t* uart_rx_buffer,uint16_t size){
+	if(size > GPS_BUFFER_SIZE) return GPS_BUFFER_OVERFLOW;
+	if(gps_ctrl_check(GPS_READ_BIT)){
+>>>>>>> gps_update
 		memcpy(gps_alt_buffer,uart_rx_buffer,size);
 		gps_ctrl_set(GPS_ALT_BIT);
 		return GPS_ALT_BUFFER;
@@ -121,11 +206,19 @@ uint8_t receive_Raw_Data(uint8_t* uart_rx_buffer,uint16_t size){
 		gps_ctrl_set(GPS_WRITE_BIT);
 		memcpy(gps_main_buffer,uart_rx_buffer,size);
 		gps_ctrl_clear(GPS_WRITE_BIT);
+<<<<<<< HEAD
 		return GPS_OKAY;
 	}
 }
 
 uint8_t update_GPS_Data() {
+=======
+		return 0;
+	}
+}
+
+uint8_t GPS_Data_Update() {
+>>>>>>> gps_update
 	const char *p;
 	const char *start;
 	if(gps_ctrl_check(GPS_ALT_BIT)){
@@ -140,7 +233,12 @@ uint8_t update_GPS_Data() {
 			while(cnt < 20){
 				if(gps_ctrl_check(GPS_WRITE_BIT)){
 					++cnt;
+<<<<<<< HEAD
 					HAL_Delay(1);
+=======
+					//delay_ms(1);
+					HAL_Delay(2);
+>>>>>>> gps_update
 				}
 				else{
 					break;
@@ -177,6 +275,7 @@ uint8_t update_GPS_Data() {
             p++;
         }
     }
+<<<<<<< HEAD
     if((gps_get_inmode) == 3 ||(gps_get_inmode) == 1){
     	coordinates_tmp.Lat = rmc_tmp.Lat;
     	coordinates_tmp.Lon = rmc_tmp.Lon;
@@ -201,23 +300,56 @@ uint8_t get_RMC(RMC_t *result){
 }
 
 uint8_t get_GGA(GGA_t *result){
+=======
+
+	coordinates_tmp.Lat = rmc_tmp.Lat;
+	coordinates_tmp.Lon = rmc_tmp.Lon;
+	coordinates_tmp.Lat_area = rmc_tmp.Lat_area;
+	coordinates_tmp.Lon_area = rmc_tmp.Lon_area;
+
+    gps_ctrl_clear(GPS_READ_BIT);
+
+    return 0;
+}
+
+uint8_t GPS_RMC_Get(RMC_t *result){
+    *result = rmc_tmp;
+    return 0;
+}
+
+uint8_t  GPS_GGA_Get(GGA_t *result){
+>>>>>>> gps_update
     *result = gga_tmp;
     return 0;
 }
 
+<<<<<<< HEAD
 uint8_t get_Coordinates (COORDINATES_t *result){
+=======
+uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
+>>>>>>> gps_update
     *result = coordinates_tmp;
     return 0;
 }
 
+<<<<<<< HEAD
 void print_RMC(RMC_t *rmc) {
     mprint(
+=======
+void GPS_RMC_Print(RMC_t *rmc){
+    char tmp[256];
+    int len = snprintf(tmp, sizeof(tmp),
+>>>>>>> gps_update
         "RMC: Talker=%s, Time=%02d:%02d:%02d, Status=%c\r\n"
         " Lat=%.6f %c, Lon=%.6f %c\r\n"
         " SOG=%.2f kn, COG=%.2f deg\r\n"
         " Date=%02d/%02d/%02d, Mode=%c, Nav=%c\r\n",
         rmc->TalkerID,
+<<<<<<< HEAD
         rmc->Time_H + 7, rmc->Time_M, rmc->Time_S,
+=======
+        rmc->Time_H + 7, rmc->Time_M, rmc->Time_S,  // cộng thêm timezone VN
+>>>>>>> gps_update
         rmc->Status,
         rmc->Lat, rmc->Lat_area,
         rmc->Lon, rmc->Lon_area,
@@ -225,10 +357,19 @@ void print_RMC(RMC_t *rmc) {
         rmc->Day, rmc->Month, rmc->Year,
         rmc->ModeInd, rmc->NavStatus
     );
+<<<<<<< HEAD
 }
 
 void print_GGA(GGA_t *gga) {
     mprint(
+=======
+    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+}
+
+void GPS_GGA_Print(GGA_t *gga){
+    char tmp[256];
+    int len = snprintf(tmp, sizeof(tmp),
+>>>>>>> gps_update
         "GGA: Lat=%.6f %c, Lon=%.6f %c\r\n"
         " FixQuality=%d, NumSV=%d, HDOP=%.2f\r\n"
         " Altitude=%.3f m, GeoidSep=%.3f m\r\n",
@@ -237,6 +378,7 @@ void print_GGA(GGA_t *gga) {
         gga->FixQuality, gga->NumSV, gga->HDOP,
         gga->Altitude, gga->GeoidSep
     );
+<<<<<<< HEAD
 }
 
 void print_Coordinates(COORDINATES_t *coordinates) {
@@ -245,4 +387,15 @@ void print_Coordinates(COORDINATES_t *coordinates) {
         coordinates->Lat, coordinates->Lat_area,
         coordinates->Lon, coordinates->Lon_area
     );
+=======
+    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+}
+
+void GPS_Coordinates_Print(COORDINATES_t * coordinates){
+	char tmp[50];
+	int len = snprintf(tmp, sizeof(tmp),
+		"Lat: %.6f %c, Lon: %.6f %c\r\n",
+		coordinates->Lat, coordinates->Lat_area, coordinates->Lon, coordinates->Lon_area);
+	HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
+>>>>>>> gps_update
 }

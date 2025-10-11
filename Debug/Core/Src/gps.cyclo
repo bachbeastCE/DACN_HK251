@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ../Core/Src/gps.c:19:7:parseRMC	4
 ../Core/Src/gps.c:71:7:parseGGA	3
 ../Core/Src/gps.c:108:9:send_Command	1
@@ -9,3 +10,18 @@
 ../Core/Src/gps.c:213:6:print_RMC	1
 ../Core/Src/gps.c:230:6:print_GGA	1
 ../Core/Src/gps.c:242:6:print_Coordinates	1
+=======
+../Core/Src/gps.c:23:9:GPS_CaculateChecksum	4
+../Core/Src/gps.c:42:9:GPS_SendCommand	3
+../Core/Src/gps.c:69:9:GPS_Init	1
+../Core/Src/gps.c:89:7:parseRMC	4
+../Core/Src/gps.c:141:7:parseGGA	3
+../Core/Src/gps.c:178:9:GPS_ReceiveRawData	3
+../Core/Src/gps.c:193:9:GPS_Data_Update	13
+../Core/Src/gps.c:257:9:GPS_RMC_Get	1
+../Core/Src/gps.c:262:10:GPS_GGA_Get	1
+../Core/Src/gps.c:267:9:GPS_Coordinates_Get	1
+../Core/Src/gps.c:272:6:GPS_RMC_Print	1
+../Core/Src/gps.c:291:6:GPS_GGA_Print	1
+../Core/Src/gps.c:305:6:GPS_Coordinates_Print	1
+>>>>>>> gps_update

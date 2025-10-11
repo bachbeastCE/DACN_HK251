@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ../Core/Src/gps.c:19:7:parseRMC	280	static
 ../Core/Src/gps.c:71:7:parseGGA	248	static
 ../Core/Src/gps.c:108:9:send_Command	16	static
@@ -9,3 +10,18 @@
 ../Core/Src/gps.c:213:6:print_RMC	88	static
 ../Core/Src/gps.c:230:6:print_GGA	32	static
 ../Core/Src/gps.c:242:6:print_Coordinates	16	static
+=======
+../Core/Src/gps.c:23:9:GPS_CaculateChecksum	24	static
+../Core/Src/gps.c:42:9:GPS_SendCommand	288	static
+../Core/Src/gps.c:69:9:GPS_Init	8	static
+../Core/Src/gps.c:89:7:parseRMC	280	static
+../Core/Src/gps.c:141:7:parseGGA	248	static
+../Core/Src/gps.c:178:9:GPS_ReceiveRawData	16	static
+../Core/Src/gps.c:193:9:GPS_Data_Update	168	static
+../Core/Src/gps.c:257:9:GPS_RMC_Get	16	static
+../Core/Src/gps.c:262:10:GPS_GGA_Get	24	static
+../Core/Src/gps.c:267:9:GPS_Coordinates_Get	24	static
+../Core/Src/gps.c:272:6:GPS_RMC_Print	432	static
+../Core/Src/gps.c:291:6:GPS_GGA_Print	392	static
+../Core/Src/gps.c:305:6:GPS_Coordinates_Print	120	static
+>>>>>>> gps_update

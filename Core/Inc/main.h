@@ -57,8 +57,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED_GREEN_Pin GPIO_PIN_5
-#define LED_GREEN_GPIO_Port GPIOA
+#define GPS_RX_Pin GPIO_PIN_2
+#define GPS_RX_GPIO_Port GPIOA
+#define GPS_TX_Pin GPIO_PIN_3
+#define GPS_TX_GPIO_Port GPIOA
+#define TFT_CS_Pin GPIO_PIN_4
+#define TFT_CS_GPIO_Port GPIOA
+#define TFT_SCL_Pin GPIO_PIN_5
+#define TFT_SCL_GPIO_Port GPIOA
+#define TFT_SDA_Pin GPIO_PIN_7
+#define TFT_SDA_GPIO_Port GPIOA
+#define TFT_RES_Pin GPIO_PIN_0
+#define TFT_RES_GPIO_Port GPIOB
+#define TFT_DC_Pin GPIO_PIN_1
+#define TFT_DC_GPIO_Port GPIOB
+#define Serial_RX_Pin GPIO_PIN_6
+#define Serial_RX_GPIO_Port GPIOB
+#define Serial_TX_Pin GPIO_PIN_7
+#define Serial_TX_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
