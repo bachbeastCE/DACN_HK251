@@ -29,9 +29,7 @@ extern imu_t imu;
 #define PI 3.14159265358979323846f
 #define RAD_TO_DEG 57.295779513082320876798154814105
 
-
-
-//Accele reg
+//Accelerometer Register
 #define ACCE_ID 0x00 // Chip ID register
 #define ACCE_POWER_CTL_REG 0x2D
 #define ACCE_BW_RATE_REG 0x2C
@@ -47,7 +45,7 @@ extern imu_t imu;
 #define ACCE_OFSZ_REG 0x20
 #define ACCE_ADDR (0x53 << 1) // I2C 7-bit address = 0x0C
 
-////gyro reg
+//Gyroscope Register
 #define GYRO_ID 0x00 // Chip ID register
 #define GYRO_DLPF_CFG_REG    2
 #define GYRO_FS_SEL_REG      0x16
@@ -61,7 +59,7 @@ extern imu_t imu;
 #define GYRO_DATAZ1_REG 0x22
 #define GYRO_ADDR (0x68 << 1) // I2C 7-bit address = 0x0C
 
-////mag reg
+//Magnetometer Register
 #define MAG_ID        0x0C   // Chip ID register
 #define MAG_ADDR          (0x0C << 1)  // I2C 7-bit address = 0x0C
 #define MAG_DATAX0_REG    0x00
@@ -88,9 +86,9 @@ void mag_read(I2C_HandleTypeDef *I2Cx);
 
 void imu_init(I2C_HandleTypeDef *I2Cx);
 void imu_read(I2C_HandleTypeDef *I2Cx);
+
 // Scan address
 void I2C_Scan(I2C_HandleTypeDef *I2Cx);
 void calibrate(I2C_HandleTypeDef *I2Cx);
-
 
 #endif /* INC_IMU_H_ */

@@ -26,11 +26,11 @@ uint8_t GPS_CaculateChecksum(const char *sentence)
     uint8_t checksum = 0;
     int i = 0;
 
-    // Nếu bắt đầu bằng '$' thì bỏ qua
+    // If begin letter is '$' then continue
     if (sentence[0] == '$')
         sentence++;
 
-    // XOR all letter ultil meet '*' or end of string
+    // XOR all letter until meet '*' or end of string
     while (sentence[i] != '\0' && sentence[i] != '*')
     {
         checksum ^= (uint8_t)sentence[i];
@@ -53,7 +53,7 @@ uint8_t GPS_SendCommand(const char *data)
         data = buffer; // point to new buffer
     }
 
-    // Cacuclate check sum for command
+    // check sum for command
     checksum = GPS_CaculateChecksum(data);
 
     // Complete command: <command>*<checksum>\r\n
@@ -69,9 +69,9 @@ uint8_t GPS_SendCommand(const char *data)
 
 uint8_t GPS_Init()
 {
-    // Gửi 4 lệnh khởi tạo đến GPS
+    // Turn on only GGA and RMC
     GPS_SendCommand("$PAIR062,1,0");
-    HAL_Delay(100); // delay nhỏ giữa các lệnh
+    HAL_Delay(100); // tiny delay between commands
 
     GPS_SendCommand("$PAIR062,2,0");
     HAL_Delay(100);
@@ -125,7 +125,7 @@ RMC_t parseRMC(const char* sentence) {
     data.Lon = lonDeg + lonMin / 60.0;
     if(lonArea == 'W') data.Lon = -data.Lon;
 
-    // Ngày/Tháng/Năm
+    // Date DD/MM/YYYY
     if(strlen(dateStr) == 6){
         char temp[3] = {0};
         temp[0] = dateStr[0]; temp[1] = dateStr[1];
@@ -147,7 +147,7 @@ GGA_t parseGGA(const char* sentence) {
     double hdop=0.0, alt=0.0, geoid=0.0;
     char latArea=0, lonArea=0;
 
-    // Parse từng trường
+    // Parse data fields
     sscanf(sentence, "$%*2sGGA,%*[^,],%14[^,],%c,%14[^,],%c,%d,%d,%lf,%lf,%*c,%lf,%*c",
            latStr, &latArea, lonStr, &lonArea, &fix, &numSV, &hdop, &alt, &geoid);
 

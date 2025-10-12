@@ -233,7 +233,7 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     //Kalman gain K = Cxz * S^-1
     float S_inv[4][4];
     if (invert4x4(S_inv, ukf->S) < 0) {
-    	mprint("loi day ne %d\n", invert4x4(S_inv, ukf->S));
+    	//mprint("loi day ne %d\n", invert4x4(S_inv, ukf->S));
         return;
     }
     for (int i = 0; i < L; i++) {
@@ -334,9 +334,9 @@ void ukf_filter(ukf_t *ukf, imu_t *imu) {
     ukf_predict(ukf, imu);
 
     ukf_update(ukf, imu);
-    mprint("pitch_update = %.3f degree; ", ukf->x[1]);
-    mprint("yaw_update = %.3f degree; ", ukf->x[2]);
-    mprint("roll_update = %.3f degree; \n", ukf->x[0]);
+//    mprint("pitch_update = %.3f degree; ", ukf->x[1]);
+//    mprint("yaw_update = %.3f degree; ", ukf->x[2]);
+//    mprint("roll_update = %.3f degree; \n", ukf->x[0]);
 
 //    mprint("#######################################\n");
 }
