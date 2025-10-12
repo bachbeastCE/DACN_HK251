@@ -12,6 +12,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
+#include "config.h"
+#include "serial.h"
+
 
 extern double loc_gps_lon; 	//GPS LOCAL LONGTITUDE
 extern double loc_gps_lat; 	//GPS LOCAL LATITUDE

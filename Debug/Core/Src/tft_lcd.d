@@ -31,7 +31,7 @@ Core/Src/tft_lcd.o: ../Core/Src/tft_lcd.c ../Core/Inc/tft_lcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/st7735.h ../Core/Inc/fonts.h ../Core/Inc/testimg.h \
- ../Core/Inc/global.h
+ ../Core/Inc/global.h ../Core/Inc/config.h ../Core/Inc/serial.h
 ../Core/Inc/tft_lcd.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -69,3 +69,5 @@ Core/Src/tft_lcd.o: ../Core/Src/tft_lcd.c ../Core/Inc/tft_lcd.h \
 ../Core/Inc/fonts.h:
 ../Core/Inc/testimg.h:
 ../Core/Inc/global.h:
+../Core/Inc/config.h:
+../Core/Inc/serial.h:

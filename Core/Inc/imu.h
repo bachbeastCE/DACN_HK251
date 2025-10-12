@@ -11,6 +11,7 @@
 #include "main.h"
 #include <string.h>
 #include <math.h>
+#include <stdio.h>
 
 // ---- IMU ----
 typedef struct {

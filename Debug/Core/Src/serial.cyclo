@@ -1,0 +1,2 @@
+../Core/Src/serial.c:12:5:__io_putchar	1
+../Core/Src/serial.c:19:6:Serial_Print	5

@@ -1,0 +1,2 @@
+../Core/Src/serial.c:12:5:__io_putchar	24	static
+../Core/Src/serial.c:19:6:Serial_Print	24	static

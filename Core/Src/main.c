@@ -24,6 +24,9 @@
 #include "global.h"
 #include "tft_lcd.h"
 #include "gps.h"
+#include "serial.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,10 +51,11 @@ SPI_HandleTypeDef hspi1;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart1_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
-char tx_buffer[100];
+
 
 /* USER CODE END PV */
 
@@ -108,18 +112,12 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  ST7735_Init();
-  GPS_Init();
-  //RMC_t RMC;
-  //GGA_t GGA;
-  COORDINATES_t coordinates;
-
-  ST7735_FillScreen(ST7735_BLACK);
+  //ST7735_Init();
+  //GPS_Init();
 
 
-  int count = 0;
-
-
+ ST7735_FillScreen(ST7735_BLACK);
+int count = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -129,6 +127,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  printf("HAHAHAHA %d", count );
+	  count++ ;
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -324,11 +325,15 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
+  __HAL_RCC_DMA2_CLK_ENABLE();
 
   /* DMA interrupt init */
   /* DMA1_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
+  /* DMA2_Stream7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
 
 }
 

@@ -15,10 +15,9 @@ const uint16_t i2c_timeout = 100;
 uint8_t chipid;
 imu_t imu;
 void I2C_Scan(I2C_HandleTypeDef *I2Cx) {
-//	mprint("HELLO WORD");
     for (uint8_t addr = 1; addr < 127; addr++) {
         if (HAL_I2C_IsDeviceReady(I2Cx, addr << 1, 1, 10) == HAL_OK) {
-            mprint("I2C device found at 0x%02X\r\n", addr);
+            //mprint("I2C device found at 0x%02X\r\n", addr);
         }
     }
 }
@@ -45,10 +44,10 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
     if (imu.yaw < 0) imu.yaw += 360.0;
-    mprint("mea_pitch = %.3f degree; ", imu.pitch);
-    mprint("mea_yaw = %.3f degree; ", imu.yaw);
-    mprint("mea_roll = %.3f degree; \n", imu.roll);
-//    mprint("#######################################\n");
+//    print("mea_pitch = %.3f degree; ", imu.pitch);
+//    print("mea_yaw = %.3f degree; ", imu.yaw);
+//    print("mea_roll = %.3f degree; \n", imu.roll);
+//    print("#######################################\n");
 }
 
 void write (uint8_t reg, uint8_t value, I2C_HandleTypeDef *I2Cx, uint8_t devaddress)
@@ -67,7 +66,7 @@ void accel_init (I2C_HandleTypeDef *I2Cx) {
     	write(ACCE_DATA_FORMAT_REG, 0x0B, I2Cx, ACCE_ADDR);  // data_format range= +- 16g, full reso
     	write(ACCE_POWER_CTL_REG, 0x00, I2Cx, ACCE_ADDR);  // reset all bits
     	write(ACCE_POWER_CTL_REG, 0x08, I2Cx, ACCE_ADDR);  // power_cntl measure and wake up 8hz
-    	mprint("ACCE wake up");
+    	printf("ACCE wake up");
     }
 }
 
@@ -80,7 +79,7 @@ void gyro_init (I2C_HandleTypeDef *I2Cx) {
     	write(GYRO_FS_SEL_REG, 0x18, I2Cx, GYRO_ADDR);
     	write(GYRO_PWR_MANAG_REG, 0x80, I2Cx, GYRO_ADDR);  // reset all bits
     	write(GYRO_PWR_MANAG_REG, 0x01, I2Cx, GYRO_ADDR);  // power_cntl measure and wake up
-    	mprint("GYRO wake up");
+    	printf("GYRO wake up");
     }
 }
 
@@ -93,14 +92,14 @@ void mag_init (I2C_HandleTypeDef *I2Cx) {
     	write(MAG_CTRL_REG1, 0x80, I2Cx, MAG_ADDR);  // reset all bits
     	HAL_Delay(10);
     	write(MAG_CTRL_REG2, 0x41, I2Cx, MAG_ADDR); //power_cntl measure and wake up
-    	mprint("MAG wake up");
+    	printf("MAG wake up");
     }
 }
 
 void accel_read(I2C_HandleTypeDef *I2Cx)
 {
     if (HAL_I2C_Mem_Read(I2Cx, ACCE_ADDR, ACCE_DATAX0_REG, 1, data_acce, 6, i2c_timeout) != HAL_OK) {
-        mprint("I2C read error!\r\n");
+        printf("I2C read error!\r\n");
         return;
     }
     int16_t x_raw, y_raw, z_raw;
@@ -120,7 +119,7 @@ void accel_read(I2C_HandleTypeDef *I2Cx)
 void gyro_read(I2C_HandleTypeDef *I2Cx)
 {
     if (HAL_I2C_Mem_Read(I2Cx, GYRO_ADDR, GYRO_DATAX0_REG, 1, data_gyro, 6, i2c_timeout) != HAL_OK) {
-        mprint("I2C read error!\r\n");
+        printf("I2C read error!\r\n");
         return;
     }
 
@@ -141,7 +140,7 @@ void gyro_read(I2C_HandleTypeDef *I2Cx)
 void mag_read(I2C_HandleTypeDef *I2Cx)
 {
     if (HAL_I2C_Mem_Read(I2Cx, MAG_ADDR, MAG_DATAX0_REG, 1, data_mag, 6, i2c_timeout) != HAL_OK) {
-        mprint("I2C read error!\r\n");
+        printf("I2C read error!\r\n");
         return;
     }
 
@@ -230,16 +229,16 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     imu.moffsety = (float)sum_my / CALIB_SAMPLES;
     imu.moffsetz = (float)sum_mz / CALIB_SAMPLES;
 
-    mprint("Calibration done!\r\n");
-    mprint("Aoffsetx: %.3f g; ", imu.aoffsetx);
-    mprint("Aoffsety: %.3f g; ", imu.aoffsety);
-    mprint("Aoffsetz: %.3f g;\n", imu.aoffsetz);
-    mprint("Goffsetx = %.3f degree/s; ", imu.goffsetx);
-    mprint("Goffsety = %.3f degree/s; ", imu.goffsety);
-    mprint("Goffsetz = %.3f degree/s;\n", imu.goffsetz);
-    mprint("Moffsetx = %.3f Gauss; ", imu.moffsetx);
-    mprint("Moffsety = %.3f Gauss; ", imu.moffsety);
-    mprint("Moffsetz = %.3f Gauss;\n", imu.moffsetz);
-    mprint("=============================================\n");
+    printf("Calibration done!\r\n");
+    printf("Aoffsetx: %.3f g; ", imu.aoffsetx);
+    printf("Aoffsety: %.3f g; ", imu.aoffsety);
+    printf("Aoffsetz: %.3f g;\n", imu.aoffsetz);
+    printf("Goffsetx = %.3f degree/s; ", imu.goffsetx);
+    printf("Goffsety = %.3f degree/s; ", imu.goffsety);
+    printf("Goffsetz = %.3f degree/s;\n", imu.goffsetz);
+    printf("Moffsetx = %.3f Gauss; ", imu.moffsetx);
+    printf("Moffsety = %.3f Gauss; ", imu.moffsety);
+    printf("Moffsetz = %.3f Gauss;\n", imu.moffsetz);
+    printf("=============================================\n");
 }
 

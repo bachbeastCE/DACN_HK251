@@ -2,16 +2,25 @@
  * serial.h
  *
  *  Created on: Oct 10, 2025
- *      Author: ASUS
+ *      Author: NGUYEN DUY BACH
  */
 
 #ifndef INC_SERIAL_H_
 #define INC_SERIAL_H_
 
-/*** Redefine if necessary ***/
-#define SERIAL_UART1_PORT huart1
-extern UART_HandleTypeDef SERIAL_UART1_PORT
+#include "global.h"
+#include "string.h"
 
-void Serial_Print();
+/*** Redefine if necessary ***/
+#define SERIAL_UART_PORT huart1
+#define TX_BUFFER_SIZE 128
+#define TIMEOUT 100
+
+extern UART_HandleTypeDef SERIAL_UART_PORT;
+
+/*** Function ***/
+void Serial_Print(const char *data , size_t len);
+int __io_putchar(int ch);
 
 #endif /* INC_SERIAL_H_ */
+

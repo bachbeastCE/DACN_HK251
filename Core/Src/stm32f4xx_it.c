@@ -56,6 +56,8 @@
 
 /* External variables --------------------------------------------------------*/
 extern I2C_HandleTypeDef hi2c1;
+extern SPI_HandleTypeDef hspi1;
+extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart2_rx;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
@@ -260,7 +262,20 @@ void I2C1_ER_IRQHandler(void)
 }
 
 /**
-<<<<<<< HEAD
+  * @brief This function handles SPI1 global interrupt.
+  */
+void SPI1_IRQHandler(void)
+{
+  /* USER CODE BEGIN SPI1_IRQn 0 */
+
+  /* USER CODE END SPI1_IRQn 0 */
+  HAL_SPI_IRQHandler(&hspi1);
+  /* USER CODE BEGIN SPI1_IRQn 1 */
+
+  /* USER CODE END SPI1_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -275,8 +290,6 @@ void USART1_IRQHandler(void)
 }
 
 /**
-=======
->>>>>>> gps_update
   * @brief This function handles USART2 global interrupt.
   */
 void USART2_IRQHandler(void)
@@ -288,6 +301,20 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream7 global interrupt.
+  */
+void DMA2_Stream7_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream7_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart1_tx);
+  /* USER CODE BEGIN DMA2_Stream7_IRQn 1 */
+
+  /* USER CODE END DMA2_Stream7_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
