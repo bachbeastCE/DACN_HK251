@@ -29,14 +29,3 @@ void Serial_Print(const char *fmt, ...)
     HAL_UART_Transmit_DMA(&SERIAL_UART_PORT, (uint8_t *)tx_buffer, len);
 }
 
-//void mprint (const char* format, ...){
-//	char buffer[562];
-//    va_list args;
-//    va_start(args, format);
-//    int len = vsnprintf(buffer, sizeof(buffer), format, args);
-//    va_end(args);
-//
-//    if(len > 0) {
-//        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, HAL_MAX_DELAY);
-//    }
-//}

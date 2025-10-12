@@ -127,9 +127,7 @@ int count = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  Serial_Print("HAHAHAHA %d \r\n", count);
-	  count++ ;
-	  HAL_Delay(1000);
+
   }
   /* USER CODE END 3 */
 }
