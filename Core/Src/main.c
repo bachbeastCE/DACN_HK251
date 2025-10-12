@@ -127,7 +127,7 @@ int count = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  printf("HAHAHAHA %d", count );
+	  Serial_Print("HAHAHAHA %d \r\n", count);
 	  count++ ;
 	  HAL_Delay(1000);
   }
@@ -414,6 +414,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
     }
 }
+
 /* USER CODE END 4 */
 
 /**

@@ -9,40 +9,34 @@
 
 static uint8_t tx_buffer[TX_BUFFER_SIZE];
 
-int __io_putchar(int ch)
+void Serial_Print(const char *fmt, ...)
 {
-    char c = (char)ch;
-    Serial_Print(&c, 1);
-    return ch;
-}
+    va_list args;
+    va_start(args, fmt);
 
-void Serial_Print(const char *data , size_t len)
-{
-    // Send directly if length of data smaller than buffer size
-    if (len <= TX_BUFFER_SIZE)
+    int len = vsnprintf((char *)tx_buffer, TX_BUFFER_SIZE, fmt, args);
+    va_end(args);
+
+    if (len > TX_BUFFER_SIZE)
+        len = TX_BUFFER_SIZE;
+
+    while (SERIAL_UART_PORT.gState != HAL_UART_STATE_READY)
     {
-        HAL_UART_Transmit_DMA(&huart1, (uint8_t*)data, len);
-        return;
+        HAL_Delay(1);
     }
 
-    // On the contrary, cut into chunks and send
-    size_t offset = 0;
-    while (offset < len)
-    {
-        size_t chunk = len - offset;
-        if (chunk > TX_BUFFER_SIZE)
-            chunk = TX_BUFFER_SIZE;
-
-        memcpy(tx_buffer, &data[offset], chunk);
-        offset += chunk; //Set new offset
-
-        // Send packet
-        HAL_UART_Transmit_DMA(&huart1, tx_buffer, chunk);
-
-        // Wait for sending successfully
-        while (huart1.gState != HAL_UART_STATE_READY)
-        {
-            HAL_Delay(1);
-        }
-    }
+    // Gửi qua UART1 dùng DMA
+    HAL_UART_Transmit_DMA(&SERIAL_UART_PORT, (uint8_t *)tx_buffer, len);
 }
+
+//void mprint (const char* format, ...){
+//	char buffer[562];
+//    va_list args;
+//    va_start(args, format);
+//    int len = vsnprintf(buffer, sizeof(buffer), format, args);
+//    va_end(args);
+//
+//    if(len > 0) {
+//        HAL_UART_Transmit(&huart1, (uint8_t*)buffer, len, HAL_MAX_DELAY);
+//    }
+//}

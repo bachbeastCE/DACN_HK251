@@ -7,5 +7,6 @@
 ../Core/Src/main.c:323:13:MX_DMA_Init	16	static
 ../Core/Src/main.c:345:13:MX_GPIO_Init	48	static
 ../Core/Src/main.c:395:6:HAL_UARTEx_RxEventCallback	16	static
-../Core/Src/main.c:427:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/main.c:445:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:418:5:__io_putchar	24	static
+../Core/Src/main.c:435:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:453:6:Error_Handler	4	static,ignoring_inline_asm

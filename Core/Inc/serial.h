@@ -19,8 +19,8 @@
 extern UART_HandleTypeDef SERIAL_UART_PORT;
 
 /*** Function ***/
-void Serial_Print(const char *data , size_t len);
-int __io_putchar(int ch);
+void Serial_Print(const char *fmt, ...);
 
 #endif /* INC_SERIAL_H_ */
+
 
