@@ -17,3 +17,5 @@ double tag_gps_lat = 0.0;
 double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 
+struct geod_geodesic g;
+

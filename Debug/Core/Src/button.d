@@ -1,4 +1,4 @@
-Core/Src/tft_lcd.o: ../Core/Src/tft_lcd.c ../Core/Inc/tft_lcd.h \
+Core/Src/button.o: ../Core/Src/button.c ../Core/Inc/button.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -29,11 +29,8 @@ Core/Src/tft_lcd.o: ../Core/Src/tft_lcd.c ../Core/Inc/tft_lcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/st7735.h ../Core/Inc/fonts.h ../Core/Inc/testimg.h \
- ../Core/Inc/global.h ../Core/Inc/config.h ../Core/Inc/serial.h \
- ../Core/Inc/geodesic.h
-../Core/Inc/tft_lcd.h:
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+../Core/Inc/button.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -66,10 +63,3 @@ Core/Src/tft_lcd.o: ../Core/Src/tft_lcd.c ../Core/Inc/tft_lcd.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-../Core/Inc/st7735.h:
-../Core/Inc/fonts.h:
-../Core/Inc/testimg.h:
-../Core/Inc/global.h:
-../Core/Inc/config.h:
-../Core/Inc/serial.h:
-../Core/Inc/geodesic.h:

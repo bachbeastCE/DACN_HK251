@@ -81,9 +81,6 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 //To restore the system default setting
 #define SET_REDUCTION               "$PMTK314,-1"
 
-//Set NMEA sentence output frequencies
-#define SET_NMEA_OUTPUT   			"$PMTK314,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
-#define SET_NMEA_OUTPUT_RMC_ONLY  	"$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
 
 //======================== CONTROL  =================================//
 //GPS Control register
@@ -91,8 +88,7 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
  * 0: READ
  * 1: WRITE
  * 2: ALT_BUF
- * 3-4: IN_MODE : INPUT MODE: ALL(0), RMC_ONLY(1),GGA_ONLY(2), RMC & GGA(3)
- * 5-31: Reverse
+ * 3-31: Reverse
  **/
 
 extern volatile uint32_t __gps_ctrl_reg;
@@ -163,19 +159,9 @@ typedef struct {
 #define GPS_BUFFER_SIZE 256
 #define MAX_SENTENCE 128
 
-//======================== FUNCTION  =================================//
-uint8_t send_Command(char *data);
-uint8_t receive_Raw_Data(uint8_t* uart_rx_buffer,uint16_t size);
+extern GGA_t gga_tmp;
+extern RMC_t rmc_tmp;
 
-uint8_t update_GPS_Data();
-
-uint8_t get_RMC (RMC_t *result);
-uint8_t get_GGA (GGA_t *result);
-uint8_t get_Coordinates (COORDINATES_t *result);
-
-void print_RMC(RMC_t * rmc);
-void print_GGA(GGA_t * gga);
-void print_Coordinates(COORDINATES_t * coordinates);
 
 //======================== FUNCTION  =================================//
 

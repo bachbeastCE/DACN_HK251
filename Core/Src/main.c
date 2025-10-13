@@ -26,6 +26,7 @@
 #include "gps.h"
 #include "serial.h"
 #include "timer.h"
+#include "button.h"
 
 
 /* USER CODE END Includes */
@@ -53,6 +54,8 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 
+TIM_HandleTypeDef htim2;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart1_tx;
@@ -74,6 +77,7 @@ static void MX_SPI2_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_SPI3_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -121,20 +125,19 @@ int main(void)
   MX_I2C2_Init();
   MX_I2C3_Init();
   MX_SPI3_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   ST7735_Init();
   ST7735_FillScreen(ST7735_BLACK);
+
   GPS_Init();
+  geod_init(&g, 6378137, 1/298.257223563);
 
 
-//  Timer_Init();
-//  Timer_Set(0, 1000);
-//  Timer_Set(1, 1000);
-//  Timer_Set(2, 1000);
-
-  uint8_t flag0 = 0;
-  uint8_t flag1 = 0;
-  uint8_t flag2 = 0;
+  Timer_Init();
+  Timer_Set(0, 20); //IMU
+  Timer_Set(1, 1000);
+  Timer_Set(2, 1000);
 
   /* USER CODE END 2 */
 
@@ -145,20 +148,37 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if(flag0==1){
-	 		  flag0 = 0;
+	 if(timer_flag[0] ==1){
+		 Timer_Set(0, 40);
+		 //RUN IMU 25HZ
+		 loc_azi = 45;
+		 loc_pitch = 30;
+	 }
+	 if(timer_flag[1] ==1){
+		 Timer_Set(0, 1000);
+		 //RUN GPS 1HZ
+		 GPS_Data_Update();
+		 loc_gps_lon = gga_tmp.Lon;
+		 loc_gps_lat = gga_tmp.Lat;
+		 loc_gps_alt = gga_tmp.Altitude;
+	 }
+	 if(timer_flag[2] == 1){
+		 Timer_Set(0, 10);
+	 	//RUN TFT and BUTTON AT 100HZ
+		 tft_lcd_print_gps_imu_info();
+		 getKeyInput();
+	 }
+	 if(isButtonPressed(0) == 1){
+		 double pitch_rad = loc_pitch * M_PI / 180.0;
+		 double s12 = tag_distance * cos(pitch_rad);
 
-	 	  }
-	 	  if(flag1 == 20){
-	 		  flag1 = 0;
-	 	  }
-	 	  if(flag2==10){
-	 		  flag2 = 0;
-	 	  }
-	 	  HAL_Delay(1);
-	 	  ++flag0;
-	 	  ++flag1;
-	 	  ++flag2;
+		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+
+		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+		                 &tag_gps_lat, &tag_gps_lon, NULL);
+
+	 }
+
   }
   /* USER CODE END 3 */
 }
@@ -391,6 +411,51 @@ static void MX_SPI3_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 0;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 99;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -509,6 +574,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BUTTON_Pin */
+  GPIO_InitStruct.Pin = BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BUTTON_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TFT_CS_Pin */
   GPIO_InitStruct.Pin = TFT_CS_Pin;

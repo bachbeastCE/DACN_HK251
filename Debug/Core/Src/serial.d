@@ -31,7 +31,7 @@ Core/Src/serial.o: ../Core/Src/serial.c ../Core/Inc/serial.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/config.h ../Core/Inc/serial.h
+ ../Core/Inc/config.h ../Core/Inc/serial.h ../Core/Inc/geodesic.h
 ../Core/Inc/serial.h:
 ../Core/Inc/global.h:
 ../Core/Inc/main.h:
@@ -68,3 +68,4 @@ Core/Src/serial.o: ../Core/Src/serial.c ../Core/Inc/serial.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/config.h:
 ../Core/Inc/serial.h:
+../Core/Inc/geodesic.h:

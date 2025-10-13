@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BUTTON_Pin GPIO_PIN_0
+#define BUTTON_GPIO_Port GPIOA
 #define GPS_RX_Pin GPIO_PIN_2
 #define GPS_RX_GPIO_Port GPIOA
 #define GPS_TX_Pin GPIO_PIN_3
