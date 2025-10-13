@@ -25,7 +25,7 @@ void Serial_Print(const char *fmt, ...)
         HAL_Delay(1);
     }
 
-    // Gửi qua UART1 dùng DMA
-    HAL_UART_Transmit_DMA(&SERIAL_UART_PORT, (uint8_t *)tx_buffer, len);
+    // Gửi qua UART1
+    HAL_UART_Transmit(&SERIAL_UART_PORT, (uint8_t *)tx_buffer, len,100);
 }
 

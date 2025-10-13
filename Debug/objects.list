@@ -13,6 +13,7 @@
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32f4xx.o"
 "./Core/Src/tft_lcd.o"
+"./Core/Src/timer.o"
 "./Core/Src/ukf.o"
 "./Core/Startup/startup_stm32f411ceux.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
