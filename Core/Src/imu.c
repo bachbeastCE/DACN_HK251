@@ -181,7 +181,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
         //Read Gyro
         if (HAL_I2C_Mem_Read(I2Cx, GYRO_ADDR, GYRO_DATAX0_REG, 1, data_gyro, 6, 100) != HAL_OK) {
-            mprint("I2C read error!\r\n");
+            //mprint("I2C read error!\r\n");
             return;
         }
         gx_raw = (int16_t)((data_gyro[0] << 8) | data_gyro[1]);
@@ -192,7 +192,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         sum_gz += gz_raw;
         //Read Accel
         if (HAL_I2C_Mem_Read(I2Cx, ACCE_ADDR, ACCE_DATAX0_REG, 1, data_acce, 6, 100) != HAL_OK) {
-            mprint("I2C read error!\r\n");
+            //mprint("I2C read error!\r\n");
             return;
         }
         ax_raw = (int16_t)((data_acce[1] << 8) | data_acce[0]);
@@ -204,7 +204,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
 
         //Read Magnetometer
         if (HAL_I2C_Mem_Read(I2Cx, MAG_ADDR, MAG_DATAX0_REG, 1, data_mag, 6, 100) != HAL_OK) {
-            mprint("I2C read error!\r\n");
+            //mprint("I2C read error!\r\n");
             return;
         }
         mx_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
@@ -229,16 +229,16 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     imu.moffsety = (float)sum_my / CALIB_SAMPLES;
     imu.moffsetz = (float)sum_mz / CALIB_SAMPLES;
 
-    printf("Calibration done!\r\n");
-    printf("Aoffsetx: %.3f g; ", imu.aoffsetx);
-    printf("Aoffsety: %.3f g; ", imu.aoffsety);
-    printf("Aoffsetz: %.3f g;\n", imu.aoffsetz);
-    printf("Goffsetx = %.3f degree/s; ", imu.goffsetx);
-    printf("Goffsety = %.3f degree/s; ", imu.goffsety);
-    printf("Goffsetz = %.3f degree/s;\n", imu.goffsetz);
-    printf("Moffsetx = %.3f Gauss; ", imu.moffsetx);
-    printf("Moffsety = %.3f Gauss; ", imu.moffsety);
-    printf("Moffsetz = %.3f Gauss;\n", imu.moffsetz);
-    printf("=============================================\n");
+//    printf("Calibration done!\r\n");
+//    printf("Aoffsetx: %.3f g; ", imu.aoffsetx);
+//    printf("Aoffsety: %.3f g; ", imu.aoffsety);
+//    printf("Aoffsetz: %.3f g;\n", imu.aoffsetz);
+//    printf("Goffsetx = %.3f degree/s; ", imu.goffsetx);
+//    printf("Goffsety = %.3f degree/s; ", imu.goffsety);
+//    printf("Goffsetz = %.3f degree/s;\n", imu.goffsetz);
+//    printf("Moffsetx = %.3f Gauss; ", imu.moffsetx);
+//    printf("Moffsety = %.3f Gauss; ", imu.moffsety);
+//    printf("Moffsetz = %.3f Gauss;\n", imu.moffsetz);
+//    printf("=============================================\n");
 }
 

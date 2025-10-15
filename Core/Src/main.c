@@ -27,6 +27,8 @@
 #include "serial.h"
 #include "timer.h"
 #include "button.h"
+#include "ukf.h"
+#include "imu.h"
 
 
 /* USER CODE END Includes */
@@ -131,13 +133,16 @@ int main(void)
   ST7735_FillScreen(ST7735_BLACK);
 
   GPS_Init();
+  ukfInit(&ukf, &hi2c3);
   geod_init(&g, 6378137, 1/298.257223563);
 
+  HAL_Delay(500);
 
   Timer_Init();
-  Timer_Set(0, 20); //IMU
+  Timer_Set(0, 100); //IMU
   Timer_Set(1, 1000);
-  Timer_Set(2, 1000);
+  Timer_Set(2, 10);
+  Timer_Set(3, 20);
 
   /* USER CODE END 2 */
 
@@ -150,23 +155,37 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	 if(timer_flag[0] ==1){
 		 Timer_Set(0, 40);
-		 //RUN IMU 25HZ
-		 loc_azi = 45;
-		 loc_pitch = 30;
+		 //RUN IMU 50HZ
+		 imu_read(&hi2c3);
+		 ukf_filter(&ukf, &imu);
+
+		 //loc_azi = imu.yaw;//
+		 //loc_pitch = imu.pitch;//
+		 //loc_roll = imu.roll;//
+
+		 loc_azi = ukf.x[2]; //AZI
+		 loc_pitch = ukf.x[1];
+		 loc_roll = ukf.x[0];
 	 }
 	 if(timer_flag[1] ==1){
-		 Timer_Set(0, 1000);
+		 Timer_Set(1, 1000);
 		 //RUN GPS 1HZ
 		 GPS_Data_Update();
 		 loc_gps_lon = gga_tmp.Lon;
 		 loc_gps_lat = gga_tmp.Lat;
 		 loc_gps_alt = gga_tmp.Altitude;
+
 	 }
 	 if(timer_flag[2] == 1){
-		 Timer_Set(0, 10);
-	 	//RUN TFT and BUTTON AT 100HZ
-		 tft_lcd_print_gps_imu_info();
+		 Timer_Set(2, 10);
+	 	//RUN TFT AT 100HZ
 		 getKeyInput();
+		 tft_lcd_print_gps_imu_info();
+	 }
+	 if(timer_flag[3] == 1){
+		 Timer_Set(3, 20);
+	 	//RUN TFT AT 100HZ
+		 tft_lcd_print_gps_imu_info();
 	 }
 	 if(isButtonPressed(0) == 1){
 		 tag_distance = 500; //Ex distance
@@ -180,7 +199,6 @@ int main(void)
 		                 &tag_gps_lat, &tag_gps_lon, NULL);
 
 	 }
-
   }
   /* USER CODE END 3 */
 }
@@ -580,7 +598,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : BUTTON_Pin */
   GPIO_InitStruct.Pin = BUTTON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BUTTON_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TFT_CS_Pin */
