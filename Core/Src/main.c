@@ -27,7 +27,8 @@
 #include "serial.h"
 #include "timer.h"
 #include "button.h"
-
+#include "ukf.h"
+#include "imu.h"
 
 /* USER CODE END Includes */
 
@@ -132,7 +133,7 @@ int main(void)
 
   GPS_Init();
   geod_init(&g, 6378137, 1/298.257223563);
-
+  ukfInit(&ukf, &hi2c3);
 
   Timer_Init();
   Timer_Set(0, 20); //IMU
@@ -148,26 +149,29 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 if(timer_flag[0] ==1){
-		 Timer_Set(0, 40);
+	 if(timer_flag[0] == 1){
+		 Timer_Set(0, 100);
 		 //RUN IMU 25HZ
-		 loc_azi = 45;
-		 loc_pitch = 30;
+		 imu_read(&hi2c3);
+		 ukf_filter(&ukf, &imu);
+		 loc_azi = ukf.x[2];
+		 loc_pitch = ukf.x[1];
+		 loc_roll = ukf.x[0];
 	 }
-	 if(timer_flag[1] ==1){
-		 Timer_Set(0, 1000);
-		 //RUN GPS 1HZ
-		 GPS_Data_Update();
-		 loc_gps_lon = gga_tmp.Lon;
-		 loc_gps_lat = gga_tmp.Lat;
-		 loc_gps_alt = gga_tmp.Altitude;
-	 }
-	 if(timer_flag[2] == 1){
-		 Timer_Set(0, 10);
-	 	//RUN TFT and BUTTON AT 100HZ
-		 tft_lcd_print_gps_imu_info();
-		 getKeyInput();
-	 }
+//	 if(timer_flag[1] ==1){
+//		 Timer_Set(0, 1000);
+//		 //RUN GPS 1HZ
+//		 GPS_Data_Update();
+//		 loc_gps_lon = gga_tmp.Lon;
+//		 loc_gps_lat = gga_tmp.Lat;
+//		 loc_gps_alt = gga_tmp.Altitude;
+//	 }
+//	 if(timer_flag[2] == 1){
+//		 Timer_Set(0, 10);
+//	 	//RUN TFT and BUTTON AT 100HZ
+//		 tft_lcd_print_gps_imu_info();
+//		 getKeyInput();
+//	 }
 	 if(isButtonPressed(0) == 1){
 		 tag_distance = 500; //Ex distance
 
@@ -180,6 +184,7 @@ int main(void)
 		                 &tag_gps_lat, &tag_gps_lon, NULL);
 
 	 }
+
 
   }
   /* USER CODE END 3 */

@@ -13,35 +13,39 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	imu_init(I2Cx);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
-    ukf->dt = 0.5f;
+    ukf->dt = 0.1f;
     for (int i = 1; i < N; i++) {
     	ukf->W_a[i] = 1.0f / 18.0f;
 		ukf->W_c[i] = 1.0f / 18.0f;
 	}
 //    for(int i = 0; i < N; i++){
-//    	mprint("W_c[%d] = %.5f\n", i, ukf->W_c[i]);
-//    	mprint("W_a[%d] = %.5f\n", i, ukf->W_a[i]);
+//    	Serial_Print("W_c[%d] = %.5f\n", i, ukf->W_c[i]);
+//    	Serial_Print("W_a[%d] = %.5f\n", i, ukf->W_a[i]);
 //    }
 
 	//Init Q
-	ukf->Q[0][0] = 0.1f;
-	ukf->Q[1][1] = 0.1f;
-	ukf->Q[2][2] = 0.05f;
-	ukf->Q[3][3] = 1e-3f;
-	ukf->Q[4][4] = 1e-3f;
-	ukf->Q[5][5] = 1e-3f;
+
+
+
+    ukf->Q[0][0] = (imu.goffsetx / 65.5) * (imu.goffsetx / 65.5) * ukf->dt * ukf->dt + ((imu.gyrox_noise / 65.5f) * (imu.gyrox_noise / 65.5f)) * ukf->dt * ukf->dt;
+    ukf->Q[1][1] = (imu.goffsety / 65.5) * (imu.goffsety / 65.5) * ukf->dt * ukf->dt + ((imu.gyroy_noise / 65.5f) * (imu.gyroy_noise / 65.5f)) * ukf->dt * ukf->dt;
+	ukf->Q[2][2] = (imu.goffsetz / 65.5) * (imu.goffsetz / 65.5) * ukf->dt * ukf->dt + ((imu.gyroz_noise / 65.5f) * (imu.gyroz_noise / 65.5f)) * ukf->dt * ukf->dt;
+	ukf->Q[3][3] = (imu.goffsetx / 65.5) * (imu.goffsetx / 65.5) + ((imu.gyrox_noise / 65.5f) * (imu.gyrox_noise / 65.5f));
+	ukf->Q[4][4] = (imu.goffsety / 65.5) * (imu.goffsety / 65.5) + ((imu.gyroy_noise / 65.5f) * (imu.gyroy_noise / 65.5f));
+	ukf->Q[5][5] = (imu.goffsetz / 65.5) * (imu.goffsetz / 65.5) + ((imu.gyroz_noise / 65.5f) * (imu.gyroz_noise / 65.5f));
+
 	for(int i = 0; i < L; i++){
 		for(int j = 0; j < L; j++){
 			if(i != j) ukf->Q[i][j] = 0.0f;
 		}
 	}
-//	mprint("Q =\n");
-//	for(int i = 0; i < L; i++){
-//        for(int j = 0; j < L; j++){
-//            mprint("%.5f ", ukf->Q[i][j]);
-//        }
-//        mprint("\n");
-//    }
+	Serial_Print("Q =\n");
+	for(int i = 0; i < L; i++){
+        for(int j = 0; j < L; j++){
+            Serial_Print("%.5f ", ukf->Q[i][j]);
+        }
+        Serial_Print("\n");
+    }
 
 	//Init R
 	ukf->R[0][0] = 0.01f;
@@ -53,12 +57,12 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 			if(i != j) ukf->R[i][j] = 0.0f;
 		}
 	}
-//	 mprint("R =\n");
+//	 Serial_Print("R =\n");
 //	 for(int i = 0; i < 4; i++){
 //	        for(int j = 0; j < 4; j++){
-//	            mprint("%.5f ", ukf->R[i][j]);
+//	            Serial_Print("%.5f ", ukf->R[i][j]);
 //	        }
-//	        mprint("\n");
+//	        Serial_Print("\n");
 //	    }
 
 	//Init x
@@ -68,11 +72,11 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	ukf->x[3] = 0.57f;
 	ukf->x[4] = -0.57f;
 	ukf->x[5] = 0.29f;
-//	mprint("x = [");
+//	Serial_Print("x = [");
 //		for(int i = 0; i < L; i++){
-//			mprint("%.5f ", ukf->x[i]);
+//			Serial_Print("%.5f ", ukf->x[i]);
 //		}
-//		mprint("]\n");
+//		Serial_Print("]\n");
 
 
 	//Init P
@@ -87,12 +91,12 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 			if(i != j) ukf->P[i][j] = 0.0f;
 		}
 	}
-//	mprint("P =\n");
+//	Serial_Print("P =\n");
 //	for(int i = 0; i < L; i++){
 //        for(int j = 0; j < L; j++){
-//            mprint("%.5f ", ukf->P[i][j]);
+//            Serial_Print("%.5f ", ukf->P[i][j]);
 //        }
-//        mprint("\n");
+//        Serial_Print("\n");
 //    }
 }
 
@@ -115,12 +119,12 @@ void cholesky(float P[L][L], float A[L][L]) {
 void generate_sigma_points(ukf_t *ukf) {
     float A[L][L];
     cholesky(ukf->P, A);
-//    mprint("A = \n");
+//    Serial_Print("A = \n");
 //    for(int i = 0; i < L; i++){
 //        for(int j = 0; j < L; j++){
-//            mprint("%.6f ", A[i][j]);
+//            Serial_Print("%.6f ", A[i][j]);
 //        }
-//        mprint("\n");
+//        Serial_Print("\n");
 //    }
 
     float scale = 3;
@@ -132,14 +136,14 @@ void generate_sigma_points(ukf_t *ukf) {
             ukf->sigma[L + 1 + j][i] = ukf->x[i] - scale*A[i][j];
         }
     }
-//    mprint("Sigma points:\n");
+//    Serial_Print("Sigma points:\n");
 //    for(int j = 0; j < N; j++){
-//        mprint("sigma[%d] = [", j);
+//        Serial_Print("sigma[%d] = [", j);
 //        for(int i = 0; i < L; i++){
-//            mprint("%.6f", ukf->sigma[j][i]);
-//            if(i < L-1) mprint(", ");
+//            Serial_Print("%.6f", ukf->sigma[j][i]);
+//            if(i < L-1) Serial_Print(", ");
 //        }
-//        mprint("]\n");
+//        Serial_Print("]\n");
 //    }
 }
 
@@ -163,6 +167,11 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
             ukf->x_pred[i] += ukf->W_a[j]*ukf->sigma[j][i];
         }
     }
+    while (ukf->x_pred[0] > 180.0f) ukf->x_pred[0] -= 360.0f;
+    while (ukf->x_pred[0] < -180.0f) ukf->x_pred[0] += 360.0f;
+    if (ukf->x_pred[1] > 90.0f) ukf->x_pred[1] = 90.0f;
+    if (ukf->x_pred[1] < -90.0f) ukf->x_pred[1] = -90.0f;
+
 
     // compute predicted covariance
     for(int i = 0; i < L; ++i){
@@ -233,7 +242,7 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     //Kalman gain K = Cxz * S^-1
     float S_inv[4][4];
     if (invert4x4(S_inv, ukf->S) < 0) {
-    	//mprint("loi day ne %d\n", invert4x4(S_inv, ukf->S));
+    	//Serial_Print("loi day ne %d\n", invert4x4(S_inv, ukf->S));
         return;
     }
     for (int i = 0; i < L; i++) {
@@ -257,16 +266,12 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
             correction += ukf->K[i][k] * (ukf->z[k] - z_mean[k]);
         }
         ukf->x[i] = ukf->x_pred[i] + correction;
-
-        // Normalize angles
-        if (i == 0 || i == 1) { // roll & pitch -> [-180, 180]
-            while (ukf->x[i] > 180.0f) ukf->x[i] -= 360.0f;
-            while (ukf->x[i] < -180.0f) ukf->x[i] += 360.0f;
-        }
     }
-//    mprint("pitch = %.3f degree; ", ukf->x[1]);
-//    mprint("yaw = %.3f degree; ", ukf->x[2]);
-//    mprint("roll = %.3f degree; \n", ukf->x[0]);
+
+    ukf->x[1] = - (ukf->x[1]);
+//    Serial_Print("pitch = %.3f degree; ", ukf->x[1]);
+//    Serial_Print("yaw = %.3f degree; ", ukf->x[2]);
+//    Serial_Print("roll = %.3f degree; \n", ukf->x[0]);
     //Update covariance: P = P_pred - K*S*K^T
     float KS[L][3];
     for (int i = 0; i < L; i++) {
@@ -334,9 +339,9 @@ void ukf_filter(ukf_t *ukf, imu_t *imu) {
     ukf_predict(ukf, imu);
 
     ukf_update(ukf, imu);
-//    mprint("pitch_update = %.3f degree; ", ukf->x[1]);
-//    mprint("yaw_update = %.3f degree; ", ukf->x[2]);
-//    mprint("roll_update = %.3f degree; \n", ukf->x[0]);
+    Serial_Print("pitch_update = %.3f degree; ", ukf->x[1]);
+    Serial_Print("yaw_update = %.3f degree; ", ukf->x[2]);
+    Serial_Print("roll_update = %.3f degree; \n", ukf->x[0]);
 
-//    mprint("#######################################\n");
+    Serial_Print("#\n");
 }

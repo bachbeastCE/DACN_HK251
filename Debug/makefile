@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 DACN-KTMT.list \
 
+OBJCOPY_HEX += \
+DACN-KTMT.hex \
+
 
 # All Target
 all: main-build
@@ -60,8 +63,8 @@ all: main-build
 main-build: DACN-KTMT.elf secondary-outputs
 
 # Tool invocations
-DACN-KTMT.elf DACN-KTMT.map: $(OBJS) $(USER_OBJS) E:\2.\ Document\DACN_HK251\STM32F411CEUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "DACN-KTMT.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\2. Document\DACN_HK251\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DACN-KTMT.map" -Wl,--gc-sections -static -u _scanf_float -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+DACN-KTMT.elf DACN-KTMT.map: $(OBJS) $(USER_OBJS) D:\Embedded\STM32\Project\DACN-KTMT\STM32F411CEUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "DACN-KTMT.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Embedded\STM32\Project\DACN-KTMT\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DACN-KTMT.map" -Wl,--gc-sections -static -u _scanf_float -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -75,12 +78,17 @@ DACN-KTMT.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+DACN-KTMT.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "DACN-KTMT.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) DACN-KTMT.elf DACN-KTMT.list DACN-KTMT.map default.size.stdout
+	-$(RM) DACN-KTMT.elf DACN-KTMT.hex DACN-KTMT.list DACN-KTMT.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'
