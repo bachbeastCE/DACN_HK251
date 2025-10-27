@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include "kf.h"
 #include "global.h"
 
 //======================== CONFIG =================================//
@@ -24,63 +25,11 @@ extern UART_HandleTypeDef GPS_UART_PORT;
 extern UART_HandleTypeDef huart1;
 
 #define GPS_UART_BUFFER_SIZE 256
-#define GPS_BUFFER_SIZE 256
-#define MAX_SENTENCE 128
 
 extern uint8_t gps_uart_idx;
 extern uint8_t gps_uart_tranfer_count;
 extern uint8_t gps_uart_copy_flag;
 extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
-
-
-//======================== COMMAND =================================//
-
-//Startup mode
-#define HOT_START       "$PMTK101"
-#define WARM_START      "$PMTK102"
-#define COLD_START      "$PMTK103"
-#define FULL_COLD_START "$PMTK104"
-
-//Standby mode -- Exit requires high level trigger
-#define SET_PERPETUAL_STANDBY_MODE      "$PMTK161"
-
-#define SET_PERIODIC_MODE               "$PMTK225"
-#define SET_NORMAL_MODE                 "$PMTK225,0"
-#define SET_PERIODIC_BACKUP_MODE        "$PMTK225,1,1000,2000"
-#define SET_PERIODIC_STANDBY_MODE       "$PMTK225,2,1000,2000"
-#define SET_PERPETUAL_BACKUP_MODE       "$PMTK225,4"
-#define SET_ALWAYSLOCATE_STANDBY_MODE   "$PMTK225,8"
-#define SET_ALWAYSLOCATE_BACKUP_MODE    "$PMTK225,9"
-
-//Set the message interval,100ms~10000ms
-#define SET_POS_FIX         "$PMTK220"
-#define SET_POS_FIX_100MS   "$PMTK220,100"
-#define SET_POS_FIX_200MS   "$PMTK220,200"
-#define SET_POS_FIX_400MS   "$PMTK220,400"
-#define SET_POS_FIX_800MS   "$PMTK220,800"
-#define SET_POS_FIX_1S      "$PMTK220,1000"
-#define SET_POS_FIX_2S      "$PMTK220,2000"
-#define SET_POS_FIX_4S      "$PMTK220,4000"
-#define SET_POS_FIX_8S      "$PMTK220,8000"
-#define SET_POS_FIX_10S     "$PMTK220,10000"
-
-//Switching time output
-#define SET_SYNC_PPS_NMEA_OFF   "$PMTK255,0"
-#define SET_SYNC_PPS_NMEA_ON    "$PMTK255,1"
-
-//Baud rate
-#define SET_NMEA_BAUDRATE           "$PMTK251"
-#define SET_NMEA_BAUDRATE_115200    "$PMTK251,115200"
-#define SET_NMEA_BAUDRATE_57600     "$PMTK251,57600"
-#define SET_NMEA_BAUDRATE_38400     "$PMTK251,38400"
-#define SET_NMEA_BAUDRATE_19200     "$PMTK251,19200"
-#define SET_NMEA_BAUDRATE_14400     "$PMTK251,14400"
-#define SET_NMEA_BAUDRATE_9600      "$PMTK251,9600"
-#define SET_NMEA_BAUDRATE_4800      "$PMTK251,4800"
-
-//To restore the system default setting
-#define SET_REDUCTION               "$PMTK314,-1"
-
 
 //======================== CONTROL  =================================//
 //GPS Control register
@@ -157,11 +106,15 @@ typedef struct {
 
 //======================== VARIABLE  =================================//
 #define GPS_BUFFER_SIZE 256
-#define MAX_SENTENCE 128
+#define MAX_SENTENCE 200
+
 
 extern GGA_t gga_tmp;
 extern RMC_t rmc_tmp;
 
+extern KalmanFilter kf_lon;
+extern KalmanFilter kf_lat;
+extern KalmanFilter kf_alt;
 
 //======================== FUNCTION  =================================//
 
@@ -174,6 +127,7 @@ uint8_t GPS_Data_Update();
 uint8_t GPS_RMC_Get (RMC_t *result);
 uint8_t GPS_GGA_Get (GGA_t *result);
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
+uint8_t GPS_Filter();
 
 void GPS_RMC_Print(RMC_t * rmc);
 void GPS_GGA_Print(GGA_t * gga);

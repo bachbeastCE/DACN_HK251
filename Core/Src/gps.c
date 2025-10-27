@@ -21,6 +21,10 @@ COORDINATES_t coordinates_tmp = {0};
 uint8_t gps_uart_copy_flag = 0;
 char sentence[MAX_SENTENCE] = {0};
 
+KalmanFilter kf_lon;
+KalmanFilter kf_lat;
+KalmanFilter kf_alt;
+
 uint8_t GPS_CaculateChecksum(const char *sentence)
 {
     uint8_t checksum = 0;
@@ -71,18 +75,34 @@ uint8_t GPS_Init()
 {
     // Turn on only GGA and RMC
     GPS_SendCommand("$PAIR062,1,0");
-    HAL_Delay(100); // tiny delay between commands
+    HAL_Delay(20); // tiny delay between commands
 
     GPS_SendCommand("$PAIR062,2,0");
-    HAL_Delay(100);
+    HAL_Delay(20);
 
     GPS_SendCommand("$PAIR062,3,0");
-    HAL_Delay(100);
+    HAL_Delay(20);
+
+    GPS_SendCommand("$PAIR062,4,0");
+    HAL_Delay(20);
 
     GPS_SendCommand("$PAIR062,5,0");
-    HAL_Delay(100);
+    HAL_Delay(20);
+
+    GPS_SendCommand("$PAIR080,4"); //STATIONARY MODE
+    HAL_Delay(20);
+
+    GPS_SendCommand("$PAIR050,250");
+    HAL_Delay(20);
+
+    GPS_SendCommand("$PAIR098,3"); //SET3 = Latitude, Longitude: 7; Altitude: 3
+    HAL_Delay(20);
 
     HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
+
+    KalmanFilter_Init(&kf_lon, 0, 0);
+    KalmanFilter_Init(&kf_lat, 0, 0);
+    KalmanFilter_Init(&kf_alt, 0, 0);
 
     return 0;
 }
@@ -266,6 +286,36 @@ uint8_t  GPS_GGA_Get(GGA_t *result){
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
     *result = coordinates_tmp;
     return 0;
+}
+
+uint8_t GPS_Filter(){
+	double lat_deg = gga_tmp.Lat;
+	    double hdop = gga_tmp.HDOP;
+
+	    // --- Giả định UERE theo CEP = 1.5 m ---
+	    double uere_m = 1.27; // (1.5 / 1.177)
+	    double sigma_m = hdop * uere_m;  // độ lệch chuẩn theo mét
+
+	    // --- Quy đổi sang độ ---
+	    double meters_per_deg_lat = 111132.92 - 559.82 * cos(2 * lat_deg * M_PI / 180.0)
+	                                + 1.175 * cos(4 * lat_deg * M_PI / 180.0);
+	    double meters_per_deg_lon = 111412.84 * cos(lat_deg * M_PI / 180.0)
+	                                - 93.5 * cos(3 * lat_deg * M_PI / 180.0);
+
+	    double sigma_lat_deg = sigma_m / meters_per_deg_lat;
+	    double sigma_lon_deg = sigma_m / meters_per_deg_lon;
+
+	    // --- Cập nhật ma trận R (noise measurement variance) ---
+	        kf_lat.R = sigma_lat_deg * sigma_lat_deg;
+	        kf_lon.R = sigma_lon_deg * sigma_lon_deg;
+	        kf_alt.R = (sigma_m * 2.0) * (sigma_m * 2.0); // Altitude sai số lớn hơn ~2 lần
+
+	        // --- Update Kalman ---
+	        KalmanFilter_Update(&kf_lon, gga_tmp.Lon);
+	        KalmanFilter_Update(&kf_lat, gga_tmp.Lat);
+	        KalmanFilter_Update(&kf_alt, gga_tmp.Altitude);
+
+	  return 0;
 }
 
 //void GPS_GGA_Print(GGA_t *gga){

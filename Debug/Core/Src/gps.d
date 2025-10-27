@@ -30,8 +30,8 @@ Core/Src/gps.o: ../Core/Src/gps.c ../Core/Inc/gps.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/global.h ../Core/Inc/config.h ../Core/Inc/serial.h \
- ../Core/Inc/geodesic.h
+ ../Core/Inc/kf.h ../Core/Inc/global.h ../Core/Inc/config.h \
+ ../Core/Inc/serial.h ../Core/Inc/geodesic.h
 ../Core/Inc/gps.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -65,6 +65,7 @@ Core/Src/gps.o: ../Core/Src/gps.c ../Core/Inc/gps.h ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+../Core/Inc/kf.h:
 ../Core/Inc/global.h:
 ../Core/Inc/config.h:
 ../Core/Inc/serial.h:

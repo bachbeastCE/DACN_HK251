@@ -57,7 +57,8 @@ SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 
 TIM_HandleTypeDef htim2;
-
+TIM_HandleTypeDef htim3;
+uint8_t gps_flag =0;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart1_tx;
@@ -80,6 +81,7 @@ static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -128,11 +130,13 @@ int main(void)
   MX_I2C3_Init();
   MX_SPI3_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   ST7735_Init();
   ST7735_FillScreen(ST7735_BLACK);
 
   GPS_Init();
+
   ukfInit(&ukf, &hi2c3);
   geod_init(&g, 6378137, 1/298.257223563);
 
@@ -143,6 +147,7 @@ int main(void)
   Timer_Set(1, 1000);
   Timer_Set(2, 10);
   Timer_Set(3, 20);
+  int count =0;
 
   /* USER CODE END 2 */
 
@@ -153,52 +158,61 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 if(timer_flag[0] ==1){
-		 Timer_Set(0, 40);
-		 //RUN IMU 50HZ
-		 imu_read(&hi2c3);
-		 ukf_filter(&ukf, &imu);
+//	 if(timer_flag[0] ==1){
+//		 Timer_Set(0, 40);
+//		 //RUN IMU 50HZ
+//		 imu_read(&hi2c3);
+//		 ukf_filter(&ukf, &imu);
+//
+//		 //loc_azi = imu.yaw;//
+//		 //loc_pitch = imu.pitch;//
+//		 //loc_roll = imu.roll;//
+//
+//		 loc_azi = ukf.x[2]; //AZI
+//		 loc_pitch = ukf.x[1];
+//		 loc_roll = ukf.x[0];
+//	 }
+	  if(gps_flag == 1){
+	              // reset timer 200 ms
+		  gps_flag = 0;
+	      //__HAL_TIM_SET_COUNTER(&htim3, 0);  // reset counter
+	      //HAL_TIM_Base_Start(&htim3);
 
-		 //loc_azi = imu.yaw;//
-		 //loc_pitch = imu.pitch;//
-		 //loc_roll = imu.roll;//
+	      GPS_Data_Update();          // parse GGA
+	      GPS_Filter();
+	      loc_gps_lon = gga_tmp.Lon;
+	      loc_gps_lat = gga_tmp.Lat;
+	      loc_gps_alt = gga_tmp.Altitude;
+	      //uint32_t exec_time_us = __HAL_TIM_GET_COUNTER(&htim3);
+	      Serial_Print("%d,%.7f,%.7f,%.3f,%.2f\r\n", count,loc_gps_lon, loc_gps_lat, loc_gps_alt,gga_tmp.HDOP,kf_lon.x,kf_lat.x,kf_alt.x);
+	      //Serial_Print("%d,%.7f,%.7f,%.3f,%.3f,%.7f,%.7f,%.3f\r\n", count,loc_gps_lon, loc_gps_lat, loc_gps_alt,gga_tmp.HDOP,kf_lon.x,kf_lat.x,kf_alt.x);
 
-		 loc_azi = ukf.x[2]; //AZI
-		 loc_pitch = ukf.x[1];
-		 loc_roll = ukf.x[0];
-	 }
-	 if(timer_flag[1] ==1){
-		 Timer_Set(1, 1000);
-		 //RUN GPS 1HZ
-		 GPS_Data_Update();
-		 loc_gps_lon = gga_tmp.Lon;
-		 loc_gps_lat = gga_tmp.Lat;
-		 loc_gps_alt = gga_tmp.Altitude;
-
-	 }
-	 if(timer_flag[2] == 1){
-		 Timer_Set(2, 10);
-	 	//RUN TFT AT 100HZ
-		 getKeyInput();
-		 tft_lcd_print_gps_imu_info();
-	 }
-	 if(timer_flag[3] == 1){
-		 Timer_Set(3, 20);
-	 	//RUN TFT AT 100HZ
-		 tft_lcd_print_gps_imu_info();
-	 }
-	 if(isButtonPressed(0) == 1){
-		 tag_distance = 500; //Ex distance
-
-		 double pitch_rad = loc_pitch * M_PI / 180.0;
-		 double s12 = tag_distance * cos(pitch_rad);
-
-		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-
-		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-		                 &tag_gps_lat, &tag_gps_lon, NULL);
-
-	 }
+	      count++;
+	      //Serial_Print("Exec time: %lu us\r\n", exec_time_us);
+	  }
+//	 if(timer_flag[2] == 1){
+//		 Timer_Set(2, 10);
+//	 	//RUN TFT AT 100HZ
+//		 getKeyInput();
+//		 tft_lcd_print_gps_imu_info();
+//	 }
+//	 if(timer_flag[3] == 1){
+//		 Timer_Set(3, 20);
+//	 	//RUN TFT AT 100HZ
+//		 tft_lcd_print_gps_imu_info();
+//	 }
+//	 if(isButtonPressed(0) == 1){
+//		 tag_distance = 500; //Ex distance
+//
+//		 double pitch_rad = loc_pitch * M_PI / 180.0;
+//		 double s12 = tag_distance * cos(pitch_rad);
+//
+//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+//
+//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+//		                 &tag_gps_lat, &tag_gps_lon, NULL);
+//
+//	 }
   }
   /* USER CODE END 3 */
 }
@@ -476,6 +490,51 @@ static void MX_TIM2_Init(void)
 }
 
 /**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 99;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 65535;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -626,22 +685,19 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
     if (huart->Instance == USART2)
     {
-//        gps_uart_idx = Size;
-//        gps_uart_tranfer_count++;
-
-//		sprintf(tx_buffer, "Time: %d -> Tranfer:%d\r\n\n",
-//				gps_uart_tranfer_count, gps_uart_idx);
-//		HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
-
-        // 👉 Toggle LED mỗi khi nhận được 1 gói dữ liệu từ GPS
-        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
+        //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	    //__HAL_TIM_SET_COUNTER(&htim3, 0);  // reset counter
+	    //  HAL_TIM_Base_Start(&htim3);
         // Xử lý dữ liệu nhận được
         GPS_ReceiveRawData(gps_uart_rx_buffer, Size);
 
         // Bật lại DMA nhận tiếp
         HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
+        gps_flag = 1;
         __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
+        //uint32_t exec_time_us = __HAL_TIM_GET_COUNTER(&htim3);
+
+       	//Serial_Print("Exec cpy time: %lu us\r\n", exec_time_us);
     }
 }
 
