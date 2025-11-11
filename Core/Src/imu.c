@@ -48,7 +48,7 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 	float Mx = imu.mx * cosf(pitch_rad) + imu.mz * sinf(pitch_rad);
 	float My = imu.mx * sinf(roll_rad) * sinf(pitch_rad) + imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad) * cosf(pitch_rad);
 
-	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
+	imu.yaw = atan2f(-My, Mx) * 180.0f / PI;
     if (imu.yaw < 0) imu.yaw += 360.0;
     Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
     Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
@@ -168,16 +168,26 @@ void mag_read(I2C_HandleTypeDef *I2Cx)
     y_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
     z_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
 
-    imu.moffsetx = 0;
-    imu.moffsety = 0;
-    imu.moffsetz = 0;
-    imu.mx = ((float)x_raw * mag_adj[0] * 0.15f - imu.moffsetx);
-    imu.my = ((float)y_raw * mag_adj[1] * 0.15f - imu.moffsety);
-    imu.mz = ((float)z_raw * mag_adj[2] * 0.15f - imu.moffsetz);
+    imu.moffsetx = 33.387;
+    imu.moffsety = 32.952;
+    imu.moffsetz = (-35.936);
+    imu.mscalex = 1.0647;
+    imu.mscaley = 0.9433;
+    imu.mscalez = 0.9993;
+//    imu.moffsetx = 0;
+//    imu.moffsety = 0;
+//    imu.moffsetz = 0;
+//    imu.mscalex = 1;
+//    imu.mscaley = 1;
+//    imu.mscalez = 1;
+    imu.mx = ((float)x_raw * mag_adj[0] * 0.15f - imu.moffsetx) * imu.mscalex;
+    imu.my = ((float)y_raw * mag_adj[1] * 0.15f - imu.moffsety) * imu.mscaley;
+    imu.mz = ((float)z_raw * mag_adj[2] * 0.15f - imu.moffsetz) * imu.mscalez;
 
     Serial_Print("Mag_X = %.3f uT; ", imu.mx);
     Serial_Print("Mag_Y = %.3f uT; ", imu.my);
-    Serial_Print("Mag_Z = %.3f uT \n", imu.mz);
+    Serial_Print("Mag_Z = %.3f uT; \n", imu.mz);
+    Serial_Print("#\n");
 }
 
 void calibrate(I2C_HandleTypeDef *I2Cx) {

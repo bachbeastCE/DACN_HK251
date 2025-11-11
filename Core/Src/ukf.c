@@ -13,7 +13,7 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	imu_init(I2Cx);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
-    ukf->dt = 0.1f;
+    ukf->dt = 0.02f;
     for (int i = 1; i < N; i++) {
     	ukf->W_a[i] = 1.0f / 18.0f;
 		ukf->W_c[i] = 1.0f / 18.0f;
@@ -195,7 +195,7 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
         float roll_j  = ukf->sigma[j][0] * PI / 180.0f;
         float pitch_j = ukf->sigma[j][1] * PI / 180.0f;
         // predict accelerometer (gravity only) in body frame from orientation
-        float ax_p = -sinf(pitch_j);
+        float ax_p =  sinf(pitch_j);
         float ay_p =  sinf(roll_j) * cosf(pitch_j);
         float az_p =  cosf(roll_j) * cosf(pitch_j);
 
@@ -268,7 +268,6 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
         ukf->x[i] = ukf->x_pred[i] + correction;
     }
 
-    ukf->x[1] = - (ukf->x[1]);
 //    Serial_Print("pitch = %.3f degree; ", ukf->x[1]);
 //    Serial_Print("yaw = %.3f degree; ", ukf->x[2]);
 //    Serial_Print("roll = %.3f degree; \n", ukf->x[0]);

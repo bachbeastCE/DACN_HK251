@@ -73,22 +73,22 @@ idx = 0;
 
 subplot(3,1,1);
 ax1 = gca();
-p1 = plot(1,1,'b-');
-p2 = plot(1,1,'g-');
+p1 = plot(1,1,'b-o');
+p2 = plot(1,1,'g-o');
 legend(["Pitch","Mea_Pitch"], "in_upper_left");
 xtitle("Pitch"); xgrid;
 
 subplot(3,1,2);
 ax2 = gca();
-p3 = plot(1,1,'b-');
-p4 = plot(1,1,'g-');
+p3 = plot(1,1,'b-o');
+p4 = plot(1,1,'g-o');
 legend(["Yaw","Mea_Yaw"], "in_upper_left");
 xtitle("Yaw"); xgrid;
 
 subplot(3,1,3);
 ax3 = gca();
-p5 = plot(1,1,'b-');
-p6 = plot(1,1,'g-');
+p5 = plot(1,1,'b-o');
+p6 = plot(1,1,'g-o');
 legend(["Roll","Mea_Roll"], "in_upper_left");
 xtitle("Roll"); xgrid;
 
@@ -166,10 +166,10 @@ while %t
             replot([ax1 ax2 ax3]);
             
             pos = strindex(buffer, "#");
-            sleep(50);
+            sleep(500);
         end
     end
-    sleep(50);
+    sleep(500);
 end
 
 
