@@ -268,33 +268,138 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
     return 0;
 }
 
-//void GPS_GGA_Print(GGA_t *gga){
-//    char tmp[256];
-//    int len = snprintf(tmp, sizeof(tmp),
-//        "GGA: Lat=%.6f %c, Lon=%.6f %c\r\n"
-//        " FixQuality=%d, NumSV=%d, HDOP=%.2f\r\n"
-//        " Altitude=%.3f m, GeoidSep=%.3f m\r\n",
-//        gga->Lat, gga->Lat_area,
-//        gga->Lon, gga->Lon_area,
-//        gga->FixQuality, gga->NumSV, gga->HDOP,
-//        gga->Altitude, gga->GeoidSep
-//    );
-//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
-//
-//void print_Coordinates(COORDINATES_t *coordinates) {
-//    mprint(
-//        "Lat: %.6f %c, Lon: %.6f %c\r\n",
-//        coordinates->Lat, coordinates->Lat_area,
-//        coordinates->Lon, coordinates->Lon_area
-//    );
-//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
-//
-//void GPS_Coordinates_Print(COORDINATES_t * coordinates){
-//	char tmp[50];
-//	int len = snprintf(tmp, sizeof(tmp),
-//		"Lat: %.6f %c, Lon: %.6f %c\r\n",
-//		coordinates->Lat, coordinates->Lat_area, coordinates->Lon, coordinates->Lon_area);
-//	HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
+
+// CONVERT WGS84 <=> ENU
+
+/* Deg/Rad conversion */
+static inline float deg2rad(float deg) { return deg * (float)M_PI / 180.0f; }
+static inline float rad2deg(float rad) { return rad * 180.0f / (float)M_PI; }
+
+/* -------------------------------------------------------------------------- */
+/* WGS84 -> ECEF */
+void wgs84_to_ecef(float lat_deg, float lon_deg, float h,
+                   float *X, float *Y, float *Z)
+{
+    float lat = deg2rad(lat_deg);
+    float lon = deg2rad(lon_deg);
+
+    float sin_lat = sinf(lat);
+    float cos_lat = cosf(lat);
+    float sin_lon = sinf(lon);
+    float cos_lon = cosf(lon);
+
+    float N = WGS84_A / sqrtf(1.0f - WGS84_E2 * sin_lat * sin_lat);
+
+    *X = (N + h) * cos_lat * cos_lon;
+    *Y = (N + h) * cos_lat * sin_lon;
+    *Z = (N * (1.0f - WGS84_E2) + h) * sin_lat;
+}
+
+/* ECEF -> WGS84 */
+void ecef_to_wgs84(float X, float Y, float Z,
+                   float *lat_deg, float *lon_deg, float *h)
+{
+    float a = WGS84_A;
+    float e2 = WGS84_E2;
+    float eps = 1e-6f;
+
+    float lon = atan2f(Y, X);
+    float p = sqrtf(X*X + Y*Y);
+
+    float lat = atan2f(Z, p * (1 - e2));
+    float lat_prev;
+    float N;
+
+    for (int i = 0; i < 5; i++) {
+        lat_prev = lat;
+        N = a / sqrtf(1.0f - e2 * sinf(lat) * sinf(lat));
+        *h = p / cosf(lat) - N;
+        lat = atan2f(Z + e2 * N * sinf(lat), p);
+        if (fabsf(lat - lat_prev) < eps)
+            break;
+    }
+
+    *lat_deg = rad2deg(lat);
+    *lon_deg = rad2deg(lon);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Compute rotation matrix from reference lat/lon */
+void enu_rotation_matrix(float lat0_deg, float lon0_deg, float R[3][3])
+{
+    float lat0 = deg2rad(lat0_deg);
+    float lon0 = deg2rad(lon0_deg);
+
+    float sin_lat0 = sinf(lat0);
+    float cos_lat0 = cosf(lat0);
+    float sin_lon0 = sinf(lon0);
+    float cos_lon0 = cosf(lon0);
+
+    /* East-North-Up rotation matrix */
+    R[0][0] = -sin_lon0;
+    R[0][1] =  cos_lon0;
+    R[0][2] =  0.0f;
+
+    R[1][0] = -sin_lat0 * cos_lon0;
+    R[1][1] = -sin_lat0 * sin_lon0;
+    R[1][2] =  cos_lat0;
+
+    R[2][0] =  cos_lat0 * cos_lon0;
+    R[2][1] =  cos_lat0 * sin_lon0;
+    R[2][2] =  sin_lat0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* WGS84 -> ENU */
+void wgs84_to_enu(float lat, float lon, float h,
+                  float lat0, float lon0, float h0,
+                  float *E, float *N, float *U)
+{
+    float X, Y, Z;
+    float X0, Y0, Z0;
+    float R[3][3];
+
+    enu_rotation_matrix(lat0, lon0, R);
+    wgs84_to_ecef(lat, lon, h, &X, &Y, &Z);
+    wgs84_to_ecef(lat0, lon0, h0, &X0, &Y0, &Z0);
+
+    float dX = X - X0;
+    float dY = Y - Y0;
+    float dZ = Z - Z0;
+
+    *E = R[0][0]*dX + R[0][1]*dY + R[0][2]*dZ;
+    *N = R[1][0]*dX + R[1][1]*dY + R[1][2]*dZ;
+    *U = R[2][0]*dX + R[2][1]*dY + R[2][2]*dZ;
+}
+
+/* ENU -> WGS84 */
+void enu_to_wgs84(float E, float N, float U,
+                  float lat0, float lon0, float h0,
+                  float *lat, float *lon, float *h)
+{
+    float R[3][3];
+    float lat0_rad = deg2rad(lat0);
+    float lon0_rad = deg2rad(lon0);
+    float sin_lat0 = sinf(lat0_rad), cos_lat0 = cosf(lat0_rad);
+    float sin_lon0 = sinf(lon0_rad), cos_lon0 = cosf(lon0_rad);
+
+    enu_rotation_matrix(lat0, lon0, R);
+
+    // ECEF của gốc
+    float N0 = WGS84_A / sqrtf(1.0f - WGS84_E2 * sin_lat0 * sin_lat0);
+    float X0 = (N0 + h0) * cos_lat0 * cos_lon0;
+    float Y0 = (N0 + h0) * cos_lat0 * sin_lon0;
+    float Z0 = (N0 * (1.0f - WGS84_E2) + h0) * sin_lat0;
+
+    // ENU -> ECEF (R^T)
+    float dX = R[0][0]*E + R[1][0]*N + R[2][0]*U;
+    float dY = R[0][1]*E + R[1][1]*N + R[2][1]*U;
+    float dZ = R[0][2]*E + R[1][2]*N + R[2][2]*U;
+
+    float X = X0 + dX;
+    float Y = Y0 + dY;
+    float Z = Z0 + dZ;
+
+    // ECEF -> WGS84
+    ecef_to_wgs84(X, Y, Z, lat, lon, h);
+}

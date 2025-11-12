@@ -168,14 +168,6 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.94562412;com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.94562412.;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1604814256;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.815248477">
-			<autodiscovery enabled="false" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.2050521939;com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.2050521939.;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1387368326;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1753405354">
-			<autodiscovery enabled="false" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="scannerConfiguration"/>
 </cproject>

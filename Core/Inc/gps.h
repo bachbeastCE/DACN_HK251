@@ -159,6 +159,10 @@ typedef struct {
 #define GPS_BUFFER_SIZE 256
 #define MAX_SENTENCE 128
 
+/* WGS84 constants */
+#define WGS84_A  6378137.0f
+#define WGS84_E2 6.69437999014e-3f
+
 extern GGA_t gga_tmp;
 extern RMC_t rmc_tmp;
 
@@ -178,5 +182,13 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
 void GPS_RMC_Print(RMC_t * rmc);
 void GPS_GGA_Print(GGA_t * gga);
 void GPS_Coordinates_Print(COORDINATES_t * coordinates);
+
+void wgs84_to_enu(float lat, float lon, float h,
+                  float lat0, float lon0, float h0,
+                  float *E, float *N, float *U);
+
+void enu_to_wgs84(float E, float N, float U,
+                  float lat0, float lon0, float h0,
+                  float *lat, float *lon, float *h);
 
 #endif
