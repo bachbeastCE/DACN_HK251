@@ -147,14 +147,17 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   TFT_LCD_Init();
+  HAL_Delay(100);
   GPS_Init();
+  HAL_Delay(100);
   geod_init(&g, 6378137, 1/298.257223563);
+  HAL_Delay(100);
   ukfInit(&ukf, &hi2c2);
-  HAL_Delay(200);
+  HAL_Delay(100);
 
   Timer_Init();
   Timer_Set(0, 20); //IMU
-
+  Timer_Set(1, 1000); //IMU
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -174,27 +177,31 @@ int main(void)
 		 loc_pitch = ukf.x[1];
 		 loc_roll = ukf.x[0];
 
-		 //UKF GPS
-		 GPS_Coordinates_Get(&raw_coordinates);
-		 loc_gps_lon = raw_coordinates.Lon;
-		 loc_gps_lat = raw_coordinates.Lat;
-		 loc_gps_alt = raw_coordinates.Alt;
+//		 //UKF GPS
+//		 GPS_Coordinates_Get(&raw_coordinates);
+//		 loc_gps_lon = raw_coordinates.Lon;
+//		 loc_gps_lat = raw_coordinates.Lat;
+//		 loc_gps_alt = raw_coordinates.Alt;
+//
+//
+//		 //CACULATE TARGET POSITION
+//
+//		 tag_distance = 500; //Ex distance
+//
+//		 double pitch_rad = loc_pitch * M_PI / 180.0;
+//		 double s12 = tag_distance * cos(pitch_rad);
+//
+//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+//
+//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+//		                 &tag_gps_lat, &tag_gps_lon, NULL);
 
 
-		 //CACULATE TARGET POSITION
 
-		 tag_distance = 500; //Ex distance
-
-		 double pitch_rad = loc_pitch * M_PI / 180.0;
-		 double s12 = tag_distance * cos(pitch_rad);
-
-		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-
-		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-		                 &tag_gps_lat, &tag_gps_lon, NULL);
-
-		 //DISPLAY RESULT
-		 TFT_LCD_Run();
+	 }
+	 if(timer_flag[1] == 1){
+		 	 Timer_Set(1, 1000);
+		 	 TFT_LCD_Run();
 	 }
 
   /* USER CODE END 3 */
@@ -626,7 +633,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     {
 
         HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-        GPS_Data_Update();
+        //GPS_Data_Update();
 
         HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
         __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
