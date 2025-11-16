@@ -91,14 +91,21 @@ static void MX_TIM3_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+double loc_gps_lon = 0.0;
+double loc_gps_lat = 0.0;
+double loc_gps_alt = 0.0;
+double loc_azi = 0.0;
+double loc_pitch = 0.0;
+double loc_yaw = 0.0;
+double loc_roll = 0.0;
 
-uint16_t ADC_VAL = 0;
-int value = 0;
+double tag_gps_lon = 0.0;
+double tag_gps_lat = 0.0;
+double tag_gps_alt = 0.0;
+double tag_distance = 0.0;
 
-long map(long x, long in_min, long in_max, long out_min, long out_max)
-{
-  return (x - in_min) * (out_max - out_min + 1) / (in_max - in_min + 1) + out_min;
-}
+struct geod_geodesic g;
+
 /* USER CODE END 0 */
 
 /**
@@ -142,21 +149,15 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  ST7735_Init();
-  ST7735_FillScreen(ST7735_BLACK);
-
+  TFT_LCD_Init();
   GPS_Init();
   ukfInit(&ukf, &hi2c3);
   geod_init(&g, 6378137, 1/298.257223563);
-  Battery_Init();
-
-  HAL_Delay(500);
-
+  //Battery_Init();
   Timer_Init();
+
   Timer_Set(0, 100); //IMU
-  Timer_Set(1, 1000);
-  Timer_Set(2, 10);
-  Timer_Set(3, 20);
+
 
   /* USER CODE END 2 */
 
@@ -167,61 +168,37 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	 if(timer_flag[0] ==1){
-//		 Timer_Set(0, 40);
-//		 //RUN IMU 50HZ
-//		 imu_read(&hi2c3);
-//		 ukf_filter(&ukf, &imu);
-//
-//		 //loc_azi = imu.yaw;//
-//		 //loc_pitch = imu.pitch;//
-//		 //loc_roll = imu.roll;//
-//
-//		 loc_azi = ukf.x[2]; //AZI
-//		 loc_pitch = ukf.x[1];
-//		 loc_roll = ukf.x[0];
-//	 }
-//	 if(timer_flag[1] ==1){
-//		 Timer_Set(1, 1000);
-//		 //RUN GPS 1HZ
-//		 GPS_Data_Update();
-//		 loc_gps_lon = gga_tmp.Lon;
-//		 loc_gps_lat = gga_tmp.Lat;
-//		 loc_gps_alt = gga_tmp.Altitude;
-//
-//	 }
-//	 if(timer_flag[2] == 1){
-//		 Timer_Set(2, 10);
-//	 	//RUN TFT AT 100HZ
-//		 getKeyInput();
-//		 tft_lcd_print_gps_imu_info();
-//	 }
-//	 if(timer_flag[3] == 1){
-//		 Timer_Set(3, 20);
-//	 	//RUN TFT AT 100HZ
-//		 tft_lcd_print_gps_imu_info();
-//	 }
-//	 if(isButtonPressed(0) == 1){
-//		 tag_distance = 500; //Ex distance
-//
-//		 double pitch_rad = loc_pitch * M_PI / 180.0;
-//		 double s12 = tag_distance * cos(pitch_rad);
-//
-//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-//
-//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-//		                 &tag_gps_lat, &tag_gps_lon, NULL);
-//
-//	 }
+	 if(timer_flag[0] ==1){
+		 Timer_Set(0, 20);
 
+		 //RUN IMU 50HZ
+		 imu_read(&hi2c3);
+		 ukf_filter(&ukf, &imu);
 
+		 loc_azi = ukf.x[2];
+		 loc_pitch = ukf.x[1];
+		 loc_roll = ukf.x[0];
 
-	  Battery_Run();
+		 tag_distance = 500; //Ex distance
 
-	  Serial_Print("Battery: %.2f V | %.1f %%\r\n",
-			Battery_Get_Voltage(), Battery_Get_Percent());
+		 double pitch_rad = loc_pitch * M_PI / 180.0;
+		 double s12 = tag_distance * cos(pitch_rad);
 
-	 HAL_Delay(2000);
+		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+
+		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+						 &tag_gps_lat, &tag_gps_lon, NULL);
+
+		TFT_LCD_Run();
+
+	 }
+
+//	  Battery_Run();
+//
+//	  Serial_Print("Battery: %.2f V | %.1f %%\r\n",
+//			Battery_Get_Voltage(), Battery_Get_Percent());
+//
+//	 HAL_Delay(2000);
 
   }
   /* USER CODE END 3 */
@@ -758,7 +735,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
         // Xử lý dữ liệu nhận được
-        GPS_ReceiveRawData(gps_uart_rx_buffer, Size);
+        GPS_Data_Update();
 
         // Bật lại DMA nhận tiếp
         HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
