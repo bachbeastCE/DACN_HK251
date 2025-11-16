@@ -29,7 +29,10 @@
 #include "button.h"
 #include "ukf.h"
 #include "imu.h"
+<<<<<<< HEAD
 #include "battery.h"
+=======
+>>>>>>> IMU
 
 /* USER CODE END Includes */
 
@@ -149,11 +152,22 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+<<<<<<< HEAD
   TFT_LCD_Init();
+=======
+  ST7735_Init();
+  ST7735_FillScreen(ST7735_BLACK);
+>>>>>>> IMU
   GPS_Init();
   ukfInit(&ukf, &hi2c3);
   geod_init(&g, 6378137, 1/298.257223563);
+<<<<<<< HEAD
   //Battery_Init();
+=======
+  ukfInit(&ukf, &hi2c2);
+  HAL_Delay(200);
+
+>>>>>>> IMU
   Timer_Init();
 
   Timer_Set(0, 100); //IMU
@@ -168,6 +182,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+<<<<<<< HEAD
 	 if(timer_flag[0] ==1){
 		 Timer_Set(0, 20);
 
@@ -179,6 +194,24 @@ int main(void)
 		 loc_pitch = ukf.x[1];
 		 loc_roll = ukf.x[0];
 
+=======
+	 if(timer_flag[0] == 1){
+		 Timer_Set(0, 20);
+		 //RUN IMU 25HZ
+		 imu_read(&hi2c2);
+		 ukf_filter(&ukf, &imu);
+		 loc_azi = ukf.x[2];
+		 loc_pitch = ukf.x[1];
+		 loc_roll = ukf.x[0];
+	 }
+	 if(timer_flag[1] ==1){
+		 Timer_Set(1, 20);
+		 //RUN GPS 1HZ
+		 GPS_Data_Update();
+		 loc_gps_lon = gga_tmp.Lon;
+		 loc_gps_lat = gga_tmp.Lat;
+		 loc_gps_alt = gga_tmp.Altitude;
+>>>>>>> IMU
 		 tag_distance = 500; //Ex distance
 
 		 double pitch_rad = loc_pitch * M_PI / 180.0;
@@ -187,6 +220,7 @@ int main(void)
 		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
 
 		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+<<<<<<< HEAD
 						 &tag_gps_lat, &tag_gps_lon, NULL);
 
 		TFT_LCD_Run();
@@ -200,6 +234,28 @@ int main(void)
 //
 //	 HAL_Delay(2000);
 
+=======
+		                 &tag_gps_lat, &tag_gps_lon, NULL);
+	 }
+	 if(timer_flag[2] == 1){
+		 Timer_Set(2, 10);
+	 	//RUN TFT and BUTTON AT 100HZ
+		 tft_lcd_print_gps_imu_info();
+//		 getKeyInput();
+	 }
+//	 if(isButtonPressed(0) == 1){
+//		 tag_distance = 500; //Ex distance
+//
+//		 double pitch_rad = loc_pitch * M_PI / 180.0;
+//		 double s12 = tag_distance * cos(pitch_rad);
+//
+//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+//
+//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+//		                 &tag_gps_lat, &tag_gps_lon, NULL);
+//
+//	 }
+>>>>>>> IMU
   }
   /* USER CODE END 3 */
 }
