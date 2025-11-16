@@ -203,14 +203,8 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     HAL_Delay(1000);
     int16_t gx_raw, gy_raw, gz_raw;
     for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
-<<<<<<< HEAD
-        //Read Gyro
-        if (HAL_I2C_Mem_Read(I2Cx, GYRO_ADDR, GYRO_DATAX0_REG, 1, data_gyro, 6, 100) != HAL_OK) {
-            //mprint("I2C read error!\r\n");
-=======
         // --- Read Gyro ---
         if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6, 100) != HAL_OK)
->>>>>>> IMU
             return;
 
 
@@ -223,15 +217,9 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         sum_gx += gx_raw;
         sum_gy += gy_raw;
         sum_gz += gz_raw;
-<<<<<<< HEAD
-        //Read Accel
-        if (HAL_I2C_Mem_Read(I2Cx, ACCE_ADDR, ACCE_DATAX0_REG, 1, data_acce, 6, 100) != HAL_OK) {
-            //mprint("I2C read error!\r\n");
-=======
 
         // --- Read Accel ---
         if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_ACCEL_XOUT_H, 1, data_acce, 6, 100) != HAL_OK)
->>>>>>> IMU
             return;
 
         ax_raw = (int16_t)((data_acce[0] << 8) | data_acce[1]);
@@ -241,22 +229,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         sum_ay += ay_raw;
         sum_az += az_raw;
 
-<<<<<<< HEAD
-        //Read Magnetometer
-        if (HAL_I2C_Mem_Read(I2Cx, MAG_ADDR, MAG_DATAX0_REG, 1, data_mag, 6, 100) != HAL_OK) {
-            //mprint("I2C read error!\r\n");
-            return;
-        }
-        mx_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
-        my_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
-        mz_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
-        sum_mx += mx_raw;
-        sum_my += my_raw;
-        sum_mz += mz_raw;
-        HAL_Delay(2); // ~500Hz
-=======
         HAL_Delay(5);
->>>>>>> IMU
     }
 
     imu.goffsetx = (float)sum_gx / CALIB_SAMPLES;
@@ -279,19 +252,6 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     var_gy /= (CALIB_SAMPLES - 1);
     var_gz /= (CALIB_SAMPLES - 1);
 
-<<<<<<< HEAD
-//    printf("Calibration done!\r\n");
-//    printf("Aoffsetx: %.3f g; ", imu.aoffsetx);
-//    printf("Aoffsety: %.3f g; ", imu.aoffsety);
-//    printf("Aoffsetz: %.3f g;\n", imu.aoffsetz);
-//    printf("Goffsetx = %.3f degree/s; ", imu.goffsetx);
-//    printf("Goffsety = %.3f degree/s; ", imu.goffsety);
-//    printf("Goffsetz = %.3f degree/s;\n", imu.goffsetz);
-//    printf("Moffsetx = %.3f Gauss; ", imu.moffsetx);
-//    printf("Moffsety = %.3f Gauss; ", imu.moffsety);
-//    printf("Moffsetz = %.3f Gauss;\n", imu.moffsetz);
-//    printf("=============================================\n");
-=======
     imu.gyrox_noise = sqrtf(var_gx);
     imu.gyroy_noise = sqrtf(var_gy);
     imu.gyroz_noise = sqrtf(var_gz);
@@ -347,6 +307,5 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     Serial_Print("Offsets:\r\n");
     Serial_Print(" Mx_off=%.2f, My_off=%.2f, Mz_off=%.2f\r\n", imu.moffsetx, imu.moffsety, imu.moffsetz);
     Serial_Print("=============================================\r\n");
->>>>>>> IMU
 }
 

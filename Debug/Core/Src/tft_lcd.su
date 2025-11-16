@@ -1,4 +1,2 @@
 ../Core/Src/tft_lcd.c:12:6:tft_lcd_test	32	static
 ../Core/Src/tft_lcd.c:87:6:tft_lcd_print_gps_imu_info	32	static
-../Core/Src/tft_lcd.c:123:6:TFT_LCD_Init	8	static
-../Core/Src/tft_lcd.c:127:6:TFT_LCD_Run	8	static

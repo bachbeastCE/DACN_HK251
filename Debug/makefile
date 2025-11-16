@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 DACN-KTMT.list \
 
+OBJCOPY_HEX += \
+DACN-KTMT.hex \
+
 
 # All Target
 all: main-build
@@ -75,12 +78,17 @@ DACN-KTMT.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+DACN-KTMT.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "DACN-KTMT.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) DACN-KTMT.elf DACN-KTMT.list DACN-KTMT.map default.size.stdout
+	-$(RM) DACN-KTMT.elf DACN-KTMT.hex DACN-KTMT.list DACN-KTMT.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

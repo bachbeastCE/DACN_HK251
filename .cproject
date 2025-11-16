@@ -169,10 +169,6 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-<<<<<<< HEAD
-	<storageModule moduleId="refreshScope"/>
-	<storageModule moduleId="scannerConfiguration"/>
-=======
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<scannerConfigBuildInfo instanceId="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.94562412;com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.release.94562412.;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1604814256;com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.815248477">
@@ -190,5 +186,4 @@
 			<resource resourceType="PROJECT" workspacePath="/DACN-KTMT"/>
 		</configuration>
 	</storageModule>
->>>>>>> IMU
 </cproject>

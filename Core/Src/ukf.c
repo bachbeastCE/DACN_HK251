@@ -13,11 +13,7 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	imu_init(I2Cx);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
-<<<<<<< HEAD
-    ukf->dt = 0.04f;
-=======
     ukf->dt = 0.02f;
->>>>>>> IMU
     for (int i = 1; i < N; i++) {
     	ukf->W_a[i] = 1.0f / 18.0f;
 		ukf->W_c[i] = 1.0f / 18.0f;
@@ -270,20 +266,6 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
             correction += ukf->K[i][k] * (ukf->z[k] - z_mean[k]);
         }
         ukf->x[i] = ukf->x_pred[i] + correction;
-<<<<<<< HEAD
-
-        // Normalize angles
-        if (i == 0 || i == 1) {
-        	while (ukf->x[1] > 90.0f)  ukf->x[1] -= 180.0f;
-        	while (ukf->x[1] < -90.0f) ukf->x[1] += 180.0f;
-
-        	// roll [-180°, 180°]
-        	while (ukf->x[0] > 180.0f)  ukf->x[0] -= 360.0f;
-        	while (ukf->x[0] < -180.0f) ukf->x[0] += 360.0f;
-        }
-
-=======
->>>>>>> IMU
     }
 
 //    Serial_Print("pitch = %.3f degree; ", ukf->x[1]);

@@ -5,13 +5,11 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/battery.c \
 ../Core/Src/button.c \
 ../Core/Src/fonts.c \
 ../Core/Src/geodesic.c \
 ../Core/Src/global.c \
 ../Core/Src/gps.c \
-../Core/Src/gps_ukf.c \
 ../Core/Src/imu.c \
 ../Core/Src/main.c \
 ../Core/Src/serial.c \
@@ -27,13 +25,11 @@ C_SRCS += \
 ../Core/Src/ukf.c 
 
 OBJS += \
-./Core/Src/battery.o \
 ./Core/Src/button.o \
 ./Core/Src/fonts.o \
 ./Core/Src/geodesic.o \
 ./Core/Src/global.o \
 ./Core/Src/gps.o \
-./Core/Src/gps_ukf.o \
 ./Core/Src/imu.o \
 ./Core/Src/main.o \
 ./Core/Src/serial.o \
@@ -49,13 +45,11 @@ OBJS += \
 ./Core/Src/ukf.o 
 
 C_DEPS += \
-./Core/Src/battery.d \
 ./Core/Src/button.d \
 ./Core/Src/fonts.d \
 ./Core/Src/geodesic.d \
 ./Core/Src/global.d \
 ./Core/Src/gps.d \
-./Core/Src/gps_ukf.d \
 ./Core/Src/imu.d \
 ./Core/Src/main.d \
 ./Core/Src/serial.d \
@@ -78,7 +72,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/battery.cyclo ./Core/Src/battery.d ./Core/Src/battery.o ./Core/Src/battery.su ./Core/Src/button.cyclo ./Core/Src/button.d ./Core/Src/button.o ./Core/Src/button.su ./Core/Src/fonts.cyclo ./Core/Src/fonts.d ./Core/Src/fonts.o ./Core/Src/fonts.su ./Core/Src/geodesic.cyclo ./Core/Src/geodesic.d ./Core/Src/geodesic.o ./Core/Src/geodesic.su ./Core/Src/global.cyclo ./Core/Src/global.d ./Core/Src/global.o ./Core/Src/global.su ./Core/Src/gps.cyclo ./Core/Src/gps.d ./Core/Src/gps.o ./Core/Src/gps.su ./Core/Src/gps_ukf.cyclo ./Core/Src/gps_ukf.d ./Core/Src/gps_ukf.o ./Core/Src/gps_ukf.su ./Core/Src/imu.cyclo ./Core/Src/imu.d ./Core/Src/imu.o ./Core/Src/imu.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/serial.cyclo ./Core/Src/serial.d ./Core/Src/serial.o ./Core/Src/serial.su ./Core/Src/st7735.cyclo ./Core/Src/st7735.d ./Core/Src/st7735.o ./Core/Src/st7735.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_hal_timebase_tim.cyclo ./Core/Src/stm32f4xx_hal_timebase_tim.d ./Core/Src/stm32f4xx_hal_timebase_tim.o ./Core/Src/stm32f4xx_hal_timebase_tim.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/tft_lcd.cyclo ./Core/Src/tft_lcd.d ./Core/Src/tft_lcd.o ./Core/Src/tft_lcd.su ./Core/Src/timer.cyclo ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su ./Core/Src/ukf.cyclo ./Core/Src/ukf.d ./Core/Src/ukf.o ./Core/Src/ukf.su
+	-$(RM) ./Core/Src/button.cyclo ./Core/Src/button.d ./Core/Src/button.o ./Core/Src/button.su ./Core/Src/fonts.cyclo ./Core/Src/fonts.d ./Core/Src/fonts.o ./Core/Src/fonts.su ./Core/Src/geodesic.cyclo ./Core/Src/geodesic.d ./Core/Src/geodesic.o ./Core/Src/geodesic.su ./Core/Src/global.cyclo ./Core/Src/global.d ./Core/Src/global.o ./Core/Src/global.su ./Core/Src/gps.cyclo ./Core/Src/gps.d ./Core/Src/gps.o ./Core/Src/gps.su ./Core/Src/imu.cyclo ./Core/Src/imu.d ./Core/Src/imu.o ./Core/Src/imu.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/serial.cyclo ./Core/Src/serial.d ./Core/Src/serial.o ./Core/Src/serial.su ./Core/Src/st7735.cyclo ./Core/Src/st7735.d ./Core/Src/st7735.o ./Core/Src/st7735.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_hal_timebase_tim.cyclo ./Core/Src/stm32f4xx_hal_timebase_tim.d ./Core/Src/stm32f4xx_hal_timebase_tim.o ./Core/Src/stm32f4xx_hal_timebase_tim.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/tft_lcd.cyclo ./Core/Src/tft_lcd.d ./Core/Src/tft_lcd.o ./Core/Src/tft_lcd.su ./Core/Src/timer.cyclo ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su ./Core/Src/ukf.cyclo ./Core/Src/ukf.d ./Core/Src/ukf.o ./Core/Src/ukf.su
 
 .PHONY: clean-Core-2f-Src
 
