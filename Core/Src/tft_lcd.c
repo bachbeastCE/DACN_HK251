@@ -9,7 +9,7 @@
 
 char buffer[32];
 
-void tft_lcd_test() {
+static inline void tft_lcd_test() {
     // Check border
     ST7735_FillScreen(ST7735_BLACK);
 
@@ -84,7 +84,7 @@ void tft_lcd_test() {
 #endif // ST7735_IS_128X128
 }
 
-void tft_lcd_print_gps_imu_info(){
+static inline void tft_lcd_print_gps_imu_info(){
 	uint16_t y = 0;
 
 	snprintf(buffer, sizeof(buffer), "Loc_lon: %.7f", loc_gps_lon);
@@ -119,4 +119,17 @@ void tft_lcd_print_gps_imu_info(){
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 }
 
+void TFT_LCD_Init(){
+	 ST7735_Init();
+	 ST7735_FillScreen(ST7735_BLACK);
+}
+
+void TFT_LCD_Run(){
+#if TFT_ENABLE_SPI_TEST
+	tft_lcd_test();
+#else
+	tft_lcd_print_gps_imu_info();
+#endif
+
+}
 

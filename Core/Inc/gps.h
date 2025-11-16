@@ -21,17 +21,8 @@
 #define GPS_UART_PORT huart2
 extern UART_HandleTypeDef GPS_UART_PORT;
 
-extern UART_HandleTypeDef huart1;
-
 #define GPS_UART_BUFFER_SIZE 256
-#define GPS_BUFFER_SIZE 256
-#define MAX_SENTENCE 128
-
-extern uint8_t gps_uart_idx;
-extern uint8_t gps_uart_tranfer_count;
-extern uint8_t gps_uart_copy_flag;
 extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
-
 
 //======================== COMMAND =================================//
 
@@ -82,46 +73,12 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 #define SET_REDUCTION               "$PMTK314,-1"
 
 
-//======================== CONTROL  =================================//
-//GPS Control register
-/**
- * 0: READ
- * 1: WRITE
- * 2: ALT_BUF
- * 3-31: Reverse
- **/
-
-extern volatile uint32_t __gps_ctrl_reg;
-
-// ===== Bit masks =====
-#define GPS_READ_BIT     (1U << 0)   // bit 0
-#define GPS_WRITE_BIT    (1U << 1)   // bit 1
-#define GPS_ALT_BIT      (1U << 2)   // bit 2
-
-// Check
-#define gps_ctrl_check(bit)     (__gps_ctrl_reg & (bit))
-
-// Set
-#define gps_ctrl_set(bit)       (__gps_ctrl_reg |= (bit))
-
-// Clear
-#define gps_ctrl_clear(bit)     (__gps_ctrl_reg &= ~(bit))
-
-#define delay_ms(__ms) HAL_Delay(__ms)
-
-//======================== ERROR =================================//
-
-#define GPS_ALT_BUFFER 1
-#define GPS_TIMEOUT 2
-#define GPS_BUFFER_OVERFLOW 3
-
 //======================== DATA STRUCT  =================================//
 
 typedef struct {
 	double Lat;       // Latitude (decimal degree)
 	double Lon;       // Longtiude (decimal degree)
-    char Lat_area;    // 'N' or 'S'
-    char Lon_area;    // 'E' or 'W'
+	double Alt;
 } COORDINATES_t;
 
 typedef struct {
@@ -155,28 +112,11 @@ typedef struct {
     double GeoidSep;  // chênh lệch geoid (m)
 } GGA_t;
 
-//======================== VARIABLE  =================================//
-#define GPS_BUFFER_SIZE 256
-#define MAX_SENTENCE 128
-
-extern GGA_t gga_tmp;
-extern RMC_t rmc_tmp;
-
-
 //======================== FUNCTION  =================================//
-
-uint8_t GPS_CaculateChecksum(const char *sentence);
 uint8_t GPS_SendCommand(const char *data);
-uint8_t GPS_ReceiveRawData(uint8_t* uart_rx_buffer,uint16_t size);
-
 uint8_t GPS_Init();
 uint8_t GPS_Data_Update();
 uint8_t GPS_RMC_Get (RMC_t *result);
 uint8_t GPS_GGA_Get (GGA_t *result);
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
-
-void GPS_RMC_Print(RMC_t * rmc);
-void GPS_GGA_Print(GGA_t * gga);
-void GPS_Coordinates_Print(COORDINATES_t * coordinates);
-
 #endif

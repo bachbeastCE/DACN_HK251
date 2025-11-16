@@ -63,7 +63,25 @@ DMA_HandleTypeDef hdma_usart1_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
+double loc_gps_lon = 0.0;
+double loc_gps_lat = 0.0;
+double loc_gps_alt = 0.0;
+double loc_azi = 0.0;
+double loc_pitch = 0.0;
+double loc_yaw = 0.0;
+double loc_roll = 0.0;
 
+double tag_gps_lon = 0.0;
+double tag_gps_lat = 0.0;
+double tag_gps_alt = 0.0;
+double tag_distance = 0.0;
+
+struct geod_geodesic g;
+
+uint8_t gps_uart_idx = 0;
+uint8_t gps_uart_tranfer_count = 0;
+
+COORDINATES_t raw_coordinates;
 
 /* USER CODE END PV */
 
@@ -128,8 +146,7 @@ int main(void)
   MX_SPI3_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  ST7735_Init();
-  ST7735_FillScreen(ST7735_BLACK);
+  TFT_LCD_Init();
   GPS_Init();
   geod_init(&g, 6378137, 1/298.257223563);
   ukfInit(&ukf, &hi2c2);
@@ -137,8 +154,6 @@ int main(void)
 
   Timer_Init();
   Timer_Set(0, 20); //IMU
-  Timer_Set(1, 1000);
-  Timer_Set(2, 1000);
 
   /* USER CODE END 2 */
 
@@ -151,20 +166,23 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	 if(timer_flag[0] == 1){
 		 Timer_Set(0, 20);
-		 //RUN IMU 25HZ
+
+		 //UKF IMU
 		 imu_read(&hi2c2);
 		 ukf_filter(&ukf, &imu);
 		 loc_azi = ukf.x[2];
 		 loc_pitch = ukf.x[1];
 		 loc_roll = ukf.x[0];
-	 }
-	 if(timer_flag[1] ==1){
-		 Timer_Set(1, 20);
-		 //RUN GPS 1HZ
-		 GPS_Data_Update();
-		 loc_gps_lon = gga_tmp.Lon;
-		 loc_gps_lat = gga_tmp.Lat;
-		 loc_gps_alt = gga_tmp.Altitude;
+
+		 //UKF GPS
+		 GPS_Coordinates_Get(&raw_coordinates);
+		 loc_gps_lon = raw_coordinates.Lon;
+		 loc_gps_lat = raw_coordinates.Lat;
+		 loc_gps_alt = raw_coordinates.Alt;
+
+
+		 //CACULATE TARGET POSITION
+
 		 tag_distance = 500; //Ex distance
 
 		 double pitch_rad = loc_pitch * M_PI / 180.0;
@@ -174,27 +192,13 @@ int main(void)
 
 		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
 		                 &tag_gps_lat, &tag_gps_lon, NULL);
+
+		 //DISPLAY RESULT
+		 TFT_LCD_Run();
 	 }
-	 if(timer_flag[2] == 1){
-		 Timer_Set(2, 10);
-	 	//RUN TFT and BUTTON AT 100HZ
-		 tft_lcd_print_gps_imu_info();
-//		 getKeyInput();
-	 }
-//	 if(isButtonPressed(0) == 1){
-//		 tag_distance = 500; //Ex distance
-//
-//		 double pitch_rad = loc_pitch * M_PI / 180.0;
-//		 double s12 = tag_distance * cos(pitch_rad);
-//
-//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-//
-//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-//		                 &tag_gps_lat, &tag_gps_lon, NULL);
-//
-//	 }
-  }
+
   /* USER CODE END 3 */
+  }
 }
 
 /**
@@ -620,20 +624,10 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
     if (huart->Instance == USART2)
     {
-//        gps_uart_idx = Size;
-//        gps_uart_tranfer_count++;
 
-//		sprintf(tx_buffer, "Time: %d -> Tranfer:%d\r\n\n",
-//				gps_uart_tranfer_count, gps_uart_idx);
-//		HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
-
-        // 👉 Toggle LED mỗi khi nhận được 1 gói dữ liệu từ GPS
         HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        GPS_Data_Update();
 
-        // Xử lý dữ liệu nhận được
-        GPS_ReceiveRawData(gps_uart_rx_buffer, Size);
-
-        // Bật lại DMA nhận tiếp
         HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
         __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
     }

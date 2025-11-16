@@ -16,7 +16,6 @@
 #include "testimg.h"
 #include "global.h"
 
-void tft_lcd_test();
-void tft_lcd_print_gps_imu_info();
-
+void TFT_LCD_Init();
+void TFT_LCD_Run();
 #endif /* INC_TFT_LCD_H_ */

@@ -1,7 +1,6 @@
 "./Core/Src/button.o"
 "./Core/Src/fonts.o"
 "./Core/Src/geodesic.o"
-"./Core/Src/global.o"
 "./Core/Src/gps.o"
 "./Core/Src/imu.o"
 "./Core/Src/main.o"

@@ -7,21 +7,14 @@
 
 #include "gps.h"
 
-volatile uint32_t __gps_ctrl_reg = 0x07;
-
-uint8_t gps_uart_idx = 0;
-uint8_t gps_uart_tranfer_count = 0;
 uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
-uint8_t gps_main_buffer[GPS_BUFFER_SIZE];
-uint8_t gps_alt_buffer[GPS_BUFFER_SIZE];
 
-GGA_t gga_tmp = {0};
-RMC_t rmc_tmp = {0};
-COORDINATES_t coordinates_tmp = {0};
-uint8_t gps_uart_copy_flag = 0;
-char sentence[MAX_SENTENCE] = {0};
+static char sentence[128] = {0};
+static GGA_t gga_tmp = {0};
+static RMC_t rmc_tmp = {0};
 
-uint8_t GPS_CaculateChecksum(const char *sentence)
+
+static uint8_t GPS_CaculateChecksum(const char *sentence)
 {
     uint8_t checksum = 0;
     int i = 0;
@@ -36,7 +29,6 @@ uint8_t GPS_CaculateChecksum(const char *sentence)
         checksum ^= (uint8_t)sentence[i];
         i++;
     }
-
     return checksum;
 }
 
@@ -87,7 +79,7 @@ uint8_t GPS_Init()
     return 0;
 }
 
-RMC_t parseRMC(const char* sentence) {
+static RMC_t parseRMC(const char* sentence) {
     RMC_t data = {0};
     char timeStr[11] = {0}, latStr[15] = {0}, lonStr[15] = {0}, dateStr[7] = {0};
     char latArea=0, lonArea=0, status=0, modeInd=0, navStatus=0;
@@ -139,7 +131,7 @@ RMC_t parseRMC(const char* sentence) {
     return data;
 }
 
-GGA_t parseGGA(const char* sentence) {
+static GGA_t parseGGA(const char* sentence) {
     GGA_t data = {0};
     char latStr[15]={0}, lonStr[15]={0};
 
@@ -176,48 +168,11 @@ GGA_t parseGGA(const char* sentence) {
     return data;
 }
 
-uint8_t GPS_ReceiveRawData(uint8_t* uart_rx_buffer,uint16_t size){
-	if(size > GPS_BUFFER_SIZE) return GPS_BUFFER_OVERFLOW;
-	if(gps_ctrl_check(GPS_READ_BIT)){
-		memcpy(gps_alt_buffer,uart_rx_buffer,size);
-		gps_ctrl_set(GPS_ALT_BIT);
-		return GPS_ALT_BUFFER;
-	}
-	else{
-		gps_ctrl_set(GPS_WRITE_BIT);
-		memcpy(gps_main_buffer,uart_rx_buffer,size);
-		gps_ctrl_clear(GPS_WRITE_BIT);
-		return 0;
-	}
-}
-
 uint8_t GPS_Data_Update() {
 	const char *p;
 	const char *start;
-	if(gps_ctrl_check(GPS_ALT_BIT)){
-		gps_ctrl_clear(GPS_ALT_BIT);
-		p = (char*)gps_alt_buffer;
-		start = (char*)gps_alt_buffer;
-
-	}
-	else{
-		if(gps_ctrl_check(GPS_WRITE_BIT)){
-			int cnt = 0;
-			while(cnt < 20){
-				if(gps_ctrl_check(GPS_WRITE_BIT)){
-					++cnt;
-					delay_ms(2);
-				}
-				else{
-					break;
-				}
-			}
-			if(cnt >= 20) return GPS_TIMEOUT;
-		}
-		gps_ctrl_set(GPS_READ_BIT);
-		p = (char*)gps_main_buffer;
-		start = (char*)gps_main_buffer;
-	}
+	p = (char*)gps_uart_rx_buffer;
+	start = (char*)gps_uart_rx_buffer;
 
     while (*p) {
         if (*p == '\r' && *(p+1) == '\n') {
@@ -243,13 +198,6 @@ uint8_t GPS_Data_Update() {
             p++;
         }
     }
-	coordinates_tmp.Lat = rmc_tmp.Lat;
-	coordinates_tmp.Lon = rmc_tmp.Lon;
-	coordinates_tmp.Lat_area = rmc_tmp.Lat_area;
-	coordinates_tmp.Lon_area = rmc_tmp.Lon_area;
-
-    gps_ctrl_clear(GPS_READ_BIT);
-
     return 0;
 }
 
@@ -264,37 +212,8 @@ uint8_t  GPS_GGA_Get(GGA_t *result){
 }
 
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
-    *result = coordinates_tmp;
+	result->Lat = gga_tmp.Lat;
+	result->Lon = gga_tmp.Lon;
+	result->Alt = gga_tmp.Altitude;
     return 0;
 }
-
-//void GPS_GGA_Print(GGA_t *gga){
-//    char tmp[256];
-//    int len = snprintf(tmp, sizeof(tmp),
-//        "GGA: Lat=%.6f %c, Lon=%.6f %c\r\n"
-//        " FixQuality=%d, NumSV=%d, HDOP=%.2f\r\n"
-//        " Altitude=%.3f m, GeoidSep=%.3f m\r\n",
-//        gga->Lat, gga->Lat_area,
-//        gga->Lon, gga->Lon_area,
-//        gga->FixQuality, gga->NumSV, gga->HDOP,
-//        gga->Altitude, gga->GeoidSep
-//    );
-//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
-//
-//void print_Coordinates(COORDINATES_t *coordinates) {
-//    mprint(
-//        "Lat: %.6f %c, Lon: %.6f %c\r\n",
-//        coordinates->Lat, coordinates->Lat_area,
-//        coordinates->Lon, coordinates->Lon_area
-//    );
-//    HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
-//
-//void GPS_Coordinates_Print(COORDINATES_t * coordinates){
-//	char tmp[50];
-//	int len = snprintf(tmp, sizeof(tmp),
-//		"Lat: %.6f %c, Lon: %.6f %c\r\n",
-//		coordinates->Lat, coordinates->Lat_area, coordinates->Lon, coordinates->Lon_area);
-//	HAL_UART_Transmit(&huart1, (uint8_t*)tmp, len, HAL_MAX_DELAY);
-//}
