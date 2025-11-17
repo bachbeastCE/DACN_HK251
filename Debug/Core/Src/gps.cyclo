@@ -7,3 +7,10 @@
 ../Core/Src/gps.c:204:9:GPS_RMC_Get	1
 ../Core/Src/gps.c:209:10:GPS_GGA_Get	1
 ../Core/Src/gps.c:214:9:GPS_Coordinates_Get	1
+../Core/Src/gps.c:224:21:deg2rad	1
+../Core/Src/gps.c:225:21:rad2deg	1
+../Core/Src/gps.c:229:6:wgs84_to_ecef	1
+../Core/Src/gps.c:248:6:ecef_to_wgs84	3
+../Core/Src/gps.c:275:6:enu_rotation_matrix	1
+../Core/Src/gps.c:299:6:wgs84_to_enu	1
+../Core/Src/gps.c:320:6:enu_to_wgs84	1

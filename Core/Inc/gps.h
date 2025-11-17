@@ -24,6 +24,8 @@ extern UART_HandleTypeDef GPS_UART_PORT;
 #define GPS_UART_BUFFER_SIZE 256
 extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 
+#define WGS84_A  6378137.0f
+#define WGS84_E2 6.69437999014e-3f
 //======================== COMMAND =================================//
 
 //Startup mode
@@ -119,4 +121,10 @@ uint8_t GPS_Data_Update();
 uint8_t GPS_RMC_Get (RMC_t *result);
 uint8_t GPS_GGA_Get (GGA_t *result);
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
+void enu_to_wgs84(float E, float N, float U,
+                  float lat0, float lon0, float h0,
+                  float *lat, float *lon, float *h);
+void wgs84_to_enu(float lat, float lon, float h,
+                  float lat0, float lon0, float h0,
+                  float *E, float *N, float *U);
 #endif

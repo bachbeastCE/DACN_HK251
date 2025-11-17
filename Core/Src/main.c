@@ -29,6 +29,7 @@
 #include "button.h"
 #include "ukf.h"
 #include "imu.h"
+#include "battery.h"
 
 /* USER CODE END Includes */
 
@@ -48,6 +49,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
 
@@ -76,6 +79,8 @@ double tag_gps_lat = 0.0;
 double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 
+uint8_t battery_percent = 0.0;
+
 struct geod_geodesic g;
 
 uint8_t gps_uart_idx = 0;
@@ -97,6 +102,7 @@ static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -145,14 +151,15 @@ int main(void)
   MX_I2C3_Init();
   MX_SPI3_Init();
   MX_TIM2_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   TFT_LCD_Init();
   HAL_Delay(100);
-  GPS_Init();
+  //GPS_Init();
   HAL_Delay(100);
-  geod_init(&g, 6378137, 1/298.257223563);
+  //geod_init(&g, 6378137, 1/298.257223563);
   HAL_Delay(100);
-  ukfInit(&ukf, &hi2c2);
+  //ukfInit(&ukf, &hi2c2);
   HAL_Delay(100);
 
   Timer_Init();
@@ -200,6 +207,11 @@ int main(void)
 		 TFT_LCD_Run();
 	 }
 
+	 if(timer_flag[1] == 1){
+		  Timer_Set(1, 10000);
+		  Battery_Run();
+		  battery_percent = (uint8_t)(Battery_Get_Percent());
+	 }
 
   /* USER CODE END 3 */
   }
@@ -248,6 +260,58 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.ScanConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -636,6 +700,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT);
     }
 }
+
+void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
+	Battery_Get_ADC(hadc);
+}
+
 
 /* USER CODE END 4 */
 

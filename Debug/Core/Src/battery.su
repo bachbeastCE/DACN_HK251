@@ -1,0 +1,6 @@
+../Core/Src/battery.c:14:6:Battery_Init	8	static
+../Core/Src/battery.c:28:6:Battery_Get_ADC	24	static
+../Core/Src/battery.c:56:14:VoltageToPercent	56	static
+../Core/Src/battery.c:85:6:Battery_Run	16	static
+../Core/Src/battery.c:121:7:Battery_Get_Voltage	4	static
+../Core/Src/battery.c:129:7:Battery_Get_Percent	4	static
