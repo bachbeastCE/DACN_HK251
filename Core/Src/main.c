@@ -28,6 +28,7 @@
 #include "timer.h"
 #include "button.h"
 #include "ukf.h"
+#include "gps_ukf.h"
 #include "imu.h"
 #include "battery.h"
 
@@ -86,7 +87,18 @@ struct geod_geodesic g;
 uint8_t gps_uart_idx = 0;
 uint8_t gps_uart_tranfer_count = 0;
 
+
+
 COORDINATES_t raw_coordinates;
+
+
+
+/*
+ * Bit 0: Get Reference point
+ * */
+uint8_t enu_ref_point_flag = 0;
+COORDINATES_t enu_ref_point;
+enu_t enu;
 
 /* USER CODE END PV */
 
@@ -162,6 +174,7 @@ int main(void)
   TFT_LCD_Init();
 
   ukfInit(&ukf, &hi2c2);
+  ukf_gps_Init(&ukf_gps);
   HAL_Delay(100);
 
   Timer_Init();
@@ -188,6 +201,19 @@ int main(void)
 		 loc_roll = ukf.x[0];
 
 		 //UKF GPS
+		 if(enu_ref_point_flag){
+			 GPS_Coordinates_Get(&raw_coordinates);
+			 wgs84_to_enu(raw_coordinates.Lat,raw_coordinates.Lon,raw_coordinates.Alt,enu_ref_point.Lat,enu_ref_point.Lon,enu_ref_point.Alt,&(enu.x),&(enu.y),&(enu.z));
+			 float acc[3] = {0};
+			 ukf_gps_filter(&ukf_gps, &enu, acc);
+			 enu_to_wgs84(enu.x,enu.y,enu.z,enu_ref_point.Lat,enu_ref_point.Lon,enu_ref_point.Alt, &loc_gps_lat, &loc_gps_lon, &loc_gps_alt);
+		 }
+		 else{
+			 if(GPS_Get_Status()){
+				 GPS_Coordinates_Get(&enu_ref_point);
+			 }
+		 }
+
 		 GPS_Coordinates_Get(&raw_coordinates);
 		 loc_gps_lon = raw_coordinates.Lon;
 		 loc_gps_lat = raw_coordinates.Lat;

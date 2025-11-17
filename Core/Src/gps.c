@@ -6,7 +6,6 @@
  */
 
 #include "gps.h"
-
 uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 
 static char sentence[128] = {0};
@@ -218,6 +217,12 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
     return 0;
 }
 
+uint8_t GPS_Get_Status(){
+	if(gga_tmp.HDOP != 0) return 1;
+	else return 0;
+}
+
+
 // CONVERT WGS84 <=> ENU
 
 /* Deg/Rad conversion */
@@ -347,3 +352,7 @@ void enu_to_wgs84(float E, float N, float U,
     // ECEF -> WGS84
     ecef_to_wgs84(X, Y, Z, lat, lon, h);
 }
+
+
+
+

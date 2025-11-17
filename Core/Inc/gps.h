@@ -118,6 +118,7 @@ typedef struct {
 uint8_t GPS_SendCommand(const char *data);
 uint8_t GPS_Init();
 uint8_t GPS_Data_Update();
+uint8_t GPS_Get_Status();
 uint8_t GPS_RMC_Get (RMC_t *result);
 uint8_t GPS_GGA_Get (GGA_t *result);
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result);
