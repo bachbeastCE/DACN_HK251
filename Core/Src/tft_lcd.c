@@ -8,7 +8,10 @@
 #include "tft_lcd.h"
 #include "math.h"
 
-char buffer[32];
+static uint16_t deg = 0;
+static uint8_t min = 0;
+static double sec;
+static char buffer[32];
 
 static inline void tft_lcd_test() {
     // Check border
@@ -85,47 +88,94 @@ static inline void tft_lcd_test() {
 #endif // ST7735_IS_128X128
 }
 
+
+#if TFT_ENABLE_CONVERT_DMS
+void decimal_to_dms(double decimal, uint16_t *deg, uint8_t *min, double *sec)
+{
+    double abs_val = fabs(decimal);
+
+    *deg = (int)abs_val;
+    double minutes = (abs_val - *deg) * 60.0;
+    *min = (int)minutes;
+    *sec = (minutes - *min) * 60.0;
+}
+#endif
+
 static inline void tft_lcd_print_gps_imu_info(){
 	uint16_t y = 0;
-
-	snprintf(buffer, sizeof(buffer), "Battery: %d", battery_percent);
+	snprintf(buffer, sizeof(buffer), "Battery:%d%%", battery_percent);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
+#if TFT_ENABLE_CONVERT_DMS
 	char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
-	snprintf(buffer, sizeof(buffer), "Loc_lon: %.5f %c",fabs(loc_gps_lon), lon_dir);
+	decimal_to_dms(loc_gps_lon, &deg, &min, &sec);
+	snprintf(buffer, sizeof(buffer),
+	         "LocLon:%c %03d*%02d'%05.2f\"",
+			 lon_dir, deg, min, sec);
+	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+	char lat_dir = (loc_gps_lat >= 0) ? 'N' : 'S';
+	decimal_to_dms(loc_gps_lat, &deg, &min, &sec);
+	snprintf(buffer, sizeof(buffer),
+	         "LocLat:%c %03d*%02d'%05.2f\"",
+			 lat_dir, deg, min, sec);
+	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+
+
+#else
+	char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
+	snprintf(buffer, sizeof(buffer), "Loc_Lon:%c%.5f",lon_dir,fabs(loc_gps_lon));
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
 	char lat_dir = (loc_gps_lat >= 0) ? 'N' : 'S';
-	snprintf(buffer, sizeof(buffer), "Loc_lat: %.5f %c", fabsf(loc_gps_lat), lat_dir);
+	snprintf(buffer, sizeof(buffer), "Loc_Lat:%c%.5f", lat_dir,fabsf(loc_gps_lat) );
+	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
+#endif
+
+	snprintf(buffer, sizeof(buffer), "Loc_Alt:%.2f", loc_gps_alt);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_alt: %.2f", loc_gps_alt);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
-
-	snprintf(buffer, sizeof(buffer), "Loc_azi: %.2f", loc_azi);
+	snprintf(buffer, sizeof(buffer), "Loc_Azi:%.2f", loc_azi);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_WHITE, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_pit: %.2f", loc_pitch);
+	snprintf(buffer, sizeof(buffer), "Loc_Pit:%.2f", loc_pitch);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_WHITE, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_rol: %.2f", loc_roll);
+	snprintf(buffer, sizeof(buffer), "Loc_Rol:%.2f", loc_roll);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_WHITE, ST7735_BLACK);
 
 	//TAG
-	char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
-	float tag_lon_abs = fabsf(tag_gps_lon);
-	snprintf(buffer, sizeof(buffer), "Tag_lon: %.5f %c", tag_lon_abs, tag_lon_dir);
-	ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+#if TFT_ENABLE_CONVERT_DMS
+    char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
+    decimal_to_dms(tag_gps_lon, &deg, &min, &sec);
+    snprintf(buffer, sizeof(buffer),
+             "TagLon:%c %03d*%02d'%05.2f\"",
+			 tag_lon_dir,deg, min, sec);
+    ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 
-	char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
-	float tag_lat_abs = fabsf(tag_gps_lat);
-	snprintf(buffer, sizeof(buffer), "Tag_lat: %.5f %c", tag_lat_abs, tag_lat_dir);
+    char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
+    decimal_to_dms(tag_gps_lat, &deg, &min, &sec);
+    snprintf(buffer, sizeof(buffer),
+             "TagLat:%c %03d*%02d'%05.2f\"",
+			 tag_lat_dir,deg, min, sec);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+#else
+    char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
+    snprintf(buffer, sizeof(buffer),
+             "Tag_lon:%c%.5f",
+			 tag_lon_dir, fabs(tag_gps_lon));
+
+    ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+    char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
+    snprintf(buffer, sizeof(buffer),
+             "Tag_lat:%c%.5f",
+			 tag_lat_dir, fabs(tag_gps_lat));
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
+#endif
+
+	snprintf(buffer, sizeof(buffer), "Tag_Alt:%.2f", tag_gps_alt);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Tag_alt: %.2f", tag_gps_alt);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
-
-	snprintf(buffer, sizeof(buffer), "Tag_dis: %.2f", tag_distance);
+	snprintf(buffer, sizeof(buffer), "Tag_Dis:%.2f", tag_distance);
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 }
 

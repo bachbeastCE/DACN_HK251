@@ -1,5 +1,6 @@
-../Core/Src/battery.c:14:6:Battery_Init	1
-../Core/Src/battery.c:38:14:VoltageToPercent	6
-../Core/Src/battery.c:67:6:Battery_Run	2
-../Core/Src/battery.c:103:7:Battery_Get_Voltage	1
-../Core/Src/battery.c:111:7:Battery_Get_Percent	1
+../Core/Src/battery.c:21:6:Battery_Init	1
+../Core/Src/battery.c:33:6:Battery_ADC_ConvCpltCallback	3
+../Core/Src/battery.c:61:14:VoltageToPercent	6
+../Core/Src/battery.c:90:6:Battery_Run	2
+../Core/Src/battery.c:126:7:Battery_Get_Voltage	1
+../Core/Src/battery.c:137:7:Battery_Get_Percent	1

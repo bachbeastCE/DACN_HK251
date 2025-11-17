@@ -1,3 +1,4 @@
-../Core/Src/tft_lcd.c:88:20:tft_lcd_print_gps_imu_info	5
-../Core/Src/tft_lcd.c:132:6:TFT_LCD_Init	1
-../Core/Src/tft_lcd.c:137:6:TFT_LCD_Run	1
+../Core/Src/tft_lcd.c:93:6:decimal_to_dms	1
+../Core/Src/tft_lcd.c:104:20:tft_lcd_print_gps_imu_info	5
+../Core/Src/tft_lcd.c:182:6:TFT_LCD_Init	1
+../Core/Src/tft_lcd.c:187:6:TFT_LCD_Run	1

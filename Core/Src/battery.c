@@ -1,3 +1,10 @@
+/*
+ * battery.c
+ *
+ *  Created on: Nov 5, 2025
+ *      Author: NGUYEN DUY BACH
+ */
+
 #include "battery.h"
 #include <math.h>
 
@@ -23,9 +30,25 @@ void Battery_Init(void)
 /**
  * @brief Callback khi ADC chuyển đổi xong (được gọi từ HAL)
  */
+void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+    if (hadc->Instance == BATTERY_HANDLE_ADC.Instance)
+    {
+        uint32_t value = HAL_ADC_GetValue(hadc);
+        adc_sum += value;
+        adc_count++;
 
-
-
+        if (adc_count >= ADC_SAMPLES)
+        {
+            adc_ready = 1;
+            HAL_ADC_Stop_IT(hadc); // dừng ADC khi đủ mẫu
+        }
+        else
+        {
+            HAL_ADC_Start_IT(hadc); // tiếp tục đo mẫu kế tiếp
+        }
+    }
+}
 
 /**
  * Map voltage to percent according to:
@@ -102,7 +125,10 @@ void Battery_Run(void)
  */
 float Battery_Get_Voltage(void)
 {
-    return battery_voltage_tmp;
+#if BATTERY_ENABLE_SERIAL_LOG
+	Serial_Print("Battery voltage: %.2f V \r\n", battery_voltage_tmp);
+#endif
+	return battery_voltage_tmp;
 }
 
 /**
@@ -110,5 +136,10 @@ float Battery_Get_Voltage(void)
  */
 float Battery_Get_Percent(void)
 {
-    return battery_percent_tmp;
+#if BATTERY_ENABLE_SERIAL_LOG
+	Serial_Print("Battery percent: %.1f %%\r\n",battery_percent_tmp);
+#endif
+	return battery_percent_tmp;
 }
+
+
