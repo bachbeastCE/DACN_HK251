@@ -5,6 +5,6 @@
 ../Core/Src/imu.c:67:6:accel_gyro_Init	2
 ../Core/Src/imu.c:88:6:mag_init	3
 ../Core/Src/imu.c:117:6:accel_read	2
-../Core/Src/imu.c:136:6:gyro_read	2
-../Core/Src/imu.c:158:6:mag_read	2
-../Core/Src/imu.c:193:6:calibrate	13
+../Core/Src/imu.c:141:6:gyro_read	2
+../Core/Src/imu.c:167:6:mag_read	2
+../Core/Src/imu.c:205:6:calibrate	13

@@ -161,6 +161,7 @@ int main(void)
   HAL_Delay(100);
   //ukfInit(&ukf, &hi2c2);
   HAL_Delay(100);
+  Battery_Init();
 
   Timer_Init();
   Timer_Set(0, 20); //IMU
@@ -174,47 +175,49 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 if(timer_flag[0] == 1){
-		 Timer_Set(0, 20);
+//	 if(timer_flag[0] == 1){
+//		 Timer_Set(0, 20);
+//
+//		 //UKF IMU
+//		 //imu_read(&hi2c2);
+//		 //ukf_filter(&ukf, &imu);
+//		 loc_azi = ukf.x[2];
+//		 loc_pitch = ukf.x[1];
+//		 loc_roll = ukf.x[0];
+//
+//		 //UKF GPS
+//		 GPS_Coordinates_Get(&raw_coordinates);
+//		 loc_gps_lon = raw_coordinates.Lon;
+//		 loc_gps_lat = raw_coordinates.Lat;
+//		 loc_gps_alt = raw_coordinates.Alt;
+//
+//
+//		 //CACULATE TARGET POSITION
+//
+//		 tag_distance = 500; //Ex distance
+//
+//		 double pitch_rad = loc_pitch * M_PI / 180.0;
+//		 double s12 = tag_distance * cos(pitch_rad);
+//
+//		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
+//
+//		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
+//		                 &tag_gps_lat, &tag_gps_lon, NULL);
+//
+//
+//		 TFT_LCD_Run();
+//	 }
 
-		 //UKF IMU
-		 imu_read(&hi2c2);
-		 ukf_filter(&ukf, &imu);
-		 loc_azi = ukf.x[2];
-		 loc_pitch = ukf.x[1];
-		 loc_roll = ukf.x[0];
-
-		 //UKF GPS
-		 GPS_Coordinates_Get(&raw_coordinates);
-		 loc_gps_lon = raw_coordinates.Lon;
-		 loc_gps_lat = raw_coordinates.Lat;
-		 loc_gps_alt = raw_coordinates.Alt;
-
-
-		 //CACULATE TARGET POSITION
-
-		 tag_distance = 500; //Ex distance
-
-		 double pitch_rad = loc_pitch * M_PI / 180.0;
-		 double s12 = tag_distance * cos(pitch_rad);
-
-		 tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-
-		 geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-		                 &tag_gps_lat, &tag_gps_lon, NULL);
-
-
-		 TFT_LCD_Run();
-	 }
-
-	 if(timer_flag[1] == 1){
-		  Timer_Set(1, 10000);
 		  Battery_Run();
-		  battery_percent = (uint8_t)(Battery_Get_Percent());
-	 }
+		  Serial_Print("Battery: %.2f V | %.1f %%\r\n",
+				Battery_Get_Voltage(), Battery_Get_Percent());
 
-  /* USER CODE END 3 */
+		  HAL_Delay(2000);
+//		  Battery_Run();
+//		  battery_percent = (uint8_t)(Battery_Get_Percent());
+
   }
+  /* USER CODE END 3 */
 }
 
 /**
@@ -286,7 +289,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
@@ -701,10 +704,25 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     }
 }
 
-void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
-	Battery_Get_ADC(hadc);
-}
+void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+    if (hadc->Instance == BATTERY_HANDLE_ADC.Instance)
+    {
+        uint32_t value = HAL_ADC_GetValue(hadc);
+        adc_sum += value;
+        adc_count++;
 
+        if (adc_count >= ADC_SAMPLES)
+        {
+            adc_ready = 1;
+            HAL_ADC_Stop_IT(hadc); // dừng ADC khi đủ mẫu
+        }
+        else
+        {
+            HAL_ADC_Start_IT(hadc); // tiếp tục đo mẫu kế tiếp
+        }
+    }
+}
 
 /* USER CODE END 4 */
 

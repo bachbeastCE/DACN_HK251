@@ -27,5 +27,6 @@ float Battery_Get_Voltage(void);
 float Battery_Get_Percent(void);
 
 void Battery_Get_ADC();
+void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc);
 
 #endif /* INC_BATTERY_H_ */

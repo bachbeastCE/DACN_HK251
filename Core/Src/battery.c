@@ -25,25 +25,7 @@ void Battery_Init(void)
  */
 
 
-void Battery_Get_ADC(ADC_HandleTypeDef *hadc)
-{
-    if (hadc->Instance == BATTERY_HANDLE_ADC.Instance)
-    {
-        uint32_t value = HAL_ADC_GetValue(hadc);
-        adc_sum += value;
-        adc_count++;
 
-        if (adc_count >= ADC_SAMPLES)
-        {
-            adc_ready = 1;
-            HAL_ADC_Stop_IT(hadc); // dừng ADC khi đủ mẫu
-        }
-        else
-        {
-            HAL_ADC_Start_IT(hadc); // tiếp tục đo mẫu kế tiếp
-        }
-    }
-}
 
 /**
  * Map voltage to percent according to:

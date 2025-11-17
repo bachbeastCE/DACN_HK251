@@ -5,6 +5,6 @@
 ../Core/Src/imu.c:67:6:accel_gyro_Init	32	static
 ../Core/Src/imu.c:88:6:mag_init	56	static
 ../Core/Src/imu.c:117:6:accel_read	40	static
-../Core/Src/imu.c:136:6:gyro_read	40	static
-../Core/Src/imu.c:158:6:mag_read	40	static
-../Core/Src/imu.c:193:6:calibrate	384	dynamic
+../Core/Src/imu.c:141:6:gyro_read	40	static
+../Core/Src/imu.c:167:6:mag_read	40	static
+../Core/Src/imu.c:205:6:calibrate	360	dynamic

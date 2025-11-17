@@ -117,7 +117,9 @@ void mag_init (I2C_HandleTypeDef *I2Cx) {
 void accel_read(I2C_HandleTypeDef *I2Cx)
 {
     if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_ACCEL_XOUT_H, 1, data_acce, 6, i2c_timeout) != HAL_OK) {
+#if IMU_ENABLE_SERIAL_LOG
         Serial_Print("I2C read error!\r\n");
+#endif
         return;
     }
 
@@ -128,15 +130,20 @@ void accel_read(I2C_HandleTypeDef *I2Cx)
     imu.ax = ((float)x_raw - imu.aoffsetx) / 4096.0f;
     imu.ay = ((float)y_raw - imu.aoffsety) / 4096.0f;
     imu.az = 1 + ((float)z_raw - imu.aoffsetz) / 4096.0f;
+
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Acce_X = %.3f g; ", imu.ax);
     Serial_Print("Acce_Y = %.3f g; ", imu.ay);
     Serial_Print("Acce_Z = %.3f g \n", imu.az);
+#endif
 }
 
 void gyro_read(I2C_HandleTypeDef *I2Cx)
 {
 	if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6, i2c_timeout) != HAL_OK) {
+#if IMU_ENABLE_SERIAL_LOG
 	   Serial_Print("I2C read error!\r\n");
+#endif
 	   return;
 	}
 
@@ -150,16 +157,19 @@ void gyro_read(I2C_HandleTypeDef *I2Cx)
     imu.gy = ((float)y_raw) / 65.5f;
     imu.gz = ((float)z_raw) / 65.5f;
 
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Gyro_X = %.3f deg/s; ", imu.gx);
     Serial_Print("Gyro_Y = %.3f deg/s; ", imu.gy);
     Serial_Print("Gyro_Z = %.3f deg/s \n", imu.gz);
+#endif
 }
 
 void mag_read(I2C_HandleTypeDef *I2Cx)
 {
-
     if (HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7, i2c_timeout) != HAL_OK) {
+#if IMU_ENABLE_SERIAL_LOG
         Serial_Print("I2C read error!\r\n");
+#endif
         return;
     }
     int16_t x_raw, y_raw, z_raw;
@@ -184,10 +194,12 @@ void mag_read(I2C_HandleTypeDef *I2Cx)
     imu.my = ((float)y_raw * mag_adj[1] * 0.15f - imu.moffsety) * imu.mscaley;
     imu.mz = ((float)z_raw * mag_adj[2] * 0.15f - imu.moffsetz) * imu.mscalez;
 
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Mag_X = %.3f uT; ", imu.mx);
     Serial_Print("Mag_Y = %.3f uT; ", imu.my);
     Serial_Print("Mag_Z = %.3f uT; \n", imu.mz);
     Serial_Print("#\n");
+#endif
 }
 
 void calibrate(I2C_HandleTypeDef *I2Cx) {
@@ -256,13 +268,15 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     imu.gyroy_noise = sqrtf(var_gy);
     imu.gyroz_noise = sqrtf(var_gz);
 
-
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Gyro & Accel calibration done!\r\n");
     Serial_Print("Ax_off=%.3f, Ay_off=%.3f, Az_off=%.3f\r\n, Gx_off=%.3f, Gy_off%=%.3f, Gz_off=%.3f\r\n", imu.aoffsetx / 4096.0f, imu.aoffsety / 4096.0f, imu.aoffsetz / 4096.0f, imu.goffsetx/65.5f, imu.goffsety/65.5f, imu.goffsetz/65.5f);
     Serial_Print("Gyro Noise (1σ): Nx=%.6f, Ny=%.6f, Nz=%.6f\r\n",
                  imu.gyrox_noise/65.5f, imu.gyroy_noise/65.5f, imu.gyroz_noise/65.5f);
     // ===== Magnetometer calibration =====
     Serial_Print("=== Rotate IMU slowly in all directions (figure-8) ===\r\n");
+#endif
+
     HAL_Delay(2000);
 
     float mx_min = 1e9, my_min = 1e9, mz_min = 1e9;

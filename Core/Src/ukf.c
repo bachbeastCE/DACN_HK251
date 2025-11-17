@@ -334,13 +334,13 @@ int8_t invert4x4(float inv[4][4], float A[4][4]) {
 }
 
 void ukf_filter(ukf_t *ukf, imu_t *imu) {
-
     ukf_predict(ukf, imu);
-
     ukf_update(ukf, imu);
+
+#if  IMU_UKF_ENABLE_SERIAL_LOG
     Serial_Print("pitch_update = %.3f degree; ", ukf->x[1]);
     Serial_Print("yaw_update = %.3f degree; ", ukf->x[2]);
     Serial_Print("roll_update = %.3f degree; \n", ukf->x[0]);
-
     Serial_Print("#\n");
+#endif
 }
