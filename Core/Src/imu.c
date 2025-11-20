@@ -50,9 +50,11 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 
 	imu.yaw = atan2f(-My, Mx) * 180.0f / PI;
     if (imu.yaw < 0) imu.yaw += 360.0;
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
     Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
     Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
+#endif
 //    Serial_Print("#######################################\n");
 }
 

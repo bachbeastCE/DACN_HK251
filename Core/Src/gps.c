@@ -60,19 +60,33 @@ uint8_t GPS_SendCommand(const char *data)
 
 uint8_t GPS_Init()
 {
-    // Turn on only GGA and RMC
-    GPS_SendCommand("$PAIR062,1,0");
-    HAL_Delay(100); // tiny delay between commands
+//    // Turn on only GGA and RMC
+//    GPS_SendCommand("$PAIR062,1,0");
+//    HAL_Delay(100); // tiny delay between commands
+//
+//    GPS_SendCommand("$PAIR062,2,0");
+//    HAL_Delay(100);
+//
+//    GPS_SendCommand("$PAIR062,3,0");
+//    HAL_Delay(100);
+//
+//    GPS_SendCommand("$PAIR062,5,0");
+//    HAL_Delay(100);
 
-    GPS_SendCommand("$PAIR062,2,0");
-    HAL_Delay(100);
-
-    GPS_SendCommand("$PAIR062,3,0");
-    HAL_Delay(100);
-
-    GPS_SendCommand("$PAIR062,5,0");
-    HAL_Delay(100);
-
+	GPS_SendCommand(SET_GGA_SENTENCE_RATE(1));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_GLL_SENTENCE_RATE(0));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_GSA_SENTENCE_RATE(0));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_GSV_SENTENCE_RATE(0));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_RMC_SENTENCE_RATE(1));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_VTG_SENTENCE_RATE(0));
+	HAL_Delay(100);
+	GPS_SendCommand(SET_FIX_RATE(250)); // 200 ms = 5 Hz
+	HAL_Delay(100);
     HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
 
     return 0;

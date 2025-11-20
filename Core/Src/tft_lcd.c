@@ -123,11 +123,11 @@ static inline void tft_lcd_print_gps_imu_info(){
 
 #else
 	char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
-	snprintf(buffer, sizeof(buffer), "Loc_Lon:%c%.5f",lon_dir,fabs(loc_gps_lon));
+	snprintf(buffer, sizeof(buffer), "Loc_Lon: %c%.6f",lon_dir,fabs(loc_gps_lon));
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 
 	char lat_dir = (loc_gps_lat >= 0) ? 'N' : 'S';
-	snprintf(buffer, sizeof(buffer), "Loc_Lat:%c%.5f", lat_dir,fabsf(loc_gps_lat) );
+	snprintf(buffer, sizeof(buffer), "Loc_Lat: %c%.6f", lat_dir,fabsf(loc_gps_lat) );
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_CYAN, ST7735_BLACK);
 #endif
 
@@ -161,13 +161,13 @@ static inline void tft_lcd_print_gps_imu_info(){
 #else
     char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
     snprintf(buffer, sizeof(buffer),
-             "Tag_lon:%c%.5f",
+             "Tag_lon: %c%.6f",
 			 tag_lon_dir, fabs(tag_gps_lon));
 
     ST7735_WriteString(0, y += 12, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
     char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
     snprintf(buffer, sizeof(buffer),
-             "Tag_lat:%c%.5f",
+             "Tag_lat: %c%.6f",
 			 tag_lat_dir, fabs(tag_gps_lat));
     ST7735_WriteString(0, y += 10, buffer, Font_7x10, ST7735_GREEN, ST7735_BLACK);
 #endif

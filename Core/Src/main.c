@@ -99,7 +99,7 @@ COORDINATES_t raw_coordinates;
 uint8_t enu_ref_point_flag = 0;
 COORDINATES_t enu_ref_point;
 enu_t enu;
-
+float tmp_lon,tmp_lat,tmp_alt;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -181,6 +181,7 @@ int main(void)
   Timer_Set(0, 20); //IMU
   Timer_Set(1, 30); //
   Timer_Set(2, 500);  //CACULATE TARGET POSITION
+  Timer_Set(3, 200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -206,18 +207,17 @@ int main(void)
 			 wgs84_to_enu(raw_coordinates.Lat,raw_coordinates.Lon,raw_coordinates.Alt,enu_ref_point.Lat,enu_ref_point.Lon,enu_ref_point.Alt,&(enu.x),&(enu.y),&(enu.z));
 			 float acc[3] = {0};
 			 ukf_gps_filter(&ukf_gps, &enu, acc);
-			 enu_to_wgs84(enu.x,enu.y,enu.z,enu_ref_point.Lat,enu_ref_point.Lon,enu_ref_point.Alt, &loc_gps_lat, &loc_gps_lon, &loc_gps_alt);
+			 enu_to_wgs84(enu.x,enu.y,enu.z,enu_ref_point.Lat,enu_ref_point.Lon,enu_ref_point.Alt, &tmp_lat, &tmp_lon, &tmp_alt);
+			 loc_gps_lat = (double)tmp_lat;
+			 loc_gps_lon = (double)tmp_lon;
+			 loc_gps_alt = (double)tmp_alt;
 		 }
 		 else{
 			 if(GPS_Get_Status()){
 				 GPS_Coordinates_Get(&enu_ref_point);
+				 enu_ref_point_flag =1;
 			 }
 		 }
-
-		 GPS_Coordinates_Get(&raw_coordinates);
-		 loc_gps_lon = raw_coordinates.Lon;
-		 loc_gps_lat = raw_coordinates.Lat;
-		 loc_gps_alt = raw_coordinates.Alt;
 
 		 TFT_LCD_Run();
 	 }
@@ -241,6 +241,14 @@ int main(void)
 		geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
 						 &tag_gps_lat, &tag_gps_lon, NULL);
 	}
+
+#if GPS_ENABLE_SERIAL_LOG
+	if(timer_flag[3] == 1){
+		Timer_Set(3, 1000);
+		Serial_Print("%.6f, %.6f, %.3f, %.6f, %.6f, %.3f\n\r",raw_coordinates.Lon,raw_coordinates.Lat,raw_coordinates.Alt, loc_gps_lat, loc_gps_lon,loc_gps_alt);
+	}
+
+#endif
 
   }
   /* USER CODE END 3 */
