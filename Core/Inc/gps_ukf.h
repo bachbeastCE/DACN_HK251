@@ -22,7 +22,7 @@
 #define LAMBDA  (ALPHA*ALPHA*((float)L + KAPPA) - (float)L)
 #define GAMMA   (sqrtf((float)L + LAMBDA))
 
-#define SAMPLING_TIME 0.02f
+#define SAMPLING_TIME 0.1f
 
 // ==================================================== //
 

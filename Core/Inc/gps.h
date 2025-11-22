@@ -48,6 +48,15 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 
 //Set the message interval,100ms~1000ms (Only for GGA and RMC)
 #define SET_FIX_RATE(f) "$PAIR050," TOSTRING(f)
+/*
+The mode of the digits shown in the NMEA position:
+0 = Latitude, Longitude: 4; Altitude: 1
+1 = Latitude, Longitude: 5; Altitude: 2
+2 = Latitude, Longitude: 6; Altitude: 3 (default)
+3 = Latitude, Longitude: 7; Altitude: 3
+*/
+#define SET_DECIMAL_PRECISION(mode) "$PAIR098," TOSTRING(mode)
+
 
 
 //======================== DATA STRUCT  =================================//
