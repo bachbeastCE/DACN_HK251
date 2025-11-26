@@ -63,18 +63,19 @@ void GPS_KF_Predict(GPS_KF *kf,
                     double a_alt,
                     double current_lat_deg)
 {
-    double dt2 = 0.5 * kf->dt * kf->dt;
-
-    // --- Chuyển gia tốc từ m/s² sang deg/s² ---
-    double lat_rad = current_lat_deg * M_PI / 180.0;
-
-    double a_lat_deg = a_lat_mps2 / 111111.0;
-    double a_lon_deg = a_lon_mps2 / (111111.0 * cos(lat_rad));
-
-    // --- Cập nhật trạng thái (position only, velocity bỏ) ---
-    kf->x[0] += a_lat_deg * dt2;
-    kf->x[1] += a_lon_deg * dt2;
-    kf->x[2] += a_alt * dt2;
+// 	Không có mô hình động học, loc nhiễu đơn thuần
+//    double dt2 = 0.5 * kf->dt * kf->dt;
+//
+//    // --- Chuyển gia tốc từ m/s² sang deg/s² ---
+//    double lat_rad = current_lat_deg * M_PI / 180.0;
+//
+//    double a_lat_deg = a_lat_mps2 / 111111.0;
+//    double a_lon_deg = a_lon_mps2 / (111111.0 * cos(lat_rad));
+//
+//    // --- Cập nhật trạng thái (position only, velocity bỏ) ---
+//    kf->x[0] += a_lat_deg * dt2;
+//    kf->x[1] += a_lon_deg * dt2;
+//    kf->x[2] += a_alt * dt2;
 
     // --- Cập nhật ma trận hiệp phương sai ---
     for(int i=0;i<3;i++)
