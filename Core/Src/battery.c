@@ -15,6 +15,7 @@ static volatile uint8_t adc_ready = 0;
 static float battery_voltage_tmp = 0.0f;
 static float battery_percent_tmp = 0.0f;
 
+
 /**
  * @brief Khởi tạo module đo pin (bắt đầu đo ADC)
  */

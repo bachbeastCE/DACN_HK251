@@ -29,8 +29,10 @@ extern double tag_gps_lon; 	//GPS TAGGET  LONGTITUDE
 extern double tag_gps_lat; 	//GPS TAGGET LATITUDE
 extern double tag_gps_alt; 	//GPS TAGGET ALTITUDE
 extern double tag_distance; //TAGGET DISTANCE
+extern double gps_hdop; 	//GPS_HDOP
 
-extern uint8_t battery_percent;
+extern uint16_t battery_percent;
+
 
 extern struct geod_geodesic g;
 

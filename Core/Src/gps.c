@@ -232,9 +232,13 @@ uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
     return 0;
 }
 
-uint8_t GPS_Get_Status(){
+uint8_t GPS_Status_Get(){
 	if(gga_tmp.HDOP != 0) return 1;
 	else return 0;
+}
+
+double GPS_HDOP_Get(){
+	return gga_tmp.HDOP;
 }
 
 

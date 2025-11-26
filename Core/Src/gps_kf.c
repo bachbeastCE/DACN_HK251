@@ -44,12 +44,14 @@ void GPS_KF_Init(GPS_KF *kf)
     // Covariance khởi tạo
     for(int i=0;i<3;i++) kf->P[i][i] = 1.0;
 
-    // Process noise (có thể để rất nhỏ nếu u tin cậy)
-    kf->Q[0][0] = kf->Q[1][1] = 5e-11;
-    kf->Q[2][2] = 0.01;
+    // Process noise (Tăng = phản ứng nhanh)
+    kf->Q[0][0] =  5e-11;
+    kf->Q[1][1] =  4e-11;
+    kf->Q[2][2] = 0.001;
 
+    // Process noise (Càng lớn = Mượt hơn)
     kf->R[0][0] = kf->R[1][1] = 1e-7;
-    kf->R[2][2] = 9; // alt m²
+    kf->R[2][2] = 16; // alt m²
 
     kf->dt = 0.5;
 }
