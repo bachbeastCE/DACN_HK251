@@ -36,20 +36,22 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 	accel_read(I2Cx);
 	gyro_read(I2Cx);
 	mag_read(I2Cx);
-	float pitch_rad = atan2f(imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
+	float pitch_rad = atan2f(-imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
 	float roll_rad  = atan2f(imu.ay, sqrtf(imu.ax * imu.ax + imu.az * imu.az));
 
 	imu.pitch = pitch_rad * 180.0f / PI;
 	imu.roll  = roll_rad  * 180.0f / PI;
 	if (imu.pitch > 90.0f) imu.pitch = 90.0f;
 	if (imu.pitch < -90.0f) imu.pitch = -90.0f;
-//	while (imu.roll > 180.0f) imu.roll -= 360.0f;
-//	while (imu.roll < -180.0f) imu.roll += 360.0f;
+	while (imu.roll > 180.0f) imu.roll -= 360.0f;
+	while (imu.roll < -180.0f) imu.roll += 360.0f;
 	float Mx = imu.mx * cosf(pitch_rad) + imu.mz * sinf(pitch_rad);
 	float My = imu.mx * sinf(roll_rad) * sinf(pitch_rad) + imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad) * cosf(pitch_rad);
 
-	imu.yaw = atan2f(-My, Mx) * 180.0f / PI;
-    if (imu.yaw < 0) imu.yaw += 360.0;
+	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
+//	imu.yaw = atan2f(imu.my, imu.mx) * 180.0f / PI;
+//	while (imu.yaw > 180.0f) imu.yaw -= 360.0f;
+//	while (imu.yaw < -180.0f) imu.yaw += 360.0f;
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
     Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
@@ -101,9 +103,9 @@ void mag_init (I2C_HandleTypeDef *I2Cx) {
     	HAL_Delay(10);
     	HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_ASAX, 1, asa, 3, i2c_timeout);
     	for (int i = 0; i < 3; i++)
-			{
-			   mag_adj[i] = ((float)(asa[i] - 128) / 256.0f) + 1.0f;
-			}
+		{
+			 mag_adj[i] = (((float)(asa[i] - 128) / 256.0f) + 1.0f);
+		}
     	Serial_Print("ASA: %d %d %d\r\n", asa[0], asa[1], asa[2]);
     	Serial_Print("Adj: %.3f %.3f %.3f\r\n", mag_adj[0], mag_adj[1], mag_adj[2]);
     	write(AK8963_CNTL1, 0x00, I2Cx, AK8963_I2C_ADDR);  // power down
@@ -192,9 +194,14 @@ void mag_read(I2C_HandleTypeDef *I2Cx)
 //    imu.mscalex = 1;
 //    imu.mscaley = 1;
 //    imu.mscalez = 1;
-    imu.mx = ((float)x_raw * mag_adj[0] * 0.15f - imu.moffsetx) * imu.mscalex;
-    imu.my = ((float)y_raw * mag_adj[1] * 0.15f - imu.moffsety) * imu.mscaley;
-    imu.mz = ((float)z_raw * mag_adj[2] * 0.15f - imu.moffsetz) * imu.mscalez;
+    imu.mx = ((float)x_raw * mag_adj[0]) * 0.15 * imu.mscalex;
+    imu.my = (((float)y_raw * mag_adj[1]) * 0.15 * imu.mscaley);
+    imu.mz = (((float)z_raw * mag_adj[2]) * 0.15 * imu.mscalez);
+    imu.mx = imu.mx + 3.345;   // bias X = -3.345
+    imu.my = 58.07 - imu.my;  // bias Y = +58.07
+    imu.mz = 0 - imu.mz - 17.31;
+//    imu.my = -imu.my;
+//    imu.mz = -imu.mz;
 
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Mag_X = %.3f uT; ", imu.mx);
@@ -214,7 +221,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     int16_t gx_sample[CALIB_SAMPLES], gy_sample[CALIB_SAMPLES], gz_sample[CALIB_SAMPLES];
     int16_t ax_raw, ay_raw, az_raw;
     Serial_Print("=== Keep IMU still... Calibrating gyro & accel... ===\r\n");
-    HAL_Delay(1000);
+    HAL_Delay(100);
     int16_t gx_raw, gy_raw, gz_raw;
     for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
         // --- Read Gyro ---
@@ -243,7 +250,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         sum_ay += ay_raw;
         sum_az += az_raw;
 
-        HAL_Delay(5);
+        HAL_Delay(2);
     }
 
     imu.goffsetx = (float)sum_gx / CALIB_SAMPLES;
@@ -279,7 +286,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     Serial_Print("=== Rotate IMU slowly in all directions (figure-8) ===\r\n");
 #endif
 
-    HAL_Delay(2000);
+    HAL_Delay(200);
 
     float mx_min = 1e9, my_min = 1e9, mz_min = 1e9;
     float mx_max = -1e9, my_max = -1e9, mz_max = -1e9;
@@ -305,7 +312,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         if (mz < mz_min) mz_min = mz;
         if (mz > mz_max) mz_max = mz;
 
-        HAL_Delay(10);
+        HAL_Delay(3);
     }
 
     imu.moffsetx = ((mx_max + mx_min)/2.0f) * 0.15f;

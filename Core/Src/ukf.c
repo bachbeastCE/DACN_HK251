@@ -8,16 +8,32 @@
 #include "main.h"
 
 ukf_t ukf;
-
+static inline float wrap180(float a)
+{
+    while (a > 180.0f) a -= 360.0f;
+    while (a < -180.0f) a += 360.0f;
+    return a;
+}
 void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	imu_init(I2Cx);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
     ukf->dt = 0.02f;
-    for (int i = 1; i < N; i++) {
-    	ukf->W_a[i] = 1.0f / 18.0f;
-		ukf->W_c[i] = 1.0f / 18.0f;
-	}
+
+    const float alpha = 0.5;
+    const float beta  = 2.0f;
+    const float kappa = 2.0f;
+
+//    const float L = 6.0f;
+    const float lambda = alpha*alpha * (L + kappa) - L;
+
+    ukf->W_a[0] = lambda / (L + lambda);
+    ukf->W_c[0] = ukf->W_a[0] + (1.0f - alpha*alpha + beta);
+
+    for (int i = 1; i < 2*L + 1; i++) {
+        ukf->W_a[i] = 1.0f / (2.0f * (L + lambda));
+        ukf->W_c[i] = ukf->W_a[i];
+    }
 //    for(int i = 0; i < N; i++){
 //    	Serial_Print("W_c[%d] = %.5f\n", i, ukf->W_c[i]);
 //    	Serial_Print("W_a[%d] = %.5f\n", i, ukf->W_a[i]);
@@ -51,7 +67,7 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	ukf->R[0][0] = 0.01f;
 	ukf->R[1][1] = 0.01f;
 	ukf->R[2][2] = 0.05f;
-	ukf->R[3][3] = 9.0f;
+	ukf->R[3][3] = 64.0f;
 	for(int i = 0; i < 4; ++i){
 		for(int j = 0; j < 4; ++j){
 			if(i != j) ukf->R[i][j] = 0.0f;
@@ -103,48 +119,75 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 //-------------------------------------------------
 // Cholesky decomposition helper
 void cholesky(float P[L][L], float A[L][L]) {
+    const float eps = 1e-9f;
     for(int i = 0; i < L; i++){
         for(int j = 0; j <= i; j++){
             float sum = P[i][j];
             for(int k = 0; k < j; k++) sum -= A[i][k] * A[j][k];
-            if(i == j) A[i][j] = sqrtf(fmaxf(sum, 0.0f));
-            else A[i][j] = sum / A[j][j];
+            if (i == j) {
+                // guard, force PD
+                A[i][j] = sqrtf(fmaxf(sum, eps));
+            } else {
+                float denom = A[j][j];
+                if (denom < eps) denom = eps;
+                A[i][j] = sum / denom;
+            }
         }
-        for(int j = i + 1; j < L; j++) A[i][j] = 0;
+        // zero upper triangle
+        for(int j = i + 1; j < L; j++) A[i][j] = 0.0f;
     }
 }
 
 //-------------------------------------------------
 // Sigma points generation
+//void generate_sigma_points(ukf_t *ukf) {
+//    float A[L][L];
+//    cholesky(ukf->P, A);
+////    Serial_Print("A = \n");
+////    for(int i = 0; i < L; i++){
+////        for(int j = 0; j < L; j++){
+////            Serial_Print("%.6f ", A[i][j]);
+////        }
+////        Serial_Print("\n");
+////    }
+//
+//    float scale = 3;
+//    memcpy(ukf->sigma[0], ukf->x, sizeof(float)*L); // sigma0
+//
+//    for(int j = 0; j < L; j++){
+//        for(int i = 0; i < L; i++){
+//            ukf->sigma[j + 1][i] = ukf->x[i] + scale*A[i][j];
+//            ukf->sigma[L + 1 + j][i] = ukf->x[i] - scale*A[i][j];
+//        }
+//    }
+////    Serial_Print("Sigma points:\n");
+////    for(int j = 0; j < N; j++){
+////        Serial_Print("sigma[%d] = [", j);
+////        for(int i = 0; i < L; i++){
+////            Serial_Print("%.6f", ukf->sigma[j][i]);
+////            if(i < L-1) Serial_Print(", ");
+////        }
+////        Serial_Print("]\n");
+////    }
+//}
+
 void generate_sigma_points(ukf_t *ukf) {
     float A[L][L];
     cholesky(ukf->P, A);
-//    Serial_Print("A = \n");
-//    for(int i = 0; i < L; i++){
-//        for(int j = 0; j < L; j++){
-//            Serial_Print("%.6f ", A[i][j]);
-//        }
-//        Serial_Print("\n");
-//    }
 
-    float scale = 3;
-    memcpy(ukf->sigma[0], ukf->x, sizeof(float)*L); // sigma0
+    const float alpha = 0.5;
+    const float kappa = 2.0f;
+    float lambda = alpha*alpha*(L + kappa) - L;
+    float scale = sqrtf(fmaxf(L + lambda, 1e-12f));
+
+    memcpy(ukf->sigma[0], ukf->x, sizeof(float)*L);
 
     for(int j = 0; j < L; j++){
         for(int i = 0; i < L; i++){
-            ukf->sigma[j + 1][i] = ukf->x[i] + scale*A[i][j];
+            ukf->sigma[j + 1][i]     = ukf->x[i] + scale*A[i][j];
             ukf->sigma[L + 1 + j][i] = ukf->x[i] - scale*A[i][j];
         }
     }
-//    Serial_Print("Sigma points:\n");
-//    for(int j = 0; j < N; j++){
-//        Serial_Print("sigma[%d] = [", j);
-//        for(int i = 0; i < L; i++){
-//            Serial_Print("%.6f", ukf->sigma[j][i]);
-//            if(i < L-1) Serial_Print(", ");
-//        }
-//        Serial_Print("]\n");
-//    }
 }
 
 //-------------------------------------------------
@@ -169,8 +212,14 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
     }
     while (ukf->x_pred[0] > 180.0f) ukf->x_pred[0] -= 360.0f;
     while (ukf->x_pred[0] < -180.0f) ukf->x_pred[0] += 360.0f;
+
+    // pitch: clamp [-90, 90]
     if (ukf->x_pred[1] > 90.0f) ukf->x_pred[1] = 90.0f;
     if (ukf->x_pred[1] < -90.0f) ukf->x_pred[1] = -90.0f;
+
+    // yaw: [-180, 180]
+    while (ukf->x_pred[2] > 180.0f) ukf->x_pred[2] -= 360.0f;
+    while (ukf->x_pred[2] < -180.0f) ukf->x_pred[2] += 360.0f;
 
 
     // compute predicted covariance
@@ -187,6 +236,8 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
 }
 
 //-------------------------------------------------
+
+
 // Update step (measurement: gyro delta)
 void ukf_update(ukf_t *ukf, imu_t *imu) {
     //Transform sigma points to measurement space
@@ -195,54 +246,84 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
         float roll_j  = ukf->sigma[j][0] * PI / 180.0f;
         float pitch_j = ukf->sigma[j][1] * PI / 180.0f;
         // predict accelerometer (gravity only) in body frame from orientation
-        float ax_p =  sinf(pitch_j);
+        float ax_p =  -sinf(pitch_j);
         float ay_p =  sinf(roll_j) * cosf(pitch_j);
         float az_p =  cosf(roll_j) * cosf(pitch_j);
-
 
         ukf->z_pred[j][0] = ax_p;
         ukf->z_pred[j][1] = ay_p;
         ukf->z_pred[j][2] = az_p;
-        ukf->z_pred[j][3] = ukf->sigma[j][2];
+        ukf->z_pred[j][3] = wrap180(ukf->sigma[j][2]); // yaw
     }
 
 
     //Compute mean z
     float z_mean[4] = {0};
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < N; ++j) {
             z_mean[i] += ukf->W_a[j] * ukf->z_pred[j][i];
         }
     }
 
+    float sin_sum = 0.0f, cos_sum = 0.0f;
+    for (int j = 0; j < N; ++j) {
+        float yaw = ukf->z_pred[j][3] * PI / 180.0f;
+        sin_sum += ukf->W_a[j] * sinf(yaw);
+        cos_sum += ukf->W_a[j] * cosf(yaw);
+    }
+    z_mean[3] = atan2f(sin_sum, cos_sum) * 180.0f / PI;
+
     //Compute measurement covariance S
     for (int i = 0; i < 4; ++i) {
-        for (int k = 0; k < 4; ++k) {
-            ukf->S[i][k] = ukf->R[i][k];
-            for (int j = 0; j < N; ++j) {
-                float dz_i = ukf->z_pred[j][i] - z_mean[i];
-                float dz_k = ukf->z_pred[j][k] - z_mean[k];
-                ukf->S[i][k] += ukf->W_c[j] * dz_i * dz_k;
-            }
-        }
+    	for (int k = 0; k < 4; ++k) {
+			ukf->S[i][k] = ukf->R[i][k];
+			for (int j = 0; j < N; ++j) {
+				float dzi = (i == 3) ?
+							wrap180(ukf->z_pred[j][3] - z_mean[3]) :
+							(ukf->z_pred[j][i] - z_mean[i]);
+
+				float dzk = (k == 3) ?
+							wrap180(ukf->z_pred[j][3] - z_mean[3]) :
+							(ukf->z_pred[j][k] - z_mean[k]);
+
+				ukf->S[i][k] += ukf->W_c[j] * dzi * dzk;
+			}
+		}
+	}
+
+
+    for(int i=0;i<4;i++) {
+        for(int j=0;j<4;j++)
+            ukf->S[i][j] = 0.5f*(ukf->S[i][j] + ukf->S[j][i]);
+        ukf->S[i][i] += 1e-6f;
     }
 
     //Compute cross covariance Cxz
     for (int i = 0; i < L; ++i) {
-        for (int k = 0; k < 4; ++k) {
-            ukf->Cxz[i][k] = 0;
-            for (int j = 0; j < N; ++j) {
-                float dx = ukf->sigma[j][i] - ukf->x_pred[i];
-                float dz = ukf->z_pred[j][k] - z_mean[k];
-                ukf->Cxz[i][k] += ukf->W_c[j] * dx * dz;
-            }
-        }
-    }
+    	for (int k = 0; k < 4; ++k) {
+			ukf->Cxz[i][k] = 0;
+			for (int j = 0; j < N; ++j) {
+				float dx = ukf->sigma[j][i] - ukf->x_pred[i];
+				if (i == 2) dx = wrap180(dx); // yaw state
+
+				float dz = (k == 3) ?
+						   wrap180(ukf->z_pred[j][3] - z_mean[3]) :
+						   (ukf->z_pred[j][k] - z_mean[k]);
+
+				ukf->Cxz[i][k] += ukf->W_c[j] * dx * dz;
+			}
+		}
+	}
+
+
 
     //Kalman gain K = Cxz * S^-1
     float S_inv[4][4];
     if (invert4x4(S_inv, ukf->S) < 0) {
-    	//Serial_Print("loi day ne %d\n", invert4x4(S_inv, ukf->S));
+    	Serial_Print("loi day ne %d\n", invert4x4(S_inv, ukf->S));
+        ukf->x[1] = 10000;
+        ukf->x[0] = 10000;
+        ukf->x[3] = 10000;
         return;
     }
     for (int i = 0; i < L; i++) {
@@ -255,24 +336,30 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     }
 
     //Update state: x = x_pred + K*(z - z_mean)
-    ukf->z[0] = imu->ax;
-    ukf->z[1] = imu->ay;
-    ukf->z[2] = imu->az;
-    ukf->z[3] = imu->yaw;
+    float norm = sqrtf(imu->ax*imu->ax + imu->ay*imu->ay + imu->az*imu->az);
+    ukf->z[0] = imu->ax / norm;
+    ukf->z[1] = imu->ay / norm;
+    ukf->z[2] = imu->az / norm;
+    ukf->z[3] = wrap180(imu->yaw);
 
     for (int i = 0; i < L; ++i) {
-        float correction = 0;
-        for (int k = 0; k < 4; ++k) {
-            correction += ukf->K[i][k] * (ukf->z[k] - z_mean[k]);
-        }
-        ukf->x[i] = ukf->x_pred[i] + correction;
-    }
+    	float correction = 0;
+		for (int k = 0; k < 4; ++k) {
+			float innov = (k == 3) ?
+						  wrap180(ukf->z[3] - z_mean[3]) :
+						  (ukf->z[k] - z_mean[k]);
+			correction += ukf->K[i][k] * innov;
+		}
+		ukf->x[i] = ukf->x_pred[i] + correction;
+		if (i == 2) ukf->x[i] = wrap180(ukf->x[i]); // yaw
+	}
+
 
 //    Serial_Print("pitch = %.3f degree; ", ukf->x[1]);
 //    Serial_Print("yaw = %.3f degree; ", ukf->x[2]);
 //    Serial_Print("roll = %.3f degree; \n", ukf->x[0]);
     //Update covariance: P = P_pred - K*S*K^T
-    float KS[L][3];
+    float KS[L][4];
     for (int i = 0; i < L; i++) {
         for (int j = 0; j < 4; j++) {
             KS[i][j] = 0;
@@ -291,6 +378,14 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
             ukf->P[i][j] = val;
         }
     }
+    while (ukf->x[0] > 180.0f) ukf->x[0] -= 360.0f;
+    while (ukf->x[0] < -180.0f) ukf->x[0] += 360.0f;
+
+    // clamp pitch into [-90, 90]
+    ukf->x[0] = wrap180(ukf->x[0]);      // roll
+    if (ukf->x[1] >  90.0f) ukf->x[1] =  90.0f;
+    if (ukf->x[1] < -90.0f) ukf->x[1] = -90.0f;
+    ukf->x[2] = wrap180(ukf->x[2]);      // yaw
 }
 
 int8_t invert4x4(float inv[4][4], float A[4][4]) {
@@ -306,7 +401,7 @@ int8_t invert4x4(float inv[4][4], float A[4][4]) {
         + c*(e*(j*p - n*l) - f*(i*p - m*l) + h*(i*n - m*j))
         - d*(e*(j*o - n*k) - f*(i*o - m*k) + g*(i*n - m*j));
 
-//    if (fabs(det) < 1e-6f) return -1;
+    if (fabs(det) < 1e-6f) return -1;
 
     float invdet = 1.0f / det;
 
