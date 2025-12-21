@@ -66,7 +66,7 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	//Init R
 	ukf->R[0][0] = 0.01f;
 	ukf->R[1][1] = 0.01f;
-	ukf->R[2][2] = 0.05f;
+	ukf->R[2][2] = 0.01f;
 	ukf->R[3][3] = 64.0f;
 	for(int i = 0; i < 4; ++i){
 		for(int j = 0; j < 4; ++j){
