@@ -166,10 +166,10 @@ while %t
             replot([ax1 ax2 ax3]);
             
             pos = strindex(buffer, "#");
-            sleep(500);
+            sleep(1);
         end
     end
-    sleep(500);
+    sleep(1);
 end
 
 

@@ -1,462 +1,1912 @@
-[2025-10-10 20:51:58.704] mea_pitch = -0.161 degree; mea_yaw = 244.486 degree; mea_roll = 0.264 degree; 
-pitch_update = -1.426 degree; yaw_update = 265.039 degree; roll_update = 1.871 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 265.038696289062500
-Distance: 10800.000000
-lat_tar = 0.069064448362423;  lon_tar = 0.068602154540554; azi_tar = 45.000041346597840
+[2025-12-20 22:45:05.303] mea_pitch = 3.426 degree; mea_yaw = 4.639 degree; mea_roll = 0.386 degree; 
+pitch_update = 1.987 degree; yaw_update = 3.599 degree; roll_update = 0.130 degree; 
 
 ##############################################################
-[2025-10-10 20:51:59.741] 
-mea_pitch = -0.162 degree; mea_yaw = 199.929 degree; mea_roll = 0.035 degree; 
-pitch_update = -1.062 degree; yaw_update = 216.587 degree; roll_update = 0.670 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 216.587036132812500
-Distance: 10900.000000
-lat_tar = 0.069703933677165;  lon_tar = 0.069237360294884; azi_tar = 45.000042115820754
+[2025-12-20 22:45:05.386] 
+mea_pitch = 2.717 degree; mea_yaw = 3.681 degree; mea_roll = 0.663 degree; 
+pitch_update = 2.070 degree; yaw_update = 3.664 degree; roll_update = 0.200 degree; 
 
 ##############################################################
-[2025-10-10 20:52:00.263] 
-mea_pitch = -0.162 degree; mea_yaw = 101.744 degree; mea_roll = -0.424 degree; 
-pitch_update = -0.822 degree; yaw_update = 131.486 degree; roll_update = -0.041 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 131.486022949218750
-Distance: 11000.000000
-lat_tar = 0.070343418983108;  lon_tar = 0.069872566066349; azi_tar = 45.000042892133294
+[2025-12-20 22:45:05.491] 
+mea_pitch = 1.877 degree; mea_yaw = 2.793 degree; mea_roll = -0.817 degree; 
+pitch_update = 2.054 degree; yaw_update = 3.532 degree; roll_update = 0.044 degree; 
 
 ##############################################################
-[2025-10-10 20:52:01.320] 
-mea_pitch = 0.067 degree; mea_yaw = 263.832 degree; mea_roll = 0.035 degree; 
-pitch_update = -0.018 degree; yaw_update = 229.604 degree; roll_update = -0.075 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 229.603866577148438
-Distance: 11100.000000
-lat_tar = 0.070982904280171;  lon_tar = 0.070507771855105; azi_tar = 45.000043675535466
+[2025-12-20 22:45:05.595] 
+mea_pitch = 1.510 degree; mea_yaw = 5.163 degree; mea_roll = -0.690 degree; 
+pitch_update = 1.989 degree; yaw_update = 3.888 degree; roll_update = -0.077 degree; 
 
 ##############################################################
-[2025-10-10 20:52:01.847] 
-mea_pitch = 0.068 degree; mea_yaw = 259.220 degree; mea_roll = 0.035 degree; 
-pitch_update = -0.046 degree; yaw_update = 251.227 degree; roll_update = 0.811 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 251.227188110351562
-Distance: 11200.000000
-lat_tar = 0.071622389568273;  lon_tar = 0.071142977661311; azi_tar = 45.000044466027262
+[2025-12-20 22:45:05.705] 
+mea_pitch = 2.240 degree; mea_yaw = 4.605 degree; mea_roll = -1.951 degree; 
+pitch_update = 2.028 degree; yaw_update = 4.095 degree; roll_update = -0.363 degree; 
 
 ##############################################################
-[2025-10-10 20:52:02.388] 
-mea_pitch = 0.297 degree; mea_yaw = 173.302 degree; mea_roll = -0.423 degree; 
-pitch_update = 0.193 degree; yaw_update = 192.988 degree; roll_update = -1.811 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 192.988037109375000
-Distance: 11300.000000
-lat_tar = 0.072261874847334;  lon_tar = 0.071778183485122; azi_tar = 45.000045263608683
+[2025-12-20 22:45:05.808] 
+mea_pitch = 1.060 degree; mea_yaw = 2.503 degree; mea_roll = 0.432 degree; 
+pitch_update = 1.913 degree; yaw_update = 3.835 degree; roll_update = -0.296 degree; 
 
 ##############################################################
-[2025-10-10 20:52:03.445] 
-mea_pitch = -0.619 degree; mea_yaw = 135.892 degree; mea_roll = 0.264 degree; 
-pitch_update = 0.618 degree; yaw_update = 150.346 degree; roll_update = -0.900 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 150.346237182617188
-Distance: 11400.000000
-lat_tar = 0.072901360117272;  lon_tar = 0.072413389326697; azi_tar = 45.000046068279730
+[2025-12-20 22:45:05.924] 
+mea_pitch = 2.674 degree; mea_yaw = -0.020 degree; mea_roll = 0.959 degree; 
+pitch_update = 1.997 degree; yaw_update = 3.077 degree; roll_update = -0.152 degree; 
 
 ##############################################################
-[2025-10-10 20:52:03.969] 
-mea_pitch = 0.068 degree; mea_yaw = 270.592 degree; mea_roll = -0.195 degree; 
-pitch_update = 0.500 degree; yaw_update = 239.541 degree; roll_update = -0.628 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 239.540557861328125
-Distance: 11500.000000
-lat_tar = 0.073540845378007;  lon_tar = 0.073048595186192; azi_tar = 45.000046880040415
+[2025-12-20 22:45:06.026] 
+mea_pitch = 0.074 degree; mea_yaw = 5.201 degree; mea_roll = -0.638 degree; 
+pitch_update = 1.771 degree; yaw_update = 3.485 degree; roll_update = -0.236 degree; 
 
 ##############################################################
-[2025-10-10 20:52:04.508] 
-mea_pitch = -0.160 degree; mea_yaw = 29.150 degree; mea_roll = 0.035 degree; 
-pitch_update = 0.951 degree; yaw_update = 82.509 degree; roll_update = -1.825 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 82.508880615234375
-Distance: 11600.000000
-lat_tar = 0.074180330629459;  lon_tar = 0.073683801063764; azi_tar = 45.000047698890718
+[2025-12-20 22:45:06.126] 
+mea_pitch = 1.496 degree; mea_yaw = 2.432 degree; mea_roll = 0.212 degree; 
+pitch_update = 1.722 degree; yaw_update = 3.260 degree; roll_update = -0.201 degree; 
 
 ##############################################################
-[2025-10-10 20:52:05.045] 
-mea_pitch = -0.160 degree; mea_yaw = 66.011 degree; mea_roll = 0.263 degree; 
-pitch_update = 0.059 degree; yaw_update = 69.783 degree; roll_update = -3.484 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 69.783287048339844
-Distance: 11700.000000
-lat_tar = 0.074819815871546;  lon_tar = 0.074319006959572; azi_tar = 45.000048524830653
+[2025-12-20 22:45:06.235] 
+mea_pitch = 2.490 degree; mea_yaw = 1.878 degree; mea_roll = 0.705 degree; 
+pitch_update = 1.813 degree; yaw_update = 2.966 degree; roll_update = -0.078 degree; 
 
 ##############################################################
-[2025-10-10 20:52:06.090] 
-mea_pitch = -0.162 degree; mea_yaw = 22.678 degree; mea_roll = -0.426 degree; 
-pitch_update = -0.721 degree; yaw_update = 34.217 degree; roll_update = -3.068 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 34.217418670654297
-Distance: 11800.000000
-lat_tar = 0.075459301104188;  lon_tar = 0.074954212873772; azi_tar = 45.000049357860220
+[2025-12-20 22:45:06.341] 
+mea_pitch = 1.867 degree; mea_yaw = 1.213 degree; mea_roll = -0.331 degree; 
+pitch_update = 1.818 degree; yaw_update = 2.567 degree; roll_update = -0.123 degree; 
 
 ##############################################################
-[2025-10-10 20:52:06.618] 
-mea_pitch = -0.161 degree; mea_yaw = 231.990 degree; mea_roll = -0.194 degree; 
-pitch_update = -0.511 degree; yaw_update = 181.537 degree; roll_update = -2.355 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 181.536544799804688
-Distance: 11900.000000
-lat_tar = 0.076098786327304;  lon_tar = 0.075589418806520; azi_tar = 45.000050197979419
+[2025-12-20 22:45:06.452] 
+1508,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 2.470 degree; mea_yaw = 4.680 degree; mea_roll = -0.753 degree; 
+pitch_update = 1.889 degree; yaw_update = 2.945 degree; roll_update = -0.221 degree; 
 
 ##############################################################
-[2025-10-10 20:52:07.154] 
-mea_pitch = -0.162 degree; mea_yaw = 35.744 degree; mea_roll = -0.424 degree; 
-pitch_update = -0.984 degree; yaw_update = 72.189 degree; roll_update = -5.808 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 72.189392089843750
-Distance: 12000.000000
-lat_tar = 0.076738271540814;  lon_tar = 0.076224624757975; azi_tar = 45.000051045188229
+[2025-12-20 22:45:06.563] 
+mea_pitch = 1.915 degree; mea_yaw = 4.015 degree; mea_roll = 0.911 degree; 
+pitch_update = 1.893 degree; yaw_update = 3.135 degree; roll_update = -0.081 degree; 
 
 ##############################################################
-[2025-10-10 20:52:07.699] 
-mea_pitch = 11.763 degree; mea_yaw = 131.309 degree; mea_roll = 4.506 degree; 
-pitch_update = 1.204 degree; yaw_update = 113.264 degree; roll_update = -9.818 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 113.264114379882812
-Distance: 12100.000000
-lat_tar = 0.077377756744636;  lon_tar = 0.076859830728294; azi_tar = 45.000051899486692
+[2025-12-20 22:45:06.666] 
+mea_pitch = 1.617 degree; mea_yaw = 4.740 degree; mea_roll = -0.125 degree; 
+pitch_update = 1.861 degree; yaw_update = 3.444 degree; roll_update = -0.090 degree; 
 
 ##############################################################
-[2025-10-10 20:52:08.264] 
-mea_pitch = -0.612 degree; mea_yaw = 163.183 degree; mea_roll = -0.192 degree; 
-pitch_update = -0.759 degree; yaw_update = 147.542 degree; roll_update = -53.259 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 147.541961669921875
-Distance: 12200.000000
-lat_tar = 0.078017241938690;  lon_tar = 0.077495036717634; azi_tar = 45.000052760874780
+[2025-12-20 22:45:06.770] 
+mea_pitch = 1.867 degree; mea_yaw = 1.932 degree; mea_roll = 0.440 degree; 
+pitch_update = 1.855 degree; yaw_update = 3.148 degree; roll_update = -0.015 degree; 
 
 ##############################################################
-[2025-10-10 20:52:09.335] 
-mea_pitch = -0.161 degree; mea_yaw = 169.569 degree; mea_roll = 0.264 degree; 
-pitch_update = -0.840 degree; yaw_update = 163.614 degree; roll_update = -50.277 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 163.613708496093750
-Distance: 12300.000000
-lat_tar = 0.078656727122895;  lon_tar = 0.078130242726151; azi_tar = 45.000053629352493
+[2025-12-20 22:45:06.880] 
+mea_pitch = -0.254 degree; mea_yaw = 2.072 degree; mea_roll = 0.879 degree; 
+pitch_update = 1.593 degree; yaw_update = 2.923 degree; roll_update = 0.113 degree; 
 
 ##############################################################
-[2025-10-10 20:52:11.420] 
-ACCE wake upGYRO wake upMAG wake upCalibration done!
-Aoffsetx: -14.525 g; Aoffsety: -229.981 g; Aoffsetz: 82.720 g;
-Goffsetx = -1463.302 degree/s; Goffsety = 267.340 degree/s; Goffsetz = -57.443 degree/s;
-Moffsetx = 500.260 Gauss; Moffsety = -1567.300 Gauss; Moffsetz = -438.522 Gauss;
-=============================================
-mea_pitch = -0.438 degree; mea_yaw = 112.877 degree; mea_roll = 9.596 degree; 
-pitch_update = 2.724 degree; yaw_update = 74.531 degree; roll_update = 154.946 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 74.531333923339844
-Distance: 500.000000
-lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+[2025-12-20 22:45:07.028] 
+1509,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 1.732 degree; mea_yaw = -0.306 degree; mea_roll = -0.170 degree; 
+pitch_update = 1.596 degree; yaw_update = 2.238 degree; roll_update = 0.079 degree; 
 
 ##############################################################
-[2025-10-10 20:52:12.489] 
-mea_pitch = -0.256 degree; mea_yaw = 96.956 degree; mea_roll = 10.991 degree; 
-pitch_update = -3.235 degree; yaw_update = 94.502 degree; roll_update = -110.579 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 94.501785278320312
-Distance: 600.000000
-lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+[2025-12-20 22:45:07.097] 
+mea_pitch = 0.888 degree; mea_yaw = 0.948 degree; mea_roll = 1.423 degree; 
+pitch_update = 1.494 degree; yaw_update = 1.887 degree; roll_update = 0.278 degree; 
 
 ##############################################################
-[2025-10-10 20:52:13.020] 
-mea_pitch = 0.127 degree; mea_yaw = 252.918 degree; mea_roll = -3.141 degree; 
-pitch_update = -22.649 degree; yaw_update = 203.970 degree; roll_update = -154.406 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 203.969696044921875
-Distance: 700.000000
-lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+[2025-12-20 22:45:07.203] 
+mea_pitch = 2.989 degree; mea_yaw = -0.581 degree; mea_roll = 2.031 degree; 
+pitch_update = 1.658 degree; yaw_update = 1.275 degree; roll_update = 0.560 degree; 
 
 ##############################################################
-[2025-10-10 20:52:14.072] 
-mea_pitch = -0.097 degree; mea_yaw = 90.309 degree; mea_roll = 4.063 degree; 
-pitch_update = -20.590 degree; yaw_update = 129.617 degree; roll_update = 43.581 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 129.617385864257812
-Distance: 800.000000
-lat_tar = 0.005115886312475;  lon_tar = 0.005081638645770; azi_tar = 45.000000226867364
+[2025-12-20 22:45:07.304] 
+mea_pitch = 1.161 degree; mea_yaw = 0.368 degree; mea_roll = 1.099 degree; 
+pitch_update = 1.583 degree; yaw_update = 0.939 degree; roll_update = 0.671 degree; 
 
 ##############################################################
-[2025-10-10 20:52:14.598] 
-mea_pitch = -0.083 degree; mea_yaw = 95.743 degree; mea_roll = 11.091 degree; 
-pitch_update = -16.176 degree; yaw_update = 105.559 degree; roll_update = 129.263 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 105.559104919433594
-Distance: 900.000000
-lat_tar = 0.005755372099476;  lon_tar = 0.005716843480499; azi_tar = 45.000000287129005
+[2025-12-20 22:45:07.408] 
+mea_pitch = 2.871 degree; mea_yaw = 2.082 degree; mea_roll = 1.684 degree; 
+pitch_update = 1.719 degree; yaw_update = 1.064 degree; roll_update = 0.886 degree; 
 
 ##############################################################
-[2025-10-10 20:52:15.149] 
-mea_pitch = 0.259 degree; mea_yaw = 282.933 degree; mea_roll = 12.331 degree; 
-pitch_update = -14.661 degree; yaw_update = 223.350 degree; roll_update = 42.159 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 223.350158691406250
-Distance: 1000.000000
-lat_tar = 0.006394857885750;  lon_tar = 0.006352048316644; azi_tar = 45.000000354480264
+[2025-12-20 22:45:07.520] 
+1510,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 0.875 degree; mea_yaw = 4.274 degree; mea_roll = -0.323 degree; 
+pitch_update = 1.616 degree; yaw_update = 1.583 degree; roll_update = 0.762 degree; 
 
 ##############################################################
-[2025-10-10 20:52:16.204] 
-mea_pitch = -0.101 degree; mea_yaw = 151.893 degree; mea_roll = -1.072 degree; 
-pitch_update = -26.995 degree; yaw_update = 180.284 degree; roll_update = -5.895 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 180.283828735351562
-Distance: 1100.000000
-lat_tar = 0.007034343671217;  lon_tar = 0.006987253154360; azi_tar = 45.000000428921119
+[2025-12-20 22:45:07.624] 
+mea_pitch = 0.937 degree; mea_yaw = 2.002 degree; mea_roll = -0.206 degree; 
+pitch_update = 1.535 degree; yaw_update = 1.589 degree; roll_update = 0.649 degree; 
 
 ##############################################################
-[2025-10-10 20:52:16.737] 
-mea_pitch = 0.119 degree; mea_yaw = 230.547 degree; mea_roll = -1.361 degree; 
-pitch_update = -24.783 degree; yaw_update = 214.470 degree; roll_update = 7.239 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 214.469848632812500
-Distance: 1200.000000
-lat_tar = 0.007673829455796;  lon_tar = 0.007622457993806; azi_tar = 45.000000510451578
+[2025-12-20 22:45:07.740] 
+mea_pitch = 3.457 degree; mea_yaw = -0.692 degree; mea_roll = -0.225 degree; 
+pitch_update = 1.764 degree; yaw_update = 1.042 degree; roll_update = 0.554 degree; 
 
 ##############################################################
-[2025-10-10 20:52:17.269] 
-mea_pitch = 0.377 degree; mea_yaw = 108.799 degree; mea_roll = -4.208 degree; 
-pitch_update = -22.857 degree; yaw_update = 145.011 degree; roll_update = -20.754 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 145.011077880859375
-Distance: 1300.000000
-lat_tar = 0.008313315239406;  lon_tar = 0.008257662835138; azi_tar = 45.000000599071647
+[2025-12-20 22:45:07.835] 
+mea_pitch = 0.159 degree; mea_yaw = 1.180 degree; mea_roll = -1.244 degree; 
+pitch_update = 1.579 degree; yaw_update = 0.955 degree; roll_update = 0.317 degree; 
 
 ##############################################################
-[2025-10-10 20:52:18.353] 
-mea_pitch = -0.121 degree; mea_yaw = 79.277 degree; mea_roll = -5.378 degree; 
-pitch_update = 8.572 degree; yaw_update = 96.501 degree; roll_update = 122.264 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 96.500663757324219
-Distance: 1400.000000
-lat_tar = 0.008952801021967;  lon_tar = 0.008892867678513; azi_tar = 45.000000694781320
+[2025-12-20 22:45:07.952] 
+mea_pitch = 4.301 degree; mea_yaw = 23.471 degree; mea_roll = -27.600 degree; 
+pitch_update = 2.081 degree; yaw_update = 5.548 degree; roll_update = -3.577 degree; 
 
 ##############################################################
-[2025-10-10 20:52:18.884] 
-mea_pitch = 0.140 degree; mea_yaw = 102.317 degree; mea_roll = -6.955 degree; 
-pitch_update = 7.622 degree; yaw_update = 101.000 degree; roll_update = 103.217 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 101.000495910644531
-Distance: 1500.000000
-lat_tar = 0.009592286803397;  lon_tar = 0.009528072524090; azi_tar = 45.000000797580597
+[2025-12-20 22:45:08.071] 
+1511,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 4.124 degree; mea_yaw = 10.378 degree; mea_roll = -8.060 degree; 
+pitch_update = 2.597 degree; yaw_update = 6.266 degree; roll_update = -5.843 degree; 
 
 ##############################################################
-[2025-10-10 20:52:19.414] 
-mea_pitch = 0.435 degree; mea_yaw = 257.276 degree; mea_roll = -8.891 degree; 
-pitch_update = 7.101 degree; yaw_update = 205.617 degree; roll_update = 125.987 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 205.616760253906250
-Distance: 1600.000000
-lat_tar = 0.010231772583617;  lon_tar = 0.010163277372024; azi_tar = 45.000000907469477
+[2025-12-20 22:45:08.171] 
+mea_pitch = 6.163 degree; mea_yaw = 0.730 degree; mea_roll = 0.425 degree; 
+pitch_update = 4.036 degree; yaw_update = 5.535 degree; roll_update = -5.838 degree; 
 
 ##############################################################
-[2025-10-10 20:52:19.950] 
-mea_pitch = 0.735 degree; mea_yaw = 258.709 degree; mea_roll = -9.358 degree; 
-pitch_update = 5.333 degree; yaw_update = 241.577 degree; roll_update = 138.417 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 241.576980590820312
-Distance: 1700.000000
-lat_tar = 0.010871258362545;  lon_tar = 0.010798482222473; azi_tar = 45.000001024447975
+[2025-12-20 22:45:08.275] 
+mea_pitch = 24.628 degree; mea_yaw = 20.850 degree; mea_roll = -16.326 degree; 
+pitch_update = 8.557 degree; yaw_update = 8.619 degree; roll_update = -6.946 degree; 
 
 ##############################################################
-[2025-10-10 20:52:21.026] 
-mea_pitch = 0.487 degree; mea_yaw = 100.196 degree; mea_roll = -12.238 degree; 
-pitch_update = 4.100 degree; yaw_update = 147.694 degree; roll_update = 173.648 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 147.693511962890625
-Distance: 1800.000000
-lat_tar = 0.011510744140101;  lon_tar = 0.011433687075595; azi_tar = 45.000001148516070
+[2025-12-20 22:45:08.376] 
+mea_pitch = 33.605 degree; mea_yaw = 0.741 degree; mea_roll = 5.442 degree; 
+pitch_update = 13.626 degree; yaw_update = 7.747 degree; roll_update = -4.999 degree; 
 
 ##############################################################
-[2025-10-10 20:52:21.560] 
-mea_pitch = 0.486 degree; mea_yaw = 104.113 degree; mea_roll = -11.235 degree; 
-pitch_update = 2.562 degree; yaw_update = 119.175 degree; roll_update = -151.124 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 119.174667358398438
-Distance: 1900.000000
-lat_tar = 0.012150229916203;  lon_tar = 0.012068891931546; azi_tar = 45.000001279673775
+[2025-12-20 22:45:08.482] 
+mea_pitch = 42.816 degree; mea_yaw = 10.685 degree; mea_roll = -2.436 degree; 
+pitch_update = 18.486 degree; yaw_update = 8.882 degree; roll_update = -4.388 degree; 
 
 ##############################################################
-[2025-10-10 20:52:22.089] 
-mea_pitch = 0.790 degree; mea_yaw = 112.704 degree; mea_roll = -11.666 degree; 
-pitch_update = 2.294 degree; yaw_update = 115.534 degree; roll_update = -118.738 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 115.534416198730469
-Distance: 2000.000000
-lat_tar = 0.012789715690772;  lon_tar = 0.012704096790484; azi_tar = 45.000001417921077
+[2025-12-20 22:45:08.594] 
+1512,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 48.596 degree; mea_yaw = 10.438 degree; mea_roll = -0.375 degree; 
+pitch_update = 22.819 degree; yaw_update = 9.716 degree; roll_update = -4.075 degree; 
 
 ##############################################################
-[2025-10-10 20:52:22.616] 
-mea_pitch = 1.118 degree; mea_yaw = 134.485 degree; mea_roll = -11.172 degree; 
-pitch_update = 2.251 degree; yaw_update = 129.042 degree; roll_update = -88.980 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 129.042221069335938
-Distance: 2100.000000
-lat_tar = 0.013429201463726;  lon_tar = 0.013339301652566; azi_tar = 45.000001563257989
+[2025-12-20 22:45:08.717] 
+mea_pitch = 55.473 degree; mea_yaw = 11.564 degree; mea_roll = -1.590 degree; 
+pitch_update = 27.076 degree; yaw_update = 10.502 degree; roll_update = -4.149 degree; 
 
 ##############################################################
-[2025-10-10 20:52:23.154] 
-mea_pitch = -0.169 degree; mea_yaw = 61.243 degree; mea_roll = -19.196 degree; 
-pitch_update = 54.287 degree; yaw_update = 76.442 degree; roll_update = 2.647 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 76.442413330078125
-Distance: 2200.000000
-lat_tar = 0.014068687234985;  lon_tar = 0.013974506517949; azi_tar = 45.000001715684512
+[2025-12-20 22:45:08.810] 
+mea_pitch = 59.734 degree; mea_yaw = 10.689 degree; mea_roll = 0.254 degree; 
+pitch_update = 31.103 degree; yaw_update = 11.018 degree; roll_update = -3.824 degree; 
 
 ##############################################################
-[2025-10-10 20:52:24.234] 
-mea_pitch = 0.329 degree; mea_yaw = 11.692 degree; mea_roll = 2.155 degree; 
-pitch_update = 60.402 degree; yaw_update = 34.426 degree; roll_update = 88.798 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 34.426319122314453
-Distance: 2300.000000
-lat_tar = 0.014708173004468;  lon_tar = 0.014609711386791; azi_tar = 45.000001875200631
+[2025-12-20 22:45:08.934] 
+mea_pitch = 59.469 degree; mea_yaw = 9.284 degree; mea_roll = 1.221 degree; 
+pitch_update = 34.400 degree; yaw_update = 11.236 degree; roll_update = -3.377 degree; 
 
 ##############################################################
-[2025-10-10 20:52:24.764] 
-mea_pitch = 0.456 degree; mea_yaw = 327.519 degree; mea_roll = 7.966 degree; 
-pitch_update = 68.798 degree; yaw_update = 226.711 degree; roll_update = -14.726 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 226.711090087890625
-Distance: 2400.000000
-lat_tar = 0.015347658772094;  lon_tar = 0.015244916259247; azi_tar = 45.000002041806361
+[2025-12-20 22:45:09.030] 
+mea_pitch = 56.558 degree; mea_yaw = 10.894 degree; mea_roll = 0.880 degree; 
+pitch_update = 37.293 degree; yaw_update = 11.631 degree; roll_update = -2.972 degree; 
 
 ##############################################################
-[2025-10-10 20:52:25.289] 
-mea_pitch = -1.000 degree; mea_yaw = 16.759 degree; mea_roll = -0.451 degree; 
-pitch_update = 45.466 degree; yaw_update = 91.033 degree; roll_update = -39.264 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 91.033432006835938
-Distance: 2500.000000
-lat_tar = 0.015987144537783;  lon_tar = 0.015880121135477; azi_tar = 45.000002215501709
+[2025-12-20 22:45:09.141] 
+1513,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 52.642 degree; mea_yaw = 8.925 degree; mea_roll = 1.328 degree; 
+pitch_update = 39.565 degree; yaw_update = 11.557 degree; roll_update = -2.506 degree; 
 
 ##############################################################
-[2025-10-10 20:52:25.852] 
-mea_pitch = -0.903 degree; mea_yaw = 83.596 degree; mea_roll = 4.034 degree; 
-pitch_update = 74.602 degree; yaw_update = 76.965 degree; roll_update = -81.332 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 76.964614868164062
-Distance: 2600.000000
-lat_tar = 0.016626630301453;  lon_tar = 0.016515326015637; azi_tar = 45.000002396286646
+[2025-12-20 22:45:09.263] 
+mea_pitch = 49.500 degree; mea_yaw = 9.890 degree; mea_roll = 0.666 degree; 
+pitch_update = 41.542 degree; yaw_update = 11.643 degree; roll_update = -2.174 degree; 
 
 ##############################################################
-[2025-10-10 20:52:26.384] 
-mea_pitch = -1.805 degree; mea_yaw = 190.465 degree; mea_roll = 11.799 degree; 
-pitch_update = 99.662 degree; yaw_update = 150.121 degree; roll_update = -18.260 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 150.121093750000000
-Distance: 2700.000000
-lat_tar = 0.017266116063025;  lon_tar = 0.017150530899883; azi_tar = 45.000002584161201
+[2025-12-20 22:45:09.376] 
+mea_pitch = 48.626 degree; mea_yaw = 6.294 degree; mea_roll = 2.956 degree; 
+pitch_update = 43.292 degree; yaw_update = 10.894 degree; roll_update = -1.551 degree; 
 
 ##############################################################
-[2025-10-10 20:52:32.078] 
-ACCE wake upGYRO wake upMAG wake upACCE wake upGYRO wake upMAG wake ÿACCE wake upGYRO wake upMAG wake upCalibration done!
-Aoffsetx: -58.467 g; Aoffsety: -52.341 g; Aoffsetz: 196.155 g;
-Goffsetx = -505.921 degree/s; Goffsety = 371.240 degree/s; Goffsetz = 726.589 degree/s;
-Moffsetx = 681.956 Gauss; Moffsety = -1918.944 Gauss; Moffsetz = 537.541 Gauss;
-=============================================
-mea_pitch = 1.437 degree; mea_yaw = 194.108 degree; mea_roll = 0.298 degree; 
-pitch_update = -69.589 degree; yaw_update = 125.200 degree; roll_update = -92.793 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 125.199630737304688
-Distance: 500.000000
-lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+[2025-12-20 22:45:09.470] 
+mea_pitch = 47.431 degree; mea_yaw = 7.039 degree; mea_roll = 0.908 degree; 
+pitch_update = 44.602 degree; yaw_update = 10.352 degree; roll_update = -1.250 degree; 
 
 ##############################################################
-[2025-10-10 20:52:38.820] 
-mea_pitch = 0.805 degree; mea_yaw = 35.962 degree; mea_roll = 0.311 degree; 
-pitch_update = 6.868 degree; yaw_update = 64.387 degree; roll_update = -50.623 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 64.387405395507812
-Distance: öACCE wake upGYRO wake upMAG wake upCalibration done!
-Aoffsetx: -55.203 g; Aoffsety: -46.062 g; Aoffsetz: 193.511 g;
-Goffsetx = -598.363 degree/s; Goffsety = -99.298 degree/s; Goffsetz = -20.084 degree/s;
-Moffsetx = 617.883 Gauss; Moffsety = -1926.875 Gauss; Moffsetz = 553.389 Gauss;
-=============================================
-mea_pitch = -5.674 degree; mea_yaw = 183.707 degree; mea_roll = -0.937 degree; 
-pitch_update = -34.726 degree; yaw_update = 124.894 degree; roll_update = 63.181 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 124.893524169921875
-Distance: 500.000000
-lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+[2025-12-20 22:45:09.570] 
+mea_pitch = 46.257 degree; mea_yaw = 6.030 degree; mea_roll = 0.926 degree; 
+pitch_update = 45.938 degree; yaw_update = 9.614 degree; roll_update = -1.016 degree; 
 
 ##############################################################
-[2025-10-10 20:52:39.866] 
-mea_pitch = 0.504 degree; mea_yaw = 219.007 degree; mea_roll = -0.443 degree; 
-pitch_update = 79.900 degree; yaw_update = 176.214 degree; roll_update = 113.378 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 176.213684082031250
-Distance: 600.000000
-lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+[2025-12-20 22:45:09.683] 
+1514,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 38.809 degree; mea_yaw = 9.622 degree; mea_roll = -3.119 degree; 
+pitch_update = 45.756 degree; yaw_update = 9.781 degree; roll_update = -1.485 degree; 
 
 ##############################################################
-[2025-10-10 20:52:40.390] 
-mea_pitch = 3.622 degree; mea_yaw = 40.605 degree; mea_roll = -25.591 degree; 
-pitch_update = 85.869 degree; yaw_update = 85.342 degree; roll_update = 77.774 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 85.342140197753906
-Distance: 700.000000
-lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+[2025-12-20 22:45:09.789] 
+mea_pitch = 35.449 degree; mea_yaw = 5.141 degree; mea_roll = 0.754 degree; 
+pitch_update = 45.449 degree; yaw_update = 8.889 degree; roll_update = -1.214 degree; 
 
 ##############################################################
-[2025-10-10 20:52:48.141] 
-ACCE wake upGYRO wake upMAG wake upACCE wake upGYRO wake upMAG wake upCalibration done!
-Aoffsetx: -31.797 g; Aoffsety: -42.501 g; Aoffsetz: 200.656 g;
-Goffsetx = -456.822 degree/s; Goffsety = -248.203 degree/s; Goffsetz = 135.219 degree/s;
-Moffsetx = 626.995 Gauss; Moffsety = -1950.987 Gauss; Moffsetz = 579.782 Gauss;
-=============================================
-mea_pitch = 3.367 degree; mea_yaw = 133.241 degree; mea_roll = 1.934 degree; 
-pitch_update = 11.293 degree; yaw_update = 86.875 degree; roll_update = -2.939 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 86.874946594238281
-Distance: 500.000000
-lat_tar = 0.003197428947920;  lon_tar = 0.003176024148497; azi_tar = 45.000000088620055
+[2025-12-20 22:45:09.902] 
+mea_pitch = 28.876 degree; mea_yaw = 6.552 degree; mea_roll = 0.197 degree; 
+pitch_update = 43.631 degree; yaw_update = 8.255 degree; roll_update = -1.029 degree; 
 
 ##############################################################
-[2025-10-10 20:52:49.187] 
-mea_pitch = 3.539 degree; mea_yaw = 79.483 degree; mea_roll = 1.456 degree; 
-pitch_update = 23.313 degree; yaw_update = 80.233 degree; roll_update = -9.858 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 80.232734680175781
-Distance: 600.000000
-lat_tar = 0.003836914736617;  lon_tar = 0.003811228979926; azi_tar = 45.000000127612886
+[2025-12-20 22:45:10.015] 
+mea_pitch = 20.648 degree; mea_yaw = 5.190 degree; mea_roll = -1.853 degree; 
+pitch_update = 40.361 degree; yaw_update = 7.606 degree; roll_update = -1.114 degree; 
 
 ##############################################################
-[2025-10-10 20:52:49.746] 
-mea_pitch = 4.000 degree; mea_yaw = 58.873 degree; mea_roll = 1.910 degree; 
-pitch_update = 34.071 degree; yaw_update = 64.755 degree; roll_update = -14.551 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 64.755065917968750
-Distance: 700.000000
-lat_tar = 0.004476400524828;  lon_tar = 0.004446433812297; azi_tar = 45.000000173695327
+[2025-12-20 22:45:10.125] 
+mea_pitch = 1.971 degree; mea_yaw = 5.023 degree; mea_roll = -1.677 degree; 
+pitch_update = 35.301 degree; yaw_update = 6.813 degree; roll_update = -1.066 degree; 
 
 ##############################################################
-[2025-10-10 20:52:50.794] 
-mea_pitch = 3.566 degree; mea_yaw = 63.484 degree; mea_roll = 1.693 degree; 
-pitch_update = 45.420 degree; yaw_update = 62.235 degree; roll_update = -18.848 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 62.234710693359375
-Distance: 800.000000
-lat_tar = 0.005115886312475;  lon_tar = 0.005081638645770; azi_tar = 45.000000226867364
+[2025-12-20 22:45:10.225] 
+1515,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 0.510 degree; mea_yaw = 8.513 degree; mea_roll = -1.932 degree; 
+pitch_update = 30.601 degree; yaw_update = 6.588 degree; roll_update = -0.661 degree; 
 
 ##############################################################
-[2025-10-10 20:52:51.326] 
-mea_pitch = 3.301 degree; mea_yaw = 40.034 degree; mea_roll = 2.119 degree; 
-pitch_update = 58.604 degree; yaw_update = 46.174 degree; roll_update = -24.299 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 46.173854827880859
-Distance: 900.000000
-lat_tar = 0.005755372099476;  lon_tar = 0.005716843480499; azi_tar = 45.000000287129005
+[2025-12-20 22:45:10.350] 
+mea_pitch = 2.297 degree; mea_yaw = 5.034 degree; mea_roll = -0.087 degree; 
+pitch_update = 27.293 degree; yaw_update = 6.190 degree; roll_update = -0.460 degree; 
 
 ##############################################################
-[2025-10-10 20:52:51.867] 
-mea_pitch = 3.791 degree; mea_yaw = 105.085 degree; mea_roll = 1.918 degree; 
-pitch_update = 73.189 degree; yaw_update = 83.802 degree; roll_update = -29.426 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 83.801574707031250
-Distance: 1000.000000
-lat_tar = 0.006394857885750;  lon_tar = 0.006352048316644; azi_tar = 45.000000354480264
+[2025-12-20 22:45:10.449] 
+mea_pitch = 2.954 degree; mea_yaw = 5.959 degree; mea_roll = 0.847 degree; 
+pitch_update = 24.274 degree; yaw_update = 6.037 degree; roll_update = -0.135 degree; 
 
 ##############################################################
-[2025-10-10 20:52:52.922] 
-mea_pitch = 3.313 degree; mea_yaw = 344.606 degree; mea_roll = 2.575 degree; 
-pitch_update = 88.941 degree; yaw_update = 254.631 degree; roll_update = -36.841 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 254.630584716796875
-Distance: 1100.000000
-lat_tar = 0.007034343671217;  lon_tar = 0.006987253154360; azi_tar = 45.000000428921119
+[2025-12-20 22:45:10.554] 
+mea_pitch = 0.280 degree; mea_yaw = 9.547 degree; mea_roll = -0.159 degree; 
+pitch_update = 21.037 degree; yaw_update = 6.577 degree; roll_update = -0.074 degree; 
 
 ##############################################################
-[2025-10-10 20:52:53.451] 
-mea_pitch = 4.224 degree; mea_yaw = 110.264 degree; mea_roll = 1.909 degree; 
-pitch_update = 106.187 degree; yaw_update = 157.505 degree; roll_update = -43.804 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 157.504989624023438
-Distance: 1200.000000
-lat_tar = 0.007673829455796;  lon_tar = 0.007622457993806; azi_tar = 45.000000510451578
+[2025-12-20 22:45:10.669] 
+mea_pitch = 0.431 degree; mea_yaw = 6.753 degree; mea_roll = -0.520 degree; 
+pitch_update = 18.181 degree; yaw_update = 6.474 degree; roll_update = -0.035 degree; 
 
 ##############################################################
-[2025-10-10 20:52:53.981] 
-mea_pitch = 3.327 degree; mea_yaw = 92.888 degree; mea_roll = 2.360 degree; 
-pitch_update = 124.392 degree; yaw_update = 113.258 degree; roll_update = -50.502 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 113.257873535156250
-Distance: 1300.000000
-lat_tar = 0.008313315239406;  lon_tar = 0.008257662835138; azi_tar = 45.000000599071647
+[2025-12-20 22:45:10.774] 
+1516,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -1.588 degree; mea_yaw = 7.259 degree; mea_roll = 2.702 degree; 
+pitch_update = 15.335 degree; yaw_update = 6.726 degree; roll_update = 0.517 degree; 
 
 ##############################################################
-[2025-10-10 20:52:54.530] 
-mea_pitch = 3.103 degree; mea_yaw = 10.614 degree; mea_roll = 1.911 degree; 
-pitch_update = 142.201 degree; yaw_update = 43.357 degree; roll_update = -56.887 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 43.357307434082031
-Distance: 1400.000000
-lat_tar = 0.008952801021967;  lon_tar = 0.008892867678513; azi_tar = 45.000000694781320
+[2025-12-20 22:45:10.888] 
+mea_pitch = 2.693 degree; mea_yaw = 14.070 degree; mea_roll = -7.613 degree; 
+pitch_update = 13.538 degree; yaw_update = 8.020 degree; roll_update = -1.004 degree; 
 
 ##############################################################
-[2025-10-10 20:52:55.603] 
-mea_pitch = 3.776 degree; mea_yaw = 56.860 degree; mea_roll = 1.910 degree; 
-pitch_update = 159.736 degree; yaw_update = 50.661 degree; roll_update = -62.547 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 50.661285400390625
-Distance: 1500.000000
-lat_tar = 0.009592286803397;  lon_tar = 0.009528072524090; azi_tar = 45.000000797580597
+[2025-12-20 22:45:10.989] 
+mea_pitch = 6.235 degree; mea_yaw = 5.060 degree; mea_roll = 1.942 degree; 
+pitch_update = 12.905 degree; yaw_update = 6.985 degree; roll_update = -0.248 degree; 
 
 ##############################################################
-[2025-10-10 20:52:56.172] 
-mea_pitch = 3.791 degree; mea_yaw = 52.201 degree; mea_roll = 2.143 degree; 
-pitch_update = 177.534 degree; yaw_update = 50.176 degree; roll_update = -69.462 degree; 
-lat_obser = 0.000000000000000;  lon_obser = 0.000000000000000; azi1_obser = 50.175765991210938
-Distance: 1600.000000
-lat_tar = 0.010231772583617;  lon_tar = 0.010163277372024; azi_tar = 45.000000907469477
+[2025-12-20 22:45:11.092] 
+mea_pitch = 5.099 degree; mea_yaw = 7.402 degree; mea_roll = -3.496 degree; 
+pitch_update = 11.148 degree; yaw_update = 6.883 degree; roll_update = -1.520 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.214] 
+mea_pitch = -1.584 degree; mea_yaw = 13.791 degree; mea_roll = -6.856 degree; 
+pitch_update = 8.084 degree; yaw_update = 8.357 degree; roll_update = -2.413 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.340] 
+1517,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -8.881 degree; mea_yaw = 8.024 degree; mea_roll = 6.092 degree; 
+pitch_update = 4.542 degree; yaw_update = 8.313 degree; roll_update = -1.321 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.432] 
+mea_pitch = -9.777 degree; mea_yaw = 17.406 degree; mea_roll = -2.732 degree; 
+pitch_update = 0.673 degree; yaw_update = 10.185 degree; roll_update = -1.207 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.559] 
+mea_pitch = -16.324 degree; mea_yaw = 20.949 degree; mea_roll = -1.553 degree; 
+pitch_update = -2.276 degree; yaw_update = 12.538 degree; roll_update = -1.211 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.636] 
+mea_pitch = -17.073 degree; mea_yaw = 19.867 degree; mea_roll = -4.601 degree; 
+pitch_update = -5.236 degree; yaw_update = 14.202 degree; roll_update = -1.276 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.754] 
+mea_pitch = -17.795 degree; mea_yaw = 23.453 degree; mea_roll = -6.141 degree; 
+pitch_update = -8.047 degree; yaw_update = 16.477 degree; roll_update = -1.974 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.860] 
+1518,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -21.633 degree; mea_yaw = 24.358 degree; mea_roll = -0.943 degree; 
+pitch_update = -10.945 degree; yaw_update = 18.664 degree; roll_update = -1.824 degree; 
+
+##############################################################
+[2025-12-20 22:45:11.970] 
+mea_pitch = -24.762 degree; mea_yaw = 28.862 degree; mea_roll = -6.792 degree; 
+pitch_update = -13.877 degree; yaw_update = 21.681 degree; roll_update = -2.747 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.078] 
+mea_pitch = -23.744 degree; mea_yaw = 27.478 degree; mea_roll = -3.202 degree; 
+pitch_update = -16.438 degree; yaw_update = 23.937 degree; roll_update = -3.213 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.177] 
+mea_pitch = -27.430 degree; mea_yaw = 31.530 degree; mea_roll = -5.723 degree; 
+pitch_update = -19.107 degree; yaw_update = 26.697 degree; roll_update = -3.818 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.286] 
+mea_pitch = -25.193 degree; mea_yaw = 25.772 degree; mea_roll = -4.274 degree; 
+pitch_update = -21.168 degree; yaw_update = 27.774 degree; roll_update = -4.091 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.395] 
+1519,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -28.291 degree; mea_yaw = 30.293 degree; mea_roll = -2.766 degree; 
+pitch_update = -23.351 degree; yaw_update = 29.499 degree; roll_update = -4.089 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.499] 
+mea_pitch = -28.227 degree; mea_yaw = 31.600 degree; mea_roll = -5.230 degree; 
+pitch_update = -25.397 degree; yaw_update = 31.240 degree; roll_update = -4.457 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.621] 
+mea_pitch = -28.835 degree; mea_yaw = 29.963 degree; mea_roll = -6.011 degree; 
+pitch_update = -27.168 degree; yaw_update = 32.279 degree; roll_update = -4.880 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.733] 
+mea_pitch = -28.572 degree; mea_yaw = 28.318 degree; mea_roll = -4.539 degree; 
+pitch_update = -28.781 degree; yaw_update = 32.721 degree; roll_update = -5.062 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.820] 
+mea_pitch = -29.788 degree; mea_yaw = 32.768 degree; mea_roll = -6.552 degree; 
+pitch_update = -30.318 degree; yaw_update = 33.882 degree; roll_update = -5.521 degree; 
+
+##############################################################
+[2025-12-20 22:45:12.936] 
+1520,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -29.089 degree; mea_yaw = 32.375 degree; mea_roll = -5.598 degree; 
+pitch_update = -31.638 degree; yaw_update = 34.671 degree; roll_update = -5.841 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.060] 
+mea_pitch = -29.639 degree; mea_yaw = 28.411 degree; mea_roll = -5.711 degree; 
+pitch_update = -32.888 degree; yaw_update = 34.474 degree; roll_update = -6.132 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.152] 
+mea_pitch = -29.124 degree; mea_yaw = 29.727 degree; mea_roll = -7.276 degree; 
+pitch_update = -33.880 degree; yaw_update = 34.422 degree; roll_update = -6.623 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.268] 
+mea_pitch = -28.950 degree; mea_yaw = 31.451 degree; mea_roll = -5.146 degree; 
+pitch_update = -34.705 degree; yaw_update = 34.625 degree; roll_update = -6.703 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.372] 
+mea_pitch = -30.531 degree; mea_yaw = 32.812 degree; mea_roll = -6.513 degree; 
+pitch_update = -34.975 degree; yaw_update = 34.992 degree; roll_update = -7.526 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.473] 
+1521,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -25.323 degree; mea_yaw = 28.865 degree; mea_roll = -10.154 degree; 
+pitch_update = -34.471 degree; yaw_update = 34.743 degree; roll_update = -9.185 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.590] 
+mea_pitch = -14.793 degree; mea_yaw = 31.247 degree; mea_roll = -18.302 degree; 
+pitch_update = -31.728 degree; yaw_update = 35.273 degree; roll_update = -12.906 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.698] 
+mea_pitch = -6.467 degree; mea_yaw = 41.707 degree; mea_roll = -37.987 degree; 
+pitch_update = -29.857 degree; yaw_update = 37.708 degree; roll_update = -17.380 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.806] 
+mea_pitch = -2.880 degree; mea_yaw = 53.971 degree; mea_roll = -47.296 degree; 
+pitch_update = -27.477 degree; yaw_update = 42.095 degree; roll_update = -23.506 degree; 
+
+##############################################################
+[2025-12-20 22:45:13.926] 
+mea_pitch = -1.698 degree; mea_yaw = 61.368 degree; mea_roll = -54.629 degree; 
+pitch_update = -24.140 degree; yaw_update = 47.415 degree; roll_update = -29.730 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.027] 
+1522,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 1.920 degree; mea_yaw = 68.957 degree; mea_roll = -63.176 degree; 
+pitch_update = -20.833 degree; yaw_update = 53.107 degree; roll_update = -35.502 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.134] 
+mea_pitch = 8.597 degree; mea_yaw = 67.944 degree; mea_roll = -61.117 degree; 
+pitch_update = -16.932 degree; yaw_update = 57.826 degree; roll_update = -39.811 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.241] 
+mea_pitch = 6.608 degree; mea_yaw = 72.020 degree; mea_roll = -65.028 degree; 
+pitch_update = -13.525 degree; yaw_update = 62.615 degree; roll_update = -44.265 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.352] 
+mea_pitch = 8.397 degree; mea_yaw = 71.990 degree; mea_roll = -62.024 degree; 
+pitch_update = -10.290 degree; yaw_update = 66.669 degree; roll_update = -47.734 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.455] 
+mea_pitch = 12.330 degree; mea_yaw = 77.037 degree; mea_roll = -72.869 degree; 
+pitch_update = -6.767 degree; yaw_update = 71.287 degree; roll_update = -52.127 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.558] 
+1523,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 15.562 degree; mea_yaw = 78.473 degree; mea_roll = -67.644 degree; 
+pitch_update = -3.233 degree; yaw_update = 75.477 degree; roll_update = -55.628 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.671] 
+mea_pitch = 20.894 degree; mea_yaw = 80.811 degree; mea_roll = -65.113 degree; 
+pitch_update = 0.460 degree; yaw_update = 78.978 degree; roll_update = -58.455 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.776] 
+mea_pitch = 17.454 degree; mea_yaw = 82.368 degree; mea_roll = -68.539 degree; 
+pitch_update = 3.316 degree; yaw_update = 81.952 degree; roll_update = -60.872 degree; 
+
+##############################################################
+[2025-12-20 22:45:14.879] 
+mea_pitch = 18.594 degree; mea_yaw = 77.328 degree; mea_roll = -65.733 degree; 
+pitch_update = 6.005 degree; yaw_update = 83.107 degree; roll_update = -62.132 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.013] 
+mea_pitch = 16.686 degree; mea_yaw = 55.906 degree; mea_roll = -44.722 degree; 
+pitch_update = 7.921 degree; yaw_update = 78.187 degree; roll_update = -58.480 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.109] 
+1524,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 8.143 degree; mea_yaw = 39.673 degree; mea_roll = -32.120 degree; 
+pitch_update = 9.294 degree; yaw_update = 70.661 degree; roll_update = -54.157 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.215] 
+mea_pitch = 6.411 degree; mea_yaw = 31.394 degree; mea_roll = -15.746 degree; 
+pitch_update = 11.615 degree; yaw_update = 62.077 degree; roll_update = -50.829 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.330] 
+mea_pitch = 6.530 degree; mea_yaw = 42.737 degree; mea_roll = -27.384 degree; 
+pitch_update = 12.082 degree; yaw_update = 57.568 degree; roll_update = -48.749 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.434] 
+mea_pitch = 5.355 degree; mea_yaw = 50.363 degree; mea_roll = -44.124 degree; 
+pitch_update = 12.016 degree; yaw_update = 56.398 degree; roll_update = -50.662 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.540] 
+mea_pitch = 1.569 degree; mea_yaw = 50.218 degree; mea_roll = -33.402 degree; 
+pitch_update = 11.001 degree; yaw_update = 55.204 degree; roll_update = -48.535 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.669] 
+1525,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 14.923 degree; mea_yaw = 27.176 degree; mea_roll = -17.335 degree; 
+pitch_update = 13.940 degree; yaw_update = 49.415 degree; roll_update = -38.796 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.772] 
+mea_pitch = 12.291 degree; mea_yaw = 14.356 degree; mea_roll = 6.849 degree; 
+pitch_update = 15.581 degree; yaw_update = 41.666 degree; roll_update = -29.956 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.874] 
+mea_pitch = 4.274 degree; mea_yaw = 20.418 degree; mea_roll = -3.036 degree; 
+pitch_update = 15.788 degree; yaw_update = 36.684 degree; roll_update = -29.740 degree; 
+
+##############################################################
+[2025-12-20 22:45:15.991] 
+mea_pitch = 20.848 degree; mea_yaw = 26.522 degree; mea_roll = -17.132 degree; 
+pitch_update = 16.979 degree; yaw_update = 32.852 degree; roll_update = -32.834 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.103] 
+mea_pitch = 11.036 degree; mea_yaw = 11.939 degree; mea_roll = 4.528 degree; 
+pitch_update = 17.459 degree; yaw_update = 26.458 degree; roll_update = -19.918 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.206] 
+1526,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 9.081 degree; mea_yaw = 34.240 degree; mea_roll = -22.440 degree; 
+pitch_update = 18.199 degree; yaw_update = 26.742 degree; roll_update = -26.175 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.305] 
+mea_pitch = 14.513 degree; mea_yaw = 27.917 degree; mea_roll = -15.646 degree; 
+pitch_update = 18.305 degree; yaw_update = 24.208 degree; roll_update = -17.794 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.431] 
+mea_pitch = 12.562 degree; mea_yaw = 21.289 degree; mea_roll = -6.931 degree; 
+pitch_update = 18.514 degree; yaw_update = 22.204 degree; roll_update = -21.249 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.535] 
+mea_pitch = 15.895 degree; mea_yaw = 31.209 degree; mea_roll = -21.574 degree; 
+pitch_update = 18.529 degree; yaw_update = 21.128 degree; roll_update = -19.085 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.647] 
+mea_pitch = 21.492 degree; mea_yaw = 26.577 degree; mea_roll = -21.420 degree; 
+pitch_update = 19.554 degree; yaw_update = 20.865 degree; roll_update = -22.379 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.760] 
+1527,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 11.671 degree; mea_yaw = 29.879 degree; mea_roll = -17.709 degree; 
+pitch_update = 19.006 degree; yaw_update = 20.436 degree; roll_update = -20.619 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.860] 
+mea_pitch = 28.694 degree; mea_yaw = 40.084 degree; mea_roll = -45.152 degree; 
+pitch_update = 20.445 degree; yaw_update = 23.611 degree; roll_update = -28.154 degree; 
+
+##############################################################
+[2025-12-20 22:45:16.971] 
+mea_pitch = 9.962 degree; mea_yaw = 40.514 degree; mea_roll = -28.040 degree; 
+pitch_update = 18.894 degree; yaw_update = 25.486 degree; roll_update = -25.181 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.075] 
+mea_pitch = 17.806 degree; mea_yaw = 34.618 degree; mea_roll = -28.637 degree; 
+pitch_update = 19.565 degree; yaw_update = 26.916 degree; roll_update = -29.793 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.183] 
+mea_pitch = 11.273 degree; mea_yaw = 37.437 degree; mea_roll = -25.114 degree; 
+pitch_update = 18.300 degree; yaw_update = 27.980 degree; roll_update = -27.184 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.304] 
+1528,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 12.814 degree; mea_yaw = 28.904 degree; mea_roll = -24.305 degree; 
+pitch_update = 18.294 degree; yaw_update = 27.888 degree; roll_update = -28.134 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.411] 
+mea_pitch = 5.607 degree; mea_yaw = 38.664 degree; mea_roll = -19.823 degree; 
+pitch_update = 16.535 degree; yaw_update = 29.205 degree; roll_update = -25.311 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.514] 
+mea_pitch = 14.393 degree; mea_yaw = 37.001 degree; mea_roll = -34.766 degree; 
+pitch_update = 16.496 degree; yaw_update = 30.958 degree; roll_update = -29.332 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.625] 
+mea_pitch = 6.423 degree; mea_yaw = 36.659 degree; mea_roll = -19.036 degree; 
+pitch_update = 14.619 degree; yaw_update = 31.650 degree; roll_update = -24.305 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.744] 
+mea_pitch = 11.132 degree; mea_yaw = 28.341 degree; mea_roll = -18.839 degree; 
+pitch_update = 15.011 degree; yaw_update = 31.860 degree; roll_update = -29.064 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.844] 
+1529,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 13.532 degree; mea_yaw = 40.007 degree; mea_roll = -33.855 degree; 
+pitch_update = 13.990 degree; yaw_update = 33.169 degree; roll_update = -24.138 degree; 
+
+##############################################################
+[2025-12-20 22:45:17.967] 
+mea_pitch = 4.892 degree; mea_yaw = 23.017 degree; mea_roll = -6.952 degree; 
+pitch_update = 13.653 degree; yaw_update = 31.018 degree; roll_update = -22.119 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.086] 
+mea_pitch = 12.110 degree; mea_yaw = 22.748 degree; mea_roll = -10.405 degree; 
+pitch_update = 14.052 degree; yaw_update = 29.980 degree; roll_update = -20.025 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.176] 
+mea_pitch = 2.571 degree; mea_yaw = 23.333 degree; mea_roll = -16.379 degree; 
+pitch_update = 11.261 degree; yaw_update = 28.552 degree; roll_update = -18.009 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.287] 
+mea_pitch = 5.273 degree; mea_yaw = 11.346 degree; mea_roll = 5.834 degree; 
+pitch_update = 11.053 degree; yaw_update = 25.351 degree; roll_update = -13.650 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.401] 
+1530,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 12.555 degree; mea_yaw = 17.142 degree; mea_roll = -4.226 degree; 
+pitch_update = 11.951 degree; yaw_update = 23.143 degree; roll_update = -12.716 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.509] 
+mea_pitch = 9.358 degree; mea_yaw = 21.446 degree; mea_roll = -4.002 degree; 
+pitch_update = 9.455 degree; yaw_update = 21.865 degree; roll_update = -8.605 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.613] 
+mea_pitch = 7.217 degree; mea_yaw = 18.173 degree; mea_roll = 1.646 degree; 
+pitch_update = 9.276 degree; yaw_update = 20.324 degree; roll_update = -5.931 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.719] 
+mea_pitch = 6.371 degree; mea_yaw = 16.899 degree; mea_roll = -3.096 degree; 
+pitch_update = 10.647 degree; yaw_update = 18.830 degree; roll_update = -4.325 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.825] 
+mea_pitch = 20.737 degree; mea_yaw = 13.474 degree; mea_roll = 0.211 degree; 
+pitch_update = 13.529 degree; yaw_update = 16.737 degree; roll_update = -3.042 degree; 
+
+##############################################################
+[2025-12-20 22:45:18.946] 
+1531,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 20.829 degree; mea_yaw = 14.616 degree; mea_roll = 0.486 degree; 
+pitch_update = 11.471 degree; yaw_update = 15.411 degree; roll_update = -0.450 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.047] 
+mea_pitch = 5.279 degree; mea_yaw = 14.488 degree; mea_roll = 3.299 degree; 
+pitch_update = 10.911 degree; yaw_update = 13.732 degree; roll_update = 1.420 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.154] 
+mea_pitch = 14.179 degree; mea_yaw = 18.781 degree; mea_roll = -8.312 degree; 
+pitch_update = 14.649 degree; yaw_update = 14.028 degree; roll_update = 1.183 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.257] 
+mea_pitch = 28.252 degree; mea_yaw = 14.774 degree; mea_roll = -1.337 degree; 
+pitch_update = 16.720 degree; yaw_update = 13.202 degree; roll_update = 1.289 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.370] 
+mea_pitch = 21.284 degree; mea_yaw = 14.259 degree; mea_roll = -1.370 degree; 
+pitch_update = 16.264 degree; yaw_update = 12.663 degree; roll_update = 2.142 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.505] 
+1532,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 13.631 degree; mea_yaw = 12.432 degree; mea_roll = 1.380 degree; 
+pitch_update = 14.060 degree; yaw_update = 11.730 degree; roll_update = 3.713 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.596] 
+mea_pitch = 5.803 degree; mea_yaw = 18.064 degree; mea_roll = -0.105 degree; 
+pitch_update = 15.790 degree; yaw_update = 12.566 degree; roll_update = 3.611 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.694] 
+mea_pitch = 29.019 degree; mea_yaw = 14.690 degree; mea_roll = -0.211 degree; 
+pitch_update = 18.153 degree; yaw_update = 12.316 degree; roll_update = 3.694 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.804] 
+mea_pitch = 23.525 degree; mea_yaw = 18.568 degree; mea_roll = -4.272 degree; 
+pitch_update = 17.573 degree; yaw_update = 13.265 degree; roll_update = 3.941 degree; 
+
+##############################################################
+[2025-12-20 22:45:19.913] 
+mea_pitch = 8.646 degree; mea_yaw = 12.212 degree; mea_roll = 4.925 degree; 
+pitch_update = 15.201 degree; yaw_update = 12.550 degree; roll_update = 5.447 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.018] 
+1533,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 3.054 degree; mea_yaw = 20.755 degree; mea_roll = -1.280 degree; 
+pitch_update = 15.362 degree; yaw_update = 13.831 degree; roll_update = 5.302 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.122] 
+mea_pitch = 19.534 degree; mea_yaw = 17.161 degree; mea_roll = -3.927 degree; 
+pitch_update = 17.712 degree; yaw_update = 14.638 degree; roll_update = 3.860 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.254] 
+mea_pitch = 24.945 degree; mea_yaw = 19.469 degree; mea_roll = -4.998 degree; 
+pitch_update = 17.957 degree; yaw_update = 15.465 degree; roll_update = 4.100 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.350] 
+mea_pitch = 13.305 degree; mea_yaw = 15.846 degree; mea_roll = -0.755 degree; 
+pitch_update = 15.267 degree; yaw_update = 15.312 degree; roll_update = 4.165 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.479] 
+mea_pitch = 11.833 degree; mea_yaw = 17.141 degree; mea_roll = -1.218 degree; 
+pitch_update = 15.218 degree; yaw_update = 14.706 degree; roll_update = 4.162 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.568] 
+1534,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 10.882 degree; mea_yaw = 18.940 degree; mea_roll = -0.577 degree; 
+pitch_update = 16.698 degree; yaw_update = 15.812 degree; roll_update = 3.726 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.697] 
+mea_pitch = 22.264 degree; mea_yaw = 17.598 degree; mea_roll = -2.211 degree; 
+pitch_update = 18.877 degree; yaw_update = 16.741 degree; roll_update = 2.740 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.789] 
+mea_pitch = 27.725 degree; mea_yaw = 15.905 degree; mea_roll = -3.871 degree; 
+pitch_update = 18.889 degree; yaw_update = 16.261 degree; roll_update = 2.832 degree; 
+
+##############################################################
+[2025-12-20 22:45:20.888] 
+mea_pitch = 12.964 degree; mea_yaw = 16.194 degree; mea_roll = -0.209 degree; 
+pitch_update = 16.085 degree; yaw_update = 15.505 degree; roll_update = 2.676 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.011] 
+mea_pitch = 2.773 degree; mea_yaw = 21.713 degree; mea_roll = -1.384 degree; 
+pitch_update = 14.878 degree; yaw_update = 16.753 degree; roll_update = 2.457 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.097] 
+1535,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 9.887 degree; mea_yaw = 20.427 degree; mea_roll = -4.166 degree; 
+pitch_update = 15.720 degree; yaw_update = 17.986 degree; roll_update = 1.214 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.218] 
+mea_pitch = 21.675 degree; mea_yaw = 16.725 degree; mea_roll = -2.901 degree; 
+pitch_update = 17.721 degree; yaw_update = 18.172 degree; roll_update = 0.157 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.322] 
+mea_pitch = 19.005 degree; mea_yaw = 17.920 degree; mea_roll = -3.502 degree; 
+pitch_update = 15.679 degree; yaw_update = 18.225 degree; roll_update = 0.315 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.423] 
+mea_pitch = 24.042 degree; mea_yaw = 17.678 degree; mea_roll = -2.901 degree; 
+pitch_update = 16.787 degree; yaw_update = 17.820 degree; roll_update = -0.047 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.539] 
+mea_pitch = 2.482 degree; mea_yaw = 20.649 degree; mea_roll = -2.333 degree; 
+pitch_update = 15.772 degree; yaw_update = 18.667 degree; roll_update = -0.207 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.642] 
+1536,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 16.276 degree; mea_yaw = 9.705 degree; mea_roll = 9.697 degree; 
+pitch_update = 18.968 degree; yaw_update = 17.033 degree; roll_update = 0.716 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.763] 
+mea_pitch = 37.031 degree; mea_yaw = 16.799 degree; mea_roll = -0.127 degree; 
+pitch_update = 23.040 degree; yaw_update = 17.105 degree; roll_update = 0.808 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.868] 
+mea_pitch = 48.081 degree; mea_yaw = 17.526 degree; mea_roll = -1.923 degree; 
+pitch_update = 27.693 degree; yaw_update = 17.759 degree; roll_update = 0.208 degree; 
+
+##############################################################
+[2025-12-20 22:45:21.970] 
+mea_pitch = 63.715 degree; mea_yaw = 17.515 degree; mea_roll = -0.543 degree; 
+pitch_update = 32.548 degree; yaw_update = 18.139 degree; roll_update = 0.143 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.073] 
+mea_pitch = 60.572 degree; mea_yaw = 13.566 degree; mea_roll = 4.045 degree; 
+pitch_update = 36.393 degree; yaw_update = 17.547 degree; roll_update = 0.526 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.190] 
+1537,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 71.499 degree; mea_yaw = 17.499 degree; mea_roll = 1.289 degree; 
+pitch_update = 40.104 degree; yaw_update = 17.793 degree; roll_update = 0.842 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.292] 
+mea_pitch = 74.994 degree; mea_yaw = 19.635 degree; mea_roll = -0.847 degree; 
+pitch_update = 43.288 degree; yaw_update = 17.870 degree; roll_update = 0.733 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.404] 
+mea_pitch = 70.385 degree; mea_yaw = 17.881 degree; mea_roll = 0.793 degree; 
+pitch_update = 44.992 degree; yaw_update = 17.733 degree; roll_update = 0.943 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.511] 
+mea_pitch = 47.861 degree; mea_yaw = 13.178 degree; mea_roll = 3.101 degree; 
+pitch_update = 44.233 degree; yaw_update = 16.681 degree; roll_update = 1.645 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.618] 
+mea_pitch = 44.259 degree; mea_yaw = 9.270 degree; mea_roll = 1.720 degree; 
+pitch_update = 42.094 degree; yaw_update = 15.273 degree; roll_update = 1.714 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.748] 
+1538,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 22.665 degree; mea_yaw = 14.903 degree; mea_roll = -5.463 degree; 
+pitch_update = 38.368 degree; yaw_update = 15.003 degree; roll_update = 0.942 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.861] 
+mea_pitch = 16.064 degree; mea_yaw = 8.816 degree; mea_roll = 1.368 degree; 
+pitch_update = 35.179 degree; yaw_update = 13.437 degree; roll_update = 1.181 degree; 
+
+##############################################################
+[2025-12-20 22:45:22.945] 
+mea_pitch = -7.922 degree; mea_yaw = 18.466 degree; mea_roll = -4.747 degree; 
+pitch_update = 30.562 degree; yaw_update = 14.288 degree; roll_update = 0.292 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.061] 
+mea_pitch = 6.585 degree; mea_yaw = 13.383 degree; mea_roll = 0.453 degree; 
+pitch_update = 27.930 degree; yaw_update = 13.824 degree; roll_update = 0.378 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.152] 
+mea_pitch = 8.352 degree; mea_yaw = 12.869 degree; mea_roll = -0.326 degree; 
+pitch_update = 27.984 degree; yaw_update = 13.465 degree; roll_update = 0.286 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.273] 
+1539,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 20.412 degree; mea_yaw = 11.444 degree; mea_roll = -0.727 degree; 
+pitch_update = 26.809 degree; yaw_update = 12.963 degree; roll_update = 0.042 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.386] 
+mea_pitch = 18.978 degree; mea_yaw = 14.051 degree; mea_roll = -2.731 degree; 
+pitch_update = 23.766 degree; yaw_update = 13.084 degree; roll_update = -0.452 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.493] 
+mea_pitch = 10.910 degree; mea_yaw = 9.829 degree; mea_roll = 3.813 degree; 
+pitch_update = 23.437 degree; yaw_update = 11.320 degree; roll_update = 0.389 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.599] 
+mea_pitch = 10.381 degree; mea_yaw = 12.488 degree; mea_roll = -0.687 degree; 
+pitch_update = 22.699 degree; yaw_update = 11.257 degree; roll_update = 0.276 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.703] 
+mea_pitch = 19.712 degree; mea_yaw = 11.252 degree; mea_roll = -2.177 degree; 
+pitch_update = 20.055 degree; yaw_update = 11.342 degree; roll_update = -0.106 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.824] 
+1540,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 10.065 degree; mea_yaw = 9.358 degree; mea_roll = 5.106 degree; 
+pitch_update = 20.271 degree; yaw_update = 9.748 degree; roll_update = 0.894 degree; 
+
+##############################################################
+[2025-12-20 22:45:23.939] 
+mea_pitch = 11.360 degree; mea_yaw = 15.096 degree; mea_roll = -1.969 degree; 
+pitch_update = 18.917 degree; yaw_update = 10.679 degree; roll_update = 0.470 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.034] 
+mea_pitch = 13.058 degree; mea_yaw = 11.014 degree; mea_roll = 2.051 degree; 
+pitch_update = 16.787 degree; yaw_update = 10.500 degree; roll_update = 0.947 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.136] 
+mea_pitch = 11.539 degree; mea_yaw = 17.882 degree; mea_roll = -3.415 degree; 
+pitch_update = 18.339 degree; yaw_update = 11.395 degree; roll_update = 0.415 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.241] 
+mea_pitch = 22.875 degree; mea_yaw = 10.786 degree; mea_roll = 0.666 degree; 
+pitch_update = 18.569 degree; yaw_update = 11.270 degree; roll_update = -0.053 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.359] 
+1541,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 25.309 degree; mea_yaw = 9.430 degree; mea_roll = 0.710 degree; 
+pitch_update = 16.654 degree; yaw_update = 10.866 degree; roll_update = 0.188 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.460] 
+mea_pitch = 8.070 degree; mea_yaw = 15.879 degree; mea_roll = -1.941 degree; 
+pitch_update = 16.848 degree; yaw_update = 11.718 degree; roll_update = -0.087 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.580] 
+mea_pitch = 21.796 degree; mea_yaw = 13.931 degree; mea_roll = -2.092 degree; 
+pitch_update = 16.554 degree; yaw_update = 12.794 degree; roll_update = -0.971 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.684] 
+mea_pitch = -3.915 degree; mea_yaw = 18.678 degree; mea_roll = -2.201 degree; 
+pitch_update = 11.225 degree; yaw_update = 13.560 degree; roll_update = -2.485 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.784] 
+mea_pitch = 7.371 degree; mea_yaw = 13.824 degree; mea_roll = -0.627 degree; 
+pitch_update = 11.604 degree; yaw_update = 14.309 degree; roll_update = -2.982 degree; 
+
+##############################################################
+[2025-12-20 22:45:24.903] 
+1542,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 17.151 degree; mea_yaw = 15.613 degree; mea_roll = -5.452 degree; 
+pitch_update = 10.389 degree; yaw_update = 14.470 degree; roll_update = -2.763 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.028] 
+mea_pitch = 4.181 degree; mea_yaw = 18.425 degree; mea_roll = -0.685 degree; 
+pitch_update = 9.175 degree; yaw_update = 15.196 degree; roll_update = -2.452 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.129] 
+mea_pitch = 2.103 degree; mea_yaw = 18.925 degree; mea_roll = -6.205 degree; 
+pitch_update = 7.949 degree; yaw_update = 16.554 degree; roll_update = -3.494 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.223] 
+mea_pitch = 10.272 degree; mea_yaw = 13.940 degree; mea_roll = 1.853 degree; 
+pitch_update = 7.806 degree; yaw_update = 16.132 degree; roll_update = -2.464 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.323] 
+mea_pitch = -3.836 degree; mea_yaw = 23.922 degree; mea_roll = -9.837 degree; 
+pitch_update = 4.055 degree; yaw_update = 18.293 degree; roll_update = -3.134 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.439] 
+1543,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 3.543 degree; mea_yaw = 18.492 degree; mea_roll = -1.289 degree; 
+pitch_update = 3.834 degree; yaw_update = 18.580 degree; roll_update = -3.214 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.558] 
+mea_pitch = 5.546 degree; mea_yaw = 18.078 degree; mea_roll = 0.040 degree; 
+pitch_update = 3.094 degree; yaw_update = 18.747 degree; roll_update = -3.049 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.662] 
+mea_pitch = -5.881 degree; mea_yaw = 20.261 degree; mea_roll = 2.419 degree; 
+pitch_update = 0.009 degree; yaw_update = 19.215 degree; roll_update = -1.339 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.772] 
+mea_pitch = -2.463 degree; mea_yaw = 23.682 degree; mea_roll = -1.071 degree; 
+pitch_update = -0.624 degree; yaw_update = 20.501 degree; roll_update = -1.488 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.871] 
+mea_pitch = -8.556 degree; mea_yaw = 21.873 degree; mea_roll = -1.528 degree; 
+pitch_update = -1.299 degree; yaw_update = 21.628 degree; roll_update = -2.775 degree; 
+
+##############################################################
+[2025-12-20 22:45:25.974] 
+1544,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -2.561 degree; mea_yaw = 21.257 degree; mea_roll = -4.421 degree; 
+pitch_update = -3.555 degree; yaw_update = 21.958 degree; roll_update = -2.829 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.110] 
+mea_pitch = 14.196 degree; mea_yaw = 22.531 degree; mea_roll = -12.419 degree; 
+pitch_update = -1.652 degree; yaw_update = 22.021 degree; roll_update = -4.576 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.183] 
+mea_pitch = -0.805 degree; mea_yaw = 20.158 degree; mea_roll = 0.833 degree; 
+pitch_update = -0.737 degree; yaw_update = 22.072 degree; roll_update = -4.170 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.299] 
+mea_pitch = 21.476 degree; mea_yaw = 25.914 degree; mea_roll = -20.312 degree; 
+pitch_update = 0.639 degree; yaw_update = 23.965 degree; roll_update = -6.483 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.407] 
+mea_pitch = 5.389 degree; mea_yaw = 19.193 degree; mea_roll = -3.980 degree; 
+pitch_update = 0.634 degree; yaw_update = 23.667 degree; roll_update = -6.847 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.510] 
+1545,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 9.897 degree; mea_yaw = 17.782 degree; mea_roll = -3.288 degree; 
+pitch_update = 3.030 degree; yaw_update = 23.311 degree; roll_update = -6.636 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.619] 
+mea_pitch = 19.449 degree; mea_yaw = 5.073 degree; mea_roll = 12.205 degree; 
+pitch_update = 4.887 degree; yaw_update = 19.590 degree; roll_update = -2.887 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.724] 
+mea_pitch = 11.793 degree; mea_yaw = 13.227 degree; mea_roll = 3.719 degree; 
+pitch_update = 4.554 degree; yaw_update = 18.445 degree; roll_update = -2.732 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.839] 
+mea_pitch = 2.224 degree; mea_yaw = 25.303 degree; mea_roll = -13.608 degree; 
+pitch_update = 3.626 degree; yaw_update = 21.042 degree; roll_update = -6.872 degree; 
+
+##############################################################
+[2025-12-20 22:45:26.948] 
+mea_pitch = 11.538 degree; mea_yaw = 45.805 degree; mea_roll = -44.235 degree; 
+pitch_update = 5.825 degree; yaw_update = 24.931 degree; roll_update = -9.783 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.051] 
+1546,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 5.277 degree; mea_yaw = 30.475 degree; mea_roll = -14.663 degree; 
+pitch_update = 5.557 degree; yaw_update = 26.833 degree; roll_update = -14.497 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.166] 
+mea_pitch = 5.280 degree; mea_yaw = 60.317 degree; mea_roll = -40.021 degree; 
+pitch_update = 4.379 degree; yaw_update = 35.552 degree; roll_update = -21.698 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.275] 
+mea_pitch = 10.137 degree; mea_yaw = 77.320 degree; mea_roll = -79.423 degree; 
+pitch_update = 5.626 degree; yaw_update = 44.357 degree; roll_update = -25.681 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.391] 
+mea_pitch = 3.306 degree; mea_yaw = 42.228 degree; mea_roll = -32.289 degree; 
+pitch_update = 6.984 degree; yaw_update = 46.187 degree; roll_update = -22.900 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.490] 
+mea_pitch = 3.821 degree; mea_yaw = 60.569 degree; mea_roll = -52.894 degree; 
+pitch_update = 7.336 degree; yaw_update = 51.140 degree; roll_update = -29.162 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.588] 
+1547,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -1.499 degree; mea_yaw = 44.136 degree; mea_roll = -32.792 degree; 
+pitch_update = 6.357 degree; yaw_update = 51.672 degree; roll_update = -31.753 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.710] 
+mea_pitch = 3.233 degree; mea_yaw = 69.981 degree; mea_roll = -70.989 degree; 
+pitch_update = 5.678 degree; yaw_update = 56.686 degree; roll_update = -36.136 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.813] 
+mea_pitch = 0.674 degree; mea_yaw = 39.828 degree; mea_roll = -27.753 degree; 
+pitch_update = 6.075 degree; yaw_update = 54.196 degree; roll_update = -33.981 degree; 
+
+##############################################################
+[2025-12-20 22:45:27.919] 
+mea_pitch = -4.944 degree; mea_yaw = 64.575 degree; mea_roll = -48.121 degree; 
+pitch_update = 4.065 degree; yaw_update = 57.958 degree; roll_update = -36.508 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.040] 
+mea_pitch = 1.106 degree; mea_yaw = 51.480 degree; mea_roll = -40.570 degree; 
+pitch_update = 3.586 degree; yaw_update = 59.919 degree; roll_update = -44.927 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.146] 
+1548,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 10.722 degree; mea_yaw = 56.719 degree; mea_roll = -70.581 degree; 
+pitch_update = 4.426 degree; yaw_update = 59.250 degree; roll_update = -44.807 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.256] 
+mea_pitch = -6.525 degree; mea_yaw = 58.262 degree; mea_roll = -33.785 degree; 
+pitch_update = 2.440 degree; yaw_update = 62.815 degree; roll_update = -50.595 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.366] 
+mea_pitch = 3.216 degree; mea_yaw = 57.664 degree; mea_roll = -64.526 degree; 
+pitch_update = 2.115 degree; yaw_update = 61.920 degree; roll_update = -48.208 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.455] 
+mea_pitch = -2.683 degree; mea_yaw = 59.737 degree; mea_roll = -39.547 degree; 
+pitch_update = 1.104 degree; yaw_update = 65.061 degree; roll_update = -54.912 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.573] 
+mea_pitch = 4.586 degree; mea_yaw = 57.014 degree; mea_roll = -69.886 degree; 
+pitch_update = 2.014 degree; yaw_update = 62.580 degree; roll_update = -52.736 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.699] 
+1549,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -6.756 degree; mea_yaw = 67.585 degree; mea_roll = -65.702 degree; 
+pitch_update = 0.191 degree; yaw_update = 65.213 degree; roll_update = -56.292 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.793] 
+mea_pitch = 0.365 degree; mea_yaw = 50.218 degree; mea_roll = -40.530 degree; 
+pitch_update = 0.131 degree; yaw_update = 63.724 degree; roll_update = -60.978 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.897] 
+mea_pitch = -0.659 degree; mea_yaw = 70.117 degree; mea_roll = -67.935 degree; 
+pitch_update = -0.945 degree; yaw_update = 64.624 degree; roll_update = -59.633 degree; 
+
+##############################################################
+[2025-12-20 22:45:28.999] 
+mea_pitch = -3.115 degree; mea_yaw = 62.551 degree; mea_roll = -51.502 degree; 
+pitch_update = -0.919 degree; yaw_update = 66.638 degree; roll_update = -64.158 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.117] 
+mea_pitch = 7.392 degree; mea_yaw = 56.001 degree; mea_roll = -66.646 degree; 
+pitch_update = -0.582 degree; yaw_update = 63.578 degree; roll_update = -59.003 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.224] 
+1550,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 1.445 degree; mea_yaw = 57.151 degree; mea_roll = -40.362 degree; 
+pitch_update = -1.298 degree; yaw_update = 66.166 degree; roll_update = -66.244 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.328] 
+mea_pitch = 13.204 degree; mea_yaw = 56.886 degree; mea_roll = -74.376 degree; 
+pitch_update = 0.015 degree; yaw_update = 62.970 degree; roll_update = -62.611 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.443] 
+mea_pitch = -6.316 degree; mea_yaw = 72.327 degree; mea_roll = -56.878 degree; 
+pitch_update = -1.403 degree; yaw_update = 65.675 degree; roll_update = -64.566 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.553] 
+mea_pitch = 10.713 degree; mea_yaw = 52.759 degree; mea_roll = -54.066 degree; 
+pitch_update = 0.497 degree; yaw_update = 63.229 degree; roll_update = -67.655 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.643] 
+mea_pitch = 0.235 degree; mea_yaw = 66.745 degree; mea_roll = -61.836 degree; 
+pitch_update = -0.589 degree; yaw_update = 63.382 degree; roll_update = -65.586 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.761] 
+1551,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -1.457 degree; mea_yaw = 61.803 degree; mea_roll = -51.406 degree; 
+pitch_update = -0.688 degree; yaw_update = 65.791 degree; roll_update = -71.847 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.864] 
+mea_pitch = 7.784 degree; mea_yaw = 65.432 degree; mea_roll = -78.740 degree; 
+pitch_update = -0.289 degree; yaw_update = 64.093 degree; roll_update = -68.156 degree; 
+
+##############################################################
+[2025-12-20 22:45:29.994] 
+mea_pitch = -1.135 degree; mea_yaw = 66.741 degree; mea_roll = -49.936 degree; 
+pitch_update = -0.143 degree; yaw_update = 66.228 degree; roll_update = -71.274 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.098] 
+mea_pitch = 15.309 degree; mea_yaw = 58.328 degree; mea_roll = -70.939 degree; 
+pitch_update = 1.868 degree; yaw_update = 63.853 degree; roll_update = -71.022 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.186] 
+mea_pitch = 0.666 degree; mea_yaw = 74.220 degree; mea_roll = -60.037 degree; 
+pitch_update = 0.952 degree; yaw_update = 65.150 degree; roll_update = -68.264 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.326] 
+1552,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 1.716 degree; mea_yaw = 68.526 degree; mea_roll = -52.963 degree; 
+pitch_update = 1.662 degree; yaw_update = 67.915 degree; roll_update = -71.969 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.425] 
+mea_pitch = 8.861 degree; mea_yaw = 60.392 degree; mea_roll = -81.068 degree; 
+pitch_update = 2.541 degree; yaw_update = 65.133 degree; roll_update = -69.029 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.521] 
+mea_pitch = -4.284 degree; mea_yaw = 55.635 degree; mea_roll = -36.229 degree; 
+pitch_update = 1.454 degree; yaw_update = 65.418 degree; roll_update = -70.429 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.626] 
+mea_pitch = 7.997 degree; mea_yaw = 60.722 degree; mea_roll = -72.394 degree; 
+pitch_update = 1.981 degree; yaw_update = 63.539 degree; roll_update = -70.818 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.747] 
+mea_pitch = -6.227 degree; mea_yaw = 67.522 degree; mea_roll = -52.817 degree; 
+pitch_update = 0.895 degree; yaw_update = 63.382 degree; roll_update = -65.253 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.846] 
+1553,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -4.206 degree; mea_yaw = 45.349 degree; mea_roll = -31.490 degree; 
+pitch_update = 1.428 degree; yaw_update = 60.213 degree; roll_update = -61.903 degree; 
+
+##############################################################
+[2025-12-20 22:45:30.956] 
+mea_pitch = -8.953 degree; mea_yaw = 65.169 degree; mea_roll = -30.610 degree; 
+pitch_update = 0.120 degree; yaw_update = 61.072 degree; roll_update = -58.459 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.055] 
+mea_pitch = -4.497 degree; mea_yaw = 64.877 degree; mea_roll = -48.522 degree; 
+pitch_update = 0.584 degree; yaw_update = 61.914 degree; roll_update = -59.352 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.158] 
+mea_pitch = -1.237 degree; mea_yaw = 46.169 degree; mea_roll = -37.464 degree; 
+pitch_update = 0.246 degree; yaw_update = 58.227 degree; roll_update = -51.522 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.265] 
+mea_pitch = -0.664 degree; mea_yaw = 32.142 degree; mea_roll = -17.882 degree; 
+pitch_update = 0.521 degree; yaw_update = 53.437 degree; roll_update = -48.197 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.377] 
+1554,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 6.939 degree; mea_yaw = 47.635 degree; mea_roll = -45.852 degree; 
+pitch_update = 0.818 degree; yaw_update = 51.486 degree; roll_update = -50.043 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.490] 
+mea_pitch = 0.023 degree; mea_yaw = 51.747 degree; mea_roll = -37.142 degree; 
+pitch_update = 0.202 degree; yaw_update = 49.751 degree; roll_update = -44.910 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.607] 
+mea_pitch = -0.669 degree; mea_yaw = 44.460 degree; mea_roll = -29.005 degree; 
+pitch_update = 0.493 degree; yaw_update = 49.471 degree; roll_update = -48.685 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.714] 
+mea_pitch = 7.757 degree; mea_yaw = 52.952 degree; mea_roll = -52.324 degree; 
+pitch_update = 0.169 degree; yaw_update = 48.210 degree; roll_update = -43.022 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.820] 
+mea_pitch = -5.401 degree; mea_yaw = 59.579 degree; mea_roll = -25.263 degree; 
+pitch_update = -0.479 degree; yaw_update = 50.291 degree; roll_update = -41.730 degree; 
+
+##############################################################
+[2025-12-20 22:45:31.944] 
+1555,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 3.533 degree; mea_yaw = 46.734 degree; mea_roll = -50.034 degree; 
+pitch_update = 0.270 degree; yaw_update = 47.650 degree; roll_update = -40.309 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.050] 
+mea_pitch = -2.922 degree; mea_yaw = 52.139 degree; mea_roll = -27.706 degree; 
+pitch_update = -0.377 degree; yaw_update = 48.531 degree; roll_update = -38.495 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.139] 
+mea_pitch = 3.180 degree; mea_yaw = 43.738 degree; mea_roll = -40.756 degree; 
+pitch_update = 0.806 degree; yaw_update = 46.077 degree; roll_update = -38.462 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.250] 
+mea_pitch = -0.260 degree; mea_yaw = 44.885 degree; mea_roll = -25.216 degree; 
+pitch_update = 0.564 degree; yaw_update = 45.187 degree; roll_update = -34.251 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.350] 
+mea_pitch = 8.956 degree; mea_yaw = 27.487 degree; mea_roll = -18.867 degree; 
+pitch_update = 2.081 degree; yaw_update = 41.067 degree; roll_update = -28.068 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.464] 
+1556,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 7.272 degree; mea_yaw = 9.999 degree; mea_roll = 11.433 degree; 
+pitch_update = 3.563 degree; yaw_update = 33.763 degree; roll_update = -18.338 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.568] 
+mea_pitch = 8.761 degree; mea_yaw = 0.727 degree; mea_roll = 35.910 degree; 
+pitch_update = 4.635 degree; yaw_update = 25.925 degree; roll_update = -5.001 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.676] 
+mea_pitch = 12.087 degree; mea_yaw = 11.611 degree; mea_roll = 34.205 degree; 
+pitch_update = 5.806 degree; yaw_update = 20.702 degree; roll_update = 3.224 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.794] 
+mea_pitch = 10.074 degree; mea_yaw = 11.913 degree; mea_roll = 6.962 degree; 
+pitch_update = 5.509 degree; yaw_update = 17.122 degree; roll_update = 2.188 degree; 
+
+##############################################################
+[2025-12-20 22:45:32.901] 
+mea_pitch = 3.596 degree; mea_yaw = 3.942 degree; mea_roll = 14.855 degree; 
+pitch_update = 5.202 degree; yaw_update = 11.961 degree; roll_update = 6.169 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.004] 
+1557,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 6.491 degree; mea_yaw = 20.863 degree; mea_roll = 1.748 degree; 
+pitch_update = 6.094 degree; yaw_update = 10.486 degree; roll_update = 11.411 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.108] 
+mea_pitch = 4.231 degree; mea_yaw = 2.240 degree; mea_roll = 27.227 degree; 
+pitch_update = 5.925 degree; yaw_update = 6.886 degree; roll_update = 14.393 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.218] 
+mea_pitch = 10.600 degree; mea_yaw = 25.511 degree; mea_roll = -30.726 degree; 
+pitch_update = 6.553 degree; yaw_update = 7.288 degree; roll_update = 6.246 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.339] 
+mea_pitch = 13.291 degree; mea_yaw = 16.662 degree; mea_roll = 3.554 degree; 
+pitch_update = 7.031 degree; yaw_update = 7.770 degree; roll_update = 11.098 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.429] 
+mea_pitch = 7.994 degree; mea_yaw = 9.724 degree; mea_roll = 8.085 degree; 
+pitch_update = 7.572 degree; yaw_update = 6.181 degree; roll_update = 8.019 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.536] 
+1558,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 12.302 degree; mea_yaw = 23.254 degree; mea_roll = -11.962 degree; 
+pitch_update = 10.706 degree; yaw_update = 8.484 degree; roll_update = 6.618 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.650] 
+mea_pitch = 17.088 degree; mea_yaw = 23.840 degree; mea_roll = -11.268 degree; 
+pitch_update = 13.286 degree; yaw_update = 10.578 degree; roll_update = 5.365 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.766] 
+mea_pitch = 29.205 degree; mea_yaw = 10.402 degree; mea_roll = 4.402 degree; 
+pitch_update = 14.533 degree; yaw_update = 9.388 degree; roll_update = 8.826 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.860] 
+mea_pitch = 11.415 degree; mea_yaw = 16.573 degree; mea_roll = -4.419 degree; 
+pitch_update = 11.621 degree; yaw_update = 10.082 degree; roll_update = 7.940 degree; 
+
+##############################################################
+[2025-12-20 22:45:33.974] 
+mea_pitch = 7.051 degree; mea_yaw = 9.713 degree; mea_roll = 8.023 degree; 
+pitch_update = 12.632 degree; yaw_update = 8.485 degree; roll_update = 9.638 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.078] 
+1559,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 20.282 degree; mea_yaw = 21.346 degree; mea_roll = -7.702 degree; 
+pitch_update = 16.593 degree; yaw_update = 10.557 degree; roll_update = 7.246 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.189] 
+mea_pitch = 25.049 degree; mea_yaw = 13.102 degree; mea_roll = -0.460 degree; 
+pitch_update = 16.412 degree; yaw_update = 10.446 degree; roll_update = 8.052 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.314] 
+mea_pitch = 21.901 degree; mea_yaw = 11.555 degree; mea_roll = 2.793 degree; 
+pitch_update = 14.596 degree; yaw_update = 8.956 degree; roll_update = 8.215 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.399] 
+mea_pitch = 13.505 degree; mea_yaw = 19.620 degree; mea_roll = -4.755 degree; 
+pitch_update = 18.230 degree; yaw_update = 11.667 degree; roll_update = 7.087 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.515] 
+mea_pitch = 28.967 degree; mea_yaw = 10.600 degree; mea_roll = 1.699 degree; 
+pitch_update = 21.058 degree; yaw_update = 11.197 degree; roll_update = 6.070 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.629] 
+1560,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 30.218 degree; mea_yaw = 15.548 degree; mea_roll = -5.800 degree; 
+pitch_update = 19.082 degree; yaw_update = 11.135 degree; roll_update = 5.663 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.729] 
+mea_pitch = 1.698 degree; mea_yaw = 5.876 degree; mea_roll = 16.350 degree; 
+pitch_update = 16.066 degree; yaw_update = 8.778 degree; roll_update = 6.065 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.834] 
+mea_pitch = 8.048 degree; mea_yaw = 19.969 degree; mea_roll = -3.502 degree; 
+pitch_update = 17.624 degree; yaw_update = 11.101 degree; roll_update = 5.250 degree; 
+
+##############################################################
+[2025-12-20 22:45:34.950] 
+mea_pitch = 34.683 degree; mea_yaw = 20.743 degree; mea_roll = -10.933 degree; 
+pitch_update = 19.128 degree; yaw_update = 13.634 degree; roll_update = 3.416 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.055] 
+mea_pitch = 24.062 degree; mea_yaw = 16.783 degree; mea_roll = -8.250 degree; 
+pitch_update = 18.444 degree; yaw_update = 13.583 degree; roll_update = 2.210 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.174] 
+1561,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -0.217 degree; mea_yaw = 18.111 degree; mea_roll = 1.814 degree; 
+pitch_update = 18.025 degree; yaw_update = 14.420 degree; roll_update = 2.881 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.279] 
+mea_pitch = 7.331 degree; mea_yaw = 18.597 degree; mea_roll = -1.834 degree; 
+pitch_update = 19.173 degree; yaw_update = 15.960 degree; roll_update = 2.021 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.388] 
+mea_pitch = 33.362 degree; mea_yaw = 17.312 degree; mea_roll = -5.658 degree; 
+pitch_update = 21.009 degree; yaw_update = 17.198 degree; roll_update = 1.138 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.487] 
+mea_pitch = 31.693 degree; mea_yaw = 13.980 degree; mea_roll = -1.238 degree; 
+pitch_update = 20.975 degree; yaw_update = 16.506 degree; roll_update = 0.865 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.599] 
+mea_pitch = 5.020 degree; mea_yaw = 22.984 degree; mea_roll = -8.928 degree; 
+pitch_update = 18.032 degree; yaw_update = 17.448 degree; roll_update = -1.544 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.715] 
+1562,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -1.897 degree; mea_yaw = 22.175 degree; mea_roll = -4.296 degree; 
+pitch_update = 17.242 degree; yaw_update = 18.884 degree; roll_update = -2.086 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.820] 
+mea_pitch = 25.080 degree; mea_yaw = 21.322 degree; mea_roll = -11.926 degree; 
+pitch_update = 19.003 degree; yaw_update = 20.434 degree; roll_update = -3.268 degree; 
+
+##############################################################
+[2025-12-20 22:45:35.922] 
+mea_pitch = 35.881 degree; mea_yaw = 8.574 degree; mea_roll = 6.834 degree; 
+pitch_update = 21.543 degree; yaw_update = 17.923 degree; roll_update = -1.818 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.053] 
+mea_pitch = 7.529 degree; mea_yaw = 23.907 degree; mea_roll = -9.414 degree; 
+pitch_update = 18.985 degree; yaw_update = 18.307 degree; roll_update = -3.822 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.139] 
+mea_pitch = -0.570 degree; mea_yaw = 22.535 degree; mea_roll = -2.373 degree; 
+pitch_update = 16.282 degree; yaw_update = 19.772 degree; roll_update = -4.182 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.250] 
+1563,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 17.790 degree; mea_yaw = 15.011 degree; mea_roll = 2.841 degree; 
+pitch_update = 17.608 degree; yaw_update = 20.049 degree; roll_update = -3.320 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.354] 
+mea_pitch = 21.661 degree; mea_yaw = 14.782 degree; mea_roll = 0.342 degree; 
+pitch_update = 20.733 degree; yaw_update = 19.404 degree; roll_update = -2.925 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.473] 
+mea_pitch = 30.766 degree; mea_yaw = 13.675 degree; mea_roll = 1.951 degree; 
+pitch_update = 22.491 degree; yaw_update = 18.195 degree; roll_update = -2.148 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.576] 
+mea_pitch = 13.448 degree; mea_yaw = 15.041 degree; mea_roll = 1.776 degree; 
+pitch_update = 18.297 degree; yaw_update = 17.552 degree; roll_update = -1.477 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.682] 
+mea_pitch = 16.045 degree; mea_yaw = 15.531 degree; mea_roll = -1.539 degree; 
+pitch_update = 18.178 degree; yaw_update = 17.145 degree; roll_update = -1.393 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.806] 
+1564,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 20.272 degree; mea_yaw = 13.780 degree; mea_roll = 2.625 degree; 
+pitch_update = 21.612 degree; yaw_update = 16.673 degree; roll_update = -0.877 degree; 
+
+##############################################################
+[2025-12-20 22:45:36.907] 
+mea_pitch = 21.167 degree; mea_yaw = 11.773 degree; mea_roll = 4.172 degree; 
+pitch_update = 22.615 degree; yaw_update = 15.652 degree; roll_update = -0.107 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.014] 
+mea_pitch = 29.786 degree; mea_yaw = 16.872 degree; mea_roll = -1.879 degree; 
+pitch_update = 21.034 degree; yaw_update = 15.077 degree; roll_update = 0.241 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.121] 
+mea_pitch = 22.005 degree; mea_yaw = 19.500 degree; mea_roll = -8.983 degree; 
+pitch_update = 17.413 degree; yaw_update = 15.617 degree; roll_update = -3.324 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.236] 
+mea_pitch = 17.859 degree; mea_yaw = 16.778 degree; mea_roll = 0.373 degree; 
+pitch_update = 19.045 degree; yaw_update = 14.018 degree; roll_update = -2.138 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.344] 
+1565,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 29.329 degree; mea_yaw = 21.188 degree; mea_roll = -7.594 degree; 
+pitch_update = 23.536 degree; yaw_update = 15.960 degree; roll_update = -3.227 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.451] 
+mea_pitch = 20.382 degree; mea_yaw = 21.211 degree; mea_roll = -5.921 degree; 
+pitch_update = 21.463 degree; yaw_update = 17.728 degree; roll_update = -3.995 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.564] 
+mea_pitch = 22.523 degree; mea_yaw = 23.215 degree; mea_roll = -18.665 degree; 
+pitch_update = 19.523 degree; yaw_update = 18.289 degree; roll_update = -7.618 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.668] 
+mea_pitch = 26.502 degree; mea_yaw = 11.572 degree; mea_roll = 5.369 degree; 
+pitch_update = 22.643 degree; yaw_update = 15.485 degree; roll_update = -4.952 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.773] 
+mea_pitch = 21.457 degree; mea_yaw = 20.172 degree; mea_roll = -5.037 degree; 
+pitch_update = 25.227 degree; yaw_update = 17.031 degree; roll_update = -5.219 degree; 
+
+##############################################################
+[2025-12-20 22:45:37.894] 
+1566,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 29.121 degree; mea_yaw = 12.572 degree; mea_roll = 1.754 degree; 
+pitch_update = 23.874 degree; yaw_update = 16.576 degree; roll_update = -4.342 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.016] 
+mea_pitch = 17.370 degree; mea_yaw = 16.436 degree; mea_roll = -2.295 degree; 
+pitch_update = 21.494 degree; yaw_update = 16.519 degree; roll_update = -4.849 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.101] 
+mea_pitch = 33.087 degree; mea_yaw = 14.931 degree; mea_roll = -1.245 degree; 
+pitch_update = 24.241 degree; yaw_update = 14.903 degree; roll_update = -4.019 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.205] 
+mea_pitch = 15.872 degree; mea_yaw = 18.583 degree; mea_roll = -1.667 degree; 
+pitch_update = 26.070 degree; yaw_update = 15.752 degree; roll_update = -3.639 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.343] 
+mea_pitch = 24.018 degree; mea_yaw = 23.069 degree; mea_roll = -12.339 degree; 
+pitch_update = 23.833 degree; yaw_update = 18.564 degree; roll_update = -5.630 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.427] 
+1567,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 43.939 degree; mea_yaw = 14.234 degree; mea_roll = 1.059 degree; 
+pitch_update = 25.507 degree; yaw_update = 17.269 degree; roll_update = -4.149 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.544] 
+mea_pitch = -0.445 degree; mea_yaw = 20.977 degree; mea_roll = 5.104 degree; 
+pitch_update = 24.903 degree; yaw_update = 17.646 degree; roll_update = -1.981 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.643] 
+mea_pitch = 19.059 degree; mea_yaw = 20.735 degree; mea_roll = -5.913 degree; 
+pitch_update = 25.485 degree; yaw_update = 19.337 degree; roll_update = -2.910 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.755] 
+mea_pitch = 36.811 degree; mea_yaw = 12.102 degree; mea_roll = 1.981 degree; 
+pitch_update = 25.487 degree; yaw_update = 18.658 degree; roll_update = -2.848 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.868] 
+mea_pitch = 3.158 degree; mea_yaw = 17.505 degree; mea_roll = 0.017 degree; 
+pitch_update = 20.195 degree; yaw_update = 17.594 degree; roll_update = -2.212 degree; 
+
+##############################################################
+[2025-12-20 22:45:38.987] 
+1568,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 6.973 degree; mea_yaw = 21.701 degree; mea_roll = 0.482 degree; 
+pitch_update = 21.228 degree; yaw_update = 18.705 degree; roll_update = -0.561 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.081] 
+mea_pitch = 35.155 degree; mea_yaw = 17.506 degree; mea_roll = -3.537 degree; 
+pitch_update = 23.003 degree; yaw_update = 19.537 degree; roll_update = -1.339 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.194] 
+mea_pitch = 19.680 degree; mea_yaw = 11.202 degree; mea_roll = 8.853 degree; 
+pitch_update = 22.165 degree; yaw_update = 16.781 degree; roll_update = 1.463 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.299] 
+mea_pitch = 9.304 degree; mea_yaw = 19.825 degree; mea_roll = -1.605 degree; 
+pitch_update = 22.469 degree; yaw_update = 17.511 degree; roll_update = 1.358 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.412] 
+mea_pitch = 30.170 degree; mea_yaw = 12.759 degree; mea_roll = 5.316 degree; 
+pitch_update = 23.615 degree; yaw_update = 17.248 degree; roll_update = 1.864 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.518] 
+1569,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 53.850 degree; mea_yaw = 8.946 degree; mea_roll = 7.859 degree; 
+pitch_update = 25.233 degree; yaw_update = 15.282 degree; roll_update = 3.396 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.619] 
+mea_pitch = 3.050 degree; mea_yaw = 23.626 degree; mea_roll = -5.394 degree; 
+pitch_update = 23.710 degree; yaw_update = 16.902 degree; roll_update = 2.539 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.730] 
+mea_pitch = 24.897 degree; mea_yaw = 15.293 degree; mea_roll = -2.144 degree; 
+pitch_update = 24.575 degree; yaw_update = 17.344 degree; roll_update = 1.580 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.850] 
+mea_pitch = 17.127 degree; mea_yaw = 13.486 degree; mea_roll = 0.791 degree; 
+pitch_update = 23.672 degree; yaw_update = 17.562 degree; roll_update = 2.386 degree; 
+
+##############################################################
+[2025-12-20 22:45:39.943] 
+mea_pitch = 20.135 degree; mea_yaw = 19.817 degree; mea_roll = -9.686 degree; 
+pitch_update = 21.305 degree; yaw_update = 18.466 degree; roll_update = -0.856 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.057] 
+1570,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 37.945 degree; mea_yaw = 26.545 degree; mea_roll = -28.887 degree; 
+pitch_update = 23.622 degree; yaw_update = 19.165 degree; roll_update = -4.656 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.169] 
+mea_pitch = -3.795 degree; mea_yaw = 28.118 degree; mea_roll = -17.150 degree; 
+pitch_update = 19.008 degree; yaw_update = 21.247 degree; roll_update = -8.230 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.281] 
+mea_pitch = -3.151 degree; mea_yaw = 28.175 degree; mea_roll = -24.933 degree; 
+pitch_update = 12.797 degree; yaw_update = 22.511 degree; roll_update = -10.617 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.377] 
+mea_pitch = -14.536 degree; mea_yaw = 22.787 degree; mea_roll = 1.012 degree; 
+pitch_update = 10.621 degree; yaw_update = 22.427 degree; roll_update = -9.394 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.520] 
+mea_pitch = 0.778 degree; mea_yaw = 20.016 degree; mea_roll = -6.403 degree; 
+pitch_update = 12.144 degree; yaw_update = 22.311 degree; roll_update = -8.912 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.603] 
+1571,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 6.009 degree; mea_yaw = 21.406 degree; mea_roll = -8.939 degree; 
+pitch_update = 12.442 degree; yaw_update = 22.106 degree; roll_update = -9.530 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.717] 
+mea_pitch = 28.428 degree; mea_yaw = 24.346 degree; mea_roll = -14.699 degree; 
+pitch_update = 10.552 degree; yaw_update = 23.814 degree; roll_update = -12.594 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.830] 
+mea_pitch = 19.346 degree; mea_yaw = 8.405 degree; mea_roll = 6.962 degree; 
+pitch_update = 10.889 degree; yaw_update = 21.256 degree; roll_update = -7.104 degree; 
+
+##############################################################
+[2025-12-20 22:45:40.939] 
+mea_pitch = -3.208 degree; mea_yaw = 8.994 degree; mea_roll = 8.076 degree; 
+pitch_update = 12.157 degree; yaw_update = 18.613 degree; roll_update = -5.204 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.034] 
+mea_pitch = 11.332 degree; mea_yaw = 19.550 degree; mea_roll = -6.151 degree; 
+pitch_update = 9.722 degree; yaw_update = 18.701 degree; roll_update = -5.994 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.149] 
+1572,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 25.490 degree; mea_yaw = 14.200 degree; mea_roll = -6.976 degree; 
+pitch_update = 8.206 degree; yaw_update = 18.167 degree; roll_update = -5.936 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.251] 
+mea_pitch = 12.007 degree; mea_yaw = 16.675 degree; mea_roll = -5.779 degree; 
+pitch_update = 10.938 degree; yaw_update = 17.166 degree; roll_update = -5.756 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.361] 
+mea_pitch = 15.755 degree; mea_yaw = 19.175 degree; mea_roll = -8.585 degree; 
+pitch_update = 11.779 degree; yaw_update = 17.704 degree; roll_update = -6.128 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.473] 
+mea_pitch = 16.707 degree; mea_yaw = 16.510 degree; mea_roll = -6.138 degree; 
+pitch_update = 8.900 degree; yaw_update = 17.010 degree; roll_update = -6.195 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.581] 
+mea_pitch = 4.370 degree; mea_yaw = 16.504 degree; mea_roll = 0.106 degree; 
+pitch_update = 7.664 degree; yaw_update = 17.615 degree; roll_update = -6.247 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.693] 
+1573,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = -7.954 degree; mea_yaw = 25.118 degree; mea_roll = -13.591 degree; 
+pitch_update = 5.916 degree; yaw_update = 18.758 degree; roll_update = -6.885 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.795] 
+mea_pitch = -6.129 degree; mea_yaw = 21.642 degree; mea_roll = -8.541 degree; 
+pitch_update = 3.067 degree; yaw_update = 18.752 degree; roll_update = -8.018 degree; 
+
+##############################################################
+[2025-12-20 22:45:41.910] 
+mea_pitch = 8.309 degree; mea_yaw = 26.574 degree; mea_roll = -16.090 degree; 
+pitch_update = 1.427 degree; yaw_update = 18.917 degree; roll_update = -7.553 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.011] 
+mea_pitch = -12.316 degree; mea_yaw = 22.774 degree; mea_roll = -4.056 degree; 
+pitch_update = 1.433 degree; yaw_update = 20.726 degree; roll_update = -7.408 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.122] 
+mea_pitch = 8.747 degree; mea_yaw = 9.846 degree; mea_roll = 10.689 degree; 
+pitch_update = 4.389 degree; yaw_update = 18.473 degree; roll_update = -5.374 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.235] 
+1574,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 3.670 degree; mea_yaw = 22.499 degree; mea_roll = -5.965 degree; 
+pitch_update = 4.204 degree; yaw_update = 19.317 degree; roll_update = -5.095 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.356] 
+mea_pitch = -5.222 degree; mea_yaw = 14.110 degree; mea_roll = 5.545 degree; 
+pitch_update = -1.382 degree; yaw_update = 19.734 degree; roll_update = -4.503 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.449] 
+mea_pitch = 1.398 degree; mea_yaw = 25.388 degree; mea_roll = -15.785 degree; 
+pitch_update = 0.681 degree; yaw_update = 19.615 degree; roll_update = -5.416 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.547] 
+mea_pitch = -4.451 degree; mea_yaw = 16.724 degree; mea_roll = 8.178 degree; 
+pitch_update = 1.331 degree; yaw_update = 18.947 degree; roll_update = -3.950 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.652] 
+mea_pitch = 6.869 degree; mea_yaw = 26.090 degree; mea_roll = -17.847 degree; 
+pitch_update = 3.009 degree; yaw_update = 22.114 degree; roll_update = -7.912 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.775] 
+1575,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 43.283 degree; mea_yaw = 11.585 degree; mea_roll = 3.292 degree; 
+pitch_update = 6.880 degree; yaw_update = 18.742 degree; roll_update = -4.413 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.896] 
+mea_pitch = -15.621 degree; mea_yaw = 36.821 degree; mea_roll = -12.379 degree; 
+pitch_update = 3.322 degree; yaw_update = 23.448 degree; roll_update = -8.701 degree; 
+
+##############################################################
+[2025-12-20 22:45:42.984] 
+mea_pitch = 20.793 degree; mea_yaw = 60.078 degree; mea_roll = -59.653 degree; 
+pitch_update = 5.026 degree; yaw_update = 30.008 degree; roll_update = -16.083 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.091] 
+mea_pitch = -3.533 degree; mea_yaw = 20.884 degree; mea_roll = -4.946 degree; 
+pitch_update = 5.650 degree; yaw_update = 27.881 degree; roll_update = -8.735 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.200] 
+mea_pitch = -0.227 degree; mea_yaw = 26.175 degree; mea_roll = -19.504 degree; 
+pitch_update = 5.662 degree; yaw_update = 29.300 degree; roll_update = -16.067 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.312] 
+1576,0.000000,0.000000,0.000,0.000000,0.000000,0.000
+
+mea_pitch = 30.952 degree; mea_yaw = 46.195 degree; mea_roll = -56.237 degree; 
+pitch_update = 7.271 degree; yaw_update = 32.542 degree; roll_update = -13.388 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.425] 
+mea_pitch = 12.084 degree; mea_yaw = 30.260 degree; mea_roll = -32.715 degree; 
+pitch_update = 8.395 degree; yaw_update = 31.425 degree; roll_update = -16.331 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.526] 
+mea_pitch = 4.858 degree; mea_yaw = 17.276 degree; mea_roll = 11.030 degree; 
+pitch_update = 8.670 degree; yaw_update = 26.404 degree; roll_update = -12.359 degree; 
+
+##############################################################
+[2025-12-20 22:45:43.632] 
+mea_pitch = -0.653 degree; mea_yaw = 6.354 degree; mea_roll = 29.980 degree; 
+pitch_update = 6.739 degree; yaw_update = 27.190 degree; roll_update = -8.661 degree; 
 
 ##############################################################
