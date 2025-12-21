@@ -1,10 +1,10 @@
 ../Core/Src/imu.c:19:6:I2C_Scan	3
 ../Core/Src/imu.c:29:6:imu_init	1
 ../Core/Src/imu.c:35:6:imu_read	5
-../Core/Src/imu.c:63:6:write	1
-../Core/Src/imu.c:71:6:accel_gyro_Init	2
-../Core/Src/imu.c:92:6:mag_init	3
-../Core/Src/imu.c:121:6:accel_read	2
-../Core/Src/imu.c:145:6:gyro_read	2
-../Core/Src/imu.c:171:6:mag_read	2
-../Core/Src/imu.c:214:6:calibrate	13
+../Core/Src/imu.c:65:6:write	1
+../Core/Src/imu.c:73:6:accel_gyro_Init	2
+../Core/Src/imu.c:94:6:mag_init	3
+../Core/Src/imu.c:123:6:accel_read	2
+../Core/Src/imu.c:147:6:gyro_read	2
+../Core/Src/imu.c:173:6:mag_read	2
+../Core/Src/imu.c:216:6:calibrate	13

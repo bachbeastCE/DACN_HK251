@@ -38,6 +38,7 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 	mag_read(I2Cx);
 	float pitch_rad = atan2f(-imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
 	float roll_rad  = atan2f(imu.ay, sqrtf(imu.ax * imu.ax + imu.az * imu.az));
+//	float roll_rad  = atan2f(imu.ay, imu.ax);
 
 	imu.pitch = pitch_rad * 180.0f / PI;
 	imu.roll  = roll_rad  * 180.0f / PI;
@@ -45,18 +46,19 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 	if (imu.pitch < -90.0f) imu.pitch = -90.0f;
 	while (imu.roll > 180.0f) imu.roll -= 360.0f;
 	while (imu.roll < -180.0f) imu.roll += 360.0f;
-	float Mx = imu.mx * cosf(pitch_rad) + imu.mz * sinf(pitch_rad);
-	float My = imu.mx * sinf(roll_rad) * sinf(pitch_rad) + imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad) * cosf(pitch_rad);
+	float Mx = imu.mx * cosf(pitch_rad) + imu.my * sinf(roll_rad) * sinf(pitch_rad) + imu.mz * cosf(roll_rad) * sinf(pitch_rad);
+
+	float My = imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad);
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
 //	imu.yaw = atan2f(imu.my, imu.mx) * 180.0f / PI;
 //	while (imu.yaw > 180.0f) imu.yaw -= 360.0f;
 //	while (imu.yaw < -180.0f) imu.yaw += 360.0f;
-#if IMU_ENABLE_SERIAL_LOG
+//#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
     Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
     Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
-#endif
+//#endif
 //    Serial_Print("#######################################\n");
 }
 

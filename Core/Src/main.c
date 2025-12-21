@@ -206,11 +206,15 @@ int main(void)
 //		 loc_azi = imu.mx;
 //		 loc_pitch = imu.my;
 //		 loc_roll = imu.mz;
+// 		 loc_azi = imu.gx;
+// 		 loc_pitch = imu.gy;
+// 		 loc_roll = imu.gz;
 
 		 loc_roll = ukf.x[0];
-		 loc_pitch = ukf.x[1];
+		 loc_pitch = -ukf.x[1];
 		 loc_azi = ukf.x[2];
 //		 loc_azi = imu.yaw;
+
 		 float yaw_offset = 180.0f - 360.0f;
 
 		 loc_azi += yaw_offset;
@@ -263,7 +267,7 @@ int main(void)
 				time++;
 		#endif
 
-		tag_distance = 500; //Ex distance
+		tag_distance = 90; //Ex distance
 		double pitch_rad = loc_pitch * M_PI / 180.0;
 		double s12 = tag_distance * cos(pitch_rad);
 		tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);

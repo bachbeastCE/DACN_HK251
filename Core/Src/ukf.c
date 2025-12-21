@@ -20,7 +20,7 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
 	ukf->W_c[0] = 0.33333f;
     ukf->dt = 0.02f;
 
-    const float alpha = 0.5;
+    const float alpha = 0.5f;
     const float beta  = 2.0f;
     const float kappa = 2.0f;
 
@@ -175,7 +175,7 @@ void generate_sigma_points(ukf_t *ukf) {
     float A[L][L];
     cholesky(ukf->P, A);
 
-    const float alpha = 0.5;
+    const float alpha = 0.5f;
     const float kappa = 2.0f;
     float lambda = alpha*alpha*(L + kappa) - L;
     float scale = sqrtf(fmaxf(L + lambda, 1e-12f));
@@ -432,10 +432,10 @@ void ukf_filter(ukf_t *ukf, imu_t *imu) {
     ukf_predict(ukf, imu);
     ukf_update(ukf, imu);
 
-#if  IMU_UKF_ENABLE_SERIAL_LOG
+//#if  IMU_UKF_ENABLE_SERIAL_LOG
     Serial_Print("pitch_update = %.3f degree; ", ukf->x[1]);
     Serial_Print("yaw_update = %.3f degree; ", ukf->x[2]);
     Serial_Print("roll_update = %.3f degree; \n", ukf->x[0]);
     Serial_Print("#\n");
-#endif
+//#endif
 }
