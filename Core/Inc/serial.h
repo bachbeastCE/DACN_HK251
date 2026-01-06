@@ -13,7 +13,7 @@
 
 /*** Redefine if necessary ***/
 #define SERIAL_UART_PORT huart1
-#define TX_BUFFER_SIZE 128
+#define TX_BUFFER_SIZE 256
 #define TIMEOUT 100
 
 extern UART_HandleTypeDef SERIAL_UART_PORT;

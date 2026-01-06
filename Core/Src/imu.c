@@ -13,6 +13,7 @@ uint8_t data_gyro[6];
 uint8_t data_mag[6];
 uint8_t asa[3];
 float mag_adj[3];
+volatile uint8_t imu_data_ready = 0;
 const uint16_t i2c_timeout = 100;
 uint8_t chipid;
 imu_t imu;
@@ -32,13 +33,18 @@ void imu_init(I2C_HandleTypeDef *I2Cx){
 	calibrate(I2Cx);
 }
 
-void imu_read(I2C_HandleTypeDef *I2Cx){
-	accel_read(I2Cx);
-	gyro_read(I2Cx);
-	mag_read(I2Cx);
+void imu_start_dma(I2C_HandleTypeDef *I2Cx)
+{
+	Serial_Print("OK!\n");
+	acc_read_dma_start(I2Cx);
+}
+
+void imu_compute_attitude(){
+//	accel_read(I2Cx);
+//	gyro_read(I2Cx);
+//	mag_read(I2Cx);
 	float pitch_rad = atan2f(-imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
 	float roll_rad  = atan2f(imu.ay, sqrtf(imu.ax * imu.ax + imu.az * imu.az));
-//	float roll_rad  = atan2f(imu.ay, imu.ax);
 
 	imu.pitch = pitch_rad * 180.0f / PI;
 	imu.roll  = roll_rad  * 180.0f / PI;
@@ -51,9 +57,6 @@ void imu_read(I2C_HandleTypeDef *I2Cx){
 	float My = imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad);
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
-//	imu.yaw = atan2f(imu.my, imu.mx) * 180.0f / PI;
-//	while (imu.yaw > 180.0f) imu.yaw -= 360.0f;
-//	while (imu.yaw < -180.0f) imu.yaw += 360.0f;
 //#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
     Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
@@ -91,6 +94,33 @@ void accel_gyro_Init (I2C_HandleTypeDef *I2Cx) {
     }
 }
 
+void mag_read_dma_start(I2C_HandleTypeDef *I2Cx){
+//	Serial_Print("OK mag!\n");
+	HAL_StatusTypeDef st = HAL_I2C_Mem_Read_DMA(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 6);
+//	Serial_Print("OK!\n");
+	if (st != HAL_OK)
+	{
+	    Serial_Print("I2C MAG DMA START FAIL\n");
+	}
+}
+void acc_read_dma_start(I2C_HandleTypeDef *I2Cx){
+//	Serial_Print("OK acc!\n");
+//	Serial_Print("I2Cx = %p \n", I2Cx);
+	HAL_StatusTypeDef st = HAL_I2C_Mem_Read_DMA(I2Cx, MPU_I2C_ADDR, MPU9250_ACCEL_XOUT_H, 1, data_acce, 6);
+	if (st != HAL_OK)
+	{
+	    Serial_Print("I2C ACCE DMA START FAIL\n");
+	}
+}
+void gyro_read_dma_start(I2C_HandleTypeDef *I2Cx){
+//	Serial_Print("OK gyro!\n");
+	HAL_StatusTypeDef st = HAL_I2C_Mem_Read_DMA(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6);
+//	Serial_Print("OK!\n");
+	if (st != HAL_OK)
+	{
+	    Serial_Print("I2C GYRO DMA START FAIL\n");
+	}
+}
 void mag_init (I2C_HandleTypeDef *I2Cx) {
     // check device ID WHO_AM_I
 	HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_WIA, 1, &chipid, 1, i2c_timeout);
@@ -122,12 +152,12 @@ void mag_init (I2C_HandleTypeDef *I2Cx) {
 
 void accel_read(I2C_HandleTypeDef *I2Cx)
 {
-    if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_ACCEL_XOUT_H, 1, data_acce, 6, i2c_timeout) != HAL_OK) {
-#if IMU_ENABLE_SERIAL_LOG
-        Serial_Print("I2C read error!\r\n");
-#endif
-        return;
-    }
+//    if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_ACCEL_XOUT_H, 1, data_acce, 6, i2c_timeout) != HAL_OK) {
+//#if IMU_ENABLE_SERIAL_LOG
+//        Serial_Print("I2C read error!\r\n");
+//#endif
+//        return;
+//    }
 
     int16_t x_raw = (int16_t)((data_acce[0] << 8) | data_acce[1]);
     int16_t y_raw = (int16_t)((data_acce[2] << 8) | data_acce[3]);
@@ -146,12 +176,12 @@ void accel_read(I2C_HandleTypeDef *I2Cx)
 
 void gyro_read(I2C_HandleTypeDef *I2Cx)
 {
-	if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6, i2c_timeout) != HAL_OK) {
-#if IMU_ENABLE_SERIAL_LOG
-	   Serial_Print("I2C read error!\r\n");
-#endif
-	   return;
-	}
+//	if (HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6, i2c_timeout) != HAL_OK) {
+//#if IMU_ENABLE_SERIAL_LOG
+//	   Serial_Print("I2C read error!\r\n");
+//#endif
+//	   return;
+//	}
 
     int16_t x_raw, y_raw, z_raw;
 
@@ -172,12 +202,12 @@ void gyro_read(I2C_HandleTypeDef *I2Cx)
 
 void mag_read(I2C_HandleTypeDef *I2Cx)
 {
-    if (HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7, i2c_timeout) != HAL_OK) {
-#if IMU_ENABLE_SERIAL_LOG
-        Serial_Print("I2C read error!\r\n");
-#endif
-        return;
-    }
+//    if (HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7, i2c_timeout) != HAL_OK) {
+//#if IMU_ENABLE_SERIAL_LOG
+//        Serial_Print("I2C read error!\r\n");
+//#endif
+//        return;
+//    }
     int16_t x_raw, y_raw, z_raw;
 
     x_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
@@ -204,6 +234,7 @@ void mag_read(I2C_HandleTypeDef *I2Cx)
     imu.mz = 0 - imu.mz - 17.31;
 //    imu.my = -imu.my;
 //    imu.mz = -imu.mz;
+
 
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Mag_X = %.3f uT; ", imu.mx);

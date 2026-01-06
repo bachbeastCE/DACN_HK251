@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -55,6 +56,8 @@ ADC_HandleTypeDef hadc1;
 
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
+DMA_HandleTypeDef hdma_i2c2_rx;
+DMA_HandleTypeDef hdma_i2c2_tx;
 
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
@@ -67,6 +70,10 @@ UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart1_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
+osThreadId TaskIMUHandle;
+osThreadId TaskGPSHandle;
+osThreadId TaskLCDHandle;
+osThreadId TaskBatteryHandle;
 /* USER CODE BEGIN PV */
 double loc_gps_lon = 0.0;
 double loc_gps_lat = 0.0;
@@ -93,7 +100,7 @@ struct geod_geodesic g;
 
 uint8_t gps_uart_idx = 0;
 uint8_t gps_uart_tranfer_count = 0;
-
+osSemaphoreId i2cDmaSemHandle;
 COORDINATES_t raw_coordinates;
 COORDINATES_t kf_point;
 int time = 0;
@@ -113,6 +120,11 @@ static void MX_I2C3_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
+void StartTaskIMU(void const * argument);
+void StartTaskGPS(void const * argument);
+void StartTaskLCD(void const * argument);
+void StartTaskBattery(void const * argument);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -183,13 +195,57 @@ int main(void)
   GPS_KF_Init(&kf_gps);
   HAL_Delay(100);
   ukfInit(&ukf, &hi2c2);
-  HAL_Delay(100);
+  HAL_Delay(500);
   Timer_Init();
   Timer_Set(0, 20); //IMU
   Timer_Set(1, 10); //Battery
   Timer_Set(2, 100); // GPS + Karney
   Timer_Set(3, 100); // LCD
   /* USER CODE END 2 */
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  osSemaphoreDef(I2C_DMA_SEM);
+  i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* definition and creation of TaskIMU */
+  osThreadDef(TaskIMU, StartTaskIMU, osPriorityAboveNormal, 0, 256);
+  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+
+  /* definition and creation of TaskGPS */
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityNormal, 0, 128);
+  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+
+  /* definition and creation of TaskLCD */
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 128);
+  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
+
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityBelowNormal, 0, 128);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -198,33 +254,48 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	 if(timer_flag[0] == 1){
-		 Timer_Set(0,20);
-		 //UKF IMU
-		 imu_read(&hi2c2);
-		 ukf_filter(&ukf, &imu);
-//		 loc_azi = imu.mx;
-//		 loc_pitch = imu.my;
-//		 loc_roll = imu.mz;
-// 		 loc_azi = imu.gx;
-// 		 loc_pitch = imu.gy;
-// 		 loc_roll = imu.gz;
+	  if (timer_flag[0] == 1)
+	  {
+	      Timer_Set(0, 3000);
+//	      uint32_t t0 = HAL_GetTick();
+	      imu_start_dma(&hi2c2);
+//	      uint32_t t1 = HAL_GetTick();
+//	      loc_roll = t1 - t0;
+	  }
 
-		 loc_roll = ukf.x[0];
-		 loc_pitch = -ukf.x[1];
-		 loc_azi = ukf.x[2];
-//		 loc_azi = imu.yaw;
 
-		 float yaw_offset = 180.0f - 360.0f;
+	 if (imu_data_ready)
+	 {
+	     imu_data_ready = 0;
 
-		 loc_azi += yaw_offset;
+	     imu_compute_attitude();
+	     ukf_filter(&ukf, &imu);
 
-		 if (loc_azi < 0) loc_azi += 360.0f;
-		 if (loc_azi >= 360.0f) loc_azi -= 360.0f;
+	     //         loc_azi   = imu.mx;
+	     //         loc_pitch = imu.my;
+	     //         loc_roll  = imu.mz;
+	     //         loc_azi   = imu.gx;
+	     //         loc_pitch = imu.gy;
+	     //         loc_roll  = imu.gz;
 
-//		 loc_pitch = imu.pitch;
-//		 loc_azi = imu.yaw;
-//		 loc_roll = imu.roll;
+	     loc_roll  = ukf.x[0];
+	     loc_pitch = -ukf.x[1];
+	     loc_azi   = ukf.x[2];
+
+	     //         loc_azi = imu.yaw;
+
+	     float yaw_offset = 180.0f - 360.0f;
+	     loc_azi += yaw_offset;
+
+	     if (loc_azi < 0)
+	         loc_azi += 360.0f;
+
+	     if (loc_azi >= 360.0f)
+	         loc_azi -= 360.0f;
+
+	     //         loc_pitch = imu.pitch;
+	     //         loc_azi   = imu.yaw;
+	     //         loc_roll  = imu.roll;
 	 }
 
 	if(timer_flag[1] == 1){
@@ -390,7 +461,11 @@ static void MX_I2C2_Init(void)
 {
 
   /* USER CODE BEGIN I2C2_Init 0 */
+	HAL_NVIC_SetPriority(I2C2_EV_IRQn, 6, 0);
+	HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
 
+	HAL_NVIC_SetPriority(I2C2_ER_IRQn, 6, 0);
+	HAL_NVIC_EnableIRQ(I2C2_ER_IRQn);
   /* USER CODE END I2C2_Init 0 */
 
   /* USER CODE BEGIN I2C2_Init 1 */
@@ -685,11 +760,17 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA2_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
   /* DMA1_Stream5_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
+  /* DMA1_Stream7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
   /* DMA2_Stream7_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
 
 }
@@ -768,6 +849,16 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     }
 }
 
+void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	Serial_Print("call back\n");
+    if (hi2c == &hi2c2)
+    {
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        xSemaphoreGiveFromISR(i2cDmaSemHandle, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    }
+}
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	Battery_ADC_ConvCpltCallback(hadc);
@@ -775,6 +866,169 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 /* USER CODE END 4 */
 
+/* USER CODE BEGIN Header_StartTaskIMU */
+/**
+  * @brief  Function implementing the TaskIMU thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartTaskIMU */
+void StartTaskIMU(void const * argument)
+{
+  /* USER CODE BEGIN 5 */
+  /* Infinite loop */
+//  Serial_Print("TASK IMU aaaaaaaaaaaaa RUNNING\n");
+    for (;;)
+    {
+
+//    	Serial_Print("IMU\n");
+    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
+    	{
+    		Serial_Print("ACC BUSY\n");
+    	      osDelay(10);
+    	 }
+        acc_read_dma_start(&hi2c2);
+        if (osSemaphoreWait(i2cDmaSemHandle, 400) != osOK)
+        {
+            Serial_Print("ACC OUT\n");
+            continue;
+        }
+        accel_read(&hi2c2);
+    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
+    	{
+    	      osDelay(10);
+    	 }
+
+        gyro_read_dma_start(&hi2c2);
+        if (osSemaphoreWait(i2cDmaSemHandle, 200) != osOK)
+        {
+            Serial_Print("GYRO OUT\n");
+            continue;
+        }
+        gyro_read(&hi2c2);
+    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
+    	{
+    	      osDelay(10);
+    	 }
+
+        mag_read_dma_start(&hi2c2);
+        if (osSemaphoreWait(i2cDmaSemHandle, 200) != osOK)
+        {
+            Serial_Print("MAG OUT\n");
+            continue;
+        }
+
+        mag_read(&hi2c2);
+        imu_compute_attitude();
+
+        osDelay(2000);
+    }
+
+
+
+  /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartTaskGPS */
+/**
+* @brief Function implementing the TaskGPS thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskGPS */
+void StartTaskGPS(void const * argument)
+{
+  /* USER CODE BEGIN StartTaskGPS */
+  /* Infinite loop */
+
+//  TickType_t last = xTaskGetTickCount();
+
+  for (;;)
+  {
+//	  Serial_Print("TASK GPS RUNNING\n");
+    if (GPS_Status_Get())
+    {
+      GPS_Coordinates_Get(&raw_coordinates);
+
+      if (!kf_start)
+      {
+        kf_gps.x[0] = raw_coordinates.Lat;
+        kf_gps.x[1] = raw_coordinates.Lon;
+        kf_gps.x[2] = raw_coordinates.Alt;
+        kf_start = 1;
+      }
+      else
+      {
+        GPS_KF_Filter(&kf_gps,
+          raw_coordinates.Lat,
+          raw_coordinates.Lon,
+          raw_coordinates.Alt,
+          0,0,0);
+
+        loc_gps_lat = kf_gps.x[0];
+        loc_gps_lon = kf_gps.x[1];
+        loc_gps_alt = kf_gps.x[2];
+      }
+
+      double pitch_rad = loc_pitch * M_PI / 180.0;
+      double s12 = tag_distance * cos(pitch_rad);
+
+      geod_direct(&g,
+        loc_gps_lat, loc_gps_lon, loc_azi,
+        s12,
+        &tag_gps_lat, &tag_gps_lon, NULL);
+    }
+
+    osDelay(1500);
+  }
+
+  /* USER CODE END StartTaskGPS */
+}
+
+/* USER CODE BEGIN Header_StartTaskLCD */
+/**
+* @brief Function implementing the TaskLCD thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskLCD */
+void StartTaskLCD(void const * argument)
+{
+  /* USER CODE BEGIN StartTaskLCD */
+  /* Infinite loop */
+
+  for(;;)
+  {
+	Serial_Print("LCD\n");
+//	Serial_Print("TASK LCD RUNNING\n");
+	TFT_LCD_Run();
+	osDelay(2000);
+  }
+  /* USER CODE END StartTaskLCD */
+}
+
+/* USER CODE BEGIN Header_StartTaskBattery */
+/**
+* @brief Function implementing the TaskBattery thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskBattery */
+void StartTaskBattery(void const * argument)
+{
+  /* USER CODE BEGIN StartTaskBattery */
+  /* Infinite loop */
+
+  for(;;)
+  {
+//	Serial_Print("TASK BATTERY RUNNING\n");
+	Serial_Print("BATTERY\n");
+	Battery_Run();
+    battery_percent = Battery_Get_Percent();
+    osDelay(2000);
+  }
+  /* USER CODE END StartTaskBattery */
+}
 /**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM4 interrupt took place, inside
@@ -786,18 +1040,18 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
-	if (htim->Instance == HANDLE_SW_INSTANCE)
-	{
-		Timer_Run();
-	}
-
+//	if (htim->Instance == HANDLE_SW_INSTANCE)
+//	{
+//		Timer_Run();
+//	}
+//
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM4)
   {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+//
   /* USER CODE END Callback 1 */
 }
 

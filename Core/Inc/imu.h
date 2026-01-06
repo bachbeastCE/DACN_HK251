@@ -29,7 +29,7 @@ typedef struct {
     float roll;
 } imu_t;
 extern imu_t imu;
-
+extern volatile uint8_t imu_data_ready;
 #define PI 3.14159265358979323846f
 #define RAD_TO_DEG 57.295779513082320876798154814105
 
@@ -151,10 +151,14 @@ void mag_init(I2C_HandleTypeDef *I2Cx);
 void mag_read(I2C_HandleTypeDef *I2Cx);
 
 void imu_init(I2C_HandleTypeDef *I2Cx);
-void imu_read(I2C_HandleTypeDef *I2Cx);
+void imu_compute_attitude();
 
 // Scan address
 void I2C_Scan(I2C_HandleTypeDef *I2Cx);
 void calibrate(I2C_HandleTypeDef *I2Cx);
 
+void mag_read_dma_start(I2C_HandleTypeDef *I2Cx);
+void acc_read_dma_start(I2C_HandleTypeDef *I2Cx);
+void gyro_read_dma_start(I2C_HandleTypeDef *I2Cx);
+void imu_start_dma(I2C_HandleTypeDef *I2Cx);
 #endif /* INC_IMU_H_ */
