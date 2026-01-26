@@ -15,7 +15,8 @@
 #include "config.h"
 #include "serial.h"
 #include "geodesic.h"
-
+#include <math.h>
+#include "cmsis_os.h"
 
 extern double loc_gps_lon; 	//GPS LOCAL LONGTITUDE
 extern double loc_gps_lat; 	//GPS LOCAL LATITUDE
@@ -35,5 +36,7 @@ extern uint16_t battery_percent;
 
 
 extern struct geod_geodesic g;
-
+extern osSemaphoreId spiDmaSemHandle;
+extern osSemaphoreId i2cDmaSemHandle;
+void Semaphore_init(void);
 #endif /* INC_GLOBAL_H_ */

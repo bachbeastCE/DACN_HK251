@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "global.h"
-#include "tft_lcd.h"
+#include "st7735.h"
 #include "gps.h"
 #include "serial.h"
 #include "timer.h"
@@ -62,6 +62,7 @@ DMA_HandleTypeDef hdma_i2c2_tx;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
+DMA_HandleTypeDef hdma_spi1_tx;
 
 TIM_HandleTypeDef htim2;
 
@@ -100,7 +101,8 @@ struct geod_geodesic g;
 
 uint8_t gps_uart_idx = 0;
 uint8_t gps_uart_tranfer_count = 0;
-osSemaphoreId i2cDmaSemHandle;
+
+
 COORDINATES_t raw_coordinates;
 COORDINATES_t kf_point;
 int time = 0;
@@ -190,8 +192,7 @@ int main(void)
 	  battery_percent+=battery_percent_window[i];
   }
   	  battery_percent /= 10;
-
-  TFT_LCD_Init();
+  ST7735_init();
   GPS_KF_Init(&kf_gps);
   HAL_Delay(100);
   ukfInit(&ukf, &hi2c2);
@@ -209,8 +210,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
-  osSemaphoreDef(I2C_DMA_SEM);
-  i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
+  Semaphore_init();
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
@@ -223,19 +223,19 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of TaskIMU */
-  osThreadDef(TaskIMU, StartTaskIMU, osPriorityAboveNormal, 0, 256);
+  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 256);
   TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 
   /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityNormal, 0, 128);
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
   /* definition and creation of TaskLCD */
-  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 128);
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 256);
   TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
   /* definition and creation of TaskBattery */
-  osThreadDef(TaskBattery, StartTaskBattery, osPriorityBelowNormal, 0, 128);
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
   TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -254,102 +254,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if (timer_flag[0] == 1)
-	  {
-	      Timer_Set(0, 3000);
-//	      uint32_t t0 = HAL_GetTick();
-	      imu_start_dma(&hi2c2);
-//	      uint32_t t1 = HAL_GetTick();
-//	      loc_roll = t1 - t0;
-	  }
-
-
-	 if (imu_data_ready)
-	 {
-	     imu_data_ready = 0;
-
-	     imu_compute_attitude();
-	     ukf_filter(&ukf, &imu);
-
-	     //         loc_azi   = imu.mx;
-	     //         loc_pitch = imu.my;
-	     //         loc_roll  = imu.mz;
-	     //         loc_azi   = imu.gx;
-	     //         loc_pitch = imu.gy;
-	     //         loc_roll  = imu.gz;
-
-	     loc_roll  = ukf.x[0];
-	     loc_pitch = -ukf.x[1];
-	     loc_azi   = ukf.x[2];
-
-	     //         loc_azi = imu.yaw;
-
-	     float yaw_offset = 180.0f - 360.0f;
-	     loc_azi += yaw_offset;
-
-	     if (loc_azi < 0)
-	         loc_azi += 360.0f;
-
-	     if (loc_azi >= 360.0f)
-	         loc_azi -= 360.0f;
-
-	     //         loc_pitch = imu.pitch;
-	     //         loc_azi   = imu.yaw;
-	     //         loc_roll  = imu.roll;
-	 }
-
-	if(timer_flag[1] == 1){
-		Timer_Set(1, 1000);
-		Battery_Run();
-		battery_percent_window[battery_curr_idx] = Battery_Get_Percent();
-		battery_curr_idx++;
-		uint16_t avg = 0;
-		if (battery_curr_idx>=10)battery_curr_idx=0;
-		for(uint8_t i = 0;i<10;i++){
-			avg+=battery_percent_window[i];
-		}
-		avg /= 10;
-		if (avg < battery_percent) battery_percent = avg;
-	}
-
-	if(timer_flag[2] == 1){
-		Timer_Set(2, 500);
-		gps_hdop = GPS_HDOP_Get();
-		if(GPS_Status_Get()){
-		 GPS_Coordinates_Get(&raw_coordinates);
-			 if(kf_start == 0){
-				 kf_gps.x[0] = raw_coordinates.Lat;
-				 kf_gps.x[1] = raw_coordinates.Lon;
-				 kf_gps.x[2] = raw_coordinates.Alt;
-				 kf_start = 1;
-			 }
-			 if(kf_start == 1){
-				 GPS_KF_Filter(&kf_gps, raw_coordinates.Lat,raw_coordinates.Lon,raw_coordinates.Alt, 0, 0, 0);
-				 loc_gps_lat  = kf_gps.x[0];
-				 loc_gps_lon  = kf_gps.x[1];
-				 loc_gps_alt  = kf_gps.x[2];
-			 }
-		}
-
-		#if GPS_ENABLE_SERIAL_LOG
-				Serial_Print("%d,%.6f,%.6f,%.3f,%.6f,%.6f,%.3f\n\r",
-						time,raw_coordinates.Lon,raw_coordinates.Lat,raw_coordinates.Alt,
-						kf_gps.x[1],kf_gps.x[0],kf_gps.x[2]);
-				time++;
-		#endif
-
-		tag_distance = 90; //Ex distance
-		double pitch_rad = loc_pitch * M_PI / 180.0;
-		double s12 = tag_distance * cos(pitch_rad);
-		tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
-		geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12,
-						 &tag_gps_lat, &tag_gps_lon, NULL);
-
-  }
-	if(timer_flag[3] == 1){
-		Timer_Set(3, 100);
-		TFT_LCD_Run();
-	}
 
   }
   /* USER CODE END 3 */
@@ -769,6 +673,9 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
+  /* DMA2_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
   /* DMA2_Stream7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
@@ -849,9 +756,10 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
     }
 }
 
+
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-	Serial_Print("call back\n");
+//	Serial_Print("call back\n");
     if (hi2c == &hi2c2)
     {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
@@ -859,11 +767,21 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
     }
 }
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	Battery_ADC_ConvCpltCallback(hadc);
 }
 
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+//	Serial_Print("call back\n");
+    if (hspi == &ST7735_SPI_PORT)
+    {
+        HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
+        osSemaphoreRelease(spiDmaSemHandle);
+    }
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartTaskIMU */
@@ -888,31 +806,23 @@ void StartTaskIMU(void const * argument)
     	      osDelay(10);
     	 }
         acc_read_dma_start(&hi2c2);
-        if (osSemaphoreWait(i2cDmaSemHandle, 400) != osOK)
+        if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
         {
             Serial_Print("ACC OUT\n");
             continue;
         }
         accel_read(&hi2c2);
-    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
-    	{
-    	      osDelay(10);
-    	 }
 
         gyro_read_dma_start(&hi2c2);
-        if (osSemaphoreWait(i2cDmaSemHandle, 200) != osOK)
+        if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
         {
             Serial_Print("GYRO OUT\n");
             continue;
         }
         gyro_read(&hi2c2);
-    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
-    	{
-    	      osDelay(10);
-    	 }
 
         mag_read_dma_start(&hi2c2);
-        if (osSemaphoreWait(i2cDmaSemHandle, 200) != osOK)
+        if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
         {
             Serial_Print("MAG OUT\n");
             continue;
@@ -920,8 +830,35 @@ void StartTaskIMU(void const * argument)
 
         mag_read(&hi2c2);
         imu_compute_attitude();
+        ukf_filter(&ukf, &imu);
+        //         loc_azi   = imu.mx;
+	     //         loc_pitch = imu.my;
+	     //         loc_roll  = imu.mz;
+	     //         loc_azi   = imu.gx;
+	     //         loc_pitch = imu.gy;
+	     //         loc_roll  = imu.gz;
 
-        osDelay(2000);
+	     loc_roll  = ukf.x[0];
+	     loc_pitch = -ukf.x[1];
+	     loc_azi   = ukf.x[2];
+
+	     //         loc_azi = imu.yaw;
+
+	     float yaw_offset = 180.0f - 360.0f;
+	     loc_azi += yaw_offset;
+
+	     if (loc_azi < 0)
+	         loc_azi += 360.0f;
+
+	     if (loc_azi >= 360.0f)
+	         loc_azi -= 360.0f;
+
+	     //         loc_pitch = imu.pitch;
+	     //         loc_azi   = imu.yaw;
+	     //         loc_roll  = imu.roll;
+
+
+        osDelay(20);
     }
 
 
@@ -945,7 +882,7 @@ void StartTaskGPS(void const * argument)
 
   for (;;)
   {
-//	  Serial_Print("TASK GPS RUNNING\n");
+//	Serial_Print("Task GPS Running\n");
     if (GPS_Status_Get())
     {
       GPS_Coordinates_Get(&raw_coordinates);
@@ -979,7 +916,7 @@ void StartTaskGPS(void const * argument)
         &tag_gps_lat, &tag_gps_lon, NULL);
     }
 
-    osDelay(1500);
+    osDelay(500);
   }
 
   /* USER CODE END StartTaskGPS */
@@ -996,13 +933,12 @@ void StartTaskLCD(void const * argument)
 {
   /* USER CODE BEGIN StartTaskLCD */
   /* Infinite loop */
-
+//  Serial_Print("TASK LCD RUNNING\n");
   for(;;)
   {
 	Serial_Print("LCD\n");
-//	Serial_Print("TASK LCD RUNNING\n");
-	TFT_LCD_Run();
-	osDelay(2000);
+	ST7735_Run();
+	osDelay(100);
   }
   /* USER CODE END StartTaskLCD */
 }
@@ -1021,14 +957,14 @@ void StartTaskBattery(void const * argument)
 
   for(;;)
   {
-//	Serial_Print("TASK BATTERY RUNNING\n");
-	Serial_Print("BATTERY\n");
+//	Serial_Print("BATTERY\n");
 	Battery_Run();
     battery_percent = Battery_Get_Percent();
-    osDelay(2000);
+    osDelay(1000);
   }
   /* USER CODE END StartTaskBattery */
 }
+
 /**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM4 interrupt took place, inside
