@@ -64,9 +64,9 @@ void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
     }
 
 	//Init R
-	ukf->R[0][0] = 0.01f;
-	ukf->R[1][1] = 0.01f;
-	ukf->R[2][2] = 0.01f;
+	ukf->R[0][0] = 0.001f;
+	ukf->R[1][1] = 0.001f;
+	ukf->R[2][2] = 0.001f;
 	ukf->R[3][3] = 64.0f;
 	for(int i = 0; i < 4; ++i){
 		for(int j = 0; j < 4; ++j){
@@ -233,6 +233,10 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
             }
         }
     }
+    Serial_Print("pitch_predict = %.3f degree; ", ukf->x_pred[1]);
+    Serial_Print("yaw_predict = %.3f degree; ", ukf->x_pred[2]);
+    Serial_Print("roll_predict = %.3f degree; \n", ukf->x_pred[0]);
+//    Serial_Print("#\n");
 }
 
 //-------------------------------------------------

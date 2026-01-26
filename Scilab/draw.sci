@@ -64,10 +64,13 @@ n_max = 1000;
 t = zeros(1, n_max);
 pitch_data = zeros(1, n_max);
 mea_pitch_data = zeros(1, n_max);
+pred_pitch_data = zeros(1, n_max);
 yaw_data = zeros(1, n_max);
 mea_yaw_data = zeros(1, n_max);
+pred_yaw_data = zeros(1, n_max);
 roll_data = zeros(1, n_max);
 mea_roll_data = zeros(1, n_max);
+pred_roll_data = zeros(1, n_max);
 buffer = "";
 idx = 0; 
 
@@ -75,21 +78,24 @@ subplot(3,1,1);
 ax1 = gca();
 p1 = plot(1,1,'b-o');
 p2 = plot(1,1,'g-o');
-legend(["Pitch","Mea_Pitch"], "in_upper_left");
+p7 = plot(1,1,'r-o');
+legend(["Pitch","Mea_Pitch","Pred_Pitch"], "in_upper_left");
 xtitle("Pitch"); xgrid;
 
 subplot(3,1,2);
 ax2 = gca();
 p3 = plot(1,1,'b-o');
 p4 = plot(1,1,'g-o');
-legend(["Yaw","Mea_Yaw"], "in_upper_left");
+p8 = plot(1,1,'r-o');
+legend(["Yaw","Mea_Yaw","Pred_Yaw"], "in_upper_left");
 xtitle("Yaw"); xgrid;
 
 subplot(3,1,3);
 ax3 = gca();
 p5 = plot(1,1,'b-o');
 p6 = plot(1,1,'g-o');
-legend(["Roll","Mea_Roll"], "in_upper_left");
+p9 = plot(1,1,'r-o');
+legend(["Roll","Mea_Roll","Pred_roll"], "in_upper_left");
 xtitle("Roll"); xgrid;
 
 while %t
@@ -108,27 +114,34 @@ while %t
             // Parse dữ liệu
             mea_pitch_val = extract_value(line, "mea_pitch");
             pitch_val     = extract_value(line, "pitch_update");
+            pred_pitch_val = extract_value(line, "pitch_predict");
             mea_yaw_val   = extract_value(line, "mea_yaw");
             yaw_val       = extract_value(line, "yaw_update");
+            pred_yaw_val = extract_value(line, "yaw_predict");
             mea_roll_val  = extract_value(line, "mea_roll");
             roll_val      = extract_value(line, "roll_update");
+            pred_roll_val = extract_value(line, "roll_predict");
             
             if idx >= 998 then
                 ++n_max;   
             end
             // Append dữ liệu
-            if ~isnan(mea_pitch_val) & ~isnan(pitch_val) then
+            if ~isnan(mea_pitch_val) & ~isnan(pitch_val) & ~isnan(pred_pitch_val) then
                 idx = idx + 1;
                 mea_pitch_data(idx) = mea_pitch_val;
                 pitch_data(idx)     = pitch_val;
+                pred_pitch_data(idx) = pred_pitch_val;
+                
             end
-            if ~isnan(mea_yaw_val) & ~isnan(yaw_val) then
+            if ~isnan(mea_yaw_val) & ~isnan(yaw_val) & ~isnan(pred_yaw_val) then
                 mea_yaw_data(idx) = mea_yaw_val;
                 yaw_data(idx)     = yaw_val;
+                pred_yaw_data(idx) = pred_yaw_val;
             end
-            if ~isnan(mea_roll_val) & ~isnan(roll_val) then
+            if ~isnan(mea_roll_val) & ~isnan(roll_val) & ~isnan(pred_roll_val) then
                 mea_roll_data(idx) = mea_roll_val;
                 roll_data(idx)     = roll_val;
+                pred_roll_data(idx) = pred_roll_val;
             end
 
             // Vẽ
@@ -163,6 +176,9 @@ while %t
             p4.data = [t' mea_yaw_data(1:idx)'];
             p5.data = [t' roll_data(1:idx)'];
             p6.data = [t' mea_roll_data(1:idx)'];
+            p7.data = [t' pred_pitch_data(1:idx)'];
+            p8.data = [t' pred_yaw_data(1:idx)'];
+            p9.data = [t' pred_roll_data(1:idx)'];
             replot([ax1 ax2 ax3]);
             
             pos = strindex(buffer, "#");

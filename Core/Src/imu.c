@@ -221,6 +221,9 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
 
     uint32_t CALIB_SAMPLES = 1000;
     int16_t gx_sample[CALIB_SAMPLES], gy_sample[CALIB_SAMPLES], gz_sample[CALIB_SAMPLES];
+    int16_t ax_sample[CALIB_SAMPLES];
+    int16_t ay_sample[CALIB_SAMPLES];
+    int16_t az_sample[CALIB_SAMPLES];
     int16_t ax_raw, ay_raw, az_raw;
     Serial_Print("=== Keep IMU still... Calibrating gyro & accel... ===\r\n");
     HAL_Delay(100);
@@ -248,6 +251,9 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         ax_raw = (int16_t)((data_acce[0] << 8) | data_acce[1]);
         ay_raw = (int16_t)((data_acce[2] << 8) | data_acce[3]);
         az_raw = (int16_t)((data_acce[4] << 8) | data_acce[5]);
+        ax_sample[i] = ax_raw;
+        ay_sample[i] = ay_raw;
+        az_sample[i] = az_raw;
         sum_ax += ax_raw;
         sum_ay += ay_raw;
         sum_az += az_raw;
@@ -270,6 +276,17 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
         var_gy = var_gy + (gy_sample[i] - imu.goffsety) * (gy_sample[i] - imu.goffsety);
         var_gz = var_gz + (gz_sample[i] - imu.goffsetz) * (gz_sample[i] - imu.goffsetz);
     }
+    float var_ax = 0, var_ay = 0, var_az = 0;
+
+    for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
+        var_ax += (ax_sample[i] - imu.aoffsetx) * (ax_sample[i] - imu.aoffsetx);
+        var_ay += (ay_sample[i] - imu.aoffsety) * (ay_sample[i] - imu.aoffsety);
+        var_az += (az_sample[i] - imu.aoffsetz) * (az_sample[i] - imu.aoffsetz);
+    }
+
+    var_ax /= (CALIB_SAMPLES - 1);
+    var_ay /= (CALIB_SAMPLES - 1);
+    var_az /= (CALIB_SAMPLES - 1);
 
     var_gx /= (CALIB_SAMPLES - 1);
     var_gy /= (CALIB_SAMPLES - 1);
@@ -331,6 +348,7 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     Serial_Print("Magnetometer calibration done!\r\n");
     Serial_Print("Offsets:\r\n");
     Serial_Print(" Mx_off=%.2f, My_off=%.2f, Mz_off=%.2f\r\n", imu.moffsetx, imu.moffsety, imu.moffsetz);
+    Serial_Print(" x=%.2f, y=%.2f, z=%.2f\r\n", var_ax/ 4096.0f, var_ay/ 4096.0f, var_az/ 4096.0f);
     Serial_Print("=============================================\r\n");
 }
 

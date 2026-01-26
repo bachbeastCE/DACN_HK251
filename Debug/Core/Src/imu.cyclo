@@ -7,4 +7,4 @@
 ../Core/Src/imu.c:123:6:accel_read	2
 ../Core/Src/imu.c:147:6:gyro_read	2
 ../Core/Src/imu.c:173:6:mag_read	2
-../Core/Src/imu.c:216:6:calibrate	13
+../Core/Src/imu.c:216:6:calibrate	14
