@@ -81,7 +81,6 @@ double loc_gps_lat = 0.0;
 double loc_gps_alt = 0.0;
 double loc_azi = 0.0;
 double loc_pitch = 0.0;
-double loc_yaw = 0.0;
 double loc_roll = 0.0;
 
 double tag_gps_lon = 0.0;
@@ -90,23 +89,23 @@ double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 
 double gps_hdop = 0.0;
-
 uint16_t battery_percent = 0;
 uint8_t battery_percent_window[10];
 uint8_t battery_curr_idx=0;
-
-
 
 struct geod_geodesic g;
 
 uint8_t gps_uart_idx = 0;
 uint8_t gps_uart_tranfer_count = 0;
 
-
 COORDINATES_t raw_coordinates;
 COORDINATES_t kf_point;
 int time = 0;
 uint8_t kf_start =0;
+double R_matrix[3][3];
+int is_gps_new = 0;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -193,7 +192,7 @@ int main(void)
   }
   	  battery_percent /= 10;
   ST7735_init();
-  GPS_KF_Init(&kf_gps);
+  GPS_KF_Init(&kf_gps, 0.05);
   HAL_Delay(100);
   ukfInit(&ukf, &hi2c2);
   HAL_Delay(500);
@@ -878,34 +877,52 @@ void StartTaskGPS(void const * argument)
   /* USER CODE BEGIN StartTaskGPS */
   /* Infinite loop */
 
-//  TickType_t last = xTaskGetTickCount();
+	//  TickType_t last = xTaskGetTickCount();
+	//	Serial_Print("Task GPS Running\n");
+	double ax_mps2 = 0;
+	double ay_mps2 = 0;
+	double az_mps2 = 0;
+	double baro_alt = 0;
+	while(1){
+	//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+		GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+	                                  loc_pitch, loc_roll, loc_azi, R_matrix);
+		is_gps_new = 0;
+		if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
+	          GPS_Coordinates_Get(&raw_coordinates);
+	          is_gps_new = 1;
 
-  for (;;)
-  {
-//	Serial_Print("Task GPS Running\n");
-    if (GPS_Status_Get())
-    {
-      GPS_Coordinates_Get(&raw_coordinates);
+	          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
+	          if (!kf_start)
+	          {
+	              // Set vị trí ban đầu
+	              kf_gps.x[0] = raw_coordinates.Lat;
+	              kf_gps.x[1] = raw_coordinates.Lon;
+	              baro_alt = raw_coordinates.Alt;
 
-      if (!kf_start)
-      {
-        kf_gps.x[0] = raw_coordinates.Lat;
-        kf_gps.x[1] = raw_coordinates.Lon;
-        kf_gps.x[2] = raw_coordinates.Alt;
-        kf_start = 1;
-      }
-      else
-      {
-        GPS_KF_Filter(&kf_gps,
-          raw_coordinates.Lat,
-          raw_coordinates.Lon,
-          raw_coordinates.Alt,
-          0,0,0);
+	              // Nếu dùng Baro thì set độ cao baro làm gốc
+	              //kf_gps.x[2] = baro_alt;
 
-        loc_gps_lat = kf_gps.x[0];
-        loc_gps_lon = kf_gps.x[1];
-        loc_gps_alt = kf_gps.x[2];
-      }
+	              // Reset vận tốc về 0
+	              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
+	              kf_start = 1;
+	          }
+	      }
+
+	      if (kf_start)
+	      {
+	          GPS_KF_Filter(&kf_gps,
+	                        raw_coordinates.Lat,
+	                        raw_coordinates.Lon,
+	                        baro_alt,
+	                        is_gps_new);
+
+	          loc_gps_lat = kf_gps.x[0];
+	          loc_gps_lon = kf_gps.x[1];
+	          loc_gps_alt = kf_gps.x[2];
+
+	      }
+
 
       double pitch_rad = loc_pitch * M_PI / 180.0;
       double s12 = tag_distance * cos(pitch_rad);
@@ -916,8 +933,7 @@ void StartTaskGPS(void const * argument)
         &tag_gps_lat, &tag_gps_lon, NULL);
     }
 
-    osDelay(500);
-  }
+    osDelay(50);
 
   /* USER CODE END StartTaskGPS */
 }
