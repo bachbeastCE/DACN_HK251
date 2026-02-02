@@ -37,9 +37,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/global.h ../Core/Inc/geodesic.h ../Core/Inc/tft_lcd.h \
  ../Core/Inc/st7735.h ../Core/Inc/fonts.h ../Core/Inc/testimg.h \
  ../Core/Inc/gps.h ../Core/Inc/serial.h ../Core/Inc/timer.h \
- ../Core/Inc/main.h ../Core/Inc/button.h ../Core/Inc/ukf.h \
- ../Core/Inc/imu.h ../Core/Inc/gps_ukf.h ../Core/Inc/imu.h \
- ../Core/Inc/battery.h ../Core/Inc/gps_kf.h
+ ../Core/Inc/main.h ../Core/Inc/button.h ../Core/Inc/imu_10DOF.h \
+ ../Core/Inc/ukf.h ../Core/Inc/imu_10DOF.h ../Core/Inc/gps_ukf.h \
+ ../Core/Inc/imu.h ../Core/Inc/battery.h ../Core/Inc/gps_kf.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -89,8 +89,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/timer.h:
 ../Core/Inc/main.h:
 ../Core/Inc/button.h:
+../Core/Inc/imu_10DOF.h:
 ../Core/Inc/ukf.h:
-../Core/Inc/imu.h:
+../Core/Inc/imu_10DOF.h:
 ../Core/Inc/gps_ukf.h:
 ../Core/Inc/imu.h:
 ../Core/Inc/battery.h:

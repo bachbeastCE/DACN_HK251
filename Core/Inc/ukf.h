@@ -7,7 +7,7 @@
 
 #ifndef INC_UKF_H_
 #define INC_UKF_H_
-#include"imu.h"
+#include "imu_10DOF.h"
 
 #define L 6       // state number
 #define N (2*L+1) // number of sigma points

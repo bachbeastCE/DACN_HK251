@@ -1,6 +1,5 @@
-Core/Src/gps_ukf.o: ../Core/Src/gps_ukf.c ../Core/Inc/gps_ukf.h \
- ../Core/Inc/imu.h ../Core/Inc/main.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+Core/Src/imu_10DOF.o: ../Core/Src/imu_10DOF.c ../Core/Inc/imu_10DOF.h \
+ ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
@@ -33,9 +32,10 @@ Core/Src/gps_ukf.o: ../Core/Src/gps_ukf.c ../Core/Inc/gps_ukf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-../Core/Inc/gps_ukf.h:
-../Core/Inc/imu.h:
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ ../Core/Inc/serial.h ../Core/Inc/global.h ../Core/Inc/main.h \
+ ../Core/Inc/config.h ../Core/Inc/serial.h ../Core/Inc/geodesic.h
+../Core/Inc/imu_10DOF.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -71,3 +71,9 @@ Core/Src/gps_ukf.o: ../Core/Src/gps_ukf.c ../Core/Inc/gps_ukf.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+../Core/Inc/serial.h:
+../Core/Inc/global.h:
+../Core/Inc/main.h:
+../Core/Inc/config.h:
+../Core/Inc/serial.h:
+../Core/Inc/geodesic.h:

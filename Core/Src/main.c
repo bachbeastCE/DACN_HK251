@@ -27,9 +27,9 @@
 #include "serial.h"
 #include "timer.h"
 #include "button.h"
+#include "imu_10DOF.h"
 #include "ukf.h"
 #include "gps_ukf.h"
-#include "imu.h"
 #include "battery.h"
 #include "gps_kf.h"
 
@@ -165,7 +165,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   GPS_Init();
   geod_init(&g, 6378137, 1/298.257223563);
-
+  I2C_Scan(&hi2c3);
 
   Battery_Init();
 
@@ -182,7 +182,7 @@ int main(void)
   TFT_LCD_Init();
   GPS_KF_Init(&kf_gps);
   HAL_Delay(100);
-  ukfInit(&ukf, &hi2c2);
+  ukfInit(&ukf, &hi2c3);
   HAL_Delay(100);
   Timer_Init();
   Timer_Set(0, 20); //IMU
@@ -199,9 +199,9 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	 if(timer_flag[0] == 1){
-		 Timer_Set(0,20);
+		 Timer_Set(0,2000);
 		 //UKF IMU
-		 imu_read(&hi2c2);
+		 imu_read(&hi2c3);
 		 ukf_filter(&ukf, &imu);
 //		 loc_azi = imu.mx;
 //		 loc_pitch = imu.my;
@@ -228,7 +228,7 @@ int main(void)
 	 }
 
 	if(timer_flag[1] == 1){
-		Timer_Set(1, 1000);
+		Timer_Set(1, 10000);
 		Battery_Run();
 		battery_percent_window[battery_curr_idx] = Battery_Get_Percent();
 		battery_curr_idx++;
@@ -242,7 +242,7 @@ int main(void)
 	}
 
 	if(timer_flag[2] == 1){
-		Timer_Set(2, 500);
+		Timer_Set(2, 5000);
 		gps_hdop = GPS_HDOP_Get();
 		if(GPS_Status_Get()){
 		 GPS_Coordinates_Get(&raw_coordinates);
@@ -276,7 +276,7 @@ int main(void)
 
   }
 	if(timer_flag[3] == 1){
-		Timer_Set(3, 100);
+		Timer_Set(3, 1000);
 		TFT_LCD_Run();
 	}
 
