@@ -35,7 +35,7 @@ typedef struct {
 extern ukf_t ukf;
 void cholesky(float P[L][L], float A[L][L]);
 void generate_sigma_points(ukf_t *ukf);
-void ukfInit(ukf_t* ukf, I2C_HandleTypeDef *I2Cx);
+void ukfInit(ukf_t* ukf, I2C_HandleTypeDef *I2Cx1, I2C_HandleTypeDef *I2Cx2);
 void ukf_predict(ukf_t *ukf, imu_t *imu);
 void ukf_update(ukf_t *ukf, imu_t *imu);
 int8_t invert4x4(float inv[4][4], float A[4][4]);

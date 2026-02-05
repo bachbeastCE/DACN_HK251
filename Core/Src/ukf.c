@@ -14,8 +14,8 @@ static inline float wrap180(float a)
     while (a < -180.0f) a += 360.0f;
     return a;
 }
-void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
-	imu_init(I2Cx);
+void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx1, I2C_HandleTypeDef *I2Cx2){
+	imu_init(I2Cx1, I2Cx2);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
     ukf->dt = 0.02f;

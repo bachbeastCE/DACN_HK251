@@ -312,6 +312,7 @@
 #ifdef HAL_I2C_MODULE_ENABLED
 
 /* Private typedef -----------------------------------------------------------*/
+#include "serial.h"
 /* Private define ------------------------------------------------------------*/
 /** @defgroup I2C_Private_Define I2C Private Define
   * @{
@@ -1967,22 +1968,24 @@ HAL_StatusTypeDef HAL_I2C_Master_Transmit_DMA(I2C_HandleTypeDef *hi2c, uint16_t 
   if (hi2c->State == HAL_I2C_STATE_READY)
   {
     /* Wait until BUSY flag is reset */
+	  Serial_Print("WAITING\n");
     count = I2C_TIMEOUT_BUSY_FLAG * (SystemCoreClock / 25U / 1000U);
     do
     {
       count--;
+      Serial_Print("BUSY\n");
       if (count == 0U)
       {
         hi2c->PreviousState       = I2C_STATE_NONE;
         hi2c->State               = HAL_I2C_STATE_READY;
         hi2c->Mode                = HAL_I2C_MODE_NONE;
         hi2c->ErrorCode           |= HAL_I2C_ERROR_TIMEOUT;
-
+        Serial_Print("BUSY\n");
         return HAL_BUSY;
       }
     }
     while (__HAL_I2C_GET_FLAG(hi2c, I2C_FLAG_BUSY) != RESET);
-
+    Serial_Print("NO BUSY\n");
     /* Process Locked */
     __HAL_LOCK(hi2c);
 

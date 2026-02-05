@@ -31,6 +31,7 @@
 #include "ukf.h"
 #include "gps_ukf.h"
 #include "imu.h"
+#include "imu_10DOF.h"
 #include "battery.h"
 #include "gps_kf.h"
 
@@ -58,6 +59,8 @@ I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
 DMA_HandleTypeDef hdma_i2c2_rx;
 DMA_HandleTypeDef hdma_i2c2_tx;
+DMA_HandleTypeDef hdma_i2c3_rx;
+DMA_HandleTypeDef hdma_i2c3_tx;
 
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
@@ -81,6 +84,7 @@ double loc_gps_lat = 0.0;
 double loc_gps_alt = 0.0;
 double loc_azi = 0.0;
 double loc_pitch = 0.0;
+double loc_yaw = 0.0;
 double loc_roll = 0.0;
 
 double tag_gps_lon = 0.0;
@@ -89,23 +93,26 @@ double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 
 double gps_hdop = 0.0;
+
 uint16_t battery_percent = 0;
 uint8_t battery_percent_window[10];
 uint8_t battery_curr_idx=0;
+
+
 
 struct geod_geodesic g;
 
 uint8_t gps_uart_idx = 0;
 uint8_t gps_uart_tranfer_count = 0;
 
+
 COORDINATES_t raw_coordinates;
 COORDINATES_t kf_point;
 int time = 0;
 uint8_t kf_start =0;
 double R_matrix[3][3];
+
 int is_gps_new = 0;
-
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -194,7 +201,7 @@ int main(void)
   ST7735_init();
   GPS_KF_Init(&kf_gps, 0.05);
   HAL_Delay(100);
-  ukfInit(&ukf, &hi2c2);
+  ukfInit(&ukf, &hi2c2, &hi2c3);
   HAL_Delay(500);
   Timer_Init();
   Timer_Set(0, 20); //IMU
@@ -222,7 +229,7 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of TaskIMU */
-  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 256);
+  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
   TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 
   /* definition and creation of TaskGPS */
@@ -230,7 +237,7 @@ int main(void)
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
   /* definition and creation of TaskLCD */
-  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 256);
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
   TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
   /* definition and creation of TaskBattery */
@@ -402,7 +409,10 @@ static void MX_I2C3_Init(void)
 {
 
   /* USER CODE BEGIN I2C3_Init 0 */
-
+  HAL_NVIC_SetPriority(I2C3_EV_IRQn, 6, 0);
+  HAL_NVIC_EnableIRQ(I2C3_EV_IRQn);
+  HAL_NVIC_SetPriority(I2C3_ER_IRQn, 6, 0);
+  HAL_NVIC_EnableIRQ(I2C3_ER_IRQn);
   /* USER CODE END I2C3_Init 0 */
 
   /* USER CODE BEGIN I2C3_Init 1 */
@@ -664,8 +674,14 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA1_Stream2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
+  /* DMA1_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+  /* DMA1_Stream4_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
   /* DMA1_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
@@ -761,12 +777,65 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 //	Serial_Print("call back\n");
     if (hi2c == &hi2c2)
     {
+//    	HAL_DMA_Abort_IT(hi2c->hdmarx);
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         xSemaphoreGiveFromISR(i2cDmaSemHandle, &xHigherPriorityTaskWoken);
         portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
     }
 }
 
+//void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+//{
+//    if (hi2c == &hi2c3){
+//    	Serial_Print("callback\n");
+//    	switch (imuState)
+//    	    {
+//    	    case IMU_ACC_TX:
+//    	    	Serial_Print("call back\n");
+//    	        imuState = IMU_ACC_RX;
+//    	        HAL_I2C_Master_Receive_IT(hi2c, ACCE_ADDR, data_acce, 6);
+//    	        break;
+//
+//    	    case IMU_MAG_TX:
+//    	        imuState = IMU_MAG_RX;
+//    	        HAL_I2C_Master_Receive_IT(hi2c, MAG_ADDR, data_mag, 6);
+//    	        break;
+//
+//    	    default:
+//    	        break;
+//    	    }
+//    }
+//
+//}
+//void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+//{
+//    if (hi2c == &hi2c3){
+//    	Serial_Print("callbacki2c\n");
+//    	switch (imuState)
+//    	    {
+//    	    case IMU_ACC_RX:
+//    	        {
+//    	        	Serial_Print("callback\n");
+//    	            static uint8_t mag_reg = MAG_DATAX0_REG;
+//    	            imuState = IMU_MAG_TX;
+//    	            HAL_I2C_Master_Transmit_IT(hi2c, MAG_ADDR, &mag_reg, 1);
+//    	        }
+//    	        break;
+//
+//    	    case IMU_MAG_RX:
+//    	        imuState = IMU_DONE;
+//
+//    	        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+//    	        xSemaphoreGiveFromISR(i2cDmaSemHandle, &xHigherPriorityTaskWoken);
+//    	        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+//    	        break;
+//
+//    	    default:
+//    	        break;
+//    	    }
+//    }
+//
+//}
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	Battery_ADC_ConvCpltCallback(hadc);
@@ -778,6 +847,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     if (hspi == &ST7735_SPI_PORT)
     {
         HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
+//        Serial_Print("callbackSPI\n");
         osSemaphoreRelease(spiDmaSemHandle);
     }
 }
@@ -799,18 +869,12 @@ void StartTaskIMU(void const * argument)
     {
 
 //    	Serial_Print("IMU\n");
-    	while (HAL_I2C_GetState(&hi2c2) != HAL_I2C_STATE_READY)
-    	{
-    		Serial_Print("ACC BUSY\n");
-    	      osDelay(10);
-    	 }
         acc_read_dma_start(&hi2c2);
         if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
         {
             Serial_Print("ACC OUT\n");
-            continue;
+            goto imu_delay;
         }
-        accel_read(&hi2c2);
 
         gyro_read_dma_start(&hi2c2);
         if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
@@ -818,16 +882,17 @@ void StartTaskIMU(void const * argument)
             Serial_Print("GYRO OUT\n");
             continue;
         }
-        gyro_read(&hi2c2);
 
         mag_read_dma_start(&hi2c2);
         if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK)
         {
             Serial_Print("MAG OUT\n");
-            continue;
+            goto imu_delay;
         }
-
+        gyro_read(&hi2c2);
+        accel_read(&hi2c2);
         mag_read(&hi2c2);
+        baro_read(&hi2c3);
         imu_compute_attitude();
         ukf_filter(&ukf, &imu);
         //         loc_azi   = imu.mx;
@@ -857,7 +922,8 @@ void StartTaskIMU(void const * argument)
 	     //         loc_roll  = imu.roll;
 
 
-        osDelay(20);
+	  imu_delay:
+	             osDelay(2000);
     }
 
 
@@ -933,7 +999,7 @@ void StartTaskGPS(void const * argument)
         &tag_gps_lat, &tag_gps_lon, NULL);
     }
 
-    osDelay(50);
+    osDelay(5000);
 
   /* USER CODE END StartTaskGPS */
 }
@@ -952,9 +1018,9 @@ void StartTaskLCD(void const * argument)
 //  Serial_Print("TASK LCD RUNNING\n");
   for(;;)
   {
-	Serial_Print("LCD\n");
+//	Serial_Print("LCD\n");
 	ST7735_Run();
-	osDelay(100);
+	osDelay(1000);
   }
   /* USER CODE END StartTaskLCD */
 }
@@ -996,7 +1062,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //	{
 //		Timer_Run();
 //	}
-//
+
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM4)
   {

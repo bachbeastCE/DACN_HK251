@@ -8,6 +8,7 @@
 "./Core/Src/gps_kf.o"
 "./Core/Src/gps_ukf.o"
 "./Core/Src/imu.o"
+"./Core/Src/imu_10DOF.o"
 "./Core/Src/main.o"
 "./Core/Src/serial.o"
 "./Core/Src/st7735.o"

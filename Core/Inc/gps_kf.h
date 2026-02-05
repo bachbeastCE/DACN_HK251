@@ -42,4 +42,3 @@ void GPS_KF_Filter(GPS_KF *kf,
                    double meas_lat, double meas_lon, double meas_alt, int is_new_meas);
 
 #endif
-

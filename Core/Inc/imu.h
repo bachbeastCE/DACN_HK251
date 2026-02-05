@@ -13,22 +13,23 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
+#include "imu_10DOF.h"
 
 // ---- IMU ----
-typedef struct {
-	float ax, ay, az; //accel_ADXL345
-	float aoffsetx, aoffsety, aoffsetz;
-	float gx, gy, gz; //gyro_ITG3205
-	float goffsetx, goffsety, goffsetz;
-	float mx, my, mz; //mag_VCM5883L
-	float moffsetx, moffsety, moffsetz;
-	float mscalex, mscaley, mscalez;
-	float gyrox_noise, gyroy_noise, gyroz_noise;
-    float pitch; //elevation
-    float yaw; //azimuth
-    float roll;
-} imu_t;
-extern imu_t imu;
+//typedef struct {
+//	float ax, ay, az; //accel_ADXL345
+//	float aoffsetx, aoffsety, aoffsetz;
+//	float gx, gy, gz; //gyro_ITG3205
+//	float goffsetx, goffsety, goffsetz;
+//	float mx, my, mz; //mag_VCM5883L
+//	float moffsetx, moffsety, moffsetz;
+//	float mscalex, mscaley, mscalez;
+//	float gyrox_noise, gyroy_noise, gyroz_noise;
+//    float pitch; //elevation
+//    float yaw; //azimuth
+//    float roll;
+//} imu_t;
+//extern imu_t imu;
 extern volatile uint8_t imu_data_ready;
 #define PI 3.14159265358979323846f
 #define RAD_TO_DEG 57.295779513082320876798154814105
@@ -150,7 +151,7 @@ void gyro_read(I2C_HandleTypeDef *I2Cx);
 void mag_init(I2C_HandleTypeDef *I2Cx);
 void mag_read(I2C_HandleTypeDef *I2Cx);
 
-void imu_init(I2C_HandleTypeDef *I2Cx);
+void imu_init(I2C_HandleTypeDef *I2Cx1, I2C_HandleTypeDef *I2Cx2);
 void imu_compute_attitude();
 
 // Scan address

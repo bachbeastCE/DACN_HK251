@@ -52,7 +52,7 @@ Core/Src/gps_ukf.o: ../Core/Src/gps_ukf.c ../Core/Inc/gps_ukf.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/main.h
+ ../Core/Inc/main.h ../Core/Inc/imu_10DOF.h
 ../Core/Inc/gps_ukf.h:
 ../Core/Inc/imu.h:
 ../Core/Inc/serial.h:
@@ -113,3 +113,4 @@ Core/Src/gps_ukf.o: ../Core/Src/gps_ukf.c ../Core/Inc/gps_ukf.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 ../Core/Inc/main.h:
+../Core/Inc/imu_10DOF.h:

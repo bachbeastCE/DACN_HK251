@@ -52,7 +52,7 @@ Core/Src/imu.o: ../Core/Src/imu.c ../Core/Inc/imu.h ../Core/Inc/serial.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/main.h
+ ../Core/Inc/main.h ../Core/Inc/imu_10DOF.h
 ../Core/Inc/imu.h:
 ../Core/Inc/serial.h:
 ../Core/Inc/global.h:
@@ -112,3 +112,4 @@ Core/Src/imu.o: ../Core/Src/imu.c ../Core/Inc/imu.h ../Core/Inc/serial.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
 ../Core/Inc/main.h:
+../Core/Inc/imu_10DOF.h:

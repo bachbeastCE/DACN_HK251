@@ -16,7 +16,7 @@ float mag_adj[3];
 volatile uint8_t imu_data_ready = 0;
 const uint16_t i2c_timeout = 100;
 uint8_t chipid;
-imu_t imu;
+
 void I2C_Scan(I2C_HandleTypeDef *I2Cx) {
 	Serial_Print("OK can call this function");
     for (uint8_t addr = 1; addr < 127; addr++) {
@@ -27,10 +27,11 @@ void I2C_Scan(I2C_HandleTypeDef *I2Cx) {
     }
 }
 
-void imu_init(I2C_HandleTypeDef *I2Cx){
-	accel_gyro_Init(I2Cx);
-	mag_init(I2Cx);
-	calibrate(I2Cx);
+void imu_init(I2C_HandleTypeDef *I2Cx1, I2C_HandleTypeDef *I2Cx2){
+	accel_gyro_Init(I2Cx1);
+	mag_init(I2Cx1);
+	baro_init(I2Cx2);
+	calibrate(I2Cx1);
 }
 
 void imu_start_dma(I2C_HandleTypeDef *I2Cx)
@@ -43,6 +44,7 @@ void imu_compute_attitude(){
 //	accel_read(I2Cx);
 //	gyro_read(I2Cx);
 //	mag_read(I2Cx);
+//	baro_read(&hi2c3);
 	float pitch_rad = atan2f(-imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
 	float roll_rad  = atan2f(imu.ay, sqrtf(imu.ax * imu.ax + imu.az * imu.az));
 
@@ -58,9 +60,12 @@ void imu_compute_attitude(){
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
 //#if IMU_ENABLE_SERIAL_LOG
-    Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
-    Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
-    Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
+	    Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
+	    Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
+	    Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
+	    Serial_Print("mea_temperature = %.3f degree C; \n", imu.temperature);
+	    Serial_Print("mea_altitude = %.3f m; \n", imu.altitude);
+	    Serial_Print("mea_pressure = %.3f Pa; \n", imu.pressure);
 //#endif
 //    Serial_Print("#######################################\n");
 }
