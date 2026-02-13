@@ -445,7 +445,7 @@ uint8_t LoRa_transmit(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeo
 	//Polling for checking if tranfer successfully.
 #if LORA_RTOS
 	uint32_t startTick = xTaskGetTickCount();
-	uint32_t timeoutTicks = pdMS_TO_TICKS(2000);
+	uint32_t timeoutTicks = pdMS_TO_TICKS(timeout);
 
 	while(1)
 	{
@@ -646,21 +646,61 @@ void LoRa_resetDMA(LoRa* _LoRa){
 }
 
 uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout){
+
+#if LORA_RTOS
+	int mode = _LoRa->current_mode;
+
 	_LoRa->dma_tx_buffer [0] = RegFiFo | 0x80; //Write mode
 	memcpy(_LoRa->dma_tx_buffer + 1, data, length);
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
 	HAL_SPI_Transmit_DMA(_LoRa->hSPIx, _LoRa->dma_tx_buffer, length + 1);
-
-	//ulTaskNotifyTake(xClearCountOnExit, xTicksToWait)
-
+	ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
 
+	//Polling for checking if tranfer successfully.
+	uint32_t startTick = xTaskGetTickCount();
+	uint32_t timeoutTicks = pdMS_TO_TICKS(timeout);
+	uint8_t read;
 
+	while(1)
+	{
+	    read = LoRa_read(_LoRa, RegIrqFlags);
+	    if((read & 0x08)!=0) // TxDone
+	    {
+	        LoRa_write(_LoRa, RegIrqFlags, 0xFF); // clear all IRQ base on dataset
+	        LoRa_gotoMode(_LoRa, mode);
+	        return 0;
+	    }
+	    if((xTaskGetTickCount() - startTick) > timeoutTicks)
+	    {
+	        LoRa_gotoMode(_LoRa, mode);
+	        return 1;
+	    }
+	    vTaskDelay(pdMS_TO_TICKS(2));
+	}
 
-	return 0;
+#else
+		while(1){
+			read = LoRa_read(_LoRa, RegIrqFlags);
+			if((read & 0x08)!=0){
+				LoRa_write(_LoRa, RegIrqFlags, 0xFF);
+				LoRa_gotoMode(_LoRa, mode);
+				return 0;
+			}
+			else{
+				if(--timeout==0){
+					LoRa_gotoMode(_LoRa, mode);
+					return 1;
+				}
+			}
+			HAL_Delay(1);
+		}
+#endif
 }
 
 #endif
+
+
 
 
 
