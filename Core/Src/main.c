@@ -34,6 +34,7 @@
 #include "imu_10DOF.h"
 #include "battery.h"
 #include "gps_kf.h"
+#include "LoRa.h"
 
 /* USER CODE END Includes */
 
@@ -58,7 +59,6 @@ ADC_HandleTypeDef hadc1;
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
 DMA_HandleTypeDef hdma_i2c2_rx;
-DMA_HandleTypeDef hdma_i2c2_tx;
 DMA_HandleTypeDef hdma_i2c3_rx;
 DMA_HandleTypeDef hdma_i2c3_tx;
 
@@ -66,6 +66,7 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi1_tx;
+DMA_HandleTypeDef hdma_spi3_tx;
 
 TIM_HandleTypeDef htim2;
 
@@ -78,6 +79,7 @@ osThreadId TaskIMUHandle;
 osThreadId TaskGPSHandle;
 osThreadId TaskLCDHandle;
 osThreadId TaskBatteryHandle;
+osThreadId LoRaTaskHandle;
 /* USER CODE BEGIN PV */
 double loc_gps_lon = 0.0;
 double loc_gps_lat = 0.0;
@@ -113,6 +115,9 @@ uint8_t kf_start =0;
 double R_matrix[3][3];
 
 int is_gps_new = 0;
+
+LoRa myLoRa;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -132,6 +137,7 @@ void StartTaskIMU(void const * argument);
 void StartTaskGPS(void const * argument);
 void StartTaskLCD(void const * argument);
 void StartTaskBattery(void const * argument);
+void StartLoRaTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -183,31 +189,35 @@ int main(void)
   MX_TIM2_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  GPS_Init();
-  geod_init(&g, 6378137, 1/298.257223563);
+//  GPS_Init();
+//  geod_init(&g, 6378137, 1/298.257223563);
+//
+//
+//  Battery_Init();
+//
+//  for(uint8_t i = 0;i<10;i++){
+//	  Battery_Run();
+//	  battery_percent_window[i] = Battery_Get_Percent();
+//	  HAL_Delay(200);
+//  }
+//  for(uint8_t i = 0;i<10;i++){
+//	  battery_percent+=battery_percent_window[i];
+//  }
+//  	  battery_percent /= 10;
+//  ST7735_init();
+//  GPS_KF_Init(&kf_gps, 0.05);
+//  HAL_Delay(100);
+//  ukfInit(&ukf, &hi2c2, &hi2c3);
+//  HAL_Delay(500);
+//  Timer_Init();
+//  Timer_Set(0, 20); //IMU
+//  Timer_Set(1, 10); //Battery
+//  Timer_Set(2, 100); // GPS + Karney
+//  Timer_Set(3, 100); // LCD
 
 
-  Battery_Init();
 
-  for(uint8_t i = 0;i<10;i++){
-	  Battery_Run();
-	  battery_percent_window[i] = Battery_Get_Percent();
-	  HAL_Delay(200);
-  }
-  for(uint8_t i = 0;i<10;i++){
-	  battery_percent+=battery_percent_window[i];
-  }
-  	  battery_percent /= 10;
-  ST7735_init();
-  GPS_KF_Init(&kf_gps, 0.05);
-  HAL_Delay(100);
-  ukfInit(&ukf, &hi2c2, &hi2c3);
-  HAL_Delay(500);
-  Timer_Init();
-  Timer_Set(0, 20); //IMU
-  Timer_Set(1, 10); //Battery
-  Timer_Set(2, 100); // GPS + Karney
-  Timer_Set(3, 100); // LCD
+
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -227,22 +237,26 @@ int main(void)
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
-  /* Create the thread(s) */
-  /* definition and creation of TaskIMU */
-  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
-  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+//  /* Create the thread(s) */
+//  /* definition and creation of TaskIMU */
+//  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
+//  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+//
+//  /* definition and creation of TaskGPS */
+//  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
+//  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+//
+//  /* definition and creation of TaskLCD */
+//  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
+//  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
+//
+//  /* definition and creation of TaskBattery */
+//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
+//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
-  /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
-  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
-
-  /* definition and creation of TaskLCD */
-  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
-  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-
-  /* definition and creation of TaskBattery */
-  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+  /* definition and creation of LoRaTask */
+  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
+  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -535,7 +549,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi3.Init.NSS = SPI_NSS_HARD_INPUT;
+  hspi3.Init.NSS = SPI_NSS_SOFT;
   hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
@@ -674,7 +688,7 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA1_Stream2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
   /* DMA1_Stream3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 5, 0);
@@ -719,7 +733,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(TFT_CS_GPIO_Port, TFT_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, TFT_CS_Pin|GPIO_PIN_10|GPIO_PIN_15, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, TFT_RES_Pin|TFT_DC_Pin, GPIO_PIN_RESET);
@@ -737,12 +751,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BUTTON_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : TFT_CS_Pin */
-  GPIO_InitStruct.Pin = TFT_CS_Pin;
+  /*Configure GPIO pins : TFT_CS_Pin PA10 PA15 */
+  GPIO_InitStruct.Pin = TFT_CS_Pin|GPIO_PIN_10|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(TFT_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : TFT_RES_Pin TFT_DC_Pin */
   GPIO_InitStruct.Pin = TFT_RES_Pin|TFT_DC_Pin;
@@ -1045,6 +1059,46 @@ void StartTaskBattery(void const * argument)
     osDelay(1000);
   }
   /* USER CODE END StartTaskBattery */
+}
+
+/* USER CODE BEGIN Header_StartLoRaTask */
+/**
+* @brief Function implementing the LoRaTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartLoRaTask */
+void StartLoRaTask(void const * argument)
+{
+  /* USER CODE BEGIN StartLoRaTask */
+	// LORA MODULE SETTINGS ----------------------------------------------
+
+	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3);
+	  	myLoRa.frequency             = 434;							  // default = 433 MHz
+	  	myLoRa.spredingFactor        = SF_7;							// default = SF_7
+	  	myLoRa.bandWidth			 = BW_125KHz;				  // default = BW_125KHz
+	  	myLoRa.crcRate				 = CR_4_5;						// default = CR_4_5
+	  	myLoRa.power				= POWER_20db;				// default = 20db
+	  	myLoRa.overCurrentProtection = 120; 							// default = 100 mA
+	  	myLoRa.preamble				       = 10;		  					// default = 8;
+
+	  	LoRa_reset(&myLoRa);
+		uint8_t ver = LoRa_read(&myLoRa, 0x42);
+		Serial_Print("Version: 0x%02X\r\n", ver);
+		LoRa_init(&myLoRa);
+		LoRa_setSyncWord(&myLoRa, 0xF1);
+  /* Infinite loop */
+	uint8_t state = 0;
+	char *msg;
+  for(;;)
+  {
+	  LoRa_transmit(&myLoRa, (uint8_t*)msg, strlen(msg), 500);
+	  msg = state ? "true" : "false";
+	  Serial_Print("Sent: %s\r\n", msg);
+	  state = !state;
+	  osDelay(2000);
+  }
+  /* USER CODE END StartLoRaTask */
 }
 
 /**
