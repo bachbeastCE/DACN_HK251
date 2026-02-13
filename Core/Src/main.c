@@ -118,6 +118,9 @@ int is_gps_new = 0;
 
 LoRa myLoRa;
 
+#define LORA_TX_DMA_BUFFERSIZE 65
+uint8_t lora_tx_dma_buffer[LORA_TX_DMA_BUFFERSIZE];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -237,8 +240,8 @@ int main(void)
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
-//  /* Create the thread(s) */
-//  /* definition and creation of TaskIMU */
+  /* Create the thread(s) */
+  /* definition and creation of TaskIMU */
 //  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
 //  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 //
@@ -864,6 +867,13 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 //        Serial_Print("callbackSPI\n");
         osSemaphoreRelease(spiDmaSemHandle);
     }
+    if(hspi == myLoRa.hSPIx)
+    {
+    	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        vTaskNotifyGiveFromISR(LoRaTaskHandle, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    }
+
 }
 /* USER CODE END 4 */
 
@@ -1087,12 +1097,16 @@ void StartLoRaTask(void const * argument)
 		Serial_Print("Version: 0x%02X\r\n", ver);
 		LoRa_init(&myLoRa);
 		LoRa_setSyncWord(&myLoRa, 0xF1);
+		LoRa_setTX_DMA(&myLoRa, lora_tx_dma_buffer, LORA_TX_DMA_BUFFERSIZE);
+		Serial_Print("AAAA\r\n");
   /* Infinite loop */
 	uint8_t state = 0;
 	char *msg;
   for(;;)
   {
-	  LoRa_transmit(&myLoRa, (uint8_t*)msg, strlen(msg), 500);
+	  Serial_Print("AAAA\r\n");
+	  LoRa_transmit_DMA(&myLoRa, (uint8_t*)msg, strlen(msg), 500);
+	  Serial_Print("BBB\r\n");
 	  msg = state ? "true" : "false";
 	  Serial_Print("Sent: %s\r\n", msg);
 	  state = !state;

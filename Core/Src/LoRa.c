@@ -461,7 +461,7 @@ uint8_t LoRa_transmit(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeo
 	        LoRa_gotoMode(_LoRa, mode);
 	        return 1;
 	    }
-	    vTaskDelay(pdMS_TO_TICKS(2));
+	    vTaskDelay(pdMS_TO_TICKS(1));
 	}
 
 #else
@@ -647,20 +647,29 @@ void LoRa_resetDMA(LoRa* _LoRa){
 
 uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout){
 
-#if LORA_RTOS
+	uint8_t read;
 	int mode = _LoRa->current_mode;
+	LoRa_gotoMode(_LoRa, STDBY_MODE);
+	read = LoRa_read(_LoRa, RegFiFoTxBaseAddr);
+	LoRa_write(_LoRa, RegFiFoAddPtr, read);
+	if (length > MAX_FIFO_SIZE) length = MAX_FIFO_SIZE;
+	LoRa_write(_LoRa, RegPayloadLength, length);
 
+#if LORA_RTOS
 	_LoRa->dma_tx_buffer [0] = RegFiFo | 0x80; //Write mode
 	memcpy(_LoRa->dma_tx_buffer + 1, data, length);
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
-	HAL_SPI_Transmit_DMA(_LoRa->hSPIx, _LoRa->dma_tx_buffer, length + 1);
+	if (HAL_SPI_Transmit_DMA(_LoRa->hSPIx, _LoRa->dma_tx_buffer, length + 1) != HAL_OK)
+	{
+		Serial_Print("DMA not started\n");
+	}
 	ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
-
 	//Polling for checking if tranfer successfully.
+
+	LoRa_gotoMode(_LoRa, TRANSMIT_MODE);
 	uint32_t startTick = xTaskGetTickCount();
 	uint32_t timeoutTicks = pdMS_TO_TICKS(timeout);
-	uint8_t read;
 
 	while(1)
 	{
@@ -676,7 +685,7 @@ uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t t
 	        LoRa_gotoMode(_LoRa, mode);
 	        return 1;
 	    }
-	    vTaskDelay(pdMS_TO_TICKS(2));
+	    vTaskDelay(pdMS_TO_TICKS(1));
 	}
 
 #else

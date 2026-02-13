@@ -8,8 +8,8 @@
 #ifndef INC_LORA_H_
 #define INC_LORA_H_
 
-#define LORA_RTOS 0
-#define LORA_TX_DMA 0
+#define LORA_RTOS 1
+#define LORA_TX_DMA 1
 
 #include "main.h"
 
@@ -182,5 +182,10 @@ uint16_t LoRa_init(LoRa* _LoRa);
 uint8_t LoRa_transmit(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout);
 void LoRa_startReceiving(LoRa* _LoRa);
 uint8_t LoRa_receive(LoRa* _LoRa, uint8_t* data, uint8_t length);
+
+uint8_t LoRa_setTX_DMA(LoRa* _LoRa,  uint8_t* dma_buffer, uint16_t dma_buffer_size);
+void LoRa_resetDMA(LoRa* _LoRa);
+
+uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout);
 
 #endif /* INC_LORA_H_ */
