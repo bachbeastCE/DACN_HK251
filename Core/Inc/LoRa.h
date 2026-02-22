@@ -183,9 +183,10 @@ uint8_t LoRa_transmit(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeo
 void LoRa_startReceiving(LoRa* _LoRa);
 uint8_t LoRa_receive(LoRa* _LoRa, uint8_t* data, uint8_t length);
 
+#if LORA_TX_DMA && LORA_RTOS
 uint8_t LoRa_setTX_DMA(LoRa* _LoRa,  uint8_t* dma_buffer, uint16_t dma_buffer_size);
 void LoRa_resetDMA(LoRa* _LoRa);
-
 uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t timeout);
+#endif
 
 #endif /* INC_LORA_H_ */

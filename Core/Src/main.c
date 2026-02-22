@@ -35,12 +35,28 @@
 #include "battery.h"
 #include "gps_kf.h"
 #include "LoRa.h"
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+#define PAYLOAD_SIZE 68
 
+typedef struct __attribute__((packed)) LOCATION_DATA {
+    uint32_t device_id; // 4 bytes
+    double loc_gps_lon; // 8 bytes
+    double loc_gps_lat; // 8 bytes
+    double loc_gps_alt; // 8 bytes
+    double tag_gps_lon; // 8 bytes
+    double tag_gps_lat; // 8 bytes
+    double tag_gps_alt; // 8 bytes
+    double tag_distance; // 8 bytes
+    double gps_hdop;    // 8 bytes
+} LOC_DATA;
+
+typedef union {
+    uint8_t payload[PAYLOAD_SIZE];
+    LOC_DATA data;
+} LOC_DATA_PACKET;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -95,6 +111,8 @@ double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 
 double gps_hdop = 0.0;
+
+LOC_DATA_PACKET loc_data_packet;
 
 uint16_t battery_percent = 0;
 uint8_t battery_percent_window[10];
@@ -1099,17 +1117,26 @@ void StartLoRaTask(void const * argument)
 		LoRa_setSyncWord(&myLoRa, 0xF1);
 		LoRa_setTX_DMA(&myLoRa, lora_tx_dma_buffer, LORA_TX_DMA_BUFFERSIZE);
 		Serial_Print("AAAA\r\n");
+
   /* Infinite loop */
-	uint8_t state = 0;
-	char *msg;
+
+		loc_data_packet.data.device_id = 0;
+		loc_data_packet.data.gps_hdop = 100;
+		loc_data_packet.data.loc_gps_alt = 200;
+		loc_data_packet.data.loc_gps_lat = 300;
+		loc_data_packet.data.loc_gps_lon = 400;
+		loc_data_packet.data.tag_distance = 500;
+		loc_data_packet.data.tag_gps_alt = 600;
+		loc_data_packet.data.tag_gps_lat = 700;
+		loc_data_packet.data.tag_gps_lon = 800;
   for(;;)
   {
 	  Serial_Print("AAAA\r\n");
-	  LoRa_transmit_DMA(&myLoRa, (uint8_t*)msg, strlen(msg), 500);
+
+	  LoRa_transmit_DMA(&myLoRa, loc_data_packet.payload, PAYLOAD_SIZE, 400);
+
 	  Serial_Print("BBB\r\n");
-	  msg = state ? "true" : "false";
-	  Serial_Print("Sent: %s\r\n", msg);
-	  state = !state;
+
 	  osDelay(2000);
   }
   /* USER CODE END StartLoRaTask */

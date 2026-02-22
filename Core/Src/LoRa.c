@@ -629,7 +629,7 @@ uint16_t LoRa_init(LoRa* _LoRa){
 
 
 
-#if LORA_TX_DMA
+#if LORA_TX_DMA && LORA_RTOS
 uint8_t LoRa_setTX_DMA(LoRa* _LoRa,  uint8_t* dma_buffer, uint16_t dma_buffer_size){
 	if(_LoRa == NULL || dma_buffer == NULL ) return 1;
 	if(dma_buffer_size <= 0) return 2;
@@ -655,13 +655,21 @@ uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t t
 	if (length > MAX_FIFO_SIZE) length = MAX_FIFO_SIZE;
 	LoRa_write(_LoRa, RegPayloadLength, length);
 
-#if LORA_RTOS
-	_LoRa->dma_tx_buffer [0] = RegFiFo | 0x80; //Write mode
-	memcpy(_LoRa->dma_tx_buffer + 1, data, length);
+//	_LoRa->dma_tx_buffer [0] = RegFiFo | 0x80; //Write mode
+//	memcpy(_LoRa->dma_tx_buffer + 1, data, length);
+
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_RESET);
-	if (HAL_SPI_Transmit_DMA(_LoRa->hSPIx, _LoRa->dma_tx_buffer, length + 1) != HAL_OK)
+
+	//Open writemode
+	uint8_t cmd = RegFiFo | 0x80;
+	HAL_SPI_Transmit(_LoRa->hSPIx, &cmd, 1, 10);
+
+	//Transmit data
+	if (HAL_SPI_Transmit_DMA(_LoRa->hSPIx, data, length) != HAL_OK)
 	{
-		Serial_Print("DMA not started\n");
+		//Serial_Print("DMA not started\n");
+		HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
+		return 2;
 	}
 	ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 	HAL_GPIO_WritePin(_LoRa->CS_port, _LoRa->CS_pin, GPIO_PIN_SET);
@@ -687,24 +695,6 @@ uint8_t LoRa_transmit_DMA(LoRa* _LoRa, uint8_t* data, uint8_t length, uint16_t t
 	    }
 	    vTaskDelay(pdMS_TO_TICKS(1));
 	}
-
-#else
-		while(1){
-			read = LoRa_read(_LoRa, RegIrqFlags);
-			if((read & 0x08)!=0){
-				LoRa_write(_LoRa, RegIrqFlags, 0xFF);
-				LoRa_gotoMode(_LoRa, mode);
-				return 0;
-			}
-			else{
-				if(--timeout==0){
-					LoRa_gotoMode(_LoRa, mode);
-					return 1;
-				}
-			}
-			HAL_Delay(1);
-		}
-#endif
 }
 
 #endif
