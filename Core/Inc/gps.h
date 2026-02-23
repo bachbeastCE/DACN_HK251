@@ -26,6 +26,7 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 
 #define WGS84_A  6378137.0f
 #define WGS84_E2 6.69437999014e-3f
+
 //======================== COMMAND =================================//
 
 //Startup mode
@@ -38,7 +39,6 @@ extern uint8_t gps_uart_rx_buffer[GPS_UART_BUFFER_SIZE];
 //Set NMEA Sentences Rate
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
-
 #define SET_GGA_SENTENCE_RATE(f) "$PAIR062,0," TOSTRING(f)
 #define SET_GLL_SENTENCE_RATE(f) "$PAIR062,1," TOSTRING(f)
 #define SET_GSA_SENTENCE_RATE(f) "$PAIR062,2," TOSTRING(f)
@@ -81,7 +81,7 @@ typedef struct {
     double COG;       // degrees
     int Day;
     int Month;
-    int Year;         // 2 chữ số
+    int Year;
     char ModeInd;     // GNSS mode (A,D,E,N)
     char NavStatus;   // Navigation status
 } RMC_t;

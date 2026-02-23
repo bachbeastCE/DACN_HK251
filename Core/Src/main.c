@@ -35,14 +35,15 @@
 #include "battery.h"
 #include "gps_kf.h"
 #include "LoRa.h"
+#include "micro_aes.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define PAYLOAD_SIZE 68
 
 typedef struct __attribute__((packed)) LOCATION_DATA {
-    uint32_t device_id; // 4 bytes
+	double seq_num; // 8 bytes
+	uint32_t device_id; // 4 bytes
     double loc_gps_lon; // 8 bytes
     double loc_gps_lat; // 8 bytes
     double loc_gps_alt; // 8 bytes
@@ -51,16 +52,15 @@ typedef struct __attribute__((packed)) LOCATION_DATA {
     double tag_gps_alt; // 8 bytes
     double tag_distance; // 8 bytes
     double gps_hdop;    // 8 bytes
-} LOC_DATA;
+    uint32_t payload_crc;   // 4 bytes
+}  LOC_DATA_PACKET;
 
-typedef union {
-    uint8_t payload[PAYLOAD_SIZE];
-    LOC_DATA data;
-} LOC_DATA_PACKET;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define LORA_TX_MAX_SIZE 256
+
 
 /* USER CODE END PD */
 
@@ -71,6 +71,8 @@ typedef union {
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+
+CRC_HandleTypeDef hcrc;
 
 I2C_HandleTypeDef hi2c2;
 I2C_HandleTypeDef hi2c3;
@@ -96,6 +98,7 @@ osThreadId TaskGPSHandle;
 osThreadId TaskLCDHandle;
 osThreadId TaskBatteryHandle;
 osThreadId LoRaTaskHandle;
+
 /* USER CODE BEGIN PV */
 double loc_gps_lon = 0.0;
 double loc_gps_lat = 0.0;
@@ -135,9 +138,7 @@ double R_matrix[3][3];
 int is_gps_new = 0;
 
 LoRa myLoRa;
-
-#define LORA_TX_DMA_BUFFERSIZE 65
-uint8_t lora_tx_dma_buffer[LORA_TX_DMA_BUFFERSIZE];
+uint8_t lora_tx_ciphertext[LORA_TX_MAX_SIZE];
 
 /* USER CODE END PV */
 
@@ -154,6 +155,7 @@ static void MX_I2C3_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_CRC_Init(void);
 void StartTaskIMU(void const * argument);
 void StartTaskGPS(void const * argument);
 void StartTaskLCD(void const * argument);
@@ -209,6 +211,7 @@ int main(void)
   MX_SPI3_Init();
   MX_TIM2_Init();
   MX_ADC1_Init();
+  MX_CRC_Init();
   /* USER CODE BEGIN 2 */
 //  GPS_Init();
 //  geod_init(&g, 6378137, 1/298.257223563);
@@ -260,20 +263,20 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of TaskIMU */
-//  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
-//  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
-//
-//  /* definition and creation of TaskGPS */
-//  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
-//  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
-//
-//  /* definition and creation of TaskLCD */
-//  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
-//  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-//
-//  /* definition and creation of TaskBattery */
-//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
+  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+
+  /* definition and creation of TaskGPS */
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
+  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+
+  /* definition and creation of TaskLCD */
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
+  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
+
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
@@ -394,6 +397,32 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * @brief CRC Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CRC_Init(void)
+{
+
+  /* USER CODE BEGIN CRC_Init 0 */
+
+  /* USER CODE END CRC_Init 0 */
+
+  /* USER CODE BEGIN CRC_Init 1 */
+
+  /* USER CODE END CRC_Init 1 */
+  hcrc.Instance = CRC;
+  if (HAL_CRC_Init(&hcrc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CRC_Init 2 */
+
+  /* USER CODE END CRC_Init 2 */
 
 }
 
@@ -1119,21 +1148,30 @@ void StartLoRaTask(void const * argument)
 		Serial_Print("AAAA\r\n");
 
   /* Infinite loop */
+		__HAL_CRC_DR_RESET(&hcrc); // Reset CRC data register
 
-		loc_data_packet.data.device_id = 0;
-		loc_data_packet.data.gps_hdop = 100;
-		loc_data_packet.data.loc_gps_alt = 200;
-		loc_data_packet.data.loc_gps_lat = 300;
-		loc_data_packet.data.loc_gps_lon = 400;
-		loc_data_packet.data.tag_distance = 500;
-		loc_data_packet.data.tag_gps_alt = 600;
-		loc_data_packet.data.tag_gps_lat = 700;
-		loc_data_packet.data.tag_gps_lon = 800;
+		loc_data_packet.seq_num = 0;
+		loc_data_packet.device_id = 0;
+		loc_data_packet.gps_hdop = 100;
+		loc_data_packet.loc_gps_alt = 200;
+		loc_data_packet.loc_gps_lat = 300;
+		loc_data_packet.loc_gps_lon = 400;
+		loc_data_packet.tag_distance = 500;
+		loc_data_packet.tag_gps_alt = 600;
+		loc_data_packet.tag_gps_lat = 700;
+		loc_data_packet.tag_gps_lon = 800;
+		loc_data_packet.payload_crc = HAL_CRC_Calculate(&hcrc, (uint32_t *)&loc_data_packet, (sizeof(loc_data_packet) - 4) / 4);
+
   for(;;)
   {
 	  Serial_Print("AAAA\r\n");
 
-	  LoRa_transmit_DMA(&myLoRa, loc_data_packet.payload, PAYLOAD_SIZE, 400);
+	  loc_data_packet.seq_num++;
+	  loc_data_packet.payload_crc = HAL_CRC_Calculate(&hcrc, (uint32_t *)&loc_data_packet, (sizeof(loc_data_packet) - 4) / 4);
+
+	  LoRa_transmit_DMA(&myLoRa, (uint8_t*)loc_data_packet, sizeof(loc_data_packet), 400);
+
+	  loc_data_packet.seq_num++;
 
 	  Serial_Print("BBB\r\n");
 
