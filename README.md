@@ -69,7 +69,7 @@ Connect ST-Link and click Run → Debug or Run on STM32CubeProgrammer
 Detailed testing procedures and evaluation results are described in **REPORT_GD1**, Chapter 5: *System Implementation and Evaluation*.
 REPORT_GD1.pdf: https://github.com/bachbeastCE/DACN_HK251/blob/main/REPORT_GD1.pdf
 
-##Future
+## Future
 RTOS Integration: Migrating the firmware to FreeRTOS for better task scheduling, priority management, and deterministic system behavior.
 Long-Range Telemetry: Expanding the communication range by implementing a dedicated LoRa Gateway to transmit data to a remote management station.
 Power Optimization: Implementing Low Power modes for the STM32 and peripheral sleep cycles to extend battery life for field operations.
