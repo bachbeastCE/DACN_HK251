@@ -46,7 +46,7 @@ typedef struct __attribute__((packed)) LOCATION_DATA_HEADER {
 
 typedef struct __attribute__((packed)) LOCATION_DATA {
 	uint32_t device_id; // 4 bytes
-	uint32_t gps_hdop;  // 4 bytes
+	float gps_hdop;  // 4 bytes
     double loc_gps_lon; // 8 bytes
     double loc_gps_lat; // 8 bytes
     double loc_gps_alt; // 8 bytes
@@ -141,6 +141,7 @@ uint8_t key[] = {0x2b, 0x7e, 0x15, 0x16,0x28, 0xae, 0xd2, 0xa6,0xab, 0xf7, 0x15,
 LOC_DATA_PAYLOAD loc_data_payload;
 LOC_DATA_HEADER loc_data_header;
 uint8_t gcm_nonce[GCM_NONCE_LEN];
+uint8_t plain_text_buffer[LOC_DATA_HEADER_SIZE + LOC_DATA_PAYLOAD_SIZE];
 uint8_t cipher_text_buffer[LOC_DATA_HEADER_SIZE + LOC_DATA_PAYLOAD_SIZE + GCM_TAG_LEN];
 
 /* USER CODE END PV */
@@ -1122,26 +1123,30 @@ void StartLoRaTask(void const * argument)
 		Serial_Print("AAAA\r\n");
 
   /* Infinite loop */
-		loc_data_header.seq_num = 10000000;
-
-		loc_data_payload.device_id = 0;
-		loc_data_payload.gps_hdop = 100;
+		loc_data_header.seq_num = 0;
+		loc_data_payload.device_id = 0XF5F4F3F2;
+		loc_data_payload.gps_hdop = 3.01;
 		loc_data_payload.loc_gps_alt = 200;
-		loc_data_payload.loc_gps_lat = 300;
-		loc_data_payload.loc_gps_lon = 400;
-		loc_data_payload.tag_distance = 500;
-		loc_data_payload.tag_gps_alt = 600;
-		loc_data_payload.tag_gps_lat = 700;
-		loc_data_payload.tag_gps_lon = 800;
+		loc_data_payload.loc_gps_lat = 100.54321;
+		loc_data_payload.loc_gps_lon = 90.1357;
+		loc_data_payload.tag_distance = 500.000;
+		loc_data_payload.tag_gps_alt = 123.456;
+		loc_data_payload.tag_gps_lat = 123.45678;
+		loc_data_payload.tag_gps_lon = 98.12345;
 
   for(;;)
   {
 	  loc_data_header.seq_num++;
+
+	  //	  memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
+	  //	  memcpy(plain_text_buffer+8,&loc_data_payload, sizeof(LOC_DATA_PAYLOAD));
+
 	  memset(gcm_nonce, 0,  GCM_NONCE_LEN);
 	  memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER));//Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
 	  memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	  AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
 	  LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	  //LoRa_transmit_DMA(&myLoRa, plain_text_buffer, sizeof(plain_text_buffer), 400);
 	  Serial_Print("Transfered\r\n");
 
 	  osDelay(2000);
