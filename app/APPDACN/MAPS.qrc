@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qmlMAPS.qml</file>
+        <file>observer.png</file>
+        <file>target.png</file>
+    </qresource>
+</RCC>
