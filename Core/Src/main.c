@@ -233,7 +233,7 @@ int main(void)
   TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 
   /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 512);
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
   /* definition and creation of TaskLCD */
@@ -674,7 +674,7 @@ static void MX_DMA_Init(void)
 
   /* DMA interrupt init */
   /* DMA1_Stream2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
   /* DMA1_Stream3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 5, 0);
@@ -945,62 +945,74 @@ void StartTaskGPS(void const * argument)
 
 	//  TickType_t last = xTaskGetTickCount();
 	//	Serial_Print("Task GPS Running\n");
-	double ax_mps2 = 0;
-	double ay_mps2 = 0;
-	double az_mps2 = 0;
-	double baro_alt = 0;
+//	double ax_mps2 = 0;
+//	double ay_mps2 = 0;
+//	double az_mps2 = 0;
+//	double baro_alt = 0;
+	double observerLat = 11.537543;
+	double observerLon = 106.901618;
+	double targetLat   = 11.498572;
+	double targetLon   = 106.886122;
 	while(1){
 	//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
-		GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
-	                                  loc_pitch, loc_roll, loc_azi, R_matrix);
-		is_gps_new = 0;
-		if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
-	          GPS_Coordinates_Get(&raw_coordinates);
-	          is_gps_new = 1;
+//		GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+//	                                  loc_pitch, loc_roll, loc_azi, R_matrix);
+//		is_gps_new = 0;
+//		if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
+//	          GPS_Coordinates_Get(&raw_coordinates);
+//	          is_gps_new = 1;
+//
+//	          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
+//	          if (!kf_start)
+//	          {
+//	              // Set vị trí ban đầu
+//	              kf_gps.x[0] = raw_coordinates.Lat;
+//	              kf_gps.x[1] = raw_coordinates.Lon;
+//	              baro_alt = raw_coordinates.Alt;
+//
+//	              // Nếu dùng Baro thì set độ cao baro làm gốc
+//	              //kf_gps.x[2] = baro_alt;
+//
+//	              // Reset vận tốc về 0
+//	              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
+//	              kf_start = 1;
+//	          }
+//	      }
+//
+//	      if (kf_start)
+//	      {
+//	          GPS_KF_Filter(&kf_gps,
+//	                        raw_coordinates.Lat,
+//	                        raw_coordinates.Lon,
+//	                        baro_alt,
+//	                        is_gps_new);
+//
+//	          loc_gps_lat = kf_gps.x[0];
+//	          loc_gps_lon = kf_gps.x[1];
+//	          loc_gps_alt = kf_gps.x[2];
+//
+//	      }
+//
+//
+//      double pitch_rad = loc_pitch * M_PI / 180.0;
+//      double s12 = tag_distance * cos(pitch_rad);
+//
+//      geod_direct(&g,
+//        loc_gps_lat, loc_gps_lon, loc_azi,
+//        s12,
+//        &tag_gps_lat, &tag_gps_lon, NULL);
+//    }
 
-	          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
-	          if (!kf_start)
-	          {
-	              // Set vị trí ban đầu
-	              kf_gps.x[0] = raw_coordinates.Lat;
-	              kf_gps.x[1] = raw_coordinates.Lon;
-	              baro_alt = raw_coordinates.Alt;
-
-	              // Nếu dùng Baro thì set độ cao baro làm gốc
-	              //kf_gps.x[2] = baro_alt;
-
-	              // Reset vận tốc về 0
-	              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
-	              kf_start = 1;
-	          }
-	      }
-
-	      if (kf_start)
-	      {
-	          GPS_KF_Filter(&kf_gps,
-	                        raw_coordinates.Lat,
-	                        raw_coordinates.Lon,
-	                        baro_alt,
-	                        is_gps_new);
-
-	          loc_gps_lat = kf_gps.x[0];
-	          loc_gps_lon = kf_gps.x[1];
-	          loc_gps_alt = kf_gps.x[2];
-
-	      }
+		observerLat += 0.000056;
+			observerLon += 0.000012;
+			targetLat += 0.000012;
+			targetLon += 0.000056;
+	Serial_Print("Observer Coordinate = %.6f, %.6f\n", observerLat, observerLon);
+	Serial_Print("Target   Coordinate = %.6f, %.6f\n", targetLat, targetLon);
 
 
-      double pitch_rad = loc_pitch * M_PI / 180.0;
-      double s12 = tag_distance * cos(pitch_rad);
-
-      geod_direct(&g,
-        loc_gps_lat, loc_gps_lon, loc_azi,
-        s12,
-        &tag_gps_lat, &tag_gps_lon, NULL);
-    }
-
-    osDelay(5000);
-
+    osDelay(7000);
+	}
   /* USER CODE END StartTaskGPS */
 }
 

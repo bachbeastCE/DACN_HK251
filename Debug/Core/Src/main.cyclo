@@ -16,8 +16,8 @@
 ../Core/Src/main.c:839:6:HAL_ADC_ConvCpltCallback	1
 ../Core/Src/main.c:844:6:HAL_SPI_TxCpltCallback	2
 ../Core/Src/main.c:863:6:StartTaskIMU	6
-../Core/Src/main.c:941:6:StartTaskGPS	4
-../Core/Src/main.c:1014:6:StartTaskLCD	1
-../Core/Src/main.c:1035:6:StartTaskBattery	1
-../Core/Src/main.c:1058:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:1080:6:Error_Handler	1
+../Core/Src/main.c:941:6:StartTaskGPS	1
+../Core/Src/main.c:1026:6:StartTaskLCD	1
+../Core/Src/main.c:1047:6:StartTaskBattery	1
+../Core/Src/main.c:1070:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:1092:6:Error_Handler	1
