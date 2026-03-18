@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: E:\HCMUT\HK251\Project\PCB\PCB_Project\Top.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=top-roundholes-plated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Plated_Slot_Holes|DrillFile=top-slotholes-plated.txt|DrillLayers=gtl,gbl

@@ -1,0 +1,692 @@
+Removed Pin From Net: NetName=GND Pin=C1-1
+Removed Pin From Net: NetName=GND Pin=C2-1
+Removed Pin From Net: NetName=MCU_NRST Pin=C5-2
+Removed Pin From Net: NetName=MCU_OSC_IN Pin=C6-1
+Removed Pin From Net: NetName=GND Pin=C6-2
+Removed Pin From Net: NetName=XTAL_IN Pin=C7-1
+Removed Pin From Net: NetName=GND Pin=C7-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C10-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C12-2
+Removed Pin From Net: NetName=GND Pin=C13-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C13-2
+Removed Pin From Net: NetName=GND Pin=C14-1
+Removed Pin From Net: NetName=GND Pin=C15-1
+Removed Pin From Net: NetName=IMU_REGOUT Pin=C15-2
+Removed Pin From Net: NetName=GND Pin=C16-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C16-2
+Removed Pin From Net: NetName=GND Pin=C17-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C17-2
+Removed Pin From Net: NetName=GPS_VBAT Pin=C19-2
+Removed Pin From Net: NetName=GPS_VBAT Pin=C20-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=C22-2
+Removed Pin From Net: NetName=GND Pin=C23-2
+Removed Pin From Net: NetName=GND Pin=C24-2
+Removed Pin From Net: NetName=RF_IN Pin=C26-2
+Removed Pin From Net: NetName=GND Pin=C27-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=D2-A
+Removed Pin From Net: NetName=GND Pin=D3-A
+Removed Pin From Net: NetName=IMU_VDDIO Pin=D4-A
+Removed Pin From Net: NetName=GND Pin=J1-A1B12
+Removed Pin From Net: NetName=GND Pin=J1-B1A12
+Removed Pin From Net: NetName=I2C3_SCL Pin=J3-1
+Removed Pin From Net: NetName=I2C3_SCL Pin=J3-2
+Removed Pin From Net: NetName=I2C3_SCL Pin=J3-3
+Removed Pin From Net: NetName=I2C3_SCL Pin=J3-4
+Removed Pin From Net: NetName=I2C3_SDA Pin=J3-5
+Removed Pin From Net: NetName=I2C3_SDA Pin=J3-6
+Removed Pin From Net: NetName=I2C3_SDA Pin=J3-7
+Removed Pin From Net: NetName=I2C3_SDA Pin=J3-8
+Removed Pin From Net: NetName=GND Pin=J4-N
+Removed Pin From Net: NetName=GPS_VBAT Pin=J4-P
+Removed Pin From Net: NetName=GND Pin=J5-2
+Removed Pin From Net: NetName=GND Pin=J5-3
+Removed Pin From Net: NetName=IMU_VDDIO Pin=J6-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=J6-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=J6-3
+Removed Pin From Net: NetName=IMU_VDDIO Pin=J6-4
+Removed Pin From Net: NetName=GND Pin=J6-5
+Removed Pin From Net: NetName=GND Pin=J6-6
+Removed Pin From Net: NetName=GND Pin=J6-7
+Removed Pin From Net: NetName=GND Pin=J6-8
+Removed Pin From Net: NetName=IMU_VDDIO Pin=J7-1
+Removed Pin From Net: NetName=SWDIO Pin=J7-2
+Removed Pin From Net: NetName=SWCLK Pin=J7-3
+Removed Pin From Net: NetName=GND Pin=J7-4
+Removed Pin From Net: NetName=IO_B1 Pin=JP2-1
+Removed Pin From Net: NetName=IO_B0 Pin=JP2-2
+Removed Pin From Net: NetName=TFT_MOSI Pin=JP2-3
+Removed Pin From Net: NetName=TFT_MISO Pin=JP2-4
+Removed Pin From Net: NetName=TFT_SCK Pin=JP2-5
+Removed Pin From Net: NetName=TFT_CS Pin=JP2-6
+Removed Pin From Net: NetName=GND Pin=JP2-7
+Removed Pin From Net: NetName=IMU_VDDIO Pin=JP2-8
+Removed Pin From Net: NetName=SPI3_CS Pin=JP3-3
+Removed Pin From Net: NetName=SPI3_SCK Pin=JP3-4
+Removed Pin From Net: NetName=SPI3_MISO Pin=JP3-5
+Removed Pin From Net: NetName=SPI3_MOSI Pin=JP3-6
+Removed Pin From Net: NetName=IO_A1 Pin=JP4-2
+Removed Pin From Net: NetName=IO_A9 Pin=JP4-3
+Removed Pin From Net: NetName=IO_A10 Pin=JP4-4
+Removed Pin From Net: NetName=USB_D_N Pin=R1-1
+Removed Pin From Net: NetName=GND Pin=R2-1
+Removed Pin From Net: NetName=USB_D_P Pin=R3-1
+Removed Pin From Net: NetName=GND Pin=R4-1
+Removed Pin From Net: NetName=GND Pin=R5-1
+Removed Pin From Net: NetName=MCU_NRST Pin=R6-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=R6-2
+Removed Pin From Net: NetName=XTAL_IN Pin=R7-1
+Removed Pin From Net: NetName=MCU_OSC_OUT Pin=R7-2
+Removed Pin From Net: NetName=GND Pin=R8-1
+Removed Pin From Net: NetName=IMU_SCL Pin=R9-1
+Removed Pin From Net: NetName=IMU_SDA Pin=R10-1
+Removed Pin From Net: NetName=GND Pin=R11-2
+Removed Pin From Net: NetName=GND Pin=R12-2
+Removed Pin From Net: NetName=NetD5_A Pin=R13-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=R13-2
+Removed Pin From Net: NetName=GPS_VBAT Pin=R14-1
+Removed Pin From Net: NetName=NetQ1_1 Pin=R15-1
+Removed Pin From Net: NetName=1PPS Pin=R15-2
+Removed Pin From Net: NetName=VDD_RF Pin=R16-2
+Removed Pin From Net: NetName=RF_IN Pin=R17-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=R18-1
+Removed Pin From Net: NetName=GND Pin=U1-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U1-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U1-4
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U2-1
+Removed Pin From Net: NetName=MCU_OSC_IN Pin=U2-5
+Removed Pin From Net: NetName=MCU_OSC_OUT Pin=U2-6
+Removed Pin From Net: NetName=MCU_NRST Pin=U2-7
+Removed Pin From Net: NetName=GND Pin=U2-8
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U2-9
+Removed Pin From Net: NetName=IO_A1 Pin=U2-11
+Removed Pin From Net: NetName=GPS_RXD Pin=U2-12
+Removed Pin From Net: NetName=TFT_CS Pin=U2-14
+Removed Pin From Net: NetName=TFT_SCK Pin=U2-15
+Removed Pin From Net: NetName=TFT_MISO Pin=U2-16
+Removed Pin From Net: NetName=TFT_MOSI Pin=U2-17
+Removed Pin From Net: NetName=IO_B0 Pin=U2-18
+Removed Pin From Net: NetName=IO_B1 Pin=U2-19
+Removed Pin From Net: NetName=IMU_SCL Pin=U2-21
+Removed Pin From Net: NetName=GND Pin=U2-23
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U2-24
+Removed Pin From Net: NetName=FLASH_CS Pin=U2-25
+Removed Pin From Net: NetName=FLASH_SCK Pin=U2-26
+Removed Pin From Net: NetName=FLASH_MISO Pin=U2-27
+Removed Pin From Net: NetName=FLASH_MOSI Pin=U2-28
+Removed Pin From Net: NetName=I2C3_SCL Pin=U2-29
+Removed Pin From Net: NetName=IO_A9 Pin=U2-30
+Removed Pin From Net: NetName=IO_A10 Pin=U2-31
+Removed Pin From Net: NetName=USB_D_N Pin=U2-32
+Removed Pin From Net: NetName=USB_D_P Pin=U2-33
+Removed Pin From Net: NetName=SWDIO Pin=U2-34
+Removed Pin From Net: NetName=GND Pin=U2-35
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U2-36
+Removed Pin From Net: NetName=SWCLK Pin=U2-37
+Removed Pin From Net: NetName=SPI3_CS Pin=U2-38
+Removed Pin From Net: NetName=SPI3_SCK Pin=U2-39
+Removed Pin From Net: NetName=SPI3_MISO Pin=U2-40
+Removed Pin From Net: NetName=SPI3_MOSI Pin=U2-41
+Removed Pin From Net: NetName=I2C3_SDA Pin=U2-45
+Removed Pin From Net: NetName=IMU_SDA Pin=U2-46
+Removed Pin From Net: NetName=GND Pin=U2-47
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U2-48
+Removed Pin From Net: NetName=GND Pin=U2-49
+Removed Pin From Net: NetName=FLASH_CS Pin=U4-1
+Removed Pin From Net: NetName=FLASH_MISO Pin=U4-2
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U4-3
+Removed Pin From Net: NetName=GND Pin=U4-4
+Removed Pin From Net: NetName=FLASH_MOSI Pin=U4-5
+Removed Pin From Net: NetName=FLASH_SCK Pin=U4-6
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U4-7
+Removed Pin From Net: NetName=GND Pin=U5-1
+Removed Pin From Net: NetName=GPS_RXD Pin=U5-3
+Removed Pin From Net: NetName=1PPS Pin=U5-4
+Removed Pin From Net: NetName=GPS_VBAT Pin=U5-6
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U5-8
+Removed Pin From Net: NetName=GND Pin=U5-10
+Removed Pin From Net: NetName=RF_IN Pin=U5-11
+Removed Pin From Net: NetName=GND Pin=U5-12
+Removed Pin From Net: NetName=VDD_RF Pin=U5-14
+Change Component Footprint: Designator=L1 Old Footprint=0805 INDUCTOR New Footprint=0603 INDUCTOR
+Change Component Footprint: Designator=C27 Old Footprint=0805 NC New Footprint=CAP-ALU-SMD-6.3x7.7x2.2
+Change Component Footprint: Designator=C26 Old Footprint=0805 NC New Footprint=CAP_1206
+Change Component Footprint: Designator=R18 Old Footprint=0805 NC New Footprint=RES_0603
+Change Component Footprint: Designator=C5 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C6 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C7 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C9 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C11 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C12 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C13 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C15 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C18 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C19 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C20 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C21 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C22 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C23 Old Footprint=CAP_0805 New Footprint=CAP_0603
+Change Component Footprint: Designator=C24 Old Footprint=CAP_0805 New Footprint=CAP_1206
+Change Component Footprint: Designator=C25 Old Footprint=CAP_0805 New Footprint=CAP_1206
+Change Component Footprint: Designator=C16 Old Footprint=CAP_0805 New Footprint=NC_0603
+Change Component Footprint: Designator=C17 Old Footprint=CAP_0805 New Footprint=NC_0603
+Change Component Footprint: Designator=C1 Old Footprint=CAP_1206 New Footprint=CAP_0603
+Change Component Footprint: Designator=C2 Old Footprint=CAP_1206 New Footprint=CAP_0603
+Change Component Footprint: Designator=C3 Old Footprint=CAP_1206 New Footprint=CAP_0603
+Change Component Footprint: Designator=C8 Old Footprint=CAP_1206 New Footprint=CAP_0603
+Change Component Footprint: Designator=C14 Old Footprint=CAP_1206 New Footprint=CAP_0603
+Change Component Footprint: Designator=C4 Old Footprint=CAP_1206 New Footprint=CAP_0805
+Change Component Footprint: Designator=D3 Old Footprint=DIOM4325X250N New Footprint=SOD-323
+Change Component Footprint: Designator=U1 Old Footprint=FP-AMS1117-IPC_C New Footprint=STM-UFQFPN48_L
+Change Component Footprint: Designator=J4 Old Footprint=HARWIN_S8411-45R New Footprint=USB4510-03-1-A
+Change Component Footprint: Designator=J2 Old Footprint=JP3 New Footprint=JP4x2
+Change Component Footprint: Designator=J3 Old Footprint=JP4x2 New Footprint=IPEX_20279-001E-03
+Change Component Footprint: Designator=JP2 Old Footprint=JP8 New Footprint=JP6
+Change Component Footprint: Designator=D5 Old Footprint=LED_0805 New Footprint=LED_0805_BLUE
+Change Component Footprint: Designator=D2 Old Footprint=LED_0805_GREEN New Footprint=LED_0805
+Change Component Footprint: Designator=R12 Old Footprint=RES_0805 New Footprint=NC_0603
+Change Component Footprint: Designator=R1 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R2 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R3 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R4 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R5 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R6 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R7 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R8 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R9 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R10 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R11 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R13 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R14 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R15 Old Footprint=RES_0805 New Footprint=RES_0603
+Change Component Footprint: Designator=R16 Old Footprint=RES_0805 New Footprint=RES_1206
+Change Component Footprint: Designator=D4 Old Footprint=SOD3715X135N New Footprint=LED_0805_GREEN
+Change Component Footprint: Designator=D1 Old Footprint=SOD-323 New Footprint=SOD3715X135N
+Change Component Footprint: Designator=U4 Old Footprint=SOIC-8 New Footprint=XCVR_LC76G
+Change Component Footprint: Designator=U2 Old Footprint=STM-UFQFPN48_L New Footprint=SOIC-8
+Change Component Footprint: Designator=J1 Old Footprint=USB4510-03-1-A New Footprint=JP5
+Change Component Footprint: Designator=U5 Old Footprint=XCVR_LC76G New Footprint=VREG_V62/16624-01YE
+Change Component Comment : Designator=R17 Old Comment=0R New Comment=1K
+Change Component Comment : Designator=R7 Old Comment=0R New Comment=R0603 0R
+Change Component Comment : Designator=R2 Old Comment=1K New Comment=0R
+Change Component Comment : Designator=R15 Old Comment=1K New Comment=10K
+Change Component Comment : Designator=R13 Old Comment=1K New Comment=R0603 1K
+Change Component Comment : Designator=D4 Old Comment=1N4148W-7 New Comment=GREEN
+Change Component Comment : Designator=C1 Old Comment=2.2uF New Comment=15pF
+Change Component Comment : Designator=C2 Old Comment=2.2uF New Comment=15pF
+Change Component Comment : Designator=C8 Old Comment=2.2uF New Comment=100nF
+Change Component Comment : Designator=C14 Old Comment=2.2uF New Comment=SMD 0603 100nF
+Change Component Comment : Designator=R9 Old Comment=4k7 New Comment=10k
+Change Component Comment : Designator=R10 Old Comment=4k7 New Comment=R0603 1K
+Change Component Comment : Designator=R4 Old Comment=5.1K New Comment=10k
+Change Component Comment : Designator=R5 Old Comment=5.1K New Comment=10k
+Change Component Comment : Designator=R12 Old Comment=10K New Comment=R0603 NC
+Change Component Comment : Designator=R6 Old Comment=10K New Comment=R0603 10R
+Change Component Comment : Designator=R11 Old Comment=10K New Comment=R0603 470R
+Change Component Comment : Designator=C18 Old Comment=10nF New Comment=100nF
+Change Component Comment : Designator=R16 Old Comment=10R New Comment=100R
+Change Component Comment : Designator=C6 Old Comment=15pF New Comment=100nF
+Change Component Comment : Designator=C7 Old Comment=15pF New Comment=100nF
+Change Component Comment : Designator=R1 Old Comment=22R New Comment=10k
+Change Component Comment : Designator=R3 Old Comment=22R New Comment=10k
+Change Component Comment : Designator=C4 Old Comment=22uF New Comment=2.2uF
+Change Component Comment : Designator=C3 Old Comment=22uF New Comment=100nF
+Change Component Comment : Designator=C20 Old Comment=33nF New Comment=100nF
+Change Component Comment : Designator=C22 Old Comment=33nF New Comment=SMD 0603 100nF
+Change Component Comment : Designator=L1 Old Comment=68nH New Comment=SMD 0603 68nH
+Change Component Comment : Designator=C10 Old Comment=100nF New Comment=2.2uF
+Change Component Comment : Designator=C19 Old Comment=100nF New Comment=10nF
+Change Component Comment : Designator=C24 Old Comment=100nF New Comment=10uF
+Change Component Comment : Designator=C21 Old Comment=100nF New Comment=33nF
+Change Component Comment : Designator=C11 Old Comment=100nF New Comment=0603 100nF 16V 10%
+Change Component Comment : Designator=C16 Old Comment=100nF New Comment=SMD 0603 NC
+Change Component Comment : Designator=C17 Old Comment=100nF New Comment=SMD 0603 NC
+Change Component Comment : Designator=C23 Old Comment=100nF New Comment=SMD 0603 33nF
+Change Component Comment : Designator=C13 Old Comment=100nF New Comment=SMD 0603 100pF
+Change Component Comment : Designator=C15 Old Comment=100nF New Comment=SMD 0603 100pF
+Change Component Comment : Designator=C25 Old Comment=100pF New Comment=10uF
+Change Component Comment : Designator=R14 Old Comment=470R New Comment=10R
+Change Component Comment : Designator=U1 Old Comment=AMS1117-3.3 New Comment=STM32F411CEU6
+Change Component Comment : Designator=J3 Old Comment=Connector 4x2 New Comment=IPEX
+Change Component Comment : Designator=D1 Old Comment=D_SCHOTTKY_SOD_323 New Comment=1N4148W-7
+Change Component Comment : Designator=D2 Old Comment=GREEN New Comment=BLUE
+Change Component Comment : Designator=JP2 Old Comment=JP8 PIN New Comment=JP6 PIN
+Change Component Comment : Designator=J2 Old Comment=Jumper 3 New Comment=Connector 4x2
+Change Component Comment : Designator=U5 Old Comment=LC76G New Comment=TPS63001DRCR
+Change Component Comment : Designator=C26 Old Comment=NC New Comment=10uF
+Change Component Comment : Designator=R18 Old Comment=NC New Comment=22R
+Change Component Comment : Designator=C27 Old Comment=NC New Comment=100uF
+Change Component Comment : Designator=J4 Old Comment=S8411-45R New Comment=USB4510-03-1-A
+Change Component Comment : Designator=D3 Old Comment=SMAJ28A New Comment=D_SCHOTTKY_SOD_323
+Change Component Comment : Designator=U2 Old Comment=STM32F411CEU6 New Comment=W25Q128JVSIM
+Change Component Comment : Designator=J1 Old Comment=USB4510-03-1-A New Comment=JP5
+Change Component Comment : Designator=U4 Old Comment=W25Q128JVSIM New Comment=LC76G
+Change Managed Component Library Link : Designator=U1 Old VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 New VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 Old ItemGUID=A235AA21-9D40-41CE-AFD5-ED190622537A New ItemGUID=901EF13B-8E2B-4E53-9BA5-3DEEF30FF800 Old RevisionGUID=3D147F22-7269-42D2-A886-FBED816C16F3 New RevisionGUID=CC4CED27-7010-435A-8D64-33AB91A3A679
+Change Managed Component Library Link : Designator=U2 Old VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 New VaultGUID= Old ItemGUID=901EF13B-8E2B-4E53-9BA5-3DEEF30FF800 New ItemGUID= Old RevisionGUID=CC4CED27-7010-435A-8D64-33AB91A3A679 New RevisionGUID=
+Change component parameters: Designator = "C27" ("C27"); Footprint = "0805 NC"; UniqueID = "\XHOXRHSX\ENQVDQCT" ("\XHOXRHSX\ENQVDQCT")
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "POLAR0.8"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D1" ("D1"); Footprint = "SOD-323"; UniqueID = "\SACKHBAY\FIWGUMWP" ("\SACKHBAY\FIWGUMWP")
+Change component parameters (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/1N4148W-7/Diodes+Inc./view-part/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Diodes Inc."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "1N4148W-7"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "SOD-123 Fairchild Semiconductor"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/1N4148W-7/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/1N4148W-7/Diodes+Inc./view-part/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "D3" ("D3"); Footprint = "DIOM4325X250N"; UniqueID = "\XHOXRHSX\UPXCSAFT" ("\XHOXRHSX\UPXCSAFT")
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "D4" ("D4"); Footprint = "SOD3715X135N"; UniqueID = "\XHOXRHSX\MQUYBSPK" ("\XHOXRHSX\MQUYBSPK")
+Change component parameters (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "J1" ("J1"); Footprint = "USB4510-03-1-A"; UniqueID = "\QDZVWRHV\AKELXHQZ" ("\QDZVWRHV\AKELXHQZ")
+Change component parameters: Designator = "J2" ("J2"); Footprint = "JP3"; UniqueID = "\QDZVWRHV\FPNUHBBD" ("\QDZVWRHV\FPNUHBBD")
+Change component parameters (AddParameter): Name = "Value"; Value = "Connector 4x2"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J3" ("J3"); Footprint = "JP4x2"; UniqueID = "\SACKHBAY\CEGRIIUL" ("\SACKHBAY\CEGRIIUL")
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/20279-001E-03/I-PEX/view-part/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "I-PEX"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "20279-001E-03"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/20279-001E-03/I-PEX/view-part/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "J4" ("J4"); Footprint = "HARWIN_S8411-45R"; UniqueID = "\XHOXRHSX\KFHVZVDC" ("\XHOXRHSX\KFHVZVDC")
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "GCT"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = "USB4510-03-1-A"; VariantName = "[No Variations]"
+Change component parameters: Designator = "L1" ("L1"); Footprint = "0805 INDUCTOR"; UniqueID = "\SACKHBAY\KHPRAYBC" ("\SACKHBAY\KHPRAYBC")
+Change component parameters (AddParameter): Name = "Availability"; Value = "Warning"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/LQW18AS22NG0CD/Murata/view-part/4476690/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Murata"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "LQW18AS22NG0CD"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "1608 Murata"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/LQW18AS22NG0CD/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/LQW18AS22NG0CD/Murata/view-part/4476690/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "U1" ("U1"); Footprint = "FP-AMS1117-IPC_C"; UniqueID = "\QDZVWRHV\RHBTGGTU" ("\QDZVWRHV\RHBTGGTU")
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.st.com/"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00115249.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Core"; Value = "ARM Cortex-M4"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "D/A Converter"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "DatasheetVersion"; Value = "Rev. 6"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "FLASH Size (Prog) (kB)"; Value = "512"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "I/Os (High Current)"; Value = "36"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Internal RAM Size (kB)"; Value = "128"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Frequency(F) (Processor speed) (MHz)"; Value = "100"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package Description"; Value = "UFQFPN48"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package Reference"; Value = "48-Pin Ultra Thin Fine Pitch Quad Flat No-Lead, 7 x 7 x 0.6 mm Body, 0.5 mm Pitch, Exposed Pad"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packing"; Value = "Tray"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supply Voltage(Vcc) min (V)"; Value = "1.7"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U2" ("U2"); Footprint = "STM-UFQFPN48_L"; UniqueID = "\QDZVWRHV\AVOOKNHE" ("\QDZVWRHV\AVOOKNHE")
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "Winbond"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = "W25Q128JVSIM"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U4" ("U4"); Footprint = "SOIC-8"; UniqueID = "\SACKHBAY\XYOAHLHZ" ("\SACKHBAY\XYOAHLHZ")
+Change component parameters (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Quectel"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "LC76G"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "U5" ("U5"); Footprint = "XCVR_LC76G"; UniqueID = "\XHOXRHSX\VDMCJFQX" ("\XHOXRHSX\VDMCJFQX")
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/TPS63001DRCR/Texas+Instruments/view-part/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Texas Instruments"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "TPS63001DRCR"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "VSON-10 Texas Instruments"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/TPS63001DRCR/Texas+Instruments/view-part/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=BT1(BAT_MS621FE-FL11E)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/MS621FE-FL11E/Seiko+Instruments/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Seiko Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "MS621FE-FL11E"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "QFP-128 Seiko"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/MS621FE-FL11E/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/MS621FE-FL11E/Seiko+Instruments/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C28(CAP_0603)
+Add component (AddParameter): Name = "Dielectric"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rating"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=JP1(JP7)
+Add component (AddParameter): Name = "Value"; Value = "JP7"; VariantName = "[No Variations]"
+Added Component: Designator=L2(INDC6060X300)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/CSAB0630-100M/Codaca/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Codaca"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "CSAB0630-100M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/CSAB0630-100M/Codaca/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=P1(JST_S2B-PH-SM4-TB)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/S2B-PH-SM4-TB/JST/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "JST Sales"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "S2B-PH-SM4-TB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/S2B-PH-SM4-TB/JST/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=Q2(P_MOSFET_SOT23)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/MMFTP3401/Diotec/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Diotec Semiconductor"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "MMFTP3401"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-23 Diotec"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/MMFTP3401/Diotec/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R19(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R20(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R21(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R22(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R23(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R24(RES_0805)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R25(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R26(RES_0603)
+Add component (AddParameter): Name = "Distributor Link"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=BT1-NEG
+Added Pin To Net: NetName=GPS_VBAT Pin=BT1-POS
+Added Pin To Net: NetName=MCU_OSC_IN Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C1-2
+Added Pin To Net: NetName=XTAL_IN Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=MCU_NRST Pin=C3-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=C5-2
+Added Pin To Net: NetName=GND Pin=C6-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=C6-2
+Added Pin To Net: NetName=GND Pin=C7-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=C7-2
+Added Pin To Net: NetName=IMU_REGOUT Pin=C12-2
+Added Pin To Net: NetName=GND Pin=C13-2
+Added Pin To Net: NetName=GND Pin=C14-2
+Added Pin To Net: NetName=RF_IN Pin=C16-1
+Added Pin To Net: NetName=GND Pin=C16-2
+Added Pin To Net: NetName=GND Pin=C17-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=C19-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=C20-2
+Added Pin To Net: NetName=GPS_VBAT Pin=C22-2
+Added Pin To Net: NetName=GND Pin=C23-1
+Added Pin To Net: NetName=GPS_VBAT Pin=C23-2
+Added Pin To Net: NetName=GND Pin=C24-1
+Added Pin To Net: NetName=GND Pin=C25-1
+Added Pin To Net: NetName=GND Pin=C27-2
+Added Pin To Net: NetName=GND Pin=C28-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=D1-A
+Added Pin To Net: NetName=GND Pin=D4-K
+Added Pin To Net: NetName=GND Pin=D5-K
+Added Pin To Net: NetName=IMU_VDDIO Pin=J1-1
+Added Pin To Net: NetName=SWDIO Pin=J1-2
+Added Pin To Net: NetName=SWCLK Pin=J1-3
+Added Pin To Net: NetName=GND Pin=J1-4
+Added Pin To Net: NetName=I2C3_SCL Pin=J2-1
+Added Pin To Net: NetName=I2C3_SDA Pin=J2-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=J2-4
+Added Pin To Net: NetName=I2C3_SCL Pin=J2-5
+Added Pin To Net: NetName=I2C3_SDA Pin=J2-6
+Added Pin To Net: NetName=GND Pin=J2-7
+Added Pin To Net: NetName=IMU_VDDIO Pin=J2-8
+Added Pin To Net: NetName=GND Pin=J3-2
+Added Pin To Net: NetName=GND Pin=J3-3
+Added Pin To Net: NetName=GND Pin=J4-A1B12
+Added Pin To Net: NetName=GND Pin=J4-B1A12
+Added Pin To Net: NetName=IO_B1 Pin=JP1-2
+Added Pin To Net: NetName=IO_B0 Pin=JP1-3
+Added Pin To Net: NetName=TFT_MOSI Pin=JP1-4
+Added Pin To Net: NetName=TFT_MISO Pin=JP1-5
+Added Pin To Net: NetName=TFT_SCK Pin=JP1-6
+Added Pin To Net: NetName=TFT_CS Pin=JP1-7
+Added Pin To Net: NetName=IMU_VDDIO Pin=JP2-1
+Added Pin To Net: NetName=GND Pin=JP2-2
+Added Pin To Net: NetName=SPI3_CS Pin=JP2-3
+Added Pin To Net: NetName=SPI3_SCK Pin=JP2-4
+Added Pin To Net: NetName=SPI3_MISO Pin=JP2-5
+Added Pin To Net: NetName=SPI3_MOSI Pin=JP2-6
+Added Pin To Net: NetName=GND Pin=P1-1
+Added Pin To Net: NetName=MCU_NRST Pin=R1-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=R1-2
+Added Pin To Net: NetName=MCU_OSC_OUT Pin=R2-1
+Added Pin To Net: NetName=XTAL_IN Pin=R2-2
+Added Pin To Net: NetName=GND Pin=R3-1
+Added Pin To Net: NetName=GND Pin=R4-2
+Added Pin To Net: NetName=GND Pin=R5-2
+Added Pin To Net: NetName=VDD_RF Pin=R6-1
+Added Pin To Net: NetName=RF_IN Pin=R7-1
+Added Pin To Net: NetName=IMU_SCL Pin=R8-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=R8-2
+Added Pin To Net: NetName=IMU_SDA Pin=R9-1
+Added Pin To Net: NetName=GPS_VBAT Pin=R11-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=R12-1
+Added Pin To Net: NetName=NetQ1_1 Pin=R13-1
+Added Pin To Net: NetName=1PPS Pin=R13-2
+Added Pin To Net: NetName=GND Pin=R15-1
+Added Pin To Net: NetName=USB_D_N Pin=R18-1
+Added Pin To Net: NetName=USB_D_P Pin=R19-1
+Added Pin To Net: NetName=GND Pin=R20-1
+Added Pin To Net: NetName=GND Pin=R21-1
+Added Pin To Net: NetName=IO_A1 Pin=R22-1
+Added Pin To Net: NetName=IO_A9 Pin=R23-1
+Added Pin To Net: NetName=NetD5_A Pin=R24-1
+Added Pin To Net: NetName=GND Pin=R25-1
+Added Pin To Net: NetName=IO_A1 Pin=R25-2
+Added Pin To Net: NetName=GND Pin=R26-1
+Added Pin To Net: NetName=IO_A9 Pin=R26-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=U1-1
+Added Pin To Net: NetName=MCU_OSC_IN Pin=U1-5
+Added Pin To Net: NetName=MCU_OSC_OUT Pin=U1-6
+Added Pin To Net: NetName=MCU_NRST Pin=U1-7
+Added Pin To Net: NetName=GND Pin=U1-8
+Added Pin To Net: NetName=IMU_VDDIO Pin=U1-9
+Added Pin To Net: NetName=IO_A1 Pin=U1-11
+Added Pin To Net: NetName=GPS_RXD Pin=U1-12
+Added Pin To Net: NetName=GPS_RXD Pin=U1-13
+Added Pin To Net: NetName=TFT_CS Pin=U1-14
+Added Pin To Net: NetName=TFT_SCK Pin=U1-15
+Added Pin To Net: NetName=TFT_MISO Pin=U1-16
+Added Pin To Net: NetName=TFT_MOSI Pin=U1-17
+Added Pin To Net: NetName=IO_B0 Pin=U1-18
+Added Pin To Net: NetName=IO_B1 Pin=U1-19
+Added Pin To Net: NetName=IMU_SCL Pin=U1-21
+Added Pin To Net: NetName=GND Pin=U1-23
+Added Pin To Net: NetName=IMU_VDDIO Pin=U1-24
+Added Pin To Net: NetName=FLASH_CS Pin=U1-25
+Added Pin To Net: NetName=FLASH_SCK Pin=U1-26
+Added Pin To Net: NetName=FLASH_MISO Pin=U1-27
+Added Pin To Net: NetName=FLASH_MOSI Pin=U1-28
+Added Pin To Net: NetName=I2C3_SCL Pin=U1-29
+Added Pin To Net: NetName=IO_A9 Pin=U1-30
+Added Pin To Net: NetName=IO_A10 Pin=U1-31
+Added Pin To Net: NetName=USB_D_N Pin=U1-32
+Added Pin To Net: NetName=USB_D_P Pin=U1-33
+Added Pin To Net: NetName=SWDIO Pin=U1-34
+Added Pin To Net: NetName=GND Pin=U1-35
+Added Pin To Net: NetName=IMU_VDDIO Pin=U1-36
+Added Pin To Net: NetName=SWCLK Pin=U1-37
+Added Pin To Net: NetName=SPI3_CS Pin=U1-38
+Added Pin To Net: NetName=SPI3_SCK Pin=U1-39
+Added Pin To Net: NetName=SPI3_MISO Pin=U1-40
+Added Pin To Net: NetName=SPI3_MOSI Pin=U1-41
+Added Pin To Net: NetName=I2C3_SDA Pin=U1-45
+Added Pin To Net: NetName=IMU_SDA Pin=U1-46
+Added Pin To Net: NetName=GND Pin=U1-47
+Added Pin To Net: NetName=IMU_VDDIO Pin=U1-48
+Added Pin To Net: NetName=GND Pin=U1-49
+Added Pin To Net: NetName=FLASH_CS Pin=U2-1
+Added Pin To Net: NetName=FLASH_MISO Pin=U2-2
+Added Pin To Net: NetName=IMU_VDDIO Pin=U2-3
+Added Pin To Net: NetName=GND Pin=U2-4
+Added Pin To Net: NetName=FLASH_MOSI Pin=U2-5
+Added Pin To Net: NetName=FLASH_SCK Pin=U2-6
+Added Pin To Net: NetName=IMU_VDDIO Pin=U2-7
+Added Pin To Net: NetName=IMU_VDDIO Pin=U2-8
+Added Pin To Net: NetName=GND Pin=U4-1
+Added Pin To Net: NetName=GPS_RXD Pin=U4-3
+Added Pin To Net: NetName=1PPS Pin=U4-4
+Added Pin To Net: NetName=GPS_VBAT Pin=U4-6
+Added Pin To Net: NetName=GND Pin=U4-10
+Added Pin To Net: NetName=RF_IN Pin=U4-11
+Added Pin To Net: NetName=GND Pin=U4-12
+Added Pin To Net: NetName=VDD_RF Pin=U4-14
+Added Pin To Net: NetName=GND Pin=U5-3
+Added Pin To Net: NetName=GND Pin=U5-9
+Added Pin To Net: NetName=GND Pin=U5-11
+Change Net Name : Old Net Name=IMU_VDDIO New Net Name=IMU_VIN
+Added Pin To Net: NetName=3.3V Pin=C24-2
+Added Pin To Net: NetName=3.3V Pin=C25-2
+Added Pin To Net: NetName=3.3V Pin=R17-2
+Added Pin To Net: NetName=3.3V Pin=U5-1
+Added Pin To Net: NetName=3.3V Pin=U5-10
+Added Net: Name=3.3V
+Added Pin To Net: NetName=BTN0 Pin=JP3-3
+Added Pin To Net: NetName=BTN0 Pin=U1-2
+Added Net: Name=BTN0
+Added Pin To Net: NetName=BTN1 Pin=JP3-4
+Added Pin To Net: NetName=BTN1 Pin=U1-3
+Added Net: Name=BTN1
+Added Pin To Net: NetName=BTN2 Pin=JP3-5
+Added Pin To Net: NetName=BTN2 Pin=U1-4
+Added Net: Name=BTN2
+Added Pin To Net: NetName=BTN3 Pin=JP3-6
+Added Pin To Net: NetName=BTN3 Pin=U1-10
+Added Net: Name=BTN3
+Added Pin To Net: NetName=IO_B2 Pin=JP1-1
+Added Pin To Net: NetName=IO_B2 Pin=U1-20
+Added Net: Name=IO_B2
+Added Pin To Net: NetName=NetC10_2 Pin=C10-2
+Added Pin To Net: NetName=NetC10_2 Pin=U1-22
+Added Net: Name=NetC10_2
+Added Pin To Net: NetName=NetC13_1 Pin=C13-1
+Added Pin To Net: NetName=NetC13_1 Pin=C14-1
+Added Pin To Net: NetName=NetC13_1 Pin=L1-1
+Added Pin To Net: NetName=NetC13_1 Pin=R6-2
+Added Net: Name=NetC13_1
+Added Pin To Net: NetName=NetC15_1 Pin=C15-1
+Added Pin To Net: NetName=NetC15_1 Pin=C17-1
+Added Pin To Net: NetName=NetC15_1 Pin=R7-2
+Added Net: Name=NetC15_1
+Added Pin To Net: NetName=NetC15_2 Pin=C15-2
+Added Pin To Net: NetName=NetC15_2 Pin=J3-1
+Added Pin To Net: NetName=NetC15_2 Pin=L1-2
+Added Net: Name=NetC15_2
+Added Pin To Net: NetName=NetC28_2 Pin=C28-2
+Added Pin To Net: NetName=NetC28_2 Pin=R16-1
+Added Pin To Net: NetName=NetC28_2 Pin=U5-6
+Added Pin To Net: NetName=NetC28_2 Pin=U5-7
+Added Pin To Net: NetName=NetC28_2 Pin=U5-8
+Added Net: Name=NetC28_2
+Added Pin To Net: NetName=NetD1_C Pin=D1-C
+Added Pin To Net: NetName=NetD1_C Pin=R11-2
+Added Net: Name=NetD1_C
+Added Pin To Net: NetName=NetD2_A Pin=D2-A
+Added Pin To Net: NetName=NetD2_A Pin=R10-1
+Added Net: Name=NetD2_A
+Added Pin To Net: NetName=NetD2_K Pin=D2-K
+Added Pin To Net: NetName=NetD2_K Pin=Q1-3
+Added Net: Name=NetD2_K
+Added Pin To Net: NetName=NetD3_A Pin=D3-A
+Added Pin To Net: NetName=NetD3_A Pin=J4-A4B9
+Added Pin To Net: NetName=NetD3_A Pin=J4-B4A9
+Added Pin To Net: NetName=NetD3_A Pin=R14-2
+Added Net: Name=NetD3_A
+Added Pin To Net: NetName=NetD4_A Pin=D4-A
+Added Pin To Net: NetName=NetD4_A Pin=R17-1
+Added Net: Name=NetD4_A
+Added Pin To Net: NetName=NetJ4_A5 Pin=J4-A5
+Added Pin To Net: NetName=NetJ4_A5 Pin=R20-2
+Added Net: Name=NetJ4_A5
+Added Pin To Net: NetName=NetJ4_A6 Pin=J4-A6
+Added Pin To Net: NetName=NetJ4_A6 Pin=J4-B6
+Added Pin To Net: NetName=NetJ4_A6 Pin=R19-2
+Added Net: Name=NetJ4_A6
+Added Pin To Net: NetName=NetJ4_A7 Pin=J4-A7
+Added Pin To Net: NetName=NetJ4_A7 Pin=J4-B7
+Added Pin To Net: NetName=NetJ4_A7 Pin=R18-2
+Added Net: Name=NetJ4_A7
+Added Pin To Net: NetName=NetJ4_B5 Pin=J4-B5
+Added Pin To Net: NetName=NetJ4_B5 Pin=R21-2
+Added Net: Name=NetJ4_B5
+Added Pin To Net: NetName=NetL2_1 Pin=L2-1
+Added Pin To Net: NetName=NetL2_1 Pin=U5-2
+Added Net: Name=NetL2_1
+Added Pin To Net: NetName=NetL2_2 Pin=L2-2
+Added Pin To Net: NetName=NetL2_2 Pin=U5-4
+Added Net: Name=NetL2_2
+Added Pin To Net: NetName=NetQ2_1 Pin=Q2-1
+Added Pin To Net: NetName=NetQ2_1 Pin=R14-1
+Added Pin To Net: NetName=NetQ2_1 Pin=R15-2
+Added Net: Name=NetQ2_1
+Added Pin To Net: NetName=NetR3_2 Pin=R3-2
+Added Pin To Net: NetName=NetR3_2 Pin=U1-44
+Added Net: Name=NetR3_2
+Added Pin To Net: NetName=NetR4_1 Pin=R4-1
+Added Pin To Net: NetName=NetR4_1 Pin=U3-9
+Added Net: Name=NetR4_1
+Added Pin To Net: NetName=NetR5_1 Pin=R5-1
+Added Pin To Net: NetName=NetR5_1 Pin=U3-11
+Added Net: Name=NetR5_1
+Added Pin To Net: NetName=NetR12_2 Pin=R12-2
+Added Pin To Net: NetName=NetR12_2 Pin=U4-18
+Added Net: Name=NetR12_2
+Added Pin To Net: NetName=NetU4_2 Pin=U4-2
+Added Net: Name=NetU4_2
+Added Pin To Net: NetName=RX1 Pin=U1-43
+Added Net: Name=RX1
+Added Pin To Net: NetName=TX1 Pin=U1-42
+Added Net: Name=TX1
+Added Pin To Net: NetName=V_BAT Pin=P1-2
+Added Pin To Net: NetName=V_BAT Pin=Q2-2
+Added Pin To Net: NetName=V_BAT Pin=R22-2
+Added Net: Name=V_BAT
+Added Pin To Net: NetName=V_PWR Pin=C26-2
+Added Pin To Net: NetName=V_PWR Pin=C27-1
+Added Pin To Net: NetName=V_PWR Pin=D3-K
+Added Pin To Net: NetName=V_PWR Pin=Q2-3
+Added Pin To Net: NetName=V_PWR Pin=R16-2
+Added Pin To Net: NetName=V_PWR Pin=R23-2
+Added Pin To Net: NetName=V_PWR Pin=R24-2
+Added Pin To Net: NetName=V_PWR Pin=U5-5
+Added Net: Name=V_PWR
+Added Class: Name=Designator
+Add Class: Class already exists: Designator
+Added Rule: Name=Schematic Supply Nets
+Added Rule: Name=Schematic Supply Nets_6
+Added Rule: Name=Schematic Supply Nets_7
+Added Rule: Name=Schematic Supply Nets_8

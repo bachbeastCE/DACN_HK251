@@ -1,0 +1,13 @@
+Added Component: Designator=L1(0603 INDUCTOR)
+Add component (AddParameter): Name = "Availability"; Value = "Warning"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/LQW18AS22NG0CD/Murata/view-part/4476690/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Murata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "LQW18AS22NG0CD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "1608 Murata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/LQW18AS22NG0CD/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/LQW18AS22NG0CD/Murata/view-part/4476690/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC13_1 Pin=L1-1
+Added Pin To Net: NetName=NetC15_2 Pin=L1-2
+Added Member To Class: ClassName=GPS Member=Component L1 SMD 0603 68nH

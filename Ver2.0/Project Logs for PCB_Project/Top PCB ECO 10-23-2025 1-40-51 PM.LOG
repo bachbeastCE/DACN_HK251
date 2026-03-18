@@ -1,0 +1,33 @@
+Removed Pin From Net: NetName=V_PWR Pin=R23-2
+Removed Pin From Net: NetName=V_PWR Pin=R24-2
+Removed Member From Class: ClassName=Designator Member=C24
+Removed Member From Class: ClassName=Designator Member=C25
+Removed Member From Class: ClassName=Designator Member=C26
+Removed Member From Class: ClassName=Designator Member=C27
+Removed Member From Class: ClassName=Designator Member=C28
+Removed Member From Class: ClassName=Designator Member=D3
+Removed Member From Class: ClassName=Designator Member=D4
+Removed Member From Class: ClassName=Designator Member=D5
+Removed Member From Class: ClassName=Designator Member=J4
+Removed Member From Class: ClassName=Designator Member=L2
+Removed Member From Class: ClassName=Designator Member=P1
+Removed Member From Class: ClassName=Designator Member=Q2
+Removed Member From Class: ClassName=Designator Member=R14
+Removed Member From Class: ClassName=Designator Member=R15
+Removed Member From Class: ClassName=Designator Member=R16
+Removed Member From Class: ClassName=Designator Member=R17
+Removed Member From Class: ClassName=Designator Member=R18
+Removed Member From Class: ClassName=Designator Member=R19
+Removed Member From Class: ClassName=Designator Member=R20
+Removed Member From Class: ClassName=Designator Member=R21
+Removed Member From Class: ClassName=Designator Member=R22
+Removed Member From Class: ClassName=Designator Member=R23
+Removed Member From Class: ClassName=Designator Member=R24
+Removed Member From Class: ClassName=Designator Member=R25
+Removed Member From Class: ClassName=Designator Member=R26
+Removed Member From Class: ClassName=Designator Member=U5
+Added Pin To Net: NetName=NetD3_A Pin=R23-2
+Added Pin To Net: NetName=NetD3_A Pin=R24-2
+Change Net Name : Old Net Name=NetD3_A New Net Name=V_BUS
+Add Class: Class already exists: Designator
+Added Rule: Name=Schematic Supply Nets_6

@@ -1,0 +1,33 @@
+Added Component: Designator=J6(JP4x2)
+Add component (AddParameter): Name = "Value"; Value = "Connector 4x2"; VariantName = "[No Variations]"
+Add component: Footprint Not Found JP 1x4 DT
+Added Component: Designator=JP4(JP7)
+Add component (AddParameter): Name = "Value"; Value = "JP7"; VariantName = "[No Variations]"
+Add component: Footprint Not Found INDC2015X152N
+Added Pin To Net: NetName=+3.3V Pin=J6-1
+Added Pin To Net: NetName=+3.3V Pin=J6-2
+Added Pin To Net: NetName=+3.3V Pin=J6-3
+Added Pin To Net: NetName=+3.3V Pin=J6-4
+Added Pin To Net: NetName=GND Pin=J6-5
+Added Pin To Net: NetName=GND Pin=J6-6
+Added Pin To Net: NetName=GND Pin=J6-7
+Added Pin To Net: NetName=GND Pin=J6-8
+Add Pin To Net: Unknown Pin: Pin JP1-1
+Add Pin To Net: Unknown Pin: Pin JP1-2
+Add Pin To Net: Unknown Pin: Pin JP1-3
+Add Pin To Net: Unknown Pin: Pin JP1-4
+Added Pin To Net: NetName=IO_A0 Pin=JP4-1
+Added Pin To Net: NetName=IO_A1 Pin=JP4-2
+Added Pin To Net: NetName=IO_A9 Pin=JP4-3
+Added Pin To Net: NetName=IO_A10 Pin=JP4-4
+Added Pin To Net: NetName=IO_C13 Pin=JP4-5
+Added Pin To Net: NetName=IO_C14 Pin=JP4-6
+Added Pin To Net: NetName=IO_C15 Pin=JP4-7
+Add Pin To Net: Unknown Pin: Pin L1-1
+Add Pin To Net: Unknown Pin: Pin L1-2
+Added Member To Class: ClassName=PCB1 Member=Component J4 S8411-45R
+Added Member To Class: ClassName=PCB1 Member=Component J5 IPEX
+Added Member To Class: ClassName=PCB1 Member=Component J6 Connector 4x2
+Add Class Member: Failed to add class member : Component JP1 JP 1x4 2.54
+Added Member To Class: ClassName=PCB1 Member=Component JP4 JP7 PIN
+Add Class Member: Failed to add class member : Component L1 68nH

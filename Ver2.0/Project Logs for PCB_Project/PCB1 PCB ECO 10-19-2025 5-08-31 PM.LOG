@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=R18 Old Footprint=NC_0603 New Footprint=0805 NC
+Change Component Comment : Designator=R18 Old Comment=R0603 NC New Comment=NC
+Change Component Designator: OldDesignator=22 NewDesignator=U3

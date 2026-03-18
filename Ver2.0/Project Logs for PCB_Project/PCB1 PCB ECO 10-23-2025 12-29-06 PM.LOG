@@ -1,0 +1,16 @@
+Added Component: Designator=J5(JP3x2)
+Add component (AddParameter): Name = "Value"; Value = "Connector 3x2"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=IO_A10 Pin=J1-5
+Added Pin To Net: NetName=GND Pin=J5-3
+Added Pin To Net: NetName=TX1 Pin=J5-4
+Added Pin To Net: NetName=RX1 Pin=J5-5
+Added Pin To Net: NetName=GND Pin=J5-6
+Added Pin To Net: NetName=RX2 Pin=J5-2
+Added Pin To Net: NetName=RX2 Pin=U1-13
+Added Pin To Net: NetName=RX2 Pin=U4-2
+Added Net: Name=RX2
+Added Pin To Net: NetName=TX2 Pin=J5-1
+Added Pin To Net: NetName=TX2 Pin=U1-12
+Added Pin To Net: NetName=TX2 Pin=U4-3
+Added Net: Name=TX2
+Add Class: Class already exists: Designator

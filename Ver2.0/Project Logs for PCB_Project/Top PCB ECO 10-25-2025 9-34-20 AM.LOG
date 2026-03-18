@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=V_BAT Pin=P1-2
+Removed Pin From Net: NetName=GND Pin=U5-12
+Removed Pin From Net: NetName=GND Pin=U5-13
+Removed Pin From Net: NetName=GND Pin=U5-14
+Removed Pin From Net: NetName=GND Pin=U5-
+Change Component Description : Designator=Q2 Old Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„ New Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„|, 150Â°C
+Added Component: Designator=SW2(SW102)
+Add component (AddParameter): Name = "Value"; Value = "Switch 102 On Board"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=V_BAT Pin=SW2-3
+Added Pin To Net: NetName=NetP1_2 Pin=P1-2
+Added Pin To Net: NetName=NetP1_2 Pin=SW2-2
+Added Net: Name=NetP1_2
+Add Class: Class already exists: Designator

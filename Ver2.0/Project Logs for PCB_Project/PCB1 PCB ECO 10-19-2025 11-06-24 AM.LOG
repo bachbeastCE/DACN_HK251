@@ -1,0 +1,228 @@
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U?-1
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U?-8
+Removed Pin From Net: NetName=IMU_REGOUT Pin=U?-10
+Removed Pin From Net: NetName=IMU_INT Pin=U?-12
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U?-13
+Removed Pin From Net: NetName=GND Pin=U?-18
+Removed Pin From Net: NetName=GND Pin=U?-20
+Removed Pin From Net: NetName=IMU_VDDIO Pin=U?-22
+Removed Pin From Net: NetName=IMU_SCL Pin=U?-23
+Removed Pin From Net: NetName=IMU_SDA Pin=U?-24
+Removed Pin From Net: NetName=GND Pin=U?-25
+Change Component Footprint: Designator=U? Old Footprint=INSE-QFN-24-1700X1540TP_M New Footprint=INSE-QFN-24-1700X1540TP_L
+Change Component Designator: OldDesignator=C? NewDesignator=C1
+Change Component Designator: OldDesignator=C? NewDesignator=C2
+Change Component Designator: OldDesignator=C? NewDesignator=C3
+Change Component Designator: OldDesignator=C? NewDesignator=C4
+Change Component Designator: OldDesignator=C? NewDesignator=C5
+Change Component Designator: OldDesignator=C? NewDesignator=C6
+Change Component Designator: OldDesignator=C? NewDesignator=C7
+Change Component Designator: OldDesignator=C? NewDesignator=C8
+Change Component Designator: OldDesignator=C? NewDesignator=C9
+Change Component Designator: OldDesignator=C? NewDesignator=C10
+Change Component Designator: OldDesignator=C? NewDesignator=C11
+Change Component Designator: OldDesignator=C? NewDesignator=C12
+Change Component Designator: OldDesignator=C? NewDesignator=C13
+Change Component Designator: OldDesignator=C? NewDesignator=C14
+Change Component Designator: OldDesignator=C? NewDesignator=C15
+Change Component Designator: OldDesignator=C? NewDesignator=C16
+Change Component Designator: OldDesignator=C? NewDesignator=C17
+Change Component Designator: OldDesignator=C? NewDesignator=C18
+Change Component Designator: OldDesignator=C? NewDesignator=C19
+Change Component Designator: OldDesignator=C? NewDesignator=C20
+Change Component Designator: OldDesignator=C? NewDesignator=C21
+Change Component Designator: OldDesignator=C? NewDesignator=C22
+Change Component Designator: OldDesignator=C? NewDesignator=C23
+Change Component Designator: OldDesignator=C? NewDesignator=C24
+Change Component Designator: OldDesignator=C? NewDesignator=C25
+Change Component Designator: OldDesignator=C? NewDesignator=C26
+Change Component Designator: OldDesignator=C? NewDesignator=C27
+Change Component Designator: OldDesignator=D? NewDesignator=D1
+Change Component Designator: OldDesignator=D? NewDesignator=D2
+Change Component Designator: OldDesignator=D? NewDesignator=D3
+Change Component Designator: OldDesignator=D? NewDesignator=D4
+Change Component Designator: OldDesignator=D? NewDesignator=D5
+Change Component Designator: OldDesignator=FB? NewDesignator=FB1
+Change Component Designator: OldDesignator=J? NewDesignator=J1
+Change Component Designator: OldDesignator=J? NewDesignator=J2
+Change Component Designator: OldDesignator=J? NewDesignator=J3
+Change Component Designator: OldDesignator=Q? NewDesignator=Q1
+Change Component Designator: OldDesignator=R? NewDesignator=R1
+Change Component Designator: OldDesignator=R? NewDesignator=R2
+Change Component Designator: OldDesignator=R? NewDesignator=R3
+Change Component Designator: OldDesignator=R? NewDesignator=R4
+Change Component Designator: OldDesignator=R? NewDesignator=R5
+Change Component Designator: OldDesignator=R? NewDesignator=R6
+Change Component Designator: OldDesignator=R? NewDesignator=R7
+Change Component Designator: OldDesignator=R? NewDesignator=R8
+Change Component Designator: OldDesignator=R? NewDesignator=R9
+Change Component Designator: OldDesignator=R? NewDesignator=R10
+Change Component Designator: OldDesignator=R? NewDesignator=R11
+Change Component Designator: OldDesignator=R? NewDesignator=R12
+Change Component Designator: OldDesignator=R? NewDesignator=R13
+Change Component Designator: OldDesignator=R? NewDesignator=R14
+Change Component Designator: OldDesignator=R? NewDesignator=R15
+Change Component Designator: OldDesignator=R? NewDesignator=R16
+Change Component Designator: OldDesignator=R? NewDesignator=R17
+Change Component Designator: OldDesignator=R? NewDesignator=R18
+Change Component Designator: OldDesignator=SW? NewDesignator=SW1
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Change Component Designator: OldDesignator=U? NewDesignator=U2
+Change Component Designator: OldDesignator=U? NewDesignator=U3
+Change Component Designator: OldDesignator=U? NewDesignator=U4
+Change Component Designator: OldDesignator=U? NewDesignator=U5
+Change Component Designator: OldDesignator=X? NewDesignator=X1
+Added Component: Designator=J4(JP3)
+Add component (AddParameter): Name = "Value"; Value = "J3"; VariantName = "[No Variations]"
+Added Component: Designator=J5(JP4x2)
+Add component (AddParameter): Name = "Value"; Value = "Connector 4x2"; VariantName = "[No Variations]"
+Add component: Footprint Not Found JP 1x4 DT
+Added Component: Designator=JP2(JP8)
+Add component (AddParameter): Name = "Value"; Value = "JP7"; VariantName = "[No Variations]"
+Added Component: Designator=JP3(JP6)
+Add component (AddParameter): Name = "Value"; Value = "JP7"; VariantName = "[No Variations]"
+Add component: Footprint Not Found INDC2015X152N
+Added Pin To Net: NetName=SERIAL_RX Pin=J4-1
+Added Pin To Net: NetName=SERIAL_TX Pin=J4-2
+Added Pin To Net: NetName=GND Pin=J4-3
+Added Pin To Net: NetName=I2C3_SCL Pin=J5-1
+Added Pin To Net: NetName=I2C3_SCL Pin=J5-2
+Added Pin To Net: NetName=I2C3_SCL Pin=J5-3
+Added Pin To Net: NetName=I2C3_SCL Pin=J5-4
+Added Pin To Net: NetName=I2C3_SDA Pin=J5-5
+Added Pin To Net: NetName=I2C3_SDA Pin=J5-6
+Added Pin To Net: NetName=I2C3_SDA Pin=J5-7
+Added Pin To Net: NetName=I2C3_SDA Pin=J5-8
+Add Pin To Net: Unknown Pin: Pin JP1-1
+Add Pin To Net: Unknown Pin: Pin JP1-2
+Add Pin To Net: Unknown Pin: Pin JP1-3
+Add Pin To Net: Unknown Pin: Pin JP1-4
+Added Pin To Net: NetName=IO_B1 Pin=JP2-1
+Added Pin To Net: NetName=IO_B0 Pin=JP2-2
+Added Pin To Net: NetName=TFT_MOSI Pin=JP2-3
+Added Pin To Net: NetName=TFT_MISO Pin=JP2-4
+Added Pin To Net: NetName=TFT_SCK Pin=JP2-5
+Added Pin To Net: NetName=TFT_CS Pin=JP2-6
+Added Pin To Net: NetName=GND Pin=JP2-7
+Added Pin To Net: NetName=IMU_VDDIO Pin=JP2-8
+Added Pin To Net: NetName=IMU_VDDIO Pin=JP3-1
+Added Pin To Net: NetName=GND Pin=JP3-2
+Added Pin To Net: NetName=SPI3_SCK Pin=JP3-4
+Added Pin To Net: NetName=SPI3_MISO Pin=JP3-5
+Added Pin To Net: NetName=SPI3_MOSI Pin=JP3-6
+Add Pin To Net: Unknown Pin: Pin L1-1
+Added Pin To Net: NetName=IMU_VDDIO Pin=U3-8
+Added Pin To Net: NetName=IMU_REGOUT Pin=U3-10
+Added Pin To Net: NetName=IMU_INT Pin=U3-12
+Added Pin To Net: NetName=IMU_VDDIO Pin=U3-13
+Added Pin To Net: NetName=GND Pin=U3-18
+Added Pin To Net: NetName=GND Pin=U3-20
+Added Pin To Net: NetName=IMU_VDDIO Pin=U3-22
+Added Pin To Net: NetName=IMU_SCL Pin=U3-23
+Added Pin To Net: NetName=IMU_SDA Pin=U3-24
+Added Pin To Net: NetName=GND Pin=U3-25
+Change Net Name : Old Net Name=IMU_VDDIO New Net Name=+3.3V
+Change Net Name : Old Net Name=NetC?_1 New Net Name=NetC23_1
+Change Net Name : Old Net Name=NetC?_2 New Net Name=NetC14_2
+Change Net Name : Old Net Name=NetD?_A New Net Name=NetD5_A
+Change Net Name : Old Net Name=NetD?_C New Net Name=NetD4_C
+Change Net Name : Old Net Name=NetD?_K New Net Name=NetD5_K
+Change Net Name : Old Net Name=NetJ?_A5 New Net Name=NetJ1_A5
+Change Net Name : Old Net Name=NetJ?_A6 New Net Name=NetJ1_A6
+Change Net Name : Old Net Name=NetJ?_A7 New Net Name=NetJ1_A7
+Change Net Name : Old Net Name=NetJ?_B5 New Net Name=NetJ1_B5
+Change Net Name : Old Net Name=NetQ?_1 New Net Name=NetQ1_1
+Change Net Name : Old Net Name=NetR?_2 New Net Name=NetR8_2
+Added Pin To Net: NetName=IMU_VDDIO Pin=U3-1
+Added Net: Name=IMU_VDDIO
+Added Pin To Net: NetName=NetC1_2 Pin=C1-2
+Added Pin To Net: NetName=NetC1_2 Pin=D1-K
+Added Pin To Net: NetName=NetC1_2 Pin=D3-C
+Added Pin To Net: NetName=NetC1_2 Pin=FB1-1
+Added Net: Name=NetC1_2
+Added Pin To Net: NetName=NetC8_1 Pin=C8-1
+Added Pin To Net: NetName=NetC8_1 Pin=C9-1
+Added Pin To Net: NetName=NetC8_1 Pin=C10-1
+Added Pin To Net: NetName=NetC8_1 Pin=C11-1
+Added Pin To Net: NetName=NetC8_1 Pin=C12-1
+Added Pin To Net: NetName=NetC8_1 Pin=C13-1
+Added Net: Name=NetC8_1
+Added Pin To Net: NetName=NetC25_1 Pin=C25-1
+Added Pin To Net: NetName=NetC25_1 Pin=J3-1
+Added Net: Name=NetC25_1
+Added Pin To Net: NetName=NetC25_2 Pin=C25-2
+Added Pin To Net: NetName=NetC25_2 Pin=C27-2
+Added Pin To Net: NetName=NetC25_2 Pin=R17-1
+Added Net: Name=NetC25_2
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Pin To Net: NetName=NetR11_1 Pin=U3-9
+Added Net: Name=NetR11_1
+Added Pin To Net: NetName=NetR12_1 Pin=R12-1
+Added Pin To Net: NetName=NetR12_1 Pin=U3-11
+Added Net: Name=NetR12_1
+Added Pin To Net: NetName=NetR18_2 Pin=R18-2
+Added Pin To Net: NetName=NetR18_2 Pin=U5-18
+Added Net: Name=NetR18_2
+Added Pin To Net: NetName=SPI3_CS Pin=JP3-3
+Added Pin To Net: NetName=SPI3_CS Pin=U2-38
+Added Net: Name=SPI3_CS
+Added Member To Class: ClassName=PCB1 Member=Component C2 2.2uF
+Added Member To Class: ClassName=PCB1 Member=Component C3 22uF
+Added Member To Class: ClassName=PCB1 Member=Component C4 22uF
+Added Member To Class: ClassName=PCB1 Member=Component C5 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C6 15pF
+Added Member To Class: ClassName=PCB1 Member=Component C7 15pF
+Added Member To Class: ClassName=PCB1 Member=Component C8 2.2uF
+Added Member To Class: ClassName=PCB1 Member=Component C9 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C10 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C11 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C12 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C13 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C14 2.2uF
+Added Member To Class: ClassName=PCB1 Member=Component C15 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C16 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C17 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C18 10nF
+Added Member To Class: ClassName=PCB1 Member=Component C19 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C20 33nF
+Added Member To Class: ClassName=PCB1 Member=Component C21 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C22 33nF
+Added Member To Class: ClassName=PCB1 Member=Component C23 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C24 100nF
+Added Member To Class: ClassName=PCB1 Member=Component C25 100pF
+Added Member To Class: ClassName=PCB1 Member=Component C26 NC
+Added Member To Class: ClassName=PCB1 Member=Component C27 NC
+Added Member To Class: ClassName=PCB1 Member=Component D1 D_SCHOTTKY_SOD_323
+Added Member To Class: ClassName=PCB1 Member=Component D2 GREEN
+Added Member To Class: ClassName=PCB1 Member=Component D3 SMAJ28A
+Added Member To Class: ClassName=PCB1 Member=Component D4 1N4148W-7
+Added Member To Class: ClassName=PCB1 Member=Component J2 S8411-45R
+Added Member To Class: ClassName=PCB1 Member=Component J3 IPEX
+Added Member To Class: ClassName=PCB1 Member=Component J4 Jumper 3
+Added Member To Class: ClassName=PCB1 Member=Component J5 Connector 4x2
+Add Class Member: Failed to add class member : Component JP1 JP 1x4 2.54
+Added Member To Class: ClassName=PCB1 Member=Component JP2 JP8 PIN
+Added Member To Class: ClassName=PCB1 Member=Component JP3 JP6 PIN
+Add Class Member: Failed to add class member : Component L1 68nH
+Added Member To Class: ClassName=PCB1 Member=Component R1 22R
+Added Member To Class: ClassName=PCB1 Member=Component R2 1K
+Added Member To Class: ClassName=PCB1 Member=Component R3 22R
+Added Member To Class: ClassName=PCB1 Member=Component R4 5.1K
+Added Member To Class: ClassName=PCB1 Member=Component R5 5.1K
+Added Member To Class: ClassName=PCB1 Member=Component R6 10K
+Added Member To Class: ClassName=PCB1 Member=Component R7 0R
+Added Member To Class: ClassName=PCB1 Member=Component R8 10K
+Added Member To Class: ClassName=PCB1 Member=Component R9 4k7
+Added Member To Class: ClassName=PCB1 Member=Component R10 4k7
+Added Member To Class: ClassName=PCB1 Member=Component R11 10K
+Added Member To Class: ClassName=PCB1 Member=Component R12 10K
+Added Member To Class: ClassName=PCB1 Member=Component R13 1K
+Added Member To Class: ClassName=PCB1 Member=Component R14 470R
+Added Member To Class: ClassName=PCB1 Member=Component R15 1K
+Added Member To Class: ClassName=PCB1 Member=Component R16 10R
+Added Member To Class: ClassName=PCB1 Member=Component R17 0R
+Added Member To Class: ClassName=PCB1 Member=Component U1 AMS1117-3.3
+Added Member To Class: ClassName=PCB1 Member=Component U3 MPU-9250
+Added Member To Class: ClassName=PCB1 Member=Component U4 W25Q128JVSIM
+Added Member To Class: ClassName=PCB1 Member=Component U5 LC76G
+Added Rule: Name=Schematic Supply Nets

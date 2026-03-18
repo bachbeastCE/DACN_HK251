@@ -1,0 +1,3 @@
+Change Component Description : Designator=Q2 Old Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„ New Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„|, 150Â°C
+Add Class: Class already exists: Designator
+Added Member To Class: ClassName=Designator Member=Component U4 LC76G

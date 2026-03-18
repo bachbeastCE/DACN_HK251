@@ -1,0 +1,15 @@
+Change Component Designator: OldDesignator=C? NewDesignator=C10
+Change Component Designator: OldDesignator=R? NewDesignator=R3
+Change Component Designator: OldDesignator=R? NewDesignator=R4
+Change Component Designator: OldDesignator=R? NewDesignator=R5
+Change Component Designator: OldDesignator=R? NewDesignator=R6
+Change Net Name : Old Net Name=NetR?_1 New Net Name=NetR5_1
+Added Pin To Net: NetName=NetR6_1 Pin=R6-1
+Added Pin To Net: NetName=NetR6_1 Pin=U4-6
+Added Net: Name=NetR6_1
+Added Member To Class: ClassName=IMU Member=Component C10 SMD 0603 100nF
+Added Member To Class: ClassName=IMU Member=Component R2 0603 4.7K
+Added Member To Class: ClassName=IMU Member=Component R3 0603 10R
+Added Member To Class: ClassName=IMU Member=Component R4 0603 10R
+Added Member To Class: ClassName=IMU Member=Component R5 0603 0R
+Added Member To Class: ClassName=IMU Member=Component R6 0603 0R

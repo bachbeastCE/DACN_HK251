@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=GND Pin=JP3-2
+Removed Pin From Net: NetName=GND Pin=U5-12
+Removed Pin From Net: NetName=GND Pin=U5-13
+Removed Pin From Net: NetName=GND Pin=U5-14
+Removed Pin From Net: NetName=GND Pin=U5-15
+Change Component Description : Designator=Q2 Old Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„ New Description=MOSFET, SOT-23, P, -30V, -4A, 0.065â„|, 150Â°C
+Added Pin To Net: NetName=MCU_NRST Pin=JP3-2
+Add Class: Class already exists: Designator

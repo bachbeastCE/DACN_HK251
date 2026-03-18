@@ -1,0 +1,5 @@
+Added Component: Designator=J6(jp2h)
+Add component (AddParameter): Name = "Value"; Value = "JP 2"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=J6-1
+Added Pin To Net: NetName=IMU_VIN Pin=J6-2
+Add Class: Class already exists: Designator

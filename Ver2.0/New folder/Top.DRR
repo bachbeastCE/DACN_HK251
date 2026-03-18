@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Top.PcbDoc   10/30/2025  9:03:44 PM
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII Plated RoundHoles File : Top-RoundHoles-Plated.TXT
+ASCII Plated SlotHoles File : Top-SlotHoles-Plated.TXT
+EIA File   : Top.DRL
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel             Hole Length           Drill Type  Via Type
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+T1      0.2mm (8mil)                                              Round             29        PTH        51.88mm (2.04inch)      -                       Regular
+T2      0.3mm (12mil)                                             Round             32        PTH        254.98mm (10.04inch)    -                       Regular
+T3      0.6mm (24mil)                                             Slot              2         PTH        24.11mm (0.95inch)      1.4mm (55mil)           Regular
+T4      0.6mm (24mil)                                             Slot              2         PTH        24.94mm (0.98inch)      1.8mm (71mil)           Regular
+T5      0.711mm (28mil)                                           Round             19        PTH        201.37mm (7.93inch)     -                       Regular
+T6      0.889mm (35mil)                                           Round             3         PTH        4.06mm (0.16inch)       -                       Regular
+T7      0.914mm (36mil)                                           Round             33        PTH        221.34mm (8.71inch)     -                       Regular
+T8      1.067mm (42mil)                                           Round             7         PTH        15.24mm (0.60inch)      -                       Regular
+T9      1.143mm (45mil)                                           Round             2         PTH        9.14mm (0.36inch)       -                       Regular
+T10     2mm (79mil)                                               Round             2         PTH        3.56mm (0.14inch)       -                       Regular
+T11     4mm (157mil)                                              Round             4         PTH        192.28mm (7.57inch)     -                       Regular
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              135
+
+Total Processing Time (hh:mm:ss) : 00:00:00
