@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "inform.h"
 
 static const double FIXED_LAT = 11.537543;
 static const double FIXED_LON = 106.901618;
@@ -10,33 +11,48 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    inform = new Inform(this);
+
+    // connect Inform -> MainWindow
+    connect(inform, &Inform::sendObserver,
+            this, &MainWindow::updateObserver);
+
+    connect(inform, &Inform::sendTarget,
+            this, &MainWindow::updateTarget);
+
+    connect(inform, &Inform::sendDistance,
+            this, &MainWindow::updateDistance);
+
+
     ui->quickWidget_MAPS->setSource(QUrl(QStringLiteral("qrc:/qmlMAPS.qml")));
     ui->quickWidget_MAPS->show();
 
     auto Obje = ui->quickWidget_MAPS->rootObject();
-    connect(this, SIGNAL(setCenterPosition(QVariant,QVariant)), Obje, SLOT(setCenterPosition(QVariant,QVariant)));
-    connect(this, SIGNAL(setLocationMarking_1(QVariant,QVariant)), Obje, SLOT(setLocationMarking_1(QVariant,QVariant)));
-    connect(this, SIGNAL(setLocationMarking_2(QVariant,QVariant)), Obje, SLOT(setLocationMarking_2(QVariant,QVariant)));
-    connect(this, SIGNAL(setDistance(QVariant)), Obje, SLOT(setDistance(QVariant)));
+
+    connect(this, SIGNAL(setCenterPosition(QVariant,QVariant)),
+            Obje, SLOT(setCenterPosition(QVariant,QVariant)));
+
+    connect(this, SIGNAL(setLocationMarking_1(QVariant,QVariant)),
+            Obje, SLOT(setLocationMarking_1(QVariant,QVariant)));
+
+    connect(this, SIGNAL(setLocationMarking_2(QVariant,QVariant)),
+            Obje, SLOT(setLocationMarking_2(QVariant,QVariant)));
+
+    connect(this, SIGNAL(setDistance(QVariant)),
+            Obje, SLOT(setDistance(QVariant)));
+    ui->labelBadge->setStyleSheet(
+        "background:red;"
+        "color:white;"
+        "border-radius:10px;"
+        "min-width:20px;"
+        "min-height:20px;"
+        "font-weight:bold;"
+    );
+    connect(inform, &Inform::newPacket,
+            this, &MainWindow::onNewPacket);
+    ui->labelBadge->hide();
     emit setCenterPosition(FIXED_LAT, FIXED_LON);
     emit setLocationMarking_1(FIXED_LAT, FIXED_LON);
-
-    serial = new QSerialPort(this);
-    serial->setPortName("COM4");
-    serial->setBaudRate(QSerialPort::Baud115200);
-    serial->setDataBits(QSerialPort::Data8);
-    serial->setParity(QSerialPort::NoParity);
-    serial->setStopBits(QSerialPort::OneStop);
-    serial->setFlowControl(QSerialPort::NoFlowControl);
-
-    if (serial->open(QIODevice::ReadOnly)) {
-        connect(serial, &QSerialPort::readyRead,
-                this, &MainWindow::readSerialData);
-        qDebug() << "COM4 opened";
-    } else {
-        qDebug() << "Failed to open COM4";
-    }
-
 }
 
 MainWindow::~MainWindow()
@@ -61,50 +77,50 @@ void MainWindow::on_btn_clicked()
 
     QGeoCoordinate p1(FIXED_LAT, FIXED_LON);
     QGeoCoordinate p2(lat2, lon2);
-    double distance = p1.distanceTo(p2); // meters
+
+    double distance = p1.distanceTo(p2);
+
     emit setDistance(distance);
 
-
-    qDebug() << "Distance (meters):" << p1.distanceTo(p2);
+    qDebug() << "Distance (meters):" << distance;
 }
 
-void MainWindow::readSerialData()
+void MainWindow::on_Inform_clicked()
 {
-    while (serial->canReadLine()) {
-        QString line = QString::fromUtf8(serial->readLine()).trimmed();
+    packetCount = 0;
+    ui->labelBadge->hide();
 
-        // OBSERVER
-        if (line.startsWith("Observer Coordinate")) {
-            QStringList vals = line.split("=").last().split(",");
-            if (vals.size() == 2) {
-                lat1 = vals[0].trimmed().toDouble();
-                lon1 = vals[1].trimmed().toDouble();
+    hide();
+    inform->show();
+}
 
-                emit setCenterPosition(lat1, lon1);
-                emit setLocationMarking_1(lat1, lon1);
 
-                qDebug() << "OBS:" << lat1 << lon1;
-            }
-        }
+void MainWindow::updateObserver(double lat, double lon)
+{
+    lat1 = lat;
+    lon1 = lon;
 
-        // TARGET
-        else if (line.startsWith("Target")) {
-            QStringList vals = line.split("=").last().split(",");
-            if (vals.size() == 2) {
-                lat2 = vals[0].trimmed().toDouble();
-                lon2 = vals[1].trimmed().toDouble();
+    emit setCenterPosition(lat, lon);
+    emit setLocationMarking_1(lat, lon);
+}
 
-                emit setLocationMarking_2(lat2, lon2);
+void MainWindow::updateTarget(double lat, double lon)
+{
+    lat2 = lat;
+    lon2 = lon;
 
-                qDebug() << "TAR:" << lat2 << lon2;
-            }
-        }
+    emit setLocationMarking_2(lat, lon);
+}
 
-        // DISTANCE
-        if (lat1 != 0 && lat2 != 0) {
-            QGeoCoordinate p1(lat1, lon1);
-            QGeoCoordinate p2(lat2, lon2);
-            emit setDistance(p1.distanceTo(p2));
-        }
-    }
+void MainWindow::updateDistance(double distance)
+{
+    emit setDistance(distance);
+}
+
+void MainWindow::onNewPacket()
+{
+    packetCount++;
+
+    ui->labelBadge->setText(QString::number(packetCount));
+    ui->labelBadge->show();
 }

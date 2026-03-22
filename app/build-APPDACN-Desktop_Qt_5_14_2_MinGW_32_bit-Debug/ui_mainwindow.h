@@ -37,6 +37,8 @@ public:
     QLabel *labelLon;
     QLineEdit *lineEdit;
     QPushButton *btn;
+    QPushButton *Inform;
+    QLabel *labelBadge;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -90,6 +92,13 @@ public:
         btn = new QPushButton(centralwidget);
         btn->setObjectName(QString::fromUtf8("btn"));
         btn->setGeometry(QRect(510, 10, 93, 28));
+        Inform = new QPushButton(centralwidget);
+        Inform->setObjectName(QString::fromUtf8("Inform"));
+        Inform->setGeometry(QRect(1090, 10, 93, 28));
+        labelBadge = new QLabel(centralwidget);
+        labelBadge->setObjectName(QString::fromUtf8("labelBadge"));
+        labelBadge->setGeometry(QRect(1180, 0, 16, 20));
+        labelBadge->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -111,6 +120,8 @@ public:
         labelLon->setText(QCoreApplication::translate("MainWindow", "Input Longitude", nullptr));
         lineEdit->setText(QString());
         btn->setText(QCoreApplication::translate("MainWindow", "Find", nullptr));
+        Inform->setText(QCoreApplication::translate("MainWindow", "InformPage", nullptr));
+        labelBadge->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
     } // retranslateUi
 
 };

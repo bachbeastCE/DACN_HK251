@@ -8,7 +8,8 @@
 #include <QtQuick>
 #include <QtPositioning>
 #include <QLineEdit>
-#include <QSerialPort>
+//#include <inform.h>
+class Inform;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,26 +20,34 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void onNewPacket();
     ~MainWindow();
 
 private slots:
     void on_btn_clicked();
-     void readSerialData();
+    void on_Inform_clicked();
+
+    // nhận data từ Inform
+    void updateObserver(double lat, double lon);
+    void updateTarget(double lat, double lon);
+    void updateDistance(double distance);
 
 private:
     void typeLocation();
-    QSerialPort *serial = nullptr;
+
     double lat2 = 0.0;
     double lon2 = 0.0;
     double lat1 = 0.0;
     double lon1 = 0.0;
+    int packetCount = 0;
     Ui::MainWindow *ui;
+    Inform* inform;
 
 signals:
     void setCenterPosition(QVariant, QVariant);
     void setLocationMarking_1(QVariant, QVariant);
     void setLocationMarking_2(QVariant, QVariant);
     void setDistance(QVariant meters);
-
 };
-#endif // MAINWINDOW_H
+
+#endif

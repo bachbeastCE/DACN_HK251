@@ -12,6 +12,7 @@ Rectangle {
     property double longitude_2:106.901618
     property double distanceMeters: 0
     property var marker2Obj: null
+    property var marker1Obj: null
     property Component locationmarker_1: locmarker_1
     property Component locationmarker_2: locmarker_2
     Plugin
@@ -80,10 +81,17 @@ Rectangle {
 
     function setLocationMarking_1(lati, longi)
     {
-        var item = locationmarker_1.createObject(window, {
-                                      coordinate:QtPositioning.coordinate(lati, longi)
-                                      })
-        mapview.addMapItem(item)
+        latitude_1 = lati
+        longitude_1 = longi
+
+        if (marker1Obj !== null)
+            marker1Obj.destroy()
+
+        marker1Obj = locationmarker_1.createObject(window, {
+            coordinate: QtPositioning.coordinate(lati, longi)
+        })
+
+        mapview.addMapItem(marker1Obj)
     }
 
     function setLocationMarking_2(lati, longi)
@@ -100,7 +108,8 @@ Rectangle {
         mapview.addMapItem(marker2Obj)
 
         // Auto fit map
-        mapview.fitViewportToMapItems()
+        if (marker1Obj !== null && marker2Obj !== null)
+            mapview.fitViewportToMapItems()
     }
 
     Component
@@ -111,7 +120,7 @@ Rectangle {
             id: markerImg
             anchorPoint.x: image.width/4
             anchorPoint.y: image.height
-            coordinate: position
+            coordinate: QtPositioning.coordinate(latitude_1, longitude_1)
             sourceItem: Image {
                 id: image
                 width: 20
