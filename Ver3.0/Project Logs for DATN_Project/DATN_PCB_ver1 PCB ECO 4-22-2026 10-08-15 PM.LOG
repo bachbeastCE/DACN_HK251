@@ -1,0 +1,4 @@
+Added Component: Designator=LED3(LED-0805-Green)
+Add component (AddParameter): Name = "Value"; Value = "LED 3 - 5 ly 2 Colour"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC36_4 Pin=LED3-1
+Added Pin To Net: NetName=NetC36_3 Pin=LED3-2

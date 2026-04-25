@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=SPI3_CS Pin=R21-1
+Removed Pin From Net: NetName=SPI3_SCK Pin=R22-1
+Removed Pin From Net: NetName=SPI3_MISO Pin=R23-1
+Removed Pin From Net: NetName=SPI3_MOSI Pin=R25-1
+Change Component Designator: OldDesignator=323 NewDesignator=R7
+Added Pin To Net: NetName=SPI1_CS Pin=R21-1
+Added Pin To Net: NetName=SPI1_SCK Pin=R22-1
+Added Pin To Net: NetName=SPI1_MISO Pin=R23-1
+Added Pin To Net: NetName=SPI1_MOSI Pin=R25-1

@@ -1,0 +1,5 @@
+Change Component Footprint: Designator=C32 Old Footprint=CN-SMD-0603 New Footprint=PAD-SMD-1206
+Change Component Footprint: Designator=C39 Old Footprint=CN-SMD-0603 New Footprint=PAD-SMD-1206
+Change Component Footprint: Designator=C40 Old Footprint=CN-SMD-0603 New Footprint=PAD-SMD-1206
+Change Component Footprint: Designator=C34 Old Footprint=PAD-CAP-SMD-0603 New Footprint=PAD-SMD-1206
+Change Component Footprint: Designator=C35 Old Footprint=PAD-CAP-SMD-0603 New Footprint=PAD-SMD-1206

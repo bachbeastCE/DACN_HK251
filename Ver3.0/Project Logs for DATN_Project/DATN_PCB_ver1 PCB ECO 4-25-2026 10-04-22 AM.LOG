@@ -1,0 +1,66 @@
+Added Component: Designator=U2(STM-UFQFPN48_L)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer URL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.st.com/"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00115249.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Core"; Value = "ARM Cortex-M4"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "D/A Converter"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DatasheetVersion"; Value = "Rev. 6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "FLASH Size (Prog) (kB)"; Value = "512"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "I/Os (High Current)"; Value = "36"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Internal RAM Size (kB)"; Value = "128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Frequency(F) (Processor speed) (MHz)"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Description"; Value = "UFQFPN48"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Reference"; Value = "48-Pin Ultra Thin Fine Pitch Quad Flat No-Lead, 7 x 7 x 0.6 mm Body, 0.5 mm Pitch, Exposed Pad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packing"; Value = "Tray"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supply Voltage(Vcc) min (V)"; Value = "1.7"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=3.3V_OUT Pin=U2-1
+Added Pin To Net: NetName=PC13 Pin=U2-2
+Added Pin To Net: NetName=PC14 Pin=U2-3
+Added Pin To Net: NetName=PC15 Pin=U2-4
+Added Pin To Net: NetName=OSC_IN Pin=U2-5
+Added Pin To Net: NetName=OSC_OUT Pin=U2-6
+Added Pin To Net: NetName=MCU_NRST Pin=U2-7
+Added Pin To Net: NetName=GND_OUT Pin=U2-8
+Added Pin To Net: NetName=3.3V_OUT Pin=U2-9
+Added Pin To Net: NetName=PA0 Pin=U2-10
+Added Pin To Net: NetName=ADC1 Pin=U2-11
+Added Pin To Net: NetName=TX2_GPSRX Pin=U2-12
+Added Pin To Net: NetName=RX2_GPSTX Pin=U2-13
+Added Pin To Net: NetName=SPI1_CS Pin=U2-14
+Added Pin To Net: NetName=SPI1_SCK Pin=U2-15
+Added Pin To Net: NetName=SPI1_MISO Pin=U2-16
+Added Pin To Net: NetName=SPI1_MOSI Pin=U2-17
+Added Pin To Net: NetName=PB0 Pin=U2-18
+Added Pin To Net: NetName=PB1 Pin=U2-19
+Added Pin To Net: NetName=PB2 Pin=U2-20
+Added Pin To Net: NetName=PB10 Pin=U2-21
+Added Pin To Net: NetName=NetC19_2 Pin=U2-22
+Added Pin To Net: NetName=GND_OUT Pin=U2-23
+Added Pin To Net: NetName=3.3V_OUT Pin=U2-24
+Added Pin To Net: NetName=SPI2_CS Pin=U2-25
+Added Pin To Net: NetName=SPI2_SCK Pin=U2-26
+Added Pin To Net: NetName=SPI2_MISO Pin=U2-27
+Added Pin To Net: NetName=SPI2_MOSI Pin=U2-28
+Added Pin To Net: NetName=PA8 Pin=U2-29
+Added Pin To Net: NetName=USB_VBUS Pin=U2-30
+Added Pin To Net: NetName=PA10 Pin=U2-31
+Added Pin To Net: NetName=USB_DN Pin=U2-32
+Added Pin To Net: NetName=USB_DP Pin=U2-33
+Added Pin To Net: NetName=SWDIO Pin=U2-34
+Added Pin To Net: NetName=GND_OUT Pin=U2-35
+Added Pin To Net: NetName=3.3V_OUT Pin=U2-36
+Added Pin To Net: NetName=SWCLK Pin=U2-37
+Added Pin To Net: NetName=SPI3_CS Pin=U2-38
+Added Pin To Net: NetName=SPI3_SCK Pin=U2-39
+Added Pin To Net: NetName=SPI3_MISO Pin=U2-40
+Added Pin To Net: NetName=SPI3_MOSI Pin=U2-41
+Added Pin To Net: NetName=TX1 Pin=U2-42
+Added Pin To Net: NetName=RX1 Pin=U2-43
+Added Pin To Net: NetName=NetR23_1 Pin=U2-44
+Added Pin To Net: NetName=I2C1_SCL Pin=U2-45
+Added Pin To Net: NetName=I2C1_SDA Pin=U2-46
+Added Pin To Net: NetName=GND_OUT Pin=U2-47
+Added Pin To Net: NetName=3.3V_OUT Pin=U2-48
+Added Pin To Net: NetName=GND_OUT Pin=U2-49

@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=SPI1_CS Pin=C20-7
+Removed Pin From Net: NetName=SPI1_SCK Pin=C20-8
+Removed Pin From Net: NetName=SPI1_MOSI Pin=C20-9
+Removed Pin From Net: NetName=SPI1_MISO Pin=C20-10
+Added Pin To Net: NetName=SPI3_CS Pin=C20-7
+Added Pin To Net: NetName=SPI3_SCK Pin=C20-8
+Added Pin To Net: NetName=SPI3_MOSI Pin=C20-9
+Added Pin To Net: NetName=SPI3_MISO Pin=C20-10

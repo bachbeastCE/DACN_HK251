@@ -1,0 +1,21 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: DATN_PCB_ver1.PcbDoc   4/25/2026  10:17:54 AM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : DATN_PCB_ver1-RoundHoles.TXT
+ASCII SlotHoles File : DATN_PCB_ver1-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.3mm (12mil)                                             Round             111       PTH        469.92mm (18.50inch)
+T2      0.4mm (16mil)                                             Round             1         PTH        0.00mm (0.00inch)
+T3      0.6mm (24mil)                                             Slot              4         PTH        37.97mm (1.49inch)
+T4      1.016mm (40mil)                                           Round             2         PTH        2.54mm (0.10inch)
+T5      1.1mm (43mil)                                             Round             58        PTH        272.17mm (10.72inch)
+T6      3.2mm (126mil)                                            Round             4         PTH        180.78mm (7.12inch)
+T7      0.65mm (26mil)                                            Round             2         NPTH       5.78mm (0.23inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              182
+
+Total Processing Time (hh:mm:ss) : 00:00:00

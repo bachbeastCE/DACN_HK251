@@ -1,0 +1,6 @@
+Added Component: Designator=SW1(SW2-SMD)
+Add component (AddParameter): Name = "Value"; Value = "Button chip 4 pin"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=MCU_NRST Pin=SW1-1
+Added Pin To Net: NetName=GND_OUT Pin=SW1-2
+Added Pin To Net: NetName=GND_OUT Pin=SW1-3
+Added Pin To Net: NetName=MCU_NRST Pin=SW1-4

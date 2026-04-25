@@ -1,0 +1,4 @@
+Added Component: Designator=C19(CN-SMD-0805)
+Add component (AddParameter): Name = "Value"; Value = "33pF"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND_OUT Pin=C19-1
+Added Pin To Net: NetName=NetC19_2 Pin=C19-2

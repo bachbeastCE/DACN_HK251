@@ -1,0 +1,18 @@
+Added Component: Designator=U1(VREG_V62/16624-01YE)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/TPS63001DRCR/Texas+Instruments/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Texas Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "TPS63001DRCR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "VSON-10 Texas Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/TPS63001DRCR/Texas+Instruments/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=3.3V_OUT Pin=U1-1
+Added Pin To Net: NetName=NetL1_1 Pin=U1-2
+Added Pin To Net: NetName=GND_OUT Pin=U1-3
+Added Pin To Net: NetName=NetL1_2 Pin=U1-4
+Added Pin To Net: NetName=NetC1_2 Pin=U1-5
+Added Pin To Net: NetName=NetC7_2 Pin=U1-6
+Added Pin To Net: NetName=NetC7_2 Pin=U1-7
+Added Pin To Net: NetName=NetC7_2 Pin=U1-8
+Added Pin To Net: NetName=GND_OUT Pin=U1-9
+Added Pin To Net: NetName=3.3V_OUT Pin=U1-10
+Add Pin To Net: Unknown Pin: Pin U1-11

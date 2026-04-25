@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: E:\HCMUT\HK251\Project\PCB\DATN\DATN_Project\DATN_PCB_ver1.PcbDoc
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=datn_pcb_ver1-roundholes.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=datn_pcb_ver1-slotholes.txt|DrillLayers=gtl,gbl
