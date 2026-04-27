@@ -1119,8 +1119,10 @@ void StartLoRaTask(void const * argument)
 		uint8_t ver = LoRa_read(&myLoRa, 0x42);
 		Serial_Print("Version: 0x%02X\r\n", ver);
 		LoRa_init(&myLoRa);
-		LoRa_setSyncWord(&myLoRa, 0xF1);
+		LoRa_setSyncWord(&myLoRa, 0x12);
 		Serial_Print("AAAA\r\n");
+		Serial_Print("AAAA\r\n");
+
 
   /* Infinite loop */
 		loc_data_header.seq_num = 0;
