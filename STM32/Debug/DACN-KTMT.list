@@ -4994,7 +4994,7 @@ void StartLoRaTask(void const * argument)
   /* USER CODE BEGIN StartLoRaTask */
 	// LORA MODULE SETTINGS ----------------------------------------------
 
-	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3);
+	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA15 SPI3 CS, PA10 RESET
  80027d6:	4c5b      	ldr	r4, [pc, #364]	@ (8002944 <StartLoRaTask+0x178>)
  80027d8:	4638      	mov	r0, r7
  80027da:	4b5b      	ldr	r3, [pc, #364]	@ (8002948 <StartLoRaTask+0x17c>)
@@ -5059,8 +5059,8 @@ void StartLoRaTask(void const * argument)
 		LoRa_init(&myLoRa);
  800285a:	483a      	ldr	r0, [pc, #232]	@ (8002944 <StartLoRaTask+0x178>)
  800285c:	f7fe fe9e 	bl	800159c <LoRa_init>
-		LoRa_setSyncWord(&myLoRa, 0x12);
- 8002860:	2112      	movs	r1, #18
+		LoRa_setSyncWord(&myLoRa, 0xF1);
+ 8002860:	21f1      	movs	r1, #241	@ 0xf1
  8002862:	4838      	ldr	r0, [pc, #224]	@ (8002944 <StartLoRaTask+0x178>)
  8002864:	f7fe fe87 	bl	8001576 <LoRa_setSyncWord>
 		Serial_Print("AAAA\r\n");

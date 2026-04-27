@@ -1106,7 +1106,7 @@ void StartLoRaTask(void const * argument)
   /* USER CODE BEGIN StartLoRaTask */
 	// LORA MODULE SETTINGS ----------------------------------------------
 
-	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3);
+	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA15 SPI3 CS, PA10 RESET
 	  	myLoRa.frequency             = 434;							  // default = 433 MHz
 	  	myLoRa.spredingFactor        = SF_7;							// default = SF_7
 	  	myLoRa.bandWidth			 = BW_125KHz;				  // default = BW_125KHz
@@ -1119,7 +1119,7 @@ void StartLoRaTask(void const * argument)
 		uint8_t ver = LoRa_read(&myLoRa, 0x42);
 		Serial_Print("Version: 0x%02X\r\n", ver);
 		LoRa_init(&myLoRa);
-		LoRa_setSyncWord(&myLoRa, 0x12);
+		LoRa_setSyncWord(&myLoRa, 0xF1);
 		Serial_Print("AAAA\r\n");
 		Serial_Print("AAAA\r\n");
 
