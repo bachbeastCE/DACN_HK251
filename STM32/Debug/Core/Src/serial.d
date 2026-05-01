@@ -51,7 +51,10 @@ Core/Src/serial.o: ../Core/Src/serial.c ../Core/Inc/serial.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
+ ../Core/Inc/st7735.h ../Core/Inc/fonts.h ../Core/Inc/gps.h \
+ ../Core/Inc/button.h ../Core/Inc/main.h ../Core/Inc/battery.h \
+ ../Core/Inc/gps_kf.h ../Core/Inc/LoRa.h ../Core/Inc/micro_aes.h
 ../Core/Inc/serial.h:
 ../Core/Inc/global.h:
 ../Core/Inc/main.h:
@@ -109,3 +112,12 @@ Core/Src/serial.o: ../Core/Src/serial.c ../Core/Inc/serial.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
+../Core/Inc/st7735.h:
+../Core/Inc/fonts.h:
+../Core/Inc/gps.h:
+../Core/Inc/button.h:
+../Core/Inc/main.h:
+../Core/Inc/battery.h:
+../Core/Inc/gps_kf.h:
+../Core/Inc/LoRa.h:
+../Core/Inc/micro_aes.h:

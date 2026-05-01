@@ -1,1 +1,6 @@
-../Core/Src/global.c:13:6:Semaphore_init	1
+../Core/Src/global.c:55:6:Semaphore_init	1
+../Core/Src/global.c:60:6:Mutex_init	1
+../Core/Src/global.c:67:6:TaskButton_init	1
+../Core/Src/global.c:71:6:TaskButton_run	1
+../Core/Src/global.c:86:6:TaskDebug_init	1
+../Core/Src/global.c:91:6:TaskDebug_run	5

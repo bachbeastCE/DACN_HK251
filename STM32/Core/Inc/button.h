@@ -10,16 +10,12 @@
 
 #include "main.h"
 
-
-
 #define NORMAL_STATE SET
 #define PRESSED_STATE RESET
 
 extern const int MAX_BUTTON;
-extern int button_flag[5];
 
-#define BUTTON0 GPIO_PIN_0
-#define BUTTON0_PORT GPIOA
+#define BUTTON0_PA0 GPIO_PIN_0
 
 void getKeyInput();
 int isButtonPressed(int button_index);
