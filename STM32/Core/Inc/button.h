@@ -15,8 +15,6 @@
 
 extern const int MAX_BUTTON;
 
-#define BUTTON0_PA0 GPIO_PIN_0
-
 void getKeyInput();
 int isButtonPressed(int button_index);
 int isButtonLongPressed(int button_index);

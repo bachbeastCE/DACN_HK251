@@ -48,16 +48,10 @@ extern uint16_t battery_percent;
 
 extern struct geod_geodesic g;
 
-
 extern osSemaphoreId spiDmaSemHandle;
 extern osSemaphoreId i2cDmaSemHandle;
 
-extern osMutexId button_mutexHandle;
-
-
 void Semaphore_init(void);
-void Mutex_init(void);
-
 
 ///////// TASK  ///////////
 

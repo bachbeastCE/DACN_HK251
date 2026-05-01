@@ -1,6 +1,5 @@
-../Core/Src/global.c:55:6:Semaphore_init	8	static
-../Core/Src/global.c:60:6:Mutex_init	8	static
-../Core/Src/global.c:67:6:TaskButton_init	4	static
-../Core/Src/global.c:71:6:TaskButton_run	8	static
-../Core/Src/global.c:86:6:TaskDebug_init	8	static
-../Core/Src/global.c:91:6:TaskDebug_run	16	static
+../Core/Src/global.c:49:6:Semaphore_init	8	static
+../Core/Src/global.c:55:6:TaskButton_init	4	static
+../Core/Src/global.c:59:6:TaskButton_run	8	static
+../Core/Src/global.c:74:6:TaskDebug_init	8	static
+../Core/Src/global.c:79:6:TaskDebug_run	8	static

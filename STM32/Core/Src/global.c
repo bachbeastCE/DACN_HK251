@@ -41,27 +41,15 @@ int is_gps_new = 0;
 //uint8_t plain_text_buffer[LOC_DATA_HEADER_SIZE + LOC_DATA_PAYLOAD_SIZE];
 //uint8_t cipher_text_buffer[LOC_DATA_HEADER_SIZE + LOC_DATA_PAYLOAD_SIZE + GCM_TAG_LEN];
 
-
-osMutexId button_mutexHandle;
-osMutexDef(button_mutex);
-
 osSemaphoreId spiDmaSemHandle;
 osSemaphoreId i2cDmaSemHandle;
 osSemaphoreDef(I2C_DMA_SEM);
 osSemaphoreDef(SPI_DMA_SEM);
 
-
-
 void Semaphore_init(void){
 	i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
 	spiDmaSemHandle = osSemaphoreCreate(osSemaphore(SPI_DMA_SEM), 1);
 }
-
-void Mutex_init(void){
-	button_mutexHandle = osMutexCreate(osMutex(button_mutex));
-}
-
-
 
 
 void TaskButton_init(void){
@@ -89,39 +77,14 @@ void TaskDebug_init(void){
 
 
 void TaskDebug_run(void){
-    // Biến cục bộ để lưu trạng thái nút nhấn
-    uint8_t mid_button_pressed = 0;
-    uint8_t right_button_pressed = 0;
+	if(isButtonPressed(0)) {
+		Serial_Print("Press MID button\n\r");
+	}
 
-//    osStatus status = osMutexWait(button_mutexHandle, 100);
-
-//    if (status == osOK) {
-//        // Kiểm tra ĐỘC LẬP từng nút nhấn
-        if(isButtonPressed(0)) {
-            mid_button_pressed = 1;
-        }
-
-        // Dùng 'if' thay vì 'else if'
-        if(isButtonPressed(1)) {
-            right_button_pressed = 1;
-        }
-
-        // Nhả Mutex NGAY LẬP TỨC
- //       osMutexRelease(button_mutexHandle);
-
-//    } else if (status == osEventTimeout) {
-//        Serial_Print("Warning: TaskDebug wait mutex timeout\n\r");
-//    }
-
-    // Xử lý việc in ấn (tốn thời gian) ở BÊN NGOÀI vùng Mutex
-    // Có thể in cả 2 nếu người dùng nhấn cả 2
-    if (mid_button_pressed == 1) {
-        Serial_Print("Press MID button\n\r");
-    }
-
-    if (right_button_pressed == 1) {
-        Serial_Print("Press RIGHT button\n\r");
-    }
+	// Dùng 'if' thay vì 'else if'
+	if(isButtonPressed(1)) {
+		Serial_Print("Press RIGHT button\n\r");
+	}
 
     osDelay(100);
 }
