@@ -16,6 +16,11 @@ static volatile uint8_t adc_ready = 0;
 static float battery_voltage_tmp = 0.0f;
 static float battery_percent_tmp = 0.0f;
 
+//EMA filter
+static float filtered_batt_voltage = 0.0f;
+static const float ALPHA = 0.1f;
+static uint8_t is_first_read = 3;
+
 
 /**
  * @brief Khởi tạo module đo pin (bắt đầu đo ADC)
@@ -96,20 +101,16 @@ void Battery_Run(void)
 {
 	if (adc_ready)
     {
-        // Trung bình giá trị ADC
         float avg_adc = (float)adc_sum / (float)ADC_SAMPLES;
-
-        // Chuyển sang điện áp ADC (Vref = 3.3V, 12-bit)
         float v_adc = (avg_adc * V_REF) / 4095.0f;
 #if BATTERY_ENABLE_SERIAL_LOG
         Serial_Print("[Battery] Read ADC voltage: %.2f V \r\n", v_adc);
 #endif
 
-        // Điện áp thực tế của pin qua chia áp
         battery_voltage_tmp = v_adc * ((BAT_R1_VALUE + BAT_R2_VALUE) / (float)BAT_R1_VALUE);
 
 #if BATTERY_ENABLE_SERIAL_LOG
-        Serial_Print("[Battery] Update battery voltage: %.2f V \r\n", battery_voltage_tmp);
+        Serial_Print("[Battery] Read battery voltage: %.2f V \r\n", battery_voltage_tmp);
 #endif
 
 //         Giới hạn điện áp đo (tránh sai do nhiễu)
@@ -118,10 +119,23 @@ void Battery_Run(void)
         else if (battery_voltage_tmp < MIN_CAPACITY_VOLTAGE)
             battery_voltage_tmp = MIN_CAPACITY_VOLTAGE;
 
+        if (is_first_read > 0)
+		{
+			filtered_batt_voltage = battery_voltage_tmp;
+			is_first_read--;
+		}
+        else
+		{
+			// Từ lần thứ 2 trở đi, áp dụng công thức lọc EMA
+			filtered_batt_voltage = (ALPHA * battery_voltage_tmp) + ((1.0f - ALPHA) * filtered_batt_voltage);
+		}
+#if BATTERY_ENABLE_SERIAL_LOG
+        Serial_Print("[Battery] Filtered battery voltage: %.2f V \r\n", filtered_batt_voltage);
+#endif
+
         // Tính % pin
         //battery_percent_tmp = VoltageToPercent(battery_voltage_tmp);
 
-        // Reset để đo lại
         adc_sum = 0;
         adc_count = 0;
         adc_ready = 0;
@@ -138,7 +152,7 @@ float Battery_Get_Voltage(void)
 #if BATTERY_ENABLE_SERIAL_LOG
 	Serial_Print("[Battery] Get Battery voltage: %.2f V \r\n", battery_voltage_tmp);
 #endif
-	return battery_voltage_tmp;
+	return filtered_batt_voltage;
 }
 
 /**

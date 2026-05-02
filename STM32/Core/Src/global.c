@@ -66,11 +66,20 @@ void TaskBattery_init(void){
     Serial_Print("[Battery] Initialize battery ADC\r\n");
 #endif
 	Battery_Init();
+
+	for(int i = 0;i<4 ;i++){
+		Battery_Run();
+		osDelay(1000);
+	}
+
+#if BATTERY_ENABLE_SERIAL_LOG
+    Serial_Print("[Battery] Initialized battery\r\n");
+#endif
 }
+
 void TaskBattery_run(void){
 	Battery_Run();
-	osDelay(2000);
-
+	osDelay(10000);
 }
 
 void TaskLoRa_init(void){

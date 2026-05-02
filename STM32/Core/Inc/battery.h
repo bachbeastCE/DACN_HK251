@@ -20,10 +20,7 @@ extern ADC_HandleTypeDef BATTERY_HANDLE_ADC;
 #define MIN_CAPACITY_VOLTAGE 3.0f
 #define V_REF 3.2f
 
-
-
-#define ADC_SAMPLES 20
-#define ADC_SAMPLES_TIME 1000 //500ms
+#define ADC_SAMPLES 25
 
 #define BAT_RTOS 1
 
