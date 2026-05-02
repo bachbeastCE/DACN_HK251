@@ -89,6 +89,10 @@ void Semaphore_init(void);
 
 ///////// TASK  ///////////
 
+
+void TaskBattery_init(void);
+void TaskBattery_run(void);
+
 void TaskLoRa_init(void);
 void TaskLoRa_run(void);
 

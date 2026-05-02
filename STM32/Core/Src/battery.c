@@ -7,6 +7,7 @@
 
 #include "battery.h"
 #include <math.h>
+#include "global.h"
 
 static volatile uint32_t adc_sum = 0;
 static volatile uint8_t adc_count = 0;
@@ -35,19 +36,22 @@ void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     if (hadc->Instance == BATTERY_HANDLE_ADC.Instance)
     {
-        uint32_t value = HAL_ADC_GetValue(hadc);
+#if BATTERY_ENABLE_SERIAL_LOG
+    	Serial_Print("[Battery] Battery callback\n\r",battery_percent_tmp);
+#endif
+    	uint32_t value = HAL_ADC_GetValue(hadc);
         adc_sum += value;
         adc_count++;
 
-        if (adc_count >= ADC_SAMPLES)
+        if (adc_count < ADC_SAMPLES)
         {
-            adc_ready = 1;
-            HAL_ADC_Stop_IT(hadc); // dừng ADC khi đủ mẫu
+        	HAL_ADC_Start_IT(hadc);
         }
-        else
-        {
-            HAL_ADC_Start_IT(hadc); // tiếp tục đo mẫu kế tiếp
+        else{
+        	adc_ready = 1;
+        	HAL_ADC_Stop_IT(hadc);
         }
+
     }
 }
 
@@ -90,33 +94,38 @@ static float VoltageToPercent(float v)
  */
 void Battery_Run(void)
 {
-    if (adc_ready)
+	if (adc_ready)
     {
         // Trung bình giá trị ADC
         float avg_adc = (float)adc_sum / (float)ADC_SAMPLES;
 
         // Chuyển sang điện áp ADC (Vref = 3.3V, 12-bit)
         float v_adc = (avg_adc * 3.3f) / 4095.0f;
+#if BATTERY_ENABLE_SERIAL_LOG
+        Serial_Print("[Battery] Read ADC voltage: %.2f V \r\n", v_adc);
+#endif
 
         // Điện áp thực tế của pin qua chia áp
-
         battery_voltage_tmp = 0.1 + v_adc * ((BAT_R1_VALUE + BAT_R2_VALUE) / (float)BAT_R1_VALUE);
 
-        // Giới hạn điện áp đo (tránh sai do nhiễu)
-//        if (battery_voltage_tmp > MAX_CAPACITY_VOLTAGE)
-//            battery_voltage_tmp = MAX_CAPACITY_VOLTAGE;
-//        else if (battery_voltage_tmp < MIN_CAPACITY_VOLTAGE)
-//            battery_voltage_tmp = MIN_CAPACITY_VOLTAGE;
+#if BATTERY_ENABLE_SERIAL_LOG
+        Serial_Print("[Battery] Update battery voltage: %.2f V \r\n", battery_voltage_tmp);
+#endif
+
+//         Giới hạn điện áp đo (tránh sai do nhiễu)
+        if (battery_voltage_tmp > MAX_CAPACITY_VOLTAGE)
+            battery_voltage_tmp = MAX_CAPACITY_VOLTAGE;
+        else if (battery_voltage_tmp < MIN_CAPACITY_VOLTAGE)
+            battery_voltage_tmp = MIN_CAPACITY_VOLTAGE;
 
         // Tính % pin
-        battery_percent_tmp = VoltageToPercent(battery_voltage_tmp);
+        //battery_percent_tmp = VoltageToPercent(battery_voltage_tmp);
 
         // Reset để đo lại
         adc_sum = 0;
         adc_count = 0;
         adc_ready = 0;
 
-        // Bắt đầu chu kỳ đo mới
         HAL_ADC_Start_IT(&BATTERY_HANDLE_ADC);
     }
 }
@@ -127,7 +136,7 @@ void Battery_Run(void)
 float Battery_Get_Voltage(void)
 {
 #if BATTERY_ENABLE_SERIAL_LOG
-	Serial_Print("Battery voltage: %.2f V \r\n", battery_voltage_tmp);
+	Serial_Print("[Battery] Get Battery voltage: %.2f V \r\n", battery_voltage_tmp);
 #endif
 	return battery_voltage_tmp;
 }
@@ -138,7 +147,7 @@ float Battery_Get_Voltage(void)
 float Battery_Get_Percent(void)
 {
 #if BATTERY_ENABLE_SERIAL_LOG
-	Serial_Print("Battery percent: %.1f %%\r\n",battery_percent_tmp);
+	Serial_Print("[Battery] Get Battery percent: %.1f %%\r\n",battery_percent_tmp);
 #endif
 	return battery_percent_tmp;
 }

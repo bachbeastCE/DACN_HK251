@@ -173,7 +173,7 @@ int main(void)
   buttonQueueHandle = osMessageCreate(osMessageQ(buttonQueue), NULL);
   /* USER CODE END RTOS_QUEUES */
 
-  /* Create the thread(s) */
+//  /* Create the thread(s) */
 //  /* definition and creation of TaskIMU */
 //  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
 //  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
@@ -185,10 +185,10 @@ int main(void)
 //  /* definition and creation of TaskLCD */
 //  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
 //  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-//
-//  /* definition and creation of TaskBattery */
-//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
@@ -756,10 +756,10 @@ static void MX_GPIO_Init(void)
 //
 //}
 
-//void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
-//{
-//	Battery_ADC_ConvCpltCallback(hadc);
-//}
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	Battery_ADC_ConvCpltCallback(hadc);
+}
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
@@ -964,15 +964,12 @@ void StartTaskLCD(void const * argument)
 void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
-//  /* Infinite loop */
-//
-//  for(;;)
-//  {
-////	Serial_Print("BATTERY\n");
-//	Battery_Run();
-//    battery_percent = Battery_Get_Percent();
-//    osDelay(1000);
-//  }
+	/* Infinite loop */
+	TaskBattery_init();
+	for(;;)
+	{
+		TaskBattery_run();
+	}
   /* USER CODE END StartTaskBattery */
 }
 
@@ -1024,8 +1021,8 @@ void StartTaskDebug(void const * argument)
 {
   /* USER CODE BEGIN StartTaskDebug */
   /* Infinite loop */
+	osDelay(2000);
 	TaskDebug_init();
-
 	for(;;)
 	{
 		TaskDebug_run();

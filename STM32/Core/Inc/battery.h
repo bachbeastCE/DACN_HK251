@@ -13,13 +13,16 @@
 #define BATTERY_HANDLE_ADC hadc1
 extern ADC_HandleTypeDef BATTERY_HANDLE_ADC;
 
-#define BAT_R1_VALUE 220000.0f
-#define BAT_R2_VALUE 68000.0f
+#define BAT_R1_VALUE 66000.0f
+#define BAT_R2_VALUE 218000.0f
 
 #define MAX_CAPACITY_VOLTAGE 4.2f
 #define MIN_CAPACITY_VOLTAGE 3.0f
 
 #define ADC_SAMPLES 10
+#define ADC_SAMPLES_TIME 500 //500ms
+
+#define BAT_RTOS 1
 
 void Battery_Init(void);
 void Battery_Run(void);

@@ -6,6 +6,7 @@
  */
 
 #include "global.h"
+#include "config.h"
 
 double loc_gps_lon = 0.0;
 double loc_gps_lat = 0.0;
@@ -46,11 +47,31 @@ osSemaphoreId i2cDmaSemHandle;
 osSemaphoreDef(I2C_DMA_SEM);
 osSemaphoreDef(SPI_DMA_SEM);
 
+//// SYSTEM CONTROL
+
+uint8_t startup = 1;
+
+
 void Semaphore_init(void){
 	i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
 	spiDmaSemHandle = osSemaphoreCreate(osSemaphore(SPI_DMA_SEM), 1);
 }
 
+
+
+
+
+void TaskBattery_init(void){
+#if BATTERY_ENABLE_SERIAL_LOG
+    Serial_Print("[Battery] Initialize battery ADC\r\n");
+#endif
+	Battery_Init();
+}
+void TaskBattery_run(void){
+	Battery_Run();
+	osDelay(1000);
+
+}
 
 void TaskLoRa_init(void){
 		myLoRa = LoRa_create(GPIOA, GPIO_PIN_4, GPIOA, GPIO_PIN_10, &hspi1); //PA4 SPI3 CS, PA10 RESET
