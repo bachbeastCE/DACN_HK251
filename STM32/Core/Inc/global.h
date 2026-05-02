@@ -84,16 +84,6 @@ typedef struct __attribute__((packed)) LOCATION_DATA {
 
 
 
-
-
-
-
-
-
-
-
-
-
 void Semaphore_init(void);
 
 ///////// TASK  ///////////

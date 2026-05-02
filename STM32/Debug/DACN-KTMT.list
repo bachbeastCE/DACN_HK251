@@ -2974,8 +2974,8 @@ void TaskLoRa_init(void){
 		LoRa_init(&myLoRa);
  8001a80:	4805      	ldr	r0, [pc, #20]	@ (8001a98 <TaskLoRa_init+0xa0>)
  8001a82:	f7ff fd8b 	bl	800159c <LoRa_init>
-		LoRa_setSyncWord(&myLoRa, 0xF1);
- 8001a86:	21f1      	movs	r1, #241	@ 0xf1
+		LoRa_setSyncWord(&myLoRa, 0x12);
+ 8001a86:	2112      	movs	r1, #18
  8001a88:	4803      	ldr	r0, [pc, #12]	@ (8001a98 <TaskLoRa_init+0xa0>)
  8001a8a:	f7ff fd74 	bl	8001576 <LoRa_setSyncWord>
 }
@@ -3185,12 +3185,14 @@ void TaskLoRa_run(void){
 	Serial_Print("HERE\r\n");
  8001c1a:	4820      	ldr	r0, [pc, #128]	@ (8001c9c <TaskLoRa_run+0x1f4>)
  8001c1c:	f001 f8b6 	bl	8002d8c <Serial_Print>
+
 	LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
  8001c20:	f44f 73c8 	mov.w	r3, #400	@ 0x190
  8001c24:	2258      	movs	r2, #88	@ 0x58
  8001c26:	491a      	ldr	r1, [pc, #104]	@ (8001c90 <TaskLoRa_run+0x1e8>)
  8001c28:	481d      	ldr	r0, [pc, #116]	@ (8001ca0 <TaskLoRa_run+0x1f8>)
  8001c2a:	f7ff fd5f 	bl	80016ec <LoRa_transmit_DMA>
+//	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 	Serial_Print("HERE\r\n");
  8001c2e:	481b      	ldr	r0, [pc, #108]	@ (8001c9c <TaskLoRa_run+0x1f4>)
  8001c30:	f001 f8ac 	bl	8002d8c <Serial_Print>
@@ -3839,9 +3841,9 @@ static void MX_SPI1_Init(void)
  8002002:	4b0e      	ldr	r3, [pc, #56]	@ (800203c <MX_SPI1_Init+0x64>)
  8002004:	f44f 7200 	mov.w	r2, #512	@ 0x200
  8002008:	619a      	str	r2, [r3, #24]
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
  800200a:	4b0c      	ldr	r3, [pc, #48]	@ (800203c <MX_SPI1_Init+0x64>)
- 800200c:	2200      	movs	r2, #0
+ 800200c:	2220      	movs	r2, #32
  800200e:	61da      	str	r2, [r3, #28]
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
  8002010:	4b0a      	ldr	r3, [pc, #40]	@ (800203c <MX_SPI1_Init+0x64>)

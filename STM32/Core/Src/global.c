@@ -76,7 +76,7 @@ void TaskLoRa_init(void){
 		#endif
 
 		LoRa_init(&myLoRa);
-		LoRa_setSyncWord(&myLoRa, 0xF1);
+		LoRa_setSyncWord(&myLoRa, 0x12);
 }
 
 void TaskLoRa_run(void){
@@ -112,7 +112,9 @@ void TaskLoRa_run(void){
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
 	Serial_Print("HERE\r\n");
+
 	LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+//	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 	Serial_Print("HERE\r\n");
 
 #ifdef LORA_ENABLE_SERIAL_LOG
