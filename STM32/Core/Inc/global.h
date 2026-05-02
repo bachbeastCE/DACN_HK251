@@ -58,6 +58,7 @@ extern uint16_t battery_percent;
 
 
 extern struct geod_geodesic g;
+extern LoRa myLoRa;
 
 extern osSemaphoreId spiDmaSemHandle;
 extern osSemaphoreId i2cDmaSemHandle;

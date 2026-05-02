@@ -46,12 +46,6 @@ osSemaphoreId i2cDmaSemHandle;
 osSemaphoreDef(I2C_DMA_SEM);
 osSemaphoreDef(SPI_DMA_SEM);
 
-
-
-
-
-
-
 void Semaphore_init(void){
 	i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
 	spiDmaSemHandle = osSemaphoreCreate(osSemaphore(SPI_DMA_SEM), 1);
@@ -72,7 +66,7 @@ void TaskLoRa_init(void){
 
 		#ifdef LORA_ENABLE_SERIAL_LOG
 			uint8_t ver = LoRa_read(&myLoRa, 0x42);
-			Serial_Print("Version: 0x%02X\r\n", ver);
+			Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
 		#endif
 
 		LoRa_init(&myLoRa);
@@ -80,6 +74,10 @@ void TaskLoRa_init(void){
 }
 
 void TaskLoRa_run(void){
+
+#ifdef LORA_ENABLE_SERIAL_LOG
+	Serial_Print("[LoRa] transfer starting\r\n");
+#endif
 
 	loc_data_payload.device_id = LORA_DEVICE_ID;
 	loc_data_payload.gps_hdop = gps_hdop;
@@ -92,7 +90,7 @@ void TaskLoRa_run(void){
 	loc_data_payload.tag_distance = tag_distance;
 
 #ifdef LORA_TEST_TRANSFER
-	Serial_Print("Test LoRA transfer data\r\n");
+	Serial_Print("[LoRa] Initial test LoRa data\r\n");
 	loc_data_payload.device_id = 0XFFFF;
 	loc_data_payload.gps_hdop = 1.23;
 	loc_data_payload.loc_gps_lon = 123.45678;
@@ -108,17 +106,13 @@ void TaskLoRa_run(void){
 	memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
 	memcpy(plain_text_buffer+8,&loc_data_payload, sizeof(LOC_DATA_PAYLOAD));
 	memset(gcm_nonce, 0,  GCM_NONCE_LEN);
-	memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER));//Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
+	memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER)); //Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
-	Serial_Print("HERE\r\n");
-
 	LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
-//	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
-	Serial_Print("HERE\r\n");
 
 #ifdef LORA_ENABLE_SERIAL_LOG
-	Serial_Print("Transfered\r\n");
+	Serial_Print("[LoRa] transfered success\r\n");
 #endif
 
 	 osDelay(2000);
@@ -135,16 +129,16 @@ void TaskButton_run(void){
 
 
 void TaskDebug_init(void){
-	Serial_Print("START DEBUGING\n\r");
+	Serial_Print("[Debug] START DEBUGING\n\r");
 };
 
 
 void TaskDebug_run(void){
 	if(isButtonPressed(0)) {
-		Serial_Print("Press MID button\n\r");
+		Serial_Print("[Debug] Press MID button\n\r");
 	}
 	if(isButtonPressed(1)) {
-		Serial_Print("Press RIGHT button\n\r");
+		Serial_Print("[Debug] Press RIGHT button\n\r");
 	}
     osDelay(100);
 }

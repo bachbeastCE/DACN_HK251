@@ -760,24 +760,26 @@ static void MX_GPIO_Init(void)
 //{
 //	Battery_ADC_ConvCpltCallback(hadc);
 //}
-//
-//void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
-//{
-////	Serial_Print("call back\n");
-//    if (hspi == &ST7735_SPI_PORT)
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+//    if (hspi == &ST7735_SPI_PORT
 //    {
 //        HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
 ////        Serial_Print("callbackSPI\n");
 //        osSemaphoreRelease(spiDmaSemHandle);
 //    }
-//    if(hspi == myLoRa.hSPIx)
-//    {
-//    	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-//        vTaskNotifyGiveFromISR(LoRaTaskHandle, &xHigherPriorityTaskWoken);
-//        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-//    }
-//
-//}
+    if(hspi == myLoRa.hSPIx)
+    {
+#ifdef LORA_ENABLE_SERIAL_LOG
+    	Serial_Print("[LoRa] SPI Call Back\n\r");
+#endif
+    	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+        vTaskNotifyGiveFromISR(LoRaTaskHandle, &xHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+    }
+
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartTaskIMU */
