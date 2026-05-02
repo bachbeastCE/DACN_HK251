@@ -27,28 +27,11 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef struct __attribute__((packed)) LOCATION_DATA_HEADER {
-	uint64_t seq_num; // 8 bytes // Little endian
-}  LOC_DATA_HEADER;
-
-typedef struct __attribute__((packed)) LOCATION_DATA {
-	uint32_t device_id; // 4 bytes
-	float gps_hdop;  // 4 bytes
-    double loc_gps_lon; // 8 bytes
-    double loc_gps_lat; // 8 bytes
-    double loc_gps_alt; // 8 bytes
-    double tag_gps_lon; // 8 bytes
-    double tag_gps_lat; // 8 bytes
-    double tag_gps_alt; // 8 bytes
-    double tag_distance; // 8 bytes
-}  LOC_DATA_PAYLOAD;
 
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LOC_DATA_HEADER_SIZE 8
-#define LOC_DATA_PAYLOAD_SIZE 64
 
 /* USER CODE END PD */
 
@@ -89,6 +72,7 @@ osThreadId TaskBatteryHandle;
 osThreadId LoRaTaskHandle;
 osThreadId TaskButtonHandle;
 osThreadId TaskDebugHandle;
+osMutexId button_mutexHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -168,8 +152,8 @@ int main(void)
 
   /* Create the mutex(es) */
   /* definition and creation of button_mutex */
-//  osMutexDef(button_mutex);
-//  button_mutexHandle = osMutexCreate(osMutex(button_mutex));
+  osMutexDef(button_mutex);
+  button_mutexHandle = osMutexCreate(osMutex(button_mutex));
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -205,10 +189,10 @@ int main(void)
 //  /* definition and creation of TaskBattery */
 //  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
 //  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-//
-//  /* definition and creation of LoRaTask */
-//  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
-//  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
+
+  /* definition and creation of LoRaTask */
+  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
+  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
   /* definition and creation of TaskButton */
   osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
@@ -392,7 +376,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
   hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
@@ -652,10 +636,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_10, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PC13 PC14 PC15 */
   GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
@@ -669,6 +653,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PA4 PA10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PB0 PB1 PB2 PB10 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -680,13 +671,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA10 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -1000,55 +984,12 @@ void StartTaskBattery(void const * argument)
 void StartLoRaTask(void const * argument)
 {
   /* USER CODE BEGIN StartLoRaTask */
-//	// LORA MODULE SETTINGS ----------------------------------------------
-//
-//	  	myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA15 SPI3 CS, PA10 RESET
-//	  	myLoRa.frequency             = 434;							  // default = 433 MHz
-//	  	myLoRa.spredingFactor        = SF_7;							// default = SF_7
-//	  	myLoRa.bandWidth			 = BW_125KHz;				  // default = BW_125KHz
-//	  	myLoRa.crcRate				 = CR_4_5;						// default = CR_4_5
-//	  	myLoRa.power				= POWER_20db;				// default = 20db
-//	  	myLoRa.overCurrentProtection = 120; 							// default = 100 mA
-//	  	myLoRa.preamble				       = 10;		  					// default = 8;
-//
-//	  	LoRa_reset(&myLoRa);
-//		uint8_t ver = LoRa_read(&myLoRa, 0x42);
-//		Serial_Print("Version: 0x%02X\r\n", ver);
-//		LoRa_init(&myLoRa);
-//		LoRa_setSyncWord(&myLoRa, 0xF1);
-//		Serial_Print("AAAA\r\n");
-//		Serial_Print("AAAA\r\n");
-//
-//
-//  /* Infinite loop */
-//		loc_data_header.seq_num = 0;
-//		loc_data_payload.device_id = 0XF5F4F3F2;
-//		loc_data_payload.gps_hdop = 3.01;
-//		loc_data_payload.loc_gps_alt = 200;
-//		loc_data_payload.loc_gps_lat = 100.54321;
-//		loc_data_payload.loc_gps_lon = 90.1357;
-//		loc_data_payload.tag_distance = 500.000;
-//		loc_data_payload.tag_gps_alt = 123.456;
-//		loc_data_payload.tag_gps_lat = 123.45678;
-//		loc_data_payload.tag_gps_lon = 98.12345;
-//
-//  for(;;)
-//  {
-//	  loc_data_header.seq_num++;
-//
-//	  //	  memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
-//	  //	  memcpy(plain_text_buffer+8,&loc_data_payload, sizeof(LOC_DATA_PAYLOAD));
-//
-//	  memset(gcm_nonce, 0,  GCM_NONCE_LEN);
-//	  memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER));//Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
-//	  memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
-//	  AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
-//	  LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
-//	  //LoRa_transmit_DMA(&myLoRa, plain_text_buffer, sizeof(plain_text_buffer), 400);
-//	  Serial_Print("Transfered\r\n");
-//
-//	  osDelay(2000);
-//  }
+	/* Infinite loop */
+	TaskLoRa_init();
+	  for(;;)
+	  {
+		  TaskLoRa_run();
+	  }
   /* USER CODE END StartLoRaTask */
 }
 
@@ -1063,7 +1004,6 @@ void StartTaskButton(void const * argument)
 {
   /* USER CODE BEGIN StartTaskButton */
 	/* Infinite loop */
-    osDelay(100);
 	for(;;)
 	{
 		TaskButton_run();

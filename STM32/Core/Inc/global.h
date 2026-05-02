@@ -30,6 +30,17 @@
 #include "LoRa.h"
 #include "micro_aes.h"
 
+
+
+
+
+#define LOC_DATA_HEADER_SIZE 8
+#define LOC_DATA_PAYLOAD_SIZE 64
+#define LORA_DEVICE_ID 0xF246
+
+
+
+
 extern double loc_gps_lon; 	//GPS LOCAL LONGTITUDE
 extern double loc_gps_lat; 	//GPS LOCAL LATITUDE
 extern double loc_gps_alt; 	//GPS LOCAL ALTITUDE
@@ -51,9 +62,44 @@ extern struct geod_geodesic g;
 extern osSemaphoreId spiDmaSemHandle;
 extern osSemaphoreId i2cDmaSemHandle;
 
+typedef struct __attribute__((packed)) LOCATION_DATA_HEADER {
+	uint64_t seq_num; // 8 bytes // Little endian
+}  LOC_DATA_HEADER;
+
+typedef struct __attribute__((packed)) LOCATION_DATA {
+	uint32_t device_id; // 4 bytes
+	float gps_hdop;  // 4 bytes
+    double loc_gps_lon; // 8 bytes
+    double loc_gps_lat; // 8 bytes
+    double loc_gps_alt; // 8 bytes
+    double tag_gps_lon; // 8 bytes
+    double tag_gps_lat; // 8 bytes
+    double tag_gps_alt; // 8 bytes
+    double tag_distance; // 8 bytes
+}  LOC_DATA_PAYLOAD;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void Semaphore_init(void);
 
 ///////// TASK  ///////////
+
+void TaskLoRa_init(void);
+void TaskLoRa_run(void);
 
 void TaskButton_init(void);
 void TaskButton_run(void);
