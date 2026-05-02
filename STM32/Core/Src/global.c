@@ -69,7 +69,7 @@ void TaskBattery_init(void){
 }
 void TaskBattery_run(void){
 	Battery_Run();
-	osDelay(1000);
+	osDelay(2000);
 
 }
 

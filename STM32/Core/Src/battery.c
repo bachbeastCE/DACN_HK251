@@ -37,7 +37,7 @@ void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     if (hadc->Instance == BATTERY_HANDLE_ADC.Instance)
     {
 #if BATTERY_ENABLE_SERIAL_LOG
-    	Serial_Print("[Battery] Battery callback\n\r",battery_percent_tmp);
+    	//Serial_Print("[Battery] Battery callback\n\r",battery_percent_tmp);
 #endif
     	uint32_t value = HAL_ADC_GetValue(hadc);
         adc_sum += value;
@@ -100,13 +100,13 @@ void Battery_Run(void)
         float avg_adc = (float)adc_sum / (float)ADC_SAMPLES;
 
         // Chuyển sang điện áp ADC (Vref = 3.3V, 12-bit)
-        float v_adc = (avg_adc * 3.3f) / 4095.0f;
+        float v_adc = (avg_adc * V_REF) / 4095.0f;
 #if BATTERY_ENABLE_SERIAL_LOG
         Serial_Print("[Battery] Read ADC voltage: %.2f V \r\n", v_adc);
 #endif
 
         // Điện áp thực tế của pin qua chia áp
-        battery_voltage_tmp = 0.1 + v_adc * ((BAT_R1_VALUE + BAT_R2_VALUE) / (float)BAT_R1_VALUE);
+        battery_voltage_tmp = v_adc * ((BAT_R1_VALUE + BAT_R2_VALUE) / (float)BAT_R1_VALUE);
 
 #if BATTERY_ENABLE_SERIAL_LOG
         Serial_Print("[Battery] Update battery voltage: %.2f V \r\n", battery_voltage_tmp);

@@ -965,27 +965,10 @@ void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
-	uint16_t adc_value_pa1 = 0;
-	uint32_t voltage_mV_pa1 = 0; // Biến lưu điện áp thực tế (mV)
-	//TaskBattery_init();
+	TaskBattery_init();
 	for(;;)
 	{
-		HAL_ADC_Start(&hadc1);
-
-		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
-		{
-		  adc_value_pa1 = HAL_ADC_GetValue(&hadc1);
-
-		  // CHUYỂN ĐỔI SANG ĐIỆN ÁP (Đơn vị: mV)
-		  voltage_mV_pa1 = (adc_value_pa1 * 3110) / 4095;
-		}
-
-		HAL_ADC_Stop(&hadc1);
-		Serial_Print("[ADC] ADC voltage: %d\n\r", voltage_mV_pa1);
-		// Nếu bạn đang dùng UART để in ra máy tính debug, có thể in ở đây
-		// printf("ADC: %d - Voltage: %lu mV\r\n", adc_value_pa1, voltage_mV_pa1);
-
-		osDelay(100);
+		TaskBattery_run();
 	}
   /* USER CODE END StartTaskBattery */
 }
