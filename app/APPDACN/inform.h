@@ -2,6 +2,7 @@
 #define INFORM_H
 
 #include <QDialog>
+#include <QWebSocket>
 #include <QSerialPort>
 #include <QDateTime>
 #include <QTableWidgetItem>
@@ -13,6 +14,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QJsonDocument>
+#include <QJsonArray>
 #include <QJsonObject>
 namespace Ui {
 class Inform;
@@ -26,12 +28,14 @@ public:
     explicit Inform(QWidget *parent = nullptr);
     ~Inform();
 
-    void addRow(QString time,
+    void addRow(int id,
+                        QString time,
                         QString observer,
                         double observerAlt,
                         QString target,
                         double targetAlt,
-                        double distance);
+                        double distance,
+                        bool isSerial);
 
 signals:
     void sendObserver(double lat, double lon);
@@ -44,16 +48,22 @@ private slots:
     void on_Mapbutton_clicked();
     void on_Savebutton_clicked();
     void onRowDoubleClicked(int row, int column);
+    void onWsMessageReceived(QString message);
 
 private:
     Ui::Inform *ui;
+    QWebSocket *ws;
 
     QSerialPort *serial;
     QNetworkAccessManager *networkManager;
     void uploadFirebase(double lat1,double lon1,double alt1,
-                        double lat2,double lon2,double alt2,
-                        double distance);
+                                double lat2,double lon2,double alt2,
+                                double distance,
+                                bool isSerial,
+                                int id);
     void loadFromFirebase();
+    int currentId = -1;
+    bool isSerial = 0;
     double lat1 = 0;
     double lon1 = 0;
     double lat2 = 0;

@@ -278,6 +278,7 @@ Makefile: ../APPDACN/APPDACN.pro ../../fold/5.14.2/mingw73_32/mkspecs/win32-g++/
 		../../fold/5.14.2/mingw73_32/lib/Qt5Gui.prl \
 		../../fold/5.14.2/mingw73_32/lib/Qt5QmlModels.prl \
 		../../fold/5.14.2/mingw73_32/lib/Qt5Qml.prl \
+		../../fold/5.14.2/mingw73_32/lib/Qt5WebSockets.prl \
 		../../fold/5.14.2/mingw73_32/lib/Qt5Network.prl \
 		../../fold/5.14.2/mingw73_32/lib/Qt5Positioning.prl \
 		../../fold/5.14.2/mingw73_32/lib/Qt5SerialPort.prl \
@@ -494,6 +495,7 @@ Makefile: ../APPDACN/APPDACN.pro ../../fold/5.14.2/mingw73_32/mkspecs/win32-g++/
 ../../fold/5.14.2/mingw73_32/lib/Qt5Gui.prl:
 ../../fold/5.14.2/mingw73_32/lib/Qt5QmlModels.prl:
 ../../fold/5.14.2/mingw73_32/lib/Qt5Qml.prl:
+../../fold/5.14.2/mingw73_32/lib/Qt5WebSockets.prl:
 ../../fold/5.14.2/mingw73_32/lib/Qt5Network.prl:
 ../../fold/5.14.2/mingw73_32/lib/Qt5Positioning.prl:
 ../../fold/5.14.2/mingw73_32/lib/Qt5SerialPort.prl:

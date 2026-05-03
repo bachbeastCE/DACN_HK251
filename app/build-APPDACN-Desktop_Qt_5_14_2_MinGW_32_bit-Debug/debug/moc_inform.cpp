@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Inform_t {
-    QByteArrayData data[15];
-    char stringdata0[160];
+    QByteArrayData data[17];
+    char stringdata0[188];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,14 +46,16 @@ QT_MOC_LITERAL(10, 87, 20), // "on_Mapbutton_clicked"
 QT_MOC_LITERAL(11, 108, 21), // "on_Savebutton_clicked"
 QT_MOC_LITERAL(12, 130, 18), // "onRowDoubleClicked"
 QT_MOC_LITERAL(13, 149, 3), // "row"
-QT_MOC_LITERAL(14, 153, 6) // "column"
+QT_MOC_LITERAL(14, 153, 6), // "column"
+QT_MOC_LITERAL(15, 160, 19), // "onWsMessageReceived"
+QT_MOC_LITERAL(16, 180, 7) // "message"
 
     },
     "Inform\0sendObserver\0\0lat\0lon\0sendTarget\0"
     "sendDistance\0distance\0newPacket\0"
     "readSerialData\0on_Mapbutton_clicked\0"
     "on_Savebutton_clicked\0onRowDoubleClicked\0"
-    "row\0column"
+    "row\0column\0onWsMessageReceived\0message"
 };
 #undef QT_MOC_LITERAL
 
@@ -63,7 +65,7 @@ static const uint qt_meta_data_Inform[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -71,16 +73,17 @@ static const uint qt_meta_data_Inform[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   54,    2, 0x06 /* Public */,
-       5,    2,   59,    2, 0x06 /* Public */,
-       6,    1,   64,    2, 0x06 /* Public */,
-       8,    0,   67,    2, 0x06 /* Public */,
+       1,    2,   59,    2, 0x06 /* Public */,
+       5,    2,   64,    2, 0x06 /* Public */,
+       6,    1,   69,    2, 0x06 /* Public */,
+       8,    0,   72,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    0,   68,    2, 0x08 /* Private */,
-      10,    0,   69,    2, 0x08 /* Private */,
-      11,    0,   70,    2, 0x08 /* Private */,
-      12,    2,   71,    2, 0x08 /* Private */,
+       9,    0,   73,    2, 0x08 /* Private */,
+      10,    0,   74,    2, 0x08 /* Private */,
+      11,    0,   75,    2, 0x08 /* Private */,
+      12,    2,   76,    2, 0x08 /* Private */,
+      15,    1,   81,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Double, QMetaType::Double,    3,    4,
@@ -93,6 +96,7 @@ static const uint qt_meta_data_Inform[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   13,   14,
+    QMetaType::Void, QMetaType::QString,   16,
 
        0        // eod
 };
@@ -111,6 +115,7 @@ void Inform::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 5: _t->on_Mapbutton_clicked(); break;
         case 6: _t->on_Savebutton_clicked(); break;
         case 7: _t->onRowDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 8: _t->onWsMessageReceived((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -175,13 +180,13 @@ int Inform::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

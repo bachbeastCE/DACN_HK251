@@ -1,4 +1,4 @@
-QT       += core gui widgets quickwidgets quick qml positioning serialport network
+QT       += core gui widgets quickwidgets quick qml positioning serialport websockets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

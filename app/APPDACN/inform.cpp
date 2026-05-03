@@ -7,17 +7,20 @@ Inform::Inform(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->tableWidget->setColumnCount(6);
+    ui->tableWidget->setColumnCount(8);
 
     QStringList headers;
-    headers << "Time"
+    headers << "ID"
+            << "Time"
             << "Observer Coordinate"
             << "Observer Altitude"
             << "Target Coordinate"
             << "Target Altitude"
-            << "Distance";
+            << "Distance"
+            << "isSerial";
 
     ui->tableWidget->setHorizontalHeaderLabels(headers);
+
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
     serial = new QSerialPort(this);
@@ -39,6 +42,21 @@ Inform::Inform(QWidget *parent) :
         qDebug() << "Serial opened";
     else
         qDebug() << "Serial open failed";
+
+    ws = new QWebSocket();
+
+    connect(ws, &QWebSocket::connected, [](){
+        qDebug() << "WS connected";
+    });
+
+    connect(ws, &QWebSocket::textMessageReceived,
+            this, &Inform::onWsMessageReceived);
+
+    connect(ws, &QWebSocket::disconnected, [](){
+        qDebug() << "WS disconnected";
+    });
+
+    ws->open(QUrl("ws://192.168.137.48:9001"));
 }
 Inform::~Inform()
 {
@@ -50,22 +68,26 @@ void Inform::on_Mapbutton_clicked()
     this->hide();
     parentWidget()->show();
 }
-void Inform::addRow(QString time,
+void Inform::addRow(int id,
+                    QString time,
                     QString observer,
                     double observerAlt,
                     QString target,
                     double targetAlt,
-                    double distance)
+                    double distance,
+                    bool isSerial)
 {
     int row = ui->tableWidget->rowCount();
     ui->tableWidget->insertRow(row);
 
-    ui->tableWidget->setItem(row, 0, new QTableWidgetItem(time));
-    ui->tableWidget->setItem(row, 1, new QTableWidgetItem(observer));
-    ui->tableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(observerAlt)));
-    ui->tableWidget->setItem(row, 3, new QTableWidgetItem(target));
-    ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(targetAlt)));
-    ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(distance)));
+    ui->tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(id)));
+    ui->tableWidget->setItem(row, 1, new QTableWidgetItem(time));
+    ui->tableWidget->setItem(row, 2, new QTableWidgetItem(observer));
+    ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(observerAlt)));
+    ui->tableWidget->setItem(row, 4, new QTableWidgetItem(target));
+    ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(targetAlt)));
+    ui->tableWidget->setItem(row, 6, new QTableWidgetItem(QString::number(distance)));
+    ui->tableWidget->setItem(row, 7, new QTableWidgetItem(isSerial ? "true" : "false"));
 
     ui->tableWidget->scrollToBottom();
     ui->tableWidget->viewport()->update();
@@ -73,14 +95,21 @@ void Inform::addRow(QString time,
     emit newPacket();
 }
 
-
 void Inform::readSerialData(){
     while (serial->canReadLine())
     {
         QString line = QString::fromUtf8(serial->readLine()).trimmed();
 
+        qDebug() << "RX:" << line;
+
+        if(line.startsWith("id"))
+        {
+            QString val = line.split("=").last().trimmed();
+            currentId = val.toInt();
+        }
+
         // Observer
-        if(line.startsWith("Observer Coordinate"))
+        else if(line.startsWith("Observer Coordinate"))
         {
             QStringList vals = line.split("=").last().split(",");
 
@@ -109,8 +138,7 @@ void Inform::readSerialData(){
             }
         }
 
-
-        if(lat1 != 0 && lat2 != 0)
+        if(currentId != -1 && lat1 != 0 && lat2 != 0)
         {
             QGeoCoordinate p1(lat1, lon1);
             QGeoCoordinate p2(lat2, lon2);
@@ -124,9 +152,16 @@ void Inform::readSerialData(){
 
             QString time = QDateTime::currentDateTime().toString("dd/MM/yyyy hh:mm:ss");
 
-            addRow(time, observer, alt1, target, alt2, distance);
-            uploadFirebase(lat1,lon1,alt1,lat2,lon2,alt2,distance);
+            addRow(currentId, time, observer, alt1, target, alt2, distance, true);
 
+            uploadFirebase(lat1,lon1,alt1,
+                           lat2,lon2,alt2,
+                           distance,
+                           true,
+                           currentId);
+
+            // reset
+            currentId = -1;
             lat1 = lon1 = alt1 = 0;
             lat2 = lon2 = alt2 = 0;
         }
@@ -191,8 +226,14 @@ void Inform::onRowDoubleClicked(int row, int column)
 {
     Q_UNUSED(column);
 
-    QString observer = ui->tableWidget->item(row,1)->text();
-    QString target   = ui->tableWidget->item(row,3)->text();
+    QTableWidgetItem *obsItem = ui->tableWidget->item(row,2);
+    QTableWidgetItem *tarItem = ui->tableWidget->item(row,4);
+
+    if(!obsItem || !tarItem)
+        return;
+
+    QString observer = obsItem->text();
+    QString target   = tarItem->text();
 
     QStringList obs = observer.split(",");
     QStringList tar = target.split(",");
@@ -226,11 +267,16 @@ void Inform::onRowDoubleClicked(int row, int column)
 
 void Inform::uploadFirebase(double lat1,double lon1,double alt1,
                             double lat2,double lon2,double alt2,
-                            double distance)
+                            double distance,
+                            bool isSerial,
+                            int id)
 {
     QUrl url("https://binnocular-default-rtdb.asia-southeast1.firebasedatabase.app/tracking_history.json");
 
     QJsonObject json;
+
+    json["id"] = id;
+    json["isSerial"] = isSerial;
 
     json["observer_lat"] = lat1;
     json["observer_lon"] = lon1;
@@ -293,7 +339,8 @@ void Inform::loadFromFirebase()
         for(auto key : root.keys())
         {
             QJsonObject obj = root[key].toObject();
-
+            int id = obj["id"].toInt();
+            bool isSerial = obj["isSerial"].toBool();
             QString time = obj["time"].toString();
 
             QDateTime dt = QDateTime::fromString(time, Qt::ISODate);
@@ -312,9 +359,55 @@ void Inform::loadFromFirebase()
             QString observer = QString("%1, %2").arg(lat1).arg(lon1);
             QString target   = QString("%1, %2").arg(lat2).arg(lon2);
 
-            addRow(time, observer, alt1, target, alt2, distance);
+            addRow(id, time, observer, alt1, target, alt2, distance, isSerial);
         }
 
         reply->deleteLater();
     });
+}
+
+void Inform::onWsMessageReceived(QString message)
+{
+    qDebug() << "WS:" << message;
+
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+
+    if(!doc.isObject())
+        return;
+
+    QJsonObject obj = doc.object();
+
+    // parse an toàn
+    if(!obj.contains("observer_lat") || !obj.contains("target_lat"))
+        return;
+
+    double lat1 = obj["observer_lat"].toDouble();
+    double lon1 = obj["observer_lon"].toDouble();
+    double alt1 = obj["observer_alt"].toDouble();
+
+    double lat2 = obj["target_lat"].toDouble();
+    double lon2 = obj["target_lon"].toDouble();
+    double alt2 = obj["target_alt"].toDouble();
+
+    QString time = obj.contains("time")
+            ? obj["time"].toString()
+            : QDateTime::currentDateTime().toString(Qt::ISODate);
+
+    QDateTime dt = QDateTime::fromString(time, Qt::ISODate);
+    if(dt.isValid())
+        time = dt.toString("dd/MM/yyyy hh:mm:ss");
+
+    QGeoCoordinate p1(lat1, lon1);
+    QGeoCoordinate p2(lat2, lon2);
+
+    double distance = p1.distanceTo(p2);
+
+    QString observer = QString("%1, %2").arg(lat1).arg(lon1);
+    QString target   = QString("%1, %2").arg(lat2).arg(lon2);
+
+    emit sendObserver(lat1, lon1);
+    emit sendTarget(lat2, lon2);
+    emit sendDistance(distance);
+
+    addRow(-1, time, observer, alt1, target, alt2, distance, false);
 }

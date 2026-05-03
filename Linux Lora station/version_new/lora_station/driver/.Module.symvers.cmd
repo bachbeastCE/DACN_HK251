@@ -1,0 +1,1 @@
+savedcmd_/home/admin/firebase/lora_station/driver/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/admin/firebase/lora_station/driver/Module.symvers -T /home/admin/firebase/lora_station/driver/modules.order -i Module.symvers -e 

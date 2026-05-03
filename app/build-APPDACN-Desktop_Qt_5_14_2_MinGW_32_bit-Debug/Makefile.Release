@@ -13,13 +13,13 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_QUICKWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_QUICKWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_POSITIONING_LIB -DQT_SERIALPORT_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\APPDACN -I. -I..\..\fold\5.14.2\mingw73_32\include -I..\..\fold\5.14.2\mingw73_32\include\QtQuickWidgets -I..\..\fold\5.14.2\mingw73_32\include\QtWidgets -I..\..\fold\5.14.2\mingw73_32\include\QtQuick -I..\..\fold\5.14.2\mingw73_32\include\QtGui -I..\..\fold\5.14.2\mingw73_32\include\QtANGLE -I..\..\fold\5.14.2\mingw73_32\include\QtQmlModels -I..\..\fold\5.14.2\mingw73_32\include\QtQml -I..\..\fold\5.14.2\mingw73_32\include\QtNetwork -I..\..\fold\5.14.2\mingw73_32\include\QtPositioning -I..\..\fold\5.14.2\mingw73_32\include\QtSerialPort -I..\..\fold\5.14.2\mingw73_32\include\QtCore -Irelease -I. -I..\..\fold\5.14.2\mingw73_32\mkspecs\win32-g++ 
+INCPATH       = -I..\APPDACN -I. -I..\..\fold\5.14.2\mingw73_32\include -I..\..\fold\5.14.2\mingw73_32\include\QtQuickWidgets -I..\..\fold\5.14.2\mingw73_32\include\QtWidgets -I..\..\fold\5.14.2\mingw73_32\include\QtQuick -I..\..\fold\5.14.2\mingw73_32\include\QtGui -I..\..\fold\5.14.2\mingw73_32\include\QtANGLE -I..\..\fold\5.14.2\mingw73_32\include\QtQmlModels -I..\..\fold\5.14.2\mingw73_32\include\QtQml -I..\..\fold\5.14.2\mingw73_32\include\QtWebSockets -I..\..\fold\5.14.2\mingw73_32\include\QtNetwork -I..\..\fold\5.14.2\mingw73_32\include\QtPositioning -I..\..\fold\5.14.2\mingw73_32\include\QtSerialPort -I..\..\fold\5.14.2\mingw73_32\include\QtCore -Irelease -I. -I..\..\fold\5.14.2\mingw73_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5QuickWidgets.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Widgets.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Quick.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Gui.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5QmlModels.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Qml.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Network.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Positioning.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5SerialPort.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Core.a  -lmingw32 D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-win32\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5QuickWidgets.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Widgets.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Quick.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Gui.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5QmlModels.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Qml.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5WebSockets.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Network.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Positioning.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5SerialPort.a D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libQt5Core.a  -lmingw32 D:\Embedded\qt\fold\5.14.2\mingw73_32\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-win32\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = D:\Embedded\qt\fold\5.14.2\mingw73_32\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -76,7 +76,7 @@ DESTDIR_TARGET = release\APPDACN.exe
 first: all
 all: Makefile.Release  release/APPDACN.exe
 
-release/APPDACN.exe: D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5QuickWidgets.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Widgets.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Quick.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Gui.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5QmlModels.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Qml.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Network.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Positioning.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5SerialPort.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Core.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libqtmain.a ui_inform.h ui_mainwindow.h $(OBJECTS) 
+release/APPDACN.exe: D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5QuickWidgets.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Widgets.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Quick.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Gui.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5QmlModels.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Qml.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5WebSockets.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Network.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Positioning.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5SerialPort.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libQt5Core.a D:/Embedded/qt/fold/5.14.2/mingw73_32/lib/libqtmain.a ui_inform.h ui_mainwindow.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
 
 qmake: FORCE
@@ -85,7 +85,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) APPDACN.zip $(SOURCES) $(DIST) ..\APPDACN\APPDACN.pro ..\..\fold\5.14.2\mingw73_32\mkspecs\features\spec_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\qdevice.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\features\device_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\sanitize.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\gcc-base.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\g++-base.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\angle.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\windows-vulkan.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\g++-win32.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\windows-desktop.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\qconfig.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3drender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axbase.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axserver.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bodymovin_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_charts.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_charts_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_core.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_core_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_datavisualization.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_dbus.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designer.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gui.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_help.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_help_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_location.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_location_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_network.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_network_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_networkauth.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_nfc.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_opengl.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioning.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioningquick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_purchasing.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_purchasing_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3d.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3drender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3drender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_repparser.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_repparser_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_script.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_script_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scxml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sensors.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sql.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_svg.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_testlib.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uitools.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_virtualkeyboard.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_virtualkeyboard_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_websockets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_widgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_winextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_zlib_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt_functions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\win32-g++\qmake.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exclusive_builds.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\toolchain.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\default_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\default_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resolve_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exclusive_builds_post.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\default_post.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\build_pass.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qml_debug.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\precompile_header.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\warn_on.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resources_functions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resources.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\moc.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\opengl.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\uic.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qmake_use.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\file_copies.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\windows.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\testcase_targets.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exceptions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\yacc.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\lex.prf ..\APPDACN\APPDACN.pro ..\APPDACN\MAPS.qrc ..\..\fold\5.14.2\mingw73_32\lib\Qt5QuickWidgets.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Widgets.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Quick.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Gui.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5QmlModels.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Qml.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Network.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Positioning.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5SerialPort.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Core.prl ..\..\fold\5.14.2\mingw73_32\lib\qtmain.prl APPDACN_en_150.ts APPDACN_en_150.ts  ..\APPDACN\MAPS.qrc ..\..\fold\5.14.2\mingw73_32\mkspecs\features\data\dummy.cpp ..\APPDACN\inform.h ..\APPDACN\mainwindow.h  ..\APPDACN\inform.cpp ..\APPDACN\main.cpp ..\APPDACN\mainwindow.cpp ..\APPDACN\inform.ui ..\APPDACN\mainwindow.ui    
+	$(ZIP) APPDACN.zip $(SOURCES) $(DIST) ..\APPDACN\APPDACN.pro ..\..\fold\5.14.2\mingw73_32\mkspecs\features\spec_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\qdevice.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\features\device_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\sanitize.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\gcc-base.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\g++-base.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\angle.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\windows-vulkan.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\g++-win32.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\common\windows-desktop.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\qconfig.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3drender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axbase.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axserver.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bodymovin_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_charts.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_charts_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_core.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_core_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_datavisualization.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_datavisualization_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_dbus.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designer.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gui.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_help.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_help_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_location.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_location_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_network.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_network_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_networkauth.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_networkauth_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_nfc.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_opengl.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioning.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioningquick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_purchasing.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_purchasing_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3d.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3drender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3drender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_repparser.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_repparser_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_script.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_script_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scxml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sensors.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialport.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sql.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_svg.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_testlib.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uitools.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_virtualkeyboard.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_virtualkeyboard_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_websockets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_widgets.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_winextras.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xml.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\modules\qt_lib_zlib_private.pri ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt_functions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\win32-g++\qmake.conf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exclusive_builds.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\toolchain.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\default_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\default_pre.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resolve_config.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exclusive_builds_post.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\default_post.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\build_pass.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qml_debug.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\precompile_header.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\warn_on.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qt.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resources_functions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\resources.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\moc.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\opengl.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\uic.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\qmake_use.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\file_copies.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\win32\windows.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\testcase_targets.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\exceptions.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\yacc.prf ..\..\fold\5.14.2\mingw73_32\mkspecs\features\lex.prf ..\APPDACN\APPDACN.pro ..\APPDACN\MAPS.qrc ..\..\fold\5.14.2\mingw73_32\lib\Qt5QuickWidgets.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Widgets.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Quick.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Gui.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5QmlModels.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Qml.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5WebSockets.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Network.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Positioning.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5SerialPort.prl ..\..\fold\5.14.2\mingw73_32\lib\Qt5Core.prl ..\..\fold\5.14.2\mingw73_32\lib\qtmain.prl APPDACN_en_150.ts APPDACN_en_150.ts  ..\APPDACN\MAPS.qrc ..\..\fold\5.14.2\mingw73_32\mkspecs\features\data\dummy.cpp ..\APPDACN\inform.h ..\APPDACN\mainwindow.h  ..\APPDACN\inform.cpp ..\APPDACN\main.cpp ..\APPDACN\mainwindow.cpp ..\APPDACN\inform.ui ..\APPDACN\mainwindow.ui    
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\inform.o release\main.o release\mainwindow.o release\qrc_MAPS.o release\moc_inform.o release\moc_mainwindow.o
@@ -230,11 +230,38 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qfiledevice.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qvector2d.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/QWebSocket \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QUrl \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QAbstractSocket \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetworkglobal.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetwork-config.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkRequest \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkrequest.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QSharedDataPointer \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QString \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkProxy \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkproxy.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostaddress.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslError \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslerror.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslcertificate.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/qcryptographichash.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/qdatetime.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qssl.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QFlags \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslConfiguration \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslconfiguration.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtcpsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsockets_global.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocketprotocol.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/QSerialPort \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialport.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialportglobal.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QDateTime \
-		../../fold/5.14.2/mingw73_32/include/QtCore/qdatetime.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QTableWidgetItem \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
@@ -258,7 +285,6 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../APPDACN/mainwindow.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QMainWindow \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qmainwindow.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QVariant \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QtCore \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QtCoreDepends \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qabstractanimation.h \
@@ -289,7 +315,6 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qcommandlineparser.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qconcatenatetablesproxymodel.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/qcryptographichash.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qdeadlinetimer.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qelapsedtimer.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qdir.h \
@@ -444,7 +469,6 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglframebufferobject.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglpaintdevice.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglpixeltransferoptions.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QSharedDataPointer \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglshaderprogram.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopengltexture.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopengltextureblitter.h \
@@ -491,36 +515,20 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtQml/QtQmlDepends \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QtNetwork \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QtNetworkDepends \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetworkglobal.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetwork-config.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractnetworkcache.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkrequest.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QString \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QUrl \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractsocket.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qauthenticator.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qdnslookup.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qdtls.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslsocket.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtcpsocket.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslerror.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslcertificate.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qssl.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QFlags \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostaddress.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostinfo.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhstspolicy.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhttp2configuration.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhttpmultipart.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QByteArray \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QIODevice \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkRequest \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qlocalserver.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qlocalsocket.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkaccessmanager.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QVector \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslConfiguration \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslconfiguration.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslPreSharedKeyAuthenticator \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslpresharedkeyauthenticator.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QMetaType \
@@ -531,7 +539,6 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkdatagram.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkdiskcache.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkinterface.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkproxy.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkreply.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkAccessManager \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworksession.h \
@@ -662,10 +669,11 @@ release/moc_inform.cpp: ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qfiledialog.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkReply \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonDocument \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonArray \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonObject \
 		release/moc_predefs.h \
 		../../fold/5.14.2/mingw73_32/bin/moc.exe
-	D:\Embedded\qt\fold\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include D:/Embedded/qt/Project/build-APPDACN-Desktop_Qt_5_14_2_MinGW_32_bit-Debug/release/moc_predefs.h -ID:/Embedded/qt/fold/5.14.2/mingw73_32/mkspecs/win32-g++ -ID:/Embedded/qt/Project/APPDACN -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuickWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuick -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtGui -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtANGLE -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQmlModels -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQml -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtNetwork -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtPositioning -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtSerialPort -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtCore -I. -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -ID:/Embedded/qt/fold/Tools/mingw730_32/i686-w64-mingw32/include ..\APPDACN\inform.h -o release\moc_inform.cpp
+	D:\Embedded\qt\fold\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include D:/Embedded/qt/Project/build-APPDACN-Desktop_Qt_5_14_2_MinGW_32_bit-Debug/release/moc_predefs.h -ID:/Embedded/qt/fold/5.14.2/mingw73_32/mkspecs/win32-g++ -ID:/Embedded/qt/Project/APPDACN -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuickWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuick -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtGui -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtANGLE -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQmlModels -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQml -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWebSockets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtNetwork -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtPositioning -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtSerialPort -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtCore -I. -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -ID:/Embedded/qt/fold/Tools/mingw730_32/i686-w64-mingw32/include ..\APPDACN\inform.h -o release\moc_inform.cpp
 
 release/moc_mainwindow.cpp: ../APPDACN/mainwindow.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QMainWindow \
@@ -1182,7 +1190,7 @@ release/moc_mainwindow.cpp: ../APPDACN/mainwindow.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
 		release/moc_predefs.h \
 		../../fold/5.14.2/mingw73_32/bin/moc.exe
-	D:\Embedded\qt\fold\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include D:/Embedded/qt/Project/build-APPDACN-Desktop_Qt_5_14_2_MinGW_32_bit-Debug/release/moc_predefs.h -ID:/Embedded/qt/fold/5.14.2/mingw73_32/mkspecs/win32-g++ -ID:/Embedded/qt/Project/APPDACN -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuickWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuick -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtGui -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtANGLE -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQmlModels -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQml -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtNetwork -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtPositioning -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtSerialPort -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtCore -I. -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -ID:/Embedded/qt/fold/Tools/mingw730_32/i686-w64-mingw32/include ..\APPDACN\mainwindow.h -o release\moc_mainwindow.cpp
+	D:\Embedded\qt\fold\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include D:/Embedded/qt/Project/build-APPDACN-Desktop_Qt_5_14_2_MinGW_32_bit-Debug/release/moc_predefs.h -ID:/Embedded/qt/fold/5.14.2/mingw73_32/mkspecs/win32-g++ -ID:/Embedded/qt/Project/APPDACN -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuickWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWidgets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQuick -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtGui -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtANGLE -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQmlModels -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtQml -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtWebSockets -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtNetwork -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtPositioning -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtSerialPort -ID:/Embedded/qt/fold/5.14.2/mingw73_32/include/QtCore -I. -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -ID:/Embedded/qt/fold/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -ID:/Embedded/qt/fold/Tools/mingw730_32/i686-w64-mingw32/include ..\APPDACN\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1318,11 +1326,38 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qfiledevice.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qvector2d.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/QWebSocket \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QUrl \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QAbstractSocket \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetworkglobal.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetwork-config.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkRequest \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkrequest.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QSharedDataPointer \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QString \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkProxy \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkproxy.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostaddress.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslError \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslerror.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslcertificate.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/qcryptographichash.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/qdatetime.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qssl.h \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QFlags \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslConfiguration \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslconfiguration.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtcpsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsockets_global.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocketprotocol.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/QSerialPort \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialport.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialportglobal.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QDateTime \
-		../../fold/5.14.2/mingw73_32/include/QtCore/qdatetime.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QTableWidgetItem \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
@@ -1346,7 +1381,6 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../APPDACN/mainwindow.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QMainWindow \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qmainwindow.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QVariant \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QtCore \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QtCoreDepends \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qabstractanimation.h \
@@ -1377,7 +1411,6 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qcommandlineparser.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qconcatenatetablesproxymodel.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/qcryptographichash.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qdeadlinetimer.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qelapsedtimer.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/qdir.h \
@@ -1532,7 +1565,6 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglframebufferobject.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglpaintdevice.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglpixeltransferoptions.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QSharedDataPointer \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopenglshaderprogram.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopengltexture.h \
 		../../fold/5.14.2/mingw73_32/include/QtGui/qopengltextureblitter.h \
@@ -1579,36 +1611,20 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtQml/QtQmlDepends \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QtNetwork \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QtNetworkDepends \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetworkglobal.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtnetwork-config.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractnetworkcache.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkrequest.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QString \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QUrl \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qabstractsocket.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qauthenticator.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qdnslookup.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qdtls.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslsocket.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qtcpsocket.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslerror.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslcertificate.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qssl.h \
-		../../fold/5.14.2/mingw73_32/include/QtCore/QFlags \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostaddress.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhostinfo.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhstspolicy.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhttp2configuration.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qhttpmultipart.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QByteArray \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QIODevice \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkRequest \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qlocalserver.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qlocalsocket.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkaccessmanager.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QVector \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslConfiguration \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslconfiguration.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslPreSharedKeyAuthenticator \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qsslpresharedkeyauthenticator.h \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QMetaType \
@@ -1619,7 +1635,6 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkdatagram.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkdiskcache.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkinterface.h \
-		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkproxy.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworkreply.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkAccessManager \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/qnetworksession.h \
@@ -1750,6 +1765,7 @@ release/inform.o: ../APPDACN/inform.cpp ../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qfiledialog.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkReply \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonDocument \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonArray \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonObject \
 		ui_inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QApplication \
@@ -2822,6 +2838,13 @@ release/mainwindow.o: ../APPDACN/mainwindow.cpp ../APPDACN/mainwindow.h \
 		../APPDACN/inform.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/QDialog \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/QWebSocket \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocket.h \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QAbstractSocket \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkProxy \
+		../../fold/5.14.2/mingw73_32/include/QtNetwork/QSslError \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsockets_global.h \
+		../../fold/5.14.2/mingw73_32/include/QtWebSockets/qwebsocketprotocol.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/QSerialPort \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialport.h \
 		../../fold/5.14.2/mingw73_32/include/QtSerialPort/qserialportglobal.h \
@@ -2844,6 +2867,7 @@ release/mainwindow.o: ../APPDACN/mainwindow.cpp ../APPDACN/mainwindow.h \
 		../../fold/5.14.2/mingw73_32/include/QtWidgets/qfiledialog.h \
 		../../fold/5.14.2/mingw73_32/include/QtNetwork/QNetworkReply \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonDocument \
+		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonArray \
 		../../fold/5.14.2/mingw73_32/include/QtCore/QJsonObject
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\APPDACN\mainwindow.cpp
 

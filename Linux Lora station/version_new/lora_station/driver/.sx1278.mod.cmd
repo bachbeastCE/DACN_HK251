@@ -1,0 +1,1 @@
+savedcmd_/home/admin/firebase/lora_station/driver/sx1278.mod := printf '%s\n'   sx1278.o | awk '!x[$$0]++ { print("/home/admin/firebase/lora_station/driver/"$$0) }' > /home/admin/firebase/lora_station/driver/sx1278.mod

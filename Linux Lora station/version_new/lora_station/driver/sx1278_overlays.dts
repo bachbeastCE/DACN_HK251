@@ -1,0 +1,40 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "raspberrypi,4-model-b", "brcm,bcm2835";
+
+    fragment@0 {
+        target = <&spi0>;
+        __overlay__ {
+            status = "okay";
+            #address-cells = <1>;
+            #size-cells = <0>;
+
+            sx1278: sx1278@0 {
+                compatible = "semtech,sx1278";
+                reg = <0>;
+                spi-max-frequency = <1000000>;
+
+                interrupt-parent = <&gpio>;
+                interrupts = <27 1>;
+
+                reset-gpios = <&gpio 22 0>;
+                dio0-gpios = <&gpio 27 0>;
+
+                status = "okay";
+            };
+        };
+    };
+
+    fragment@1 {
+        target = <&gpio>;
+        __overlay__ {
+            lora_pins: lora_pins {
+                brcm,pins = <27 22>;
+                brcm,function = <0 1>;
+                brcm,pull = <0 2>;
+            };
+        };
+    };
+};
