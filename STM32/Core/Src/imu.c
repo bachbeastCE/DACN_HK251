@@ -112,7 +112,7 @@ static inline void read_all(I2C_HandleTypeDef *I2Cx){
 
     if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK){
         Serial_Print("ACC OUT\n");
-    }
+    } else Serial_Print("ACC OK\n");
 	if (HAL_I2C_Mem_Read_IT(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6) != HAL_OK) {
 #if IMU_ENABLE_SERIAL_LOG
 	   Serial_Print("I2C read error!\r\n");
@@ -121,7 +121,7 @@ static inline void read_all(I2C_HandleTypeDef *I2Cx){
 	}
     if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK){
         Serial_Print("Gyro OUT\n");
-    }
+    }else Serial_Print("GYRO OK\n");
     if (HAL_I2C_Mem_Read_IT(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7) != HAL_OK) {
 #if IMU_ENABLE_SERIAL_LOG
         Serial_Print("I2C read error!\r\n");
@@ -130,7 +130,7 @@ static inline void read_all(I2C_HandleTypeDef *I2Cx){
     }
     if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK){
         Serial_Print("Mag OUT\n");
-    }
+    } else Serial_Print("MAG OK\n");
 
     accel_convert();
     gyro_convert();
@@ -164,14 +164,14 @@ void imu_compute_attitude(I2C_HandleTypeDef *I2Cx){
 	float My = imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad);
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
-//#if IMU_ENABLE_SERIAL_LOG
+#if IMU_ENABLE_SERIAL_LOG
 	    Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
 	    Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
 	    Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
 	    Serial_Print("mea_temperature = %.3f degree C; \n", imu.temperature);
 	    Serial_Print("mea_altitude = %.3f m; \n", imu.altitude);
 	    Serial_Print("mea_pressure = %.3f Pa; \n", imu.pressure);
-//#endif
+#endif
 //    Serial_Print("#######################################\n");
 }
 

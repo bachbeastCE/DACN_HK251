@@ -88,7 +88,11 @@ typedef struct __attribute__((packed)) LOCATION_DATA {
 void Semaphore_init(void);
 
 ///////// TASK  ///////////
+void TaskIMU_init(I2C_HandleTypeDef *I2Cx);
+void TaskIMU_run(I2C_HandleTypeDef *I2Cx);
 
+void TaskLCD_init();
+void TaskLCD_run();
 
 void TaskBattery_init(void);
 void TaskBattery_run(void);

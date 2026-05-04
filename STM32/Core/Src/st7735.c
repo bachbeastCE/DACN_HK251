@@ -31,24 +31,29 @@ static inline void ST7735_sendDataCPU(uint8_t* buff, size_t buff_size) {
 }
 
 
-size_t len(uint8_t* buff){
-	size_t len = 0;
-	while (buff[len] != '\0') ++len;
-	return len;
-}
-
 static inline void setPos(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1){
-	ST7735_sendCMD(COLADDR); //Column address set 0->160 XS[15:8] XS[7:0] XE[15:8] XE[7:0]
-	ST7735_sendData((uint8_t[]){0x00, x0, 0x00, x1}, 4);
+	ST7735_sendCMDCPU(COLADDR); //Column address set 0->160 XS[15:8] XS[7:0] XE[15:8] XE[7:0]
+	ST7735_sendDataCPU((uint8_t[]){0x00, x0, 0x00, x1}, 4);
 
-	ST7735_sendCMD(ROWADDR); //Row address set 0->128 YS[15:8] YS[7:0] YE[15:8] YE[7:0]
-	ST7735_sendData((uint8_t[]){0x00, y0, 0x00, y1}, 4);
+	ST7735_sendCMDCPU(ROWADDR); //Row address set 0->128 YS[15:8] YS[7:0] YE[15:8] YE[7:0]
+	ST7735_sendDataCPU((uint8_t[]){0x00, y0, 0x00, y1}, 4);
 }
-
+uint16_t framebuf[160 * 128];
+static inline void fb_setPixel(uint16_t x, uint16_t y, uint16_t color)
+{
+    if (x >= 160 || y >= 128) return;
+    framebuf[y * 160 + x] = color;
+}
+static inline void fb_clear(uint16_t color)
+{
+    uint16_t c = (color << 8) | (color >> 8);
+    for (int i = 0; i < 160 * 128; i++)
+        framebuf[i] = c;
+}
 static inline void drawPixel(uint8_t x, uint8_t y, uint16_t color){
 	if (x >= 160 || y >= 128) return;
 	setPos(x, y, x + 1, y + 1);;
-	ST7735_sendCMD(0x2C);
+	ST7735_sendCMDCPU(0x2C);
 	uint8_t hi = color >> 8;
 	uint8_t lo = color & 0xFF;
 	uint8_t colour[] = {hi, lo};
@@ -57,67 +62,113 @@ static inline void drawPixel(uint8_t x, uint8_t y, uint16_t color){
 }
 
 void ST7735_WriteChar(uint8_t x, uint8_t y, char ch, FontDef font, uint16_t color, uint16_t bg){
-	for (int i = 0; i < font.height; ++i){
-		uint16_t pixelData  = font.data[(ch - 32)*font.height + i];
-		for (int j = 0; j < font.width; ++j){
-			if ((pixelData << j) & 0x8000){
-				drawPixel(x + j, y + i, color);
-			} else {
-				drawPixel(x + j, y + i, bg);
-			}
-		}
-	}
+	for (int i = 0; i < font.height; i++){
+        uint16_t line = font.data[(ch - 32) * font.height + i];
+
+        for (int j = 0; j < font.width; j++)
+        {
+            if (line & (1 << (15 - j)))
+                fb_setPixel(x + j, y + i, color);
+            else
+                fb_setPixel(x + j, y + i, bg);
+        }
+    }
 }
 
 void ST7735_WriteString(uint8_t x, uint8_t y, char* str, FontDef font, uint16_t color, uint16_t bg){
 	int i = 0;
-	while (*(str + i) != '\0'){
-		ST7735_WriteChar(x, y, *(str + i), font, color, bg);
-		x += font.width;
-		++i;
-	}
+	while (str[i] != '\0'){
+		ST7735_WriteChar(x, y, str[i], font, color, bg);
+        x += font.width;
+        ++i;
+    }
+
 }
 
-void ST7735_Run(){
-	uint16_t y = 0;
-	snprintf(buffer, sizeof(buffer), "Battery:%d%% HDOP:%03.2f", battery_percent, gps_hdop);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, YELLOW, BLACK);
-	char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
-	snprintf(buffer, sizeof(buffer), "Loc_Lon:%c %.6f",lon_dir,fabs(loc_gps_lon));
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
 
-	char lat_dir = (loc_gps_lat >= 0) ? 'N' : 'S';
-	snprintf(buffer, sizeof(buffer), "Loc_Lat:%c %.6f", lat_dir,fabsf(loc_gps_lat) );
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
-	snprintf(buffer, sizeof(buffer), "Loc_Alt:%.2f", loc_gps_alt);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
 
-	snprintf(buffer, sizeof(buffer), "Loc_Azi:%.2f", loc_azi);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+void ST7735_Flush(void)
+{
+    setPos(0, 0, 159, 127);
 
-	snprintf(buffer, sizeof(buffer), "Loc_Pit:%.2f", loc_pitch);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+    ST7735_sendCMDCPU(0x2C);
 
-	snprintf(buffer, sizeof(buffer), "Loc_Rol:%.2f", loc_roll);
-	ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+    HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(ST7735_DC_GPIO_Port, ST7735_DC_Pin, GPIO_PIN_SET);
 
-	char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
-	snprintf(buffer, sizeof(buffer),
-            "Tag_lon:%c %.6f",
-			 tag_lon_dir, fabs(tag_gps_lon));
+    ST7735_sendData((uint8_t*)framebuf, sizeof(framebuf));
+}
 
-   ST7735_WriteString(0, y += 12, buffer, Font_7x10, GREEN, BLACK);
-   char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
-   snprintf(buffer, sizeof(buffer),
-            "Tag_lat:%c %.6f",
-			 tag_lat_dir, fabs(tag_gps_lat));
-   ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
 
-   snprintf(buffer, sizeof(buffer), "Tag_Alt:%.2f", tag_gps_alt);
-   ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
+int check = 0;
+void ST7735_Run()
+{
+    uint16_t y = 0;
 
-   snprintf(buffer, sizeof(buffer), "Tag_Dis:%.2f", tag_distance);
-   ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
+    // ==== DRAW ====
+
+    snprintf(buffer, sizeof(buffer),
+             "Battery:%d%% HDOP:%03.2f",
+			 filtered_batt_voltage, gps_hdop);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, YELLOW, BLACK);
+
+    char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Lon:%c %.6f",
+             lon_dir, fabsf(loc_gps_lon));
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
+
+    char lat_dir = (loc_gps_lat >= 0) ? 'N' : 'S';
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Lat:%c %.6f",
+             lat_dir, fabsf(loc_gps_lat));
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Alt:%.2f",
+             loc_gps_alt);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, CYAN, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Azi:%.2f",
+             loc_azi);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Pit:%.2f",
+             loc_pitch);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Loc_Rol:%.2f",
+             loc_roll);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, WHITE, BLACK);
+
+    // ==== TAG ====
+
+    char tag_lon_dir = (tag_gps_lon >= 0) ? 'E' : 'W';
+    snprintf(buffer, sizeof(buffer),
+             "Tag_lon:%c %.6f",
+             tag_lon_dir, fabsf(tag_gps_lon));
+    ST7735_WriteString(0, y += 12, buffer, Font_7x10, GREEN, BLACK);
+
+    char tag_lat_dir = (tag_gps_lat >= 0) ? 'N' : 'S';
+    snprintf(buffer, sizeof(buffer),
+             "Tag_lat:%c %.6f",
+             tag_lat_dir, fabsf(tag_gps_lat));
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Tag_Alt:%.2f",
+             tag_gps_alt);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
+
+    snprintf(buffer, sizeof(buffer),
+             "Tag_Dis:%.2f",
+             tag_distance);
+    ST7735_WriteString(0, y += 10, buffer, Font_7x10, GREEN, BLACK);
+
+    ST7735_Flush();
 }
 
 void ST7735_init(){
@@ -224,3 +275,5 @@ void fillFullScreen(uint16_t color){
 
     HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
 }
+
+

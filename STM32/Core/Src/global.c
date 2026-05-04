@@ -57,8 +57,54 @@ void Semaphore_init(void){
 	spiDmaSemHandle = osSemaphoreCreate(osSemaphore(SPI_DMA_SEM), 1);
 }
 
+void TaskIMU_init(I2C_HandleTypeDef *I2Cx){
+	I2C_Scan(I2Cx);
+	ukfInit(&ukf, I2Cx);
+}
 
+void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
+	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
+		Serial_Print("IMU\n");
+		imu_compute_attitude(I2Cx);
+		ukf_filter(&ukf, &imu);
+		//         loc_azi   = imu.mx;
+		 //         loc_pitch = imu.my;
+		 //         loc_roll  = imu.mz;
+		 //         loc_azi   = imu.gx;
+		 //         loc_pitch = imu.gy;
+		 //         loc_roll  = imu.gz;
 
+		 loc_roll  = ukf.x[0];
+		 loc_pitch = -ukf.x[1];
+		 loc_azi   = ukf.x[2];
+
+		 //         loc_azi = imu.yaw;
+
+		 float yaw_offset = 180.0f - 360.0f;
+		 loc_azi += yaw_offset;
+
+		 if (loc_azi < 0)
+			 loc_azi += 360.0f;
+
+		 if (loc_azi >= 360.0f)
+			 loc_azi -= 360.0f;
+
+		 //         loc_pitch = imu.pitch;
+		 //         loc_azi   = imu.yaw;
+		 //         loc_roll  = imu.roll;
+
+		 osSemaphoreRelease(i2cDmaSemHandle);
+	}
+	osDelay(2000);
+
+}
+
+void TaskLCD_init(){
+	ST7735_init();
+}
+void TaskLCD_run(){
+	ST7735_Run();
+}
 
 
 void TaskBattery_init(void){

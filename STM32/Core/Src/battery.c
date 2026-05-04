@@ -17,7 +17,7 @@ static float battery_voltage_tmp = 0.0f;
 static float battery_percent_tmp = 0.0f;
 
 //EMA filter
-static float filtered_batt_voltage = 0.0f;
+float filtered_batt_voltage = 0.0f;
 static const float ALPHA = 0.1f;
 static uint8_t is_first_read = 3;
 
@@ -119,13 +119,11 @@ void Battery_Run(void)
         else if (battery_voltage_tmp < MIN_CAPACITY_VOLTAGE)
             battery_voltage_tmp = MIN_CAPACITY_VOLTAGE;
 
-        if (is_first_read > 0)
-		{
+        if (is_first_read > 0) {
 			filtered_batt_voltage = battery_voltage_tmp;
 			is_first_read--;
 		}
-        else
-		{
+        else {
 			// Từ lần thứ 2 trở đi, áp dụng công thức lọc EMA
 			filtered_batt_voltage = (ALPHA * battery_voltage_tmp) + ((1.0f - ALPHA) * filtered_batt_voltage);
 		}

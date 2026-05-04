@@ -145,8 +145,8 @@ int main(void)
   MX_I2C1_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-  I2C_Scan(&hi2c1);
-  ukfInit(&ukf, &hi2c1);
+  TaskIMU_init(&hi2c1);
+  TaskLCD_init();
   /* USER CODE END 2 */
 
   /* Create the mutex(es) */
@@ -734,45 +734,12 @@ void StartTaskIMU(void const * argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-  Serial_Print("TASK IMU RUNNING\n");
+//  Serial_Print("TASK IMU RUNNING\n");
+
     for (;;)
     {
-    	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
-    		Serial_Print("IMU\n");
-    		imu_compute_attitude(&hi2c1);
-    		ukf_filter(&ukf, &imu);
-	        //         loc_azi   = imu.mx;
-		     //         loc_pitch = imu.my;
-		     //         loc_roll  = imu.mz;
-		     //         loc_azi   = imu.gx;
-		     //         loc_pitch = imu.gy;
-		     //         loc_roll  = imu.gz;
-
-		     loc_roll  = ukf.x[0];
-		     loc_pitch = -ukf.x[1];
-		     loc_azi   = ukf.x[2];
-
-		     //         loc_azi = imu.yaw;
-
-		     float yaw_offset = 180.0f - 360.0f;
-		     loc_azi += yaw_offset;
-
-		     if (loc_azi < 0)
-		         loc_azi += 360.0f;
-
-		     if (loc_azi >= 360.0f)
-		         loc_azi -= 360.0f;
-
-		     //         loc_pitch = imu.pitch;
-		     //         loc_azi   = imu.yaw;
-		     //         loc_roll  = imu.roll;
-
-    	}
-//    	osSemaphoreRelease(i2cDmaSemHandle);
-    	osDelay(2000);
+    	TaskIMU_run(&hi2c1);
     }
-
-
 
   /* USER CODE END 5 */
 }
@@ -790,7 +757,7 @@ void StartTaskGPS(void const * argument)
 //  /* Infinite loop */
 //
 //	//  TickType_t last = xTaskGetTickCount();
-		Serial_Print("Task GPS Running\n");
+//		Serial_Print("Task GPS Running\n");
 //	double ax_mps2 = 0;
 //	double ay_mps2 = 0;
 //	double az_mps2 = 0;
@@ -798,55 +765,56 @@ void StartTaskGPS(void const * argument)
 	while(1){
 		if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
 			Serial_Print("Task GPS\n");
+//			//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+//				GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+//			                                  loc_pitch, loc_roll, loc_azi, R_matrix);
+//				is_gps_new = 0;
+//				if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
+//			          GPS_Coordinates_Get(&raw_coordinates);
+//			          is_gps_new = 1;
+//
+//			          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
+//			          if (!kf_start)
+//			          {
+//			              // Set vị trí ban đầu
+//			              kf_gps.x[0] = raw_coordinates.Lat;
+//			              kf_gps.x[1] = raw_coordinates.Lon;
+//			              baro_alt = raw_coordinates.Alt;
+//
+//			              // Nếu dùng Baro thì set độ cao baro làm gốc
+//			              //kf_gps.x[2] = baro_alt;
+//
+//			              // Reset vận tốc về 0
+//			              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
+//			              kf_start = 1;
+//			          }
+//			      }
+//
+//			      if (kf_start)
+//			      {
+//			          GPS_KF_Filter(&kf_gps,
+//			                        raw_coordinates.Lat,
+//			                        raw_coordinates.Lon,
+//			                        baro_alt,
+//			                        is_gps_new);
+//
+//			          loc_gps_lat = kf_gps.x[0];
+//			          loc_gps_lon = kf_gps.x[1];
+//			          loc_gps_alt = kf_gps.x[2];
+//
+//			      }
+//
+//
+//		      double pitch_rad = loc_pitch * M_PI / 180.0;
+//		      double s12 = tag_distance * cos(pitch_rad);
+//
+//		      geod_direct(&g,
+//		        loc_gps_lat, loc_gps_lon, loc_azi,
+//		        s12,
+//		        &tag_gps_lat, &tag_gps_lon, NULL);
+			osSemaphoreRelease(i2cDmaSemHandle);
 		}
-//	//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
-//		GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
-//	                                  loc_pitch, loc_roll, loc_azi, R_matrix);
-//		is_gps_new = 0;
-//		if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
-//	          GPS_Coordinates_Get(&raw_coordinates);
-//	          is_gps_new = 1;
-//
-//	          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
-//	          if (!kf_start)
-//	          {
-//	              // Set vị trí ban đầu
-//	              kf_gps.x[0] = raw_coordinates.Lat;
-//	              kf_gps.x[1] = raw_coordinates.Lon;
-//	              baro_alt = raw_coordinates.Alt;
-//
-//	              // Nếu dùng Baro thì set độ cao baro làm gốc
-//	              //kf_gps.x[2] = baro_alt;
-//
-//	              // Reset vận tốc về 0
-//	              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
-//	              kf_start = 1;
-//	          }
-//	      }
-//
-//	      if (kf_start)
-//	      {
-//	          GPS_KF_Filter(&kf_gps,
-//	                        raw_coordinates.Lat,
-//	                        raw_coordinates.Lon,
-//	                        baro_alt,
-//	                        is_gps_new);
-//
-//	          loc_gps_lat = kf_gps.x[0];
-//	          loc_gps_lon = kf_gps.x[1];
-//	          loc_gps_alt = kf_gps.x[2];
-//
-//	      }
-//
-//
-//      double pitch_rad = loc_pitch * M_PI / 180.0;
-//      double s12 = tag_distance * cos(pitch_rad);
-//
-//      geod_direct(&g,
-//        loc_gps_lat, loc_gps_lon, loc_azi,
-//        s12,
-//        &tag_gps_lat, &tag_gps_lon, NULL);
-		osSemaphoreRelease(i2cDmaSemHandle);
+
 		 osDelay(5000);
     }
 //
@@ -866,13 +834,13 @@ void StartTaskLCD(void const * argument)
 {
   /* USER CODE BEGIN StartTaskLCD */
 //  /* Infinite loop */
-  Serial_Print("TASK LCD RUNNING\n");
-//  for(;;)
-//  {
-////	Serial_Print("LCD\n");
-//	ST7735_Run();
-	osDelay(1000);
-//  }
+//  Serial_Print("TASK LCD RUNNING\n");
+  for(;;)
+  {
+//	Serial_Print("LCD\n");
+	TaskLCD_run();
+	osDelay(50);
+  }
   /* USER CODE END StartTaskLCD */
 }
 
