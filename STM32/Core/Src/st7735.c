@@ -47,8 +47,7 @@ static inline void fb_setPixel(uint16_t x, uint16_t y, uint16_t color)
 static inline void fb_clear(uint16_t color)
 {
     uint16_t c = (color << 8) | (color >> 8);
-    for (int i = 0; i < 160 * 128; i++)
-        framebuf[i] = c;
+    for (int i = 0; i < 160 * 128; i++) framebuf[i] = c;
 }
 static inline void drawPixel(uint8_t x, uint8_t y, uint16_t color){
 	if (x >= 160 || y >= 128) return;
@@ -89,6 +88,7 @@ void ST7735_WriteString(uint8_t x, uint8_t y, char* str, FontDef font, uint16_t 
 
 void ST7735_Flush(void)
 {
+	osSemaphoreWait(spiDmaSemHandle, osWaitForever);
     setPos(0, 0, 159, 127);
 
     ST7735_sendCMDCPU(0x2C);
@@ -96,7 +96,8 @@ void ST7735_Flush(void)
     HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(ST7735_DC_GPIO_Port, ST7735_DC_Pin, GPIO_PIN_SET);
 
-    ST7735_sendData((uint8_t*)framebuf, sizeof(framebuf));
+//    ST7735_sendData((uint8_t*)framebuf, sizeof(framebuf));
+    HAL_SPI_Transmit_DMA(&ST7735_SPI_PORT, (uint8_t*)framebuf, sizeof(framebuf));
 }
 
 

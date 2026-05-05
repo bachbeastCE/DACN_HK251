@@ -1,11 +1,10 @@
-../Core/Src/st7735.c:12:20:ST7735_sendData	1
 ../Core/Src/st7735.c:19:20:ST7735_sendCMDCPU	1
 ../Core/Src/st7735.c:26:20:ST7735_sendDataCPU	1
 ../Core/Src/st7735.c:34:20:setPos	1
 ../Core/Src/st7735.c:42:20:fb_setPixel	3
-../Core/Src/st7735.c:64:6:ST7735_WriteChar	4
-../Core/Src/st7735.c:78:6:ST7735_WriteString	2
-../Core/Src/st7735.c:90:6:ST7735_Flush	1
-../Core/Src/st7735.c:104:6:ST7735_Run	5
-../Core/Src/st7735.c:174:6:ST7735_init	1
-../Core/Src/st7735.c:262:6:fillFullScreen	2
+../Core/Src/st7735.c:63:6:ST7735_WriteChar	4
+../Core/Src/st7735.c:77:6:ST7735_WriteString	2
+../Core/Src/st7735.c:89:6:ST7735_Flush	1
+../Core/Src/st7735.c:105:6:ST7735_Run	5
+../Core/Src/st7735.c:175:6:ST7735_init	1
+../Core/Src/st7735.c:263:6:fillFullScreen	2

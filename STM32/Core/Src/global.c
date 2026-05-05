@@ -95,7 +95,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 		 osSemaphoreRelease(i2cDmaSemHandle);
 	}
-	osDelay(2000);
+	osDelay(50);
 
 }
 
@@ -104,6 +104,7 @@ void TaskLCD_init(){
 }
 void TaskLCD_run(){
 	ST7735_Run();
+	osDelay(100);
 }
 
 

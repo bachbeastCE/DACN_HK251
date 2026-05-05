@@ -815,7 +815,7 @@ void StartTaskGPS(void const * argument)
 			osSemaphoreRelease(i2cDmaSemHandle);
 		}
 
-		 osDelay(5000);
+		 osDelay(500);
     }
 //
 
@@ -839,7 +839,6 @@ void StartTaskLCD(void const * argument)
   {
 //	Serial_Print("LCD\n");
 	TaskLCD_run();
-	osDelay(50);
   }
   /* USER CODE END StartTaskLCD */
 }
