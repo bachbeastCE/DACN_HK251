@@ -21,7 +21,6 @@
 #include "gps.h"
 #include "serial.h"
 #include "button.h"
-#include "imu_10DOF.h"
 #include "imu.h"
 #include "ukf.h"
 //#include "gps_ukf.h"

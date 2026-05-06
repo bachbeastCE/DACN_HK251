@@ -95,7 +95,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 		 osSemaphoreRelease(i2cDmaSemHandle);
 	}
-	osDelay(50);
+	osDelay(2000);
 
 }
 

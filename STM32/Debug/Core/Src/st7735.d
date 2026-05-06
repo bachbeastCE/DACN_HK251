@@ -53,10 +53,9 @@ Core/Src/st7735.o: ../Core/Src/st7735.c ../Core/Inc/st7735.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Core/Inc/st7735.h ../Core/Inc/gps.h ../Core/Inc/button.h \
- ../Core/Inc/main.h ../Core/Inc/imu_10DOF.h ../Core/Inc/serial.h \
- ../Core/Inc/imu.h ../Core/Inc/ukf.h ../Core/Inc/battery.h \
- ../Core/Inc/gps_kf.h ../Core/Inc/LoRa.h ../Core/Inc/micro_aes.h \
- ../Core/Inc/fonts.h
+ ../Core/Inc/main.h ../Core/Inc/imu.h ../Core/Inc/serial.h \
+ ../Core/Inc/ukf.h ../Core/Inc/battery.h ../Core/Inc/gps_kf.h \
+ ../Core/Inc/LoRa.h ../Core/Inc/micro_aes.h ../Core/Inc/fonts.h
 ../Core/Inc/st7735.h:
 ../Core/Inc/global.h:
 ../Core/Inc/main.h:
@@ -118,9 +117,8 @@ Core/Src/st7735.o: ../Core/Src/st7735.c ../Core/Inc/st7735.h \
 ../Core/Inc/gps.h:
 ../Core/Inc/button.h:
 ../Core/Inc/main.h:
-../Core/Inc/imu_10DOF.h:
-../Core/Inc/serial.h:
 ../Core/Inc/imu.h:
+../Core/Inc/serial.h:
 ../Core/Inc/ukf.h:
 ../Core/Inc/battery.h:
 ../Core/Inc/gps_kf.h:
