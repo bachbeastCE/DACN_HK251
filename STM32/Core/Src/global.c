@@ -92,7 +92,9 @@ void TaskLoRa_init(void){
 		myLoRa.overCurrentProtection = 120; 							// default = 100 mA
 		myLoRa.preamble				       = 10;		  					// default = 8;
 
+		Serial_Print("HERE1\n\r");
 		LoRa_reset(&myLoRa);
+		Serial_Print("HERE1\n\r");
 
 		#ifdef LORA_ENABLE_SERIAL_LOG
 			uint8_t ver = LoRa_read(&myLoRa, 0x42);
@@ -140,7 +142,9 @@ void TaskLoRa_run(void){
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
 	//LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	Serial_Print("[LoRa] transferring\r\n");
 	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	Serial_Print("[LoRa] transfered success\r\n");
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfered success\r\n");
