@@ -61,9 +61,11 @@ LoRa LoRa_create(GPIO_TypeDef* CS_port, uint16_t CS_pin, GPIO_TypeDef* reset_por
  */
 void LoRa_reset(LoRa* _LoRa){
 	HAL_GPIO_WritePin(_LoRa->reset_port, _LoRa->reset_pin, GPIO_PIN_RESET);
-	HAL_Delay(10);
+	//HAL_Delay(10);
+	osDelay(20);
 	HAL_GPIO_WritePin(_LoRa->reset_port, _LoRa->reset_pin, GPIO_PIN_SET);
-	HAL_Delay(100);
+	//HAL_Delay(100);
+	osDelay(10);
 }
 
 /**

@@ -83,6 +83,7 @@ void TaskBattery_run(void){
 }
 
 void TaskLoRa_init(void){
+		Serial_Print("[LoRa] Initialize LoRa\n\r");
 		myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA4 SPI3 CS, PA10 RESET
 		myLoRa.frequency             = 434;							  // default = 433 MHz
 		myLoRa.spredingFactor        = SF_7;							// default = SF_7
@@ -92,17 +93,20 @@ void TaskLoRa_init(void){
 		myLoRa.overCurrentProtection = 120; 							// default = 100 mA
 		myLoRa.preamble				       = 10;		  					// default = 8;
 
-		Serial_Print("HERE1\n\r");
+		Serial_Print("[LoRa] Reset LoRa\n\r");
 		LoRa_reset(&myLoRa);
-		Serial_Print("HERE1\n\r");
 
-		#ifdef LORA_ENABLE_SERIAL_LOG
-			uint8_t ver = LoRa_read(&myLoRa, 0x42);
-			Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
-		#endif
+		uint8_t ver = LoRa_read(&myLoRa, 0x42);
+		Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
 
-		LoRa_init(&myLoRa);
-		LoRa_setSyncWord(&myLoRa, 0x12);
+		if(LoRa_init(&myLoRa)  == LORA_OK){
+			LoRa_setSyncWord(&myLoRa, 0x12);
+			Serial_Print("[LoRa] Initialize LoRa successfully\n\r");
+		}
+		else{
+			Serial_Print("[LoRa] Initialize LoRa failed\n\r");
+		}
+
 }
 
 void TaskLoRa_run(void){

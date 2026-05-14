@@ -183,11 +183,11 @@ int main(void)
 //  /* definition and creation of TaskBattery */
 //  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
 //  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-//
+
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
   LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
-//
+
 //  /* definition and creation of TaskButton */
 //  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
 //  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
@@ -201,12 +201,6 @@ int main(void)
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
-
-  //TaskBattery_init();
-
-  TaskDebug_init();
-  TaskLoRa_init();
-
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
@@ -965,10 +959,12 @@ void StartTaskBattery(void const * argument)
 void StartLoRaTask(void const * argument)
 {
   /* USER CODE BEGIN StartLoRaTask */
+	TaskLoRa_init();
 	/* Infinite loop */
 	  for(;;)
 	  {
-		  TaskLoRa_run();
+		  //TaskLoRa_run();
+		  osDelay(1000);
 	  }
   /* USER CODE END StartLoRaTask */
 }
@@ -1001,6 +997,7 @@ void StartTaskButton(void const * argument)
 void StartTaskDebug(void const * argument)
 {
   /* USER CODE BEGIN StartTaskDebug */
+	TaskDebug_init();
   /* Infinite loop */
 	for(;;)
 	{
