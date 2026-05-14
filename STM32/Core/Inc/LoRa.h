@@ -9,7 +9,7 @@
 #define INC_LORA_H_
 
 #define LORA_RTOS 1
-#define LORA_TX_DMA 1
+#define LORA_TX_DMA 0
 
 #include "main.h"
 

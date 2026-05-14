@@ -12,7 +12,7 @@
 #include "string.h"
 
 /*** Redefine if necessary ***/
-#define SERIAL_UART_PORT huart6
+#define SERIAL_UART_PORT huart1
 #define TX_BUFFER_SIZE 256
 #define TIMEOUT 100
 

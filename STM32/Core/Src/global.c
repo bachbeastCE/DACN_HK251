@@ -83,7 +83,7 @@ void TaskBattery_run(void){
 }
 
 void TaskLoRa_init(void){
-		myLoRa = LoRa_create(GPIOA, GPIO_PIN_4, GPIOA, GPIO_PIN_10, &hspi1); //PA4 SPI3 CS, PA10 RESET
+		myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA4 SPI3 CS, PA10 RESET
 		myLoRa.frequency             = 434;							  // default = 433 MHz
 		myLoRa.spredingFactor        = SF_7;							// default = SF_7
 		myLoRa.bandWidth			 = BW_125KHz;				  // default = BW_125KHz
@@ -139,7 +139,8 @@ void TaskLoRa_run(void){
 	memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER)); //Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
-	LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	//LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfered success\r\n");
@@ -170,7 +171,8 @@ void TaskDebug_run(void){
 	if(isButtonPressed(1)) {
 		Serial_Print("[Debug] Press RIGHT button\n\r");
 	}
-    osDelay(100);
+	Serial_Print("[Debug] Debug run\n\r");
+    osDelay(1000);
 }
 
 

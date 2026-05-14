@@ -57,6 +57,10 @@ extern double gps_hdop; 	//GPS_HDOP
 extern uint16_t battery_percent;
 
 
+
+extern SPI_HandleTypeDef hspi3;
+
+
 extern struct geod_geodesic g;
 extern LoRa myLoRa;
 
