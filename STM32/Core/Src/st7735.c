@@ -80,7 +80,7 @@ void ST7735_WriteString(uint8_t x, uint8_t y, char* str, FontDef font, uint16_t 
 
 void ST7735_Run(){
 	uint16_t y = 0;
-	snprintf(buffer, sizeof(buffer), "Battery:%d%% HDOP:%03.2f", battery_percent, gps_hdop);
+	snprintf(buffer, sizeof(buffer), "Battery:%d%% HDOP:%03.2f", 0, gps_hdop); ///
 	ST7735_WriteString(0, y += 10, buffer, Font_7x10, YELLOW, BLACK);
 	char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';
 	snprintf(buffer, sizeof(buffer), "Loc_Lon:%c %.6f",lon_dir,fabs(loc_gps_lon));

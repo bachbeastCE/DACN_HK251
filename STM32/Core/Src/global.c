@@ -79,7 +79,6 @@ void TaskBattery_init(void){
 
 void TaskBattery_run(void){
 	Battery_Run();
-	osDelay(10000);
 }
 
 void TaskLoRa_init(void){

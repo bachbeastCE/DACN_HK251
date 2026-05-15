@@ -53,6 +53,8 @@ DMA_HandleTypeDef hdma_i2c3_tx;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
+DMA_HandleTypeDef hdma_spi1_rx;
+DMA_HandleTypeDef hdma_spi1_tx;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
@@ -169,28 +171,28 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of TaskIMU */
-//  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
-//  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
-//
-//  /* definition and creation of TaskGPS */
-//  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
-//  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
-//
-//  /* definition and creation of TaskLCD */
-//  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
-//  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-//
-//  /* definition and creation of TaskBattery */
-//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
+  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+
+  /* definition and creation of TaskGPS */
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
+  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+
+  /* definition and creation of TaskLCD */
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
+  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
+
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
   LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
-//  /* definition and creation of TaskButton */
-//  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
-//  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
+  /* definition and creation of TaskButton */
+  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
+  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
 
   /* definition and creation of TaskDebug */
   osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
@@ -484,7 +486,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
-  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -573,6 +575,7 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
+  __HAL_RCC_DMA2_CLK_ENABLE();
 
   /* DMA interrupt init */
   /* DMA1_Stream1_IRQn interrupt configuration */
@@ -593,6 +596,12 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
+  /* DMA2_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
+  /* DMA2_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
 
 }
 
@@ -736,12 +745,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-//    if (hspi == &ST7735_SPI_PORT
-//    {
-//        HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
-////        Serial_Print("callbackSPI\n");
-//        osSemaphoreRelease(spiDmaSemHandle);
-//    }
+    if (hspi == &ST7735_SPI_PORT)
+    {
+        HAL_GPIO_WritePin(ST7735_CS_GPIO_Port, ST7735_CS_Pin, GPIO_PIN_SET);
+       Serial_Print("callbackSPI\n");
+        osSemaphoreRelease(spiDmaSemHandle);
+    }
     if(hspi == myLoRa.hSPIx)
     {
 #ifdef LORA_ENABLE_SERIAL_LOG
@@ -916,14 +925,14 @@ void StartTaskGPS(void const * argument)
 void StartTaskLCD(void const * argument)
 {
   /* USER CODE BEGIN StartTaskLCD */
-//  /* Infinite loop */
-////  Serial_Print("TASK LCD RUNNING\n");
-//  for(;;)
-//  {
-////	Serial_Print("LCD\n");
-//	ST7735_Run();
-//	osDelay(1000);
-//  }
+  /* Infinite loop */
+	Serial_Print("[LCD] Run LCD\n\r");
+  for(;;)
+  {
+	  Serial_Print("[LCD] display LCD\n\r");
+	  ST7735_Run();
+	  osDelay(1000);
+  }
   /* USER CODE END StartTaskLCD */
 }
 
@@ -938,9 +947,12 @@ void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
+	TaskBattery_init();
+	osDelay(1000);
 	for(;;)
 	{
 		TaskBattery_run();
+		osDelay(10000);
 	}
   /* USER CODE END StartTaskBattery */
 }
@@ -1004,7 +1016,6 @@ void StartTaskDebug(void const * argument)
 	{
 		TaskDebug_run();
 		osDelay(1000);
-
 	}
   /* USER CODE END StartTaskDebug */
 }
