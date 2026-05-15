@@ -6,4 +6,4 @@
 ../Core/Src/global.c:160:6:TaskButton_init	1
 ../Core/Src/global.c:164:6:TaskButton_run	1
 ../Core/Src/global.c:169:6:TaskDebug_init	1
-../Core/Src/global.c:174:6:TaskDebug_run	3
+../Core/Src/global.c:174:6:TaskDebug_run	1

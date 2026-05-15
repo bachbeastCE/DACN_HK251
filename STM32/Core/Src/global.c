@@ -158,7 +158,7 @@ void TaskLoRa_run(void){
 }
 
 void TaskButton_init(void){
-	//Button_Init();
+	Serial_Print("[Button] Intitial button\n\r");
 }
 
 void TaskButton_run(void){
@@ -167,19 +167,15 @@ void TaskButton_run(void){
 
 
 void TaskDebug_init(void){
-	Serial_Print("[Debug] START DEBUGING\n\r");
+	Serial_Print("[Debug] Intitial Debug\n\r");
 };
 
 
 void TaskDebug_run(void){
-	if(isButtonPressed(0)) {
-		Serial_Print("[Debug] Press MID button\n\r");
-	}
-	if(isButtonPressed(1)) {
-		Serial_Print("[Debug] Press RIGHT button\n\r");
-	}
-	Serial_Print("[Debug] Debug run\n\r");
-    osDelay(1000);
+//	if(isButtonPressed(0)) {
+//		Serial_Print("[Debug] Press Button\n\r");
+//	}
+	Serial_Print("[Debug] Run Debug\n\r");
 }
 
 

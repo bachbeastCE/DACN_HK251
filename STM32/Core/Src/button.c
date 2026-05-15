@@ -1,10 +1,10 @@
 #include "button.h"
 
-const int MAX_BUTTON = 2;
+const int MAX_BUTTON = 1;
 
 // Định nghĩa Port và Pin cho 5 nút nhấn để vòng lặp for tự động dò
-GPIO_TypeDef* Button_Port[5] = {GPIOA, GPIOC,0,0,0}; // Sửa lại đúng Port phần cứng của bạn
-uint16_t Button_Pin[5]       = {GPIO_PIN_0, GPIO_PIN_15, 0,0,0}; // Sửa lại đúng Pin của bạn
+GPIO_TypeDef* Button_Port[5] = {GPIOC, 0,0,0,0}; // Sửa lại đúng Port phần cứng của bạn
+uint16_t Button_Pin[5]       = {GPIO_PIN_13, 0, 0,0,0}; // Sửa lại đúng Pin của bạn
 
 int KeyReg0[5] = {SET, SET, SET, SET, SET};
 int KeyReg1[5] = {SET, SET, SET, SET, SET};

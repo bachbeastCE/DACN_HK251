@@ -14,7 +14,7 @@
 ../Core/Src/LoRa.c:393:6:LoRa_setTOMsb_setCRCon	1
 ../Core/Src/LoRa.c:416:6:LoRa_setSyncWord	1
 ../Core/Src/LoRa.c:436:9:LoRa_transmit	3
-../Core/Src/LoRa.c:499:6:LoRa_startReceiving	1
-../Core/Src/LoRa.c:515:9:LoRa_receive	4
-../Core/Src/LoRa.c:548:5:LoRa_getRSSI	1
-../Core/Src/LoRa.c:564:10:LoRa_init	3
+../Core/Src/LoRa.c:500:6:LoRa_startReceiving	1
+../Core/Src/LoRa.c:516:9:LoRa_receive	4
+../Core/Src/LoRa.c:549:5:LoRa_getRSSI	1
+../Core/Src/LoRa.c:565:10:LoRa_init	3

@@ -183,14 +183,14 @@ int main(void)
 //  /* definition and creation of TaskBattery */
 //  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
 //  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-//
+
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
   LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
-  /* definition and creation of TaskButton */
-  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
-  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
+//  /* definition and creation of TaskButton */
+//  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
+//  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
 
   /* definition and creation of TaskDebug */
   osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
@@ -207,6 +207,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+//  //TaskBattery_init();
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -482,7 +484,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
-  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -618,14 +620,8 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10|GPIO_PIN_15, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PC14 PC15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
+  /*Configure GPIO pins : PC13 PC14 PC15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -942,7 +938,6 @@ void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
-	TaskBattery_init();
 	for(;;)
 	{
 		TaskBattery_run();
@@ -960,12 +955,15 @@ void StartTaskBattery(void const * argument)
 void StartLoRaTask(void const * argument)
 {
   /* USER CODE BEGIN StartLoRaTask */
-	TaskLoRa_init();
 	/* Infinite loop */
+	TaskLoRa_init();
 	  for(;;)
 	  {
-		  TaskLoRa_run();
-		  osDelay(1000);
+		//if(isButtonPressed(0)) {
+		//	Serial_Print("[Button] Press Button\n\r");
+			TaskLoRa_run();
+		//}
+		  osDelay(2000);
 	  }
   /* USER CODE END StartLoRaTask */
 }
@@ -981,10 +979,11 @@ void StartTaskButton(void const * argument)
 {
   /* USER CODE BEGIN StartTaskButton */
 	/* Infinite loop */
+	TaskButton_init();
 	for(;;)
 	{
 		TaskButton_run();
-		osDelay(10);
+		osDelay(20);
 	}
   /* USER CODE END StartTaskButton */
 }
@@ -1004,6 +1003,7 @@ void StartTaskDebug(void const * argument)
 	for(;;)
 	{
 		TaskDebug_run();
+		osDelay(1000);
 
 	}
   /* USER CODE END StartTaskDebug */
