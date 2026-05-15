@@ -96,8 +96,6 @@ void TaskLoRa_init(void){
 		Serial_Print("[LoRa] Reset LoRa\n\r");
 		LoRa_reset(&myLoRa);
 
-		uint8_t ver = LoRa_read(&myLoRa, 0x42);
-		Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
 
 		if(LoRa_init(&myLoRa)  == LORA_OK){
 			LoRa_setSyncWord(&myLoRa, 0x12);
@@ -106,6 +104,10 @@ void TaskLoRa_init(void){
 		else{
 			Serial_Print("[LoRa] Initialize LoRa failed\n\r");
 		}
+
+		uint8_t ver = LoRa_read(&myLoRa, 0x42);
+				Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
+
 
 }
 
@@ -148,13 +150,11 @@ void TaskLoRa_run(void){
 	//LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 	Serial_Print("[LoRa] transferring\r\n");
 	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
-	Serial_Print("[LoRa] transfered success\r\n");
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfered success\r\n");
 #endif
 
-	 osDelay(2000);
 }
 
 void TaskButton_init(void){
@@ -163,7 +163,6 @@ void TaskButton_init(void){
 
 void TaskButton_run(void){
 	getKeyInput();
-    osDelay(10);
 }
 
 

@@ -183,21 +183,21 @@ int main(void)
 //  /* definition and creation of TaskBattery */
 //  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
 //  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-
+//
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
   LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
-//  /* definition and creation of TaskButton */
-//  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
-//  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
+  /* definition and creation of TaskButton */
+  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
+  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
 
   /* definition and creation of TaskDebug */
   osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
   TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+//  /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
@@ -212,6 +212,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 
   }
   /* USER CODE END 3 */
@@ -481,7 +482,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
-  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -963,7 +964,7 @@ void StartLoRaTask(void const * argument)
 	/* Infinite loop */
 	  for(;;)
 	  {
-		  //TaskLoRa_run();
+		  TaskLoRa_run();
 		  osDelay(1000);
 	  }
   /* USER CODE END StartLoRaTask */
@@ -983,6 +984,7 @@ void StartTaskButton(void const * argument)
 	for(;;)
 	{
 		TaskButton_run();
+		osDelay(10);
 	}
   /* USER CODE END StartTaskButton */
 }
@@ -1002,6 +1004,7 @@ void StartTaskDebug(void const * argument)
 	for(;;)
 	{
 		TaskDebug_run();
+
 	}
   /* USER CODE END StartTaskDebug */
 }
