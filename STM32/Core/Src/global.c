@@ -11,18 +11,20 @@
 double loc_gps_lon = 0.0;
 double loc_gps_lat = 0.0;
 double loc_gps_alt = 0.0;
-double loc_azi = 0.0;
-double loc_pitch = 0.0;
-double loc_yaw = 0.0;
-double loc_roll = 0.0;
+double loc_azi = 1.0;
+double loc_pitch = 2.0;
+double loc_roll = 3.0;
 double tag_gps_lon = 0.0;
 double tag_gps_lat = 0.0;
 double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 double gps_hdop = 0.0;
-
+double ax_mps2 = 0;
+double ay_mps2 = 0;
+double az_mps2 = 0;
+double baro_alt = 0;
 int time = 0;
-uint8_t kf_start =0;
+uint8_t kf_start = 0;
 double R_matrix[3][3];
 
 int is_gps_new = 0;
@@ -51,15 +53,122 @@ osSemaphoreDef(SPI_DMA_SEM);
 
 uint8_t startup = 1;
 
-
 void Semaphore_init(void){
 	i2cDmaSemHandle = osSemaphoreCreate(osSemaphore(I2C_DMA_SEM), 1);
 	spiDmaSemHandle = osSemaphoreCreate(osSemaphore(SPI_DMA_SEM), 1);
 }
 
+void TaskIMU_init(I2C_HandleTypeDef *I2Cx){
+	I2C_Scan(I2Cx);
+	ukfInit(&ukf, I2Cx);
+}
+
+void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
+	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
+		Serial_Print("IMU Run\n\r");
+		imu_compute_attitude(I2Cx);
+		ukf_filter(&ukf, &imu);
+		//         loc_azi   = imu.mx;
+		 //         loc_pitch = imu.my;
+		 //         loc_roll  = imu.mz;
+		 //         loc_azi   = imu.gx;
+		 //         loc_pitch = imu.gy;
+		 //         loc_roll  = imu.gz;
+
+		 loc_roll  = ukf.x[0];
+		 loc_pitch = -ukf.x[1];
+		 loc_azi   = ukf.x[2];
+
+		 //         loc_azi = imu.yaw;
+
+		 float yaw_offset = 180.0f - 360.0f;
+		 loc_azi += yaw_offset;
+
+		 if (loc_azi < 0)
+			 loc_azi += 360.0f;
+
+		 if (loc_azi >= 360.0f)
+			 loc_azi -= 360.0f;
+
+		 //         loc_pitch = imu.pitch;
+		 //         loc_azi   = imu.yaw;
+		 //         loc_roll  = imu.roll;
+
+		 osSemaphoreRelease(i2cDmaSemHandle);
+	}
+	osDelay(2000);
+
+}
+
+//void TaskGPS_init(void){
+//
+//}
+void TaskGPS_run(void){
+	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
+				Serial_Print("Task GPS\n");
+				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+					GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
+					is_gps_new = 0;
+					if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
+				          GPS_Coordinates_Get(&raw_coordinates);
+				          is_gps_new = 1;
+
+				          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
+				          if (!kf_start)
+				          {
+				              // Set vị trí ban đầu
+				              kf_gps.x[0] = raw_coordinates.Lat;
+				              kf_gps.x[1] = raw_coordinates.Lon;
+				              baro_alt = raw_coordinates.Alt;
+
+				              // Nếu dùng Baro thì set độ cao baro làm gốc
+				              kf_gps.x[2] = baro_alt;
+
+				              // Reset vận tốc về 0
+				              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
+				              kf_start = 1;
+				          }
+				      }
+
+				      if (kf_start)
+				      {
+				          GPS_KF_Filter(&kf_gps,
+				                        raw_coordinates.Lat,
+				                        raw_coordinates.Lon,
+				                        baro_alt,
+				                        is_gps_new);
+
+				          loc_gps_lat = kf_gps.x[0];
+				          loc_gps_lon = kf_gps.x[1];
+				          loc_gps_alt = kf_gps.x[2];
+
+				      }
+
+
+			      double pitch_rad = loc_pitch * M_PI / 180.0;
+			      double s12 = tag_distance * cos(pitch_rad);
+
+			      geod_direct(&g,
+			        loc_gps_lat, loc_gps_lon, loc_azi,
+			        s12,
+			        &tag_gps_lat, &tag_gps_lon, NULL);
+				osSemaphoreRelease(i2cDmaSemHandle);
+			}
+
+			 osDelay(5000);
+}
 
 
 
+
+
+void TaskLCD_init(){
+	ST7735_init();
+}
+void TaskLCD_run(){
+	ST7735_Run();
+}
 
 void TaskBattery_init(void){
 #if BATTERY_ENABLE_SERIAL_LOG
@@ -73,7 +182,7 @@ void TaskBattery_init(void){
 	}
 
 #if BATTERY_ENABLE_SERIAL_LOG
-    Serial_Print("[Battery] Initialized battery\r\n");
+    Serial_Print("[Battery] Initialized battery successfully\r\n");
 #endif
 }
 
@@ -97,7 +206,7 @@ void TaskLoRa_init(void){
 
 
 		if(LoRa_init(&myLoRa)  == LORA_OK){
-			LoRa_setSyncWord(&myLoRa, 0x12);
+			LoRa_setSyncWord(&myLoRa, 0xF1);
 			Serial_Print("[LoRa] Initialize LoRa successfully\n\r");
 		}
 		else{
@@ -126,16 +235,18 @@ void TaskLoRa_run(void){
 	loc_data_payload.tag_gps_alt = tag_gps_alt;
 	loc_data_payload.tag_distance = tag_distance;
 
+
+
 #ifdef LORA_TEST_TRANSFER
 	Serial_Print("[LoRa] Initial test LoRa data\r\n");
 	loc_data_payload.device_id = 0XFFFF;
 	loc_data_payload.gps_hdop = 1.23;
-	loc_data_payload.loc_gps_lon = 123.45678;
-	loc_data_payload.loc_gps_lat = 123.45678;
-	loc_data_payload.loc_gps_alt = 12345678;
-	loc_data_payload.tag_gps_lon = 123.45678;
-	loc_data_payload.tag_gps_lat = 123.45678;
-	loc_data_payload.tag_gps_alt = 12345678;
+	loc_data_payload.loc_gps_lon = 106.805482;
+	loc_data_payload.loc_gps_lat = 10.880748;
+	loc_data_payload.loc_gps_alt = 1000;
+	loc_data_payload.tag_gps_lon = 106.798498;
+	loc_data_payload.tag_gps_lat = 10.874163;
+	loc_data_payload.tag_gps_alt = 1000;
 	loc_data_payload.tag_distance = 12345678;
 #endif
 

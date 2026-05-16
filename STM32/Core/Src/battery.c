@@ -31,7 +31,8 @@ void Battery_Init(void)
     adc_count = 0;
     adc_ready = 0;
 
-    HAL_ADC_Start_IT(&BATTERY_HANDLE_ADC);
+    //HAL_ADC_Start_IT(&BATTERY_HANDLE_ADC);
+    HAL_ADC_Start(&BATTERY_HANDLE_ADC);
 }
 
 /**
@@ -50,11 +51,14 @@ void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
         if (adc_count < ADC_SAMPLES)
         {
-        	HAL_ADC_Start_IT(hadc);
+        	//HAL_ADC_Start_IT(hadc);
+        	HAL_ADC_Start(&BATTERY_HANDLE_ADC);
+
         }
         else{
         	adc_ready = 1;
-        	HAL_ADC_Stop_IT(hadc);
+        	//HAL_ADC_Stop_IT(hadc);
+        	HAL_ADC_Stop(hadc);
         }
 
     }
@@ -140,7 +144,7 @@ void Battery_Run(void)
         adc_count = 0;
         adc_ready = 0;
 
-        HAL_ADC_Start_IT(&BATTERY_HANDLE_ADC);
+        HAL_ADC_Start(&BATTERY_HANDLE_ADC);
     }
 }
 

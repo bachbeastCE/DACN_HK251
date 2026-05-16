@@ -11,7 +11,10 @@
 #define LORA_RTOS 1
 #define LORA_TX_DMA 0
 
+
 #include "main.h"
+
+extern SPI_HandleTypeDef hspi3;
 
 #if LORA_RTOS
 #include "cmsis_os.h"

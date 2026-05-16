@@ -1,5 +1,5 @@
 ../Core/Src/ukf.c:11:21:wrap180	16	static
-../Core/Src/ukf.c:17:6:ukfInit	88	static
+../Core/Src/ukf.c:17:6:ukfInit	80	static
 ../Core/Src/ukf.c:121:6:cholesky	56	static
 ../Core/Src/ukf.c:174:6:generate_sigma_points	184	static
 ../Core/Src/ukf.c:195:6:ukf_predict	48	static

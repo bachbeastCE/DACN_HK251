@@ -61,7 +61,6 @@ extern SPI_HandleTypeDef ST7735_SPI_PORT;
 #define BROWN 	 0XBC40
 #define GRAY  	 0X8430
 
-
 void ST7735_init(void);
 void fillFullScreen(uint16_t color);
 void ST7735_WriteChar(uint8_t x, uint8_t y, char ch, FontDef font, uint16_t color, uint16_t bg);

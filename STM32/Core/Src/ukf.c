@@ -14,8 +14,8 @@ static inline float wrap180(float a)
     while (a < -180.0f) a += 360.0f;
     return a;
 }
-void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx1, I2C_HandleTypeDef *I2Cx2){
-	imu_init(I2Cx1, I2Cx2);
+void ukfInit(ukf_t *ukf, I2C_HandleTypeDef *I2Cx){
+	imu_init(I2Cx);
 	ukf->W_a[0] = 0.33333f;
 	ukf->W_c[0] = 0.33333f;
     ukf->dt = 0.02f;
@@ -196,7 +196,7 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
     generate_sigma_points(ukf);
 
     // propagate sigma points through state model
-    for(int j = 0; j < N; ++j){
+    for(int j = 0; j < N_UKF; ++j){
         // roll/pitch/yaw update with gyro minus bias
         ukf->sigma[j][0] += (imu->gx - ukf->sigma[j][3]) * ukf->dt; // roll
         ukf->sigma[j][1] += (imu->gy - ukf->sigma[j][4]) * ukf->dt; // pitch
@@ -206,7 +206,7 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
     // compute predicted mean
     for(int i = 0;i < L; ++i){
         ukf->x_pred[i] = 0;
-        for(int j = 0; j < N; j++){
+        for(int j = 0; j < N_UKF; j++){
             ukf->x_pred[i] += ukf->W_a[j]*ukf->sigma[j][i];
         }
     }
@@ -226,7 +226,7 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
     for(int i = 0; i < L; ++i){
         for(int k = 0; k < L; ++k){
             ukf->P_pred[i][k] = ukf->Q[i][k]; // start with process noise
-            for(int j = 0; j < N; ++j){
+            for(int j = 0; j < N_UKF; ++j){
                 float dx_i = ukf->sigma[j][i] - ukf->x_pred[i];
                 float dx_k = ukf->sigma[j][k] - ukf->x_pred[k];
                 ukf->P_pred[i][k] += ukf->W_c[j] * dx_i * dx_k;
@@ -242,7 +242,7 @@ void ukf_predict(ukf_t *ukf, imu_t *imu) {
 void ukf_update(ukf_t *ukf, imu_t *imu) {
     //Transform sigma points to measurement space
 	//const float G = 9.80665f;
-	for (int j = 0; j < N; ++j) {
+	for (int j = 0; j < N_UKF; ++j) {
         float roll_j  = ukf->sigma[j][0] * PI / 180.0f;
         float pitch_j = ukf->sigma[j][1] * PI / 180.0f;
         // predict accelerometer (gravity only) in body frame from orientation
@@ -260,13 +260,13 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     //Compute mean z
     float z_mean[4] = {0};
     for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < N; ++j) {
+        for (int j = 0; j < N_UKF; ++j) {
             z_mean[i] += ukf->W_a[j] * ukf->z_pred[j][i];
         }
     }
 
     float sin_sum = 0.0f, cos_sum = 0.0f;
-    for (int j = 0; j < N; ++j) {
+    for (int j = 0; j < N_UKF; ++j) {
         float yaw = ukf->z_pred[j][3] * PI / 180.0f;
         sin_sum += ukf->W_a[j] * sinf(yaw);
         cos_sum += ukf->W_a[j] * cosf(yaw);
@@ -277,7 +277,7 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     for (int i = 0; i < 4; ++i) {
     	for (int k = 0; k < 4; ++k) {
 			ukf->S[i][k] = ukf->R[i][k];
-			for (int j = 0; j < N; ++j) {
+			for (int j = 0; j < N_UKF; ++j) {
 				float dzi = (i == 3) ?
 							wrap180(ukf->z_pred[j][3] - z_mean[3]) :
 							(ukf->z_pred[j][i] - z_mean[i]);
@@ -302,7 +302,7 @@ void ukf_update(ukf_t *ukf, imu_t *imu) {
     for (int i = 0; i < L; ++i) {
     	for (int k = 0; k < 4; ++k) {
 			ukf->Cxz[i][k] = 0;
-			for (int j = 0; j < N; ++j) {
+			for (int j = 0; j < N_UKF; ++j) {
 				float dx = ukf->sigma[j][i] - ukf->x_pred[i];
 				if (i == 2) dx = wrap180(dx); // yaw state
 

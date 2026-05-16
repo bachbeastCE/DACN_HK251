@@ -1,4 +1,0 @@
-../Core/Src/imu_10DOF.c:98:20:write	1
-../Core/Src/imu_10DOF.c:155:6:BMP280_get_calib_values	1
-../Core/Src/imu_10DOF.c:175:6:baro_init	3
-../Core/Src/imu_10DOF.c:253:6:baro_read	4
