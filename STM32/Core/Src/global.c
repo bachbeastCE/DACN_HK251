@@ -17,7 +17,7 @@ double loc_roll = 3.0;
 double tag_gps_lon = 0.0;
 double tag_gps_lat = 0.0;
 double tag_gps_alt = 0.0;
-double tag_distance = 0.0;
+double tag_distance = 100.0;
 double gps_hdop = 0.0;
 double ax_mps2 = 0;
 double ay_mps2 = 0;
@@ -133,19 +133,19 @@ void TaskGPS_run(void){
 
 				      if (kf_start)
 				      {
-				          GPS_KF_Filter(&kf_gps,
-				                        raw_coordinates.Lat,
-				                        raw_coordinates.Lon,
-				                        baro_alt,
-				                        is_gps_new);
+//				          GPS_KF_Filter(&kf_gps,
+//				                        raw_coordinates.Lat,
+//				                        raw_coordinates.Lon,
+//				                        baro_alt,
+//				                        is_gps_new);
+//
+//				          loc_gps_lat = kf_gps.x[0];
+//				          loc_gps_lon = kf_gps.x[1];
+//				          loc_gps_alt = kf_gps.x[2];
 
-				          loc_gps_lat = kf_gps.x[0];
-				          loc_gps_lon = kf_gps.x[1];
-				          loc_gps_alt = kf_gps.x[2];
-
-//			              kf_gps.x[0] = raw_coordinates.Lat;
-//			              kf_gps.x[1] = raw_coordinates.Lon;
-//			              baro_alt = raw_coordinates.Alt;
+			              kf_gps.x[0] = raw_coordinates.Lat;
+			              kf_gps.x[1] = raw_coordinates.Lon;
+			              baro_alt = raw_coordinates.Alt;
 
 				      }
 
