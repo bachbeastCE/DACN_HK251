@@ -20,9 +20,12 @@ double tag_gps_lat = 0.0;
 double tag_gps_alt = 0.0;
 double tag_distance = 0.0;
 double gps_hdop = 0.0;
-
+double ax_mps2 = 0;
+double ay_mps2 = 0;
+double az_mps2 = 0;
+double baro_alt = 0;
 int time = 0;
-uint8_t kf_start =0;
+uint8_t kf_start = 0;
 double R_matrix[3][3];
 
 int is_gps_new = 0;
@@ -99,6 +102,65 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 }
 
+//void TaskGPS_init(void){
+//
+//}
+void TaskGPS_run(void){
+	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
+				Serial_Print("Task GPS\n");
+				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+					GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
+					is_gps_new = 0;
+					if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
+				          GPS_Coordinates_Get(&raw_coordinates);
+				          is_gps_new = 1;
+
+				          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
+				          if (!kf_start)
+				          {
+				              // Set vị trí ban đầu
+				              kf_gps.x[0] = raw_coordinates.Lat;
+				              kf_gps.x[1] = raw_coordinates.Lon;
+				              baro_alt = raw_coordinates.Alt;
+
+				              // Nếu dùng Baro thì set độ cao baro làm gốc
+				              kf_gps.x[2] = baro_alt;
+
+				              // Reset vận tốc về 0
+				              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
+				              kf_start = 1;
+				          }
+				      }
+
+				      if (kf_start)
+				      {
+				          GPS_KF_Filter(&kf_gps,
+				                        raw_coordinates.Lat,
+				                        raw_coordinates.Lon,
+				                        baro_alt,
+				                        is_gps_new);
+
+				          loc_gps_lat = kf_gps.x[0];
+				          loc_gps_lon = kf_gps.x[1];
+				          loc_gps_alt = kf_gps.x[2];
+
+				      }
+
+
+			      double pitch_rad = loc_pitch * M_PI / 180.0;
+			      double s12 = tag_distance * cos(pitch_rad);
+
+			      geod_direct(&g,
+			        loc_gps_lat, loc_gps_lon, loc_azi,
+			        s12,
+			        &tag_gps_lat, &tag_gps_lon, NULL);
+				osSemaphoreRelease(i2cDmaSemHandle);
+			}
+
+			 osDelay(5000);
+}
+
 void TaskLCD_init(){
 	ST7735_init();
 }
@@ -116,7 +178,7 @@ void TaskBattery_init(void){
 
 	for(int i = 0;i<4 ;i++){
 		Battery_Run();
-		osDelay(1000);
+		osDelay(3000);
 	}
 
 #if BATTERY_ENABLE_SERIAL_LOG
@@ -147,7 +209,8 @@ void TaskLoRa_init(void){
 		#endif
 
 		LoRa_init(&myLoRa);
-		LoRa_setSyncWord(&myLoRa, 0x12);
+		LoRa_setSyncWord(&myLoRa, 0xF1);
+		Serial_Print("[LoRa] Sync: 0x%02X\r\n", LoRa_read(&myLoRa, 0x39));
 }
 
 void TaskLoRa_run(void){
@@ -162,7 +225,7 @@ void TaskLoRa_run(void){
 	loc_data_payload.loc_gps_lat = loc_gps_lat;
 	loc_data_payload.loc_gps_alt = loc_gps_alt;
 	loc_data_payload.tag_gps_lon = tag_gps_lon;
-	loc_data_payload.tag_gps_lat = tag_gps_lon;
+	loc_data_payload.tag_gps_lat = tag_gps_lat;
 	loc_data_payload.tag_gps_alt = tag_gps_alt;
 	loc_data_payload.tag_distance = tag_distance;
 
@@ -172,13 +235,17 @@ void TaskLoRa_run(void){
 	loc_data_payload.gps_hdop = 1.23;
 	loc_data_payload.loc_gps_lon = 123.45678;
 	loc_data_payload.loc_gps_lat = 123.45678;
-	loc_data_payload.loc_gps_alt = 12345678;
+	loc_data_payload.loc_gps_alt = 123.45678;
 	loc_data_payload.tag_gps_lon = 123.45678;
 	loc_data_payload.tag_gps_lat = 123.45678;
-	loc_data_payload.tag_gps_alt = 12345678;
+	loc_data_payload.tag_gps_alt = 123.45678;
 	loc_data_payload.tag_distance = 12345678;
 #endif
 
+	Serial_Print("id = %d\n", loc_data_header.seq_num);
+	Serial_Print("Observer Coordinate = %.6f, %.6f, %.2f\n", loc_data_payload.loc_gps_lat, loc_data_payload.loc_gps_lon, loc_data_payload.loc_gps_alt);
+
+	Serial_Print("Target Coordinate = %.6f, %.6f, %.2f\n", loc_data_payload.tag_gps_lat, loc_data_payload.tag_gps_lon, loc_data_payload.tag_gps_alt);
 	loc_data_header.seq_num++;
 	memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
 	memcpy(plain_text_buffer+8,&loc_data_payload, sizeof(LOC_DATA_PAYLOAD));
@@ -186,17 +253,17 @@ void TaskLoRa_run(void){
 	memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER)); //Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
-	LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
+	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfered success\r\n");
 #endif
 
-	 osDelay(2000);
+	 osDelay(5000);
 }
 
 void TaskButton_init(void){
-	//Button_Init();
+//	Button_Init();
 }
 
 void TaskButton_run(void){

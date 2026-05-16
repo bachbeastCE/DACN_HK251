@@ -23,9 +23,9 @@
 #include "button.h"
 #include "imu.h"
 #include "ukf.h"
+#include "gps_kf.h"
 //#include "gps_ukf.h"
 #include "battery.h"
-#include "gps_kf.h"
 #include "LoRa.h"
 #include "micro_aes.h"
 
@@ -47,7 +47,7 @@ extern double loc_azi; 		//LOCAL AZIMUTH
 extern double loc_pitch; 	//LOCAL PITCH
 extern double loc_yaw; 		//LOCAL PITCH
 extern double loc_roll; 	//LOCAL PITCH
-
+extern uint8_t kf_start;
 extern double tag_gps_lon; 	//GPS TAGGET  LONGTITUDE
 extern double tag_gps_lat; 	//GPS TAGGET LATITUDE
 extern double tag_gps_alt; 	//GPS TAGGET ALTITUDE
@@ -98,6 +98,9 @@ void TaskBattery_run(void);
 
 void TaskLoRa_init(void);
 void TaskLoRa_run(void);
+
+void TaskGPS_init(void);
+void TaskGPS_run(void);
 
 void TaskButton_init(void);
 void TaskButton_run(void);

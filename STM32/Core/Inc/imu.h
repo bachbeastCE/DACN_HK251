@@ -19,15 +19,14 @@ typedef struct imu_t {
 	float ax, ay, az; //accel_ADXL345
 	float aoffsetx, aoffsety, aoffsetz;
 	float ascalex, ascaley, ascalez;
-	float aalignx, aaligny, aalignz;
 	float gx, gy, gz; //gyro_ITG3205
 	float goffsetx, goffsety, goffsetz;
 	float gscalex, gscaley, gscalez;
-	float galignx, galigny, galignz;
+	float gbias_var_x, gbias_var_y, gbias_var_z;
+	float gscalex_var_x, gscaley_var_y, gscalez_var_z;
 	float mx, my, mz; //mag_VCM5883L
 	float moffsetx, moffsety, moffsetz;
 	float mscalex, mscaley, mscalez;
-	float malignx, maligny, malignz;
 	float gyrox_noise, gyroy_noise, gyroz_noise;
     float pitch; //elevation
     float yaw; //azimuth

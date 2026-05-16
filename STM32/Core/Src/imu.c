@@ -42,9 +42,9 @@ static inline void accel_convert()
     int16_t y_raw = (int16_t)((data_acce[2] << 8) | data_acce[3]);
     int16_t z_raw = (int16_t)((data_acce[4] << 8) | data_acce[5]);
 
-    imu.ax = ((float)x_raw - imu.aoffsetx) / 4096.0f;
-    imu.ay = ((float)y_raw - imu.aoffsety) / 4096.0f;
-    imu.az = ((float)z_raw - imu.aoffsetz) / 4096.0f;
+    imu.ax = ((float)x_raw - imu.aoffsetx) * imu.ascalex / 4096.0f;
+    imu.ay = ((float)y_raw - imu.aoffsety) * imu.ascaley / 4096.0f;
+    imu.az = ((float)z_raw - imu.aoffsetz) * imu.ascalez / 4096.0f;
 
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Acce_X = %.3f g; ", imu.ax);
@@ -61,12 +61,10 @@ static inline void mag_convert()
     y_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
     z_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
 
-    imu.moffsetx = 33.387;
-    imu.moffsety = 32.952;
-    imu.moffsetz = (-35.936);
-    imu.mscalex = 1.0647;
-    imu.mscaley = 0.9433;
-    imu.mscalez = 0.9993;
+//    imu.moffsetx = 33.387;
+//    imu.moffsety = 32.952;
+//    imu.moffsetz = (-35.936);
+
 //    imu.moffsetx = 0;
 //    imu.moffsety = 0;
 //    imu.moffsetz = 0;
@@ -99,9 +97,12 @@ static inline void gyro_convert()
     y_raw = (int16_t)((data_gyro[2] << 8) | data_gyro[3]);
     z_raw = (int16_t)((data_gyro[4] << 8) | data_gyro[5]);
 
-    imu.gx = ((float)x_raw - imu.goffsetx) / 65.5f;
-    imu.gy = ((float)y_raw - imu.goffsety) / 65.5f;
-    imu.gz = ((float)z_raw - imu.goffsetz) / 65.5f;
+//    imu.gx = ((float)x_raw - imu.goffsetx) * imu.gscalex / 65.5f;
+//    imu.gy = ((float)y_raw - imu.goffsety) * imu.gscaley / 65.5f;
+//    imu.gz = ((float)z_raw - imu.goffsetz) * imu.gscalez/ 65.5f;
+    imu.gx = ((float)x_raw) / 65.5f;
+    imu.gy = ((float)y_raw) / 65.5f;
+    imu.gz = ((float)z_raw) / 65.5f;
 
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Gyro_X = %.3f deg/s; ", imu.gx);
@@ -338,10 +339,107 @@ void baro_read(I2C_HandleTypeDef *I2Cx)
     imu.pressure = (float)p / 256.0f;
 
     //Altitude
-    imu.altitude = 44330.0f *
+    imu.altitude = 44307.69396f *
                (1.0f - powf((float)(imu.pressure / 101325.0), 1.0f / 5.255f));
 }
-
+//void calibrate(I2C_HandleTypeDef *I2Cx)
+//{
+//    // =====================================================
+//    // CONFIG
+//    // =====================================================
+//
+//    const uint32_t BLOCK_SAMPLES = 500;   // samples per block
+//    const uint32_t NUM_BLOCKS    = 60;    // total blocks
+//
+//    // 200 samples * 5ms = 1 second/block
+//
+//    float bias_x[NUM_BLOCKS];
+//    float bias_y[NUM_BLOCKS];
+//    float bias_z[NUM_BLOCKS];
+//
+//    int16_t gx_raw, gy_raw, gz_raw;
+//
+//    Serial_Print("\r\n=== ESTIMATE GYRO BIAS RANDOM WALK ===\r\n");
+//    Serial_Print("KEEP IMU STILL...\r\n");
+//
+//    HAL_Delay(3000);
+//
+//    // =====================================================
+//    // STEP 1 : ESTIMATE BIAS OVER TIME
+//    // =====================================================
+//
+//    for(uint32_t block = 0; block < NUM_BLOCKS; block++)
+//    {
+//        int64_t sum_gx = 0;
+//        int64_t sum_gy = 0;
+//        int64_t sum_gz = 0;
+//
+//        for(uint32_t i = 0; i < BLOCK_SAMPLES; i++)
+//        {
+//            if(HAL_I2C_Mem_Read(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H,
+//                                1, data_gyro, 6, 100) != HAL_OK){
+//                return;
+//            }
+//
+//            gx_raw = (int16_t)((data_gyro[0] << 8) | data_gyro[1]);
+//            gy_raw = (int16_t)((data_gyro[2] << 8) | data_gyro[3]);
+//            gz_raw = (int16_t)((data_gyro[4] << 8) | data_gyro[5]);
+//            sum_gx += gx_raw;
+//            sum_gy += gy_raw;
+//            sum_gz += gz_raw;
+//            HAL_Delay(2);
+//        }
+//
+//        // mean bias of current block
+//        bias_x[block] = ((float)sum_gx / BLOCK_SAMPLES) / 65.5f;
+//        bias_y[block] = ((float)sum_gy / BLOCK_SAMPLES) / 65.5f;
+//        bias_z[block] = ((float)sum_gz / BLOCK_SAMPLES) / 65.5f;
+//
+//        Serial_Print("Block %lu : "
+//                     "Bx=%.6f "
+//                     "By=%.6f "
+//                     "Bz=%.6f\r\n",
+//                     block,
+//                     bias_x[block],
+//                     bias_y[block],
+//                     bias_z[block]);
+//    }
+//
+//    // =====================================================
+//    // STEP 2 : COMPUTE BIAS RANDOM WALK VARIANCE
+//    // =====================================================
+//    float var_bx = 0.0f;
+//    float var_by = 0.0f;
+//    float var_bz = 0.0f;
+//    for(uint32_t k = 1; k < NUM_BLOCKS; k++)
+//    {
+//        float dbx = bias_x[k] - bias_x[k - 1];
+//        float dby = bias_y[k] - bias_y[k - 1];
+//        float dbz = bias_z[k] - bias_z[k - 1];
+//        var_bx += dbx * dbx;
+//        var_by += dby * dby;
+//        var_bz += dbz * dbz;
+//    }
+//    var_bx /= (NUM_BLOCKS - 1);
+//    var_by /= (NUM_BLOCKS - 1);
+//    var_bz /= (NUM_BLOCKS - 1);
+//
+//    // =====================================================
+//    // SAVE
+//    // =====================================================
+//    imu.gbias_var_x = var_bx;
+//    imu.gbias_var_y = var_by;
+//    imu.gbias_var_z = var_bz;
+//    // =====================================================
+//    // PRINT
+//    // =====================================================
+//
+//    Serial_Print("\r\n=== GYRO BIAS RANDOM WALK VAR ===\r\n");
+//    Serial_Print("Var Bx = %.10f\r\n", imu.gbias_var_x);
+//    Serial_Print("Var By = %.10f\r\n", imu.gbias_var_y);
+//    Serial_Print("Var Bz = %.10f\r\n", imu.gbias_var_z);
+//    Serial_Print("=================================\r\n");
+//}
 void calibrate(I2C_HandleTypeDef *I2Cx) {
     // ===== Gyro + Accel calibration =====
 //    int64_t sum_gx = 0, sum_gy = 0, sum_gz = 0;
@@ -349,10 +447,10 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
 
 
     uint32_t CALIB_SAMPLES = 1000;
-    int16_t gx_sample[CALIB_SAMPLES], gy_sample[CALIB_SAMPLES], gz_sample[CALIB_SAMPLES];
+//    int16_t gx_sample[CALIB_SAMPLES], gy_sample[CALIB_SAMPLES], gz_sample[CALIB_SAMPLES];
 //    int16_t ax_raw, ay_raw, az_raw;
     Serial_Print("=== Keep IMU still... Calibrating gyro & accel... ===\r\n");
-//    HAL_Delay(100);
+    HAL_Delay(100);
 //    int16_t gx_raw, gy_raw, gz_raw;
 //    for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
 //        // --- Read Gyro ---
@@ -401,79 +499,237 @@ void calibrate(I2C_HandleTypeDef *I2Cx) {
     // ===== ACCEL OFFSET (RAW) =====
     imu.aoffsetx = 244.577f;
     imu.aoffsety = 170.902f;
-    imu.aoffsetz = 3768.861f;
-
+    imu.aoffsetz = 3768.861f - 4096;
+    imu.ascalex = 0.982f;
+    imu.ascaley = 0.993f;
+    imu.ascalez = 1.013f;
+    imu.mscalex = 1.0647f;
+    imu.mscaley = 0.9433f;
+    imu.mscalez = 0.9993f;
     // ===== GYRO OFFSET (RAW) =====
     imu.goffsetx = -25.028f;
     imu.goffsety = 31.544f;
     imu.goffsetz = 6.769f;
-    float var_gx = 0, var_gy = 0, var_gz = 0;
-    for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
-        var_gx = var_gx + (gx_sample[i] - imu.goffsetx) * (gx_sample[i] - imu.goffsetx);
-        var_gy = var_gy + (gy_sample[i] - imu.goffsety) * (gy_sample[i] - imu.goffsety);
-        var_gz = var_gz + (gz_sample[i] - imu.goffsetz) * (gz_sample[i] - imu.goffsetz);
-    }
+    imu.gscalex = 1.027f;
+    imu.gscaley = 1.064f;
+    imu.gscalez = 0.992f;
+	imu.gbias_var_x = 0.00009f;
+    imu.gbias_var_y = 0.00005f;
+    imu.gbias_var_z = 0.00005f;
+	imu.gscalex_var_x = 1e-6f;
+    imu.gscaley_var_y = 1e-6f;
+    imu.gscalez_var_z = 1e-6f;
+//    float var_gx = 0, var_gy = 0, var_gz = 0;
+//    for (uint32_t i = 0; i < CALIB_SAMPLES; i++) {
+//        var_gx = var_gx + (gx_sample[i] - imu.goffsetx) * (gx_sample[i] - imu.goffsetx);
+//        var_gy = var_gy + (gy_sample[i] - imu.goffsety) * (gy_sample[i] - imu.goffsety);
+//        var_gz = var_gz + (gz_sample[i] - imu.goffsetz) * (gz_sample[i] - imu.goffsetz);
+//    }
+//
+//    var_gx /= (CALIB_SAMPLES - 1);
+//    var_gy /= (CALIB_SAMPLES - 1);
+//    var_gz /= (CALIB_SAMPLES - 1);
 
-    var_gx /= (CALIB_SAMPLES - 1);
-    var_gy /= (CALIB_SAMPLES - 1);
-    var_gz /= (CALIB_SAMPLES - 1);
+//    imu.gyrox_noise = sqrtf(var_gx);
+//    imu.gyroy_noise = sqrtf(var_gy);
+//    imu.gyroz_noise = sqrtf(var_gz);
+    imu.gyrox_noise = 9.7054;
+    imu.gyroy_noise = 13.0541;
+    imu.gyroz_noise = 6.1487;
 
-    imu.gyrox_noise = sqrtf(var_gx);
-    imu.gyroy_noise = sqrtf(var_gy);
-    imu.gyroz_noise = sqrtf(var_gz);
-
-//#if IMU_ENABLE_SERIAL_LOG
+#if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Gyro & Accel calibration done!\r\n");
-//    Serial_Print("Ax_off=%.3f, Ay_off=%.3f, Az_off=%.3f\r\n, Gx_off=%.3f, Gy_off=%.3f, Gz_off=%.3f\r\n", imu.aoffsetx, imu.aoffsety, imu.aoffsetz, imu.goffsetx, imu.goffsety, imu.goffsetz);
+    Serial_Print("Ax_off=%.3f, Ay_off=%.3f, Az_off=%.3f\r\n, Gx_off=%.3f, Gy_off=%.3f, Gz_off=%.3f\r\n", imu.aoffsetx, imu.aoffsety, imu.aoffsetz, imu.goffsetx, imu.goffsety, imu.goffsetz);
     Serial_Print("Gyro Noise (1σ): Nx=%.6f, Ny=%.6f, Nz=%.6f\r\n",
-                 imu.gyrox_noise/65.5f, imu.gyroy_noise/65.5f, imu.gyroz_noise/65.5f);
+                 imu.gyrox_noise, imu.gyroy_noise, imu.gyroz_noise);
     // ===== Magnetometer calibration =====
     Serial_Print("=== Rotate IMU slowly in all directions (figure-8) ===\r\n");
-//#endif
+#endif
 
-    HAL_Delay(200);
-
-    float mx_min = 1e9, my_min = 1e9, mz_min = 1e9;
-    float mx_max = -1e9, my_max = -1e9, mz_max = -1e9;
-    int16_t mx_raw, my_raw, mz_raw;
-
-    uint32_t MAG_SAMPLES = 1000;
-    for (uint32_t i = 0; i < MAG_SAMPLES; i++) {
-        if (HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7, 100) != HAL_OK)
-            return;
-
-        mx_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
-        my_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
-        mz_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
-
-        float mx = (float)mx_raw * mag_adj[0];
-        float my = (float)my_raw * mag_adj[1];
-        float mz = (float)mz_raw * mag_adj[2];
-
-        if (mx < mx_min) mx_min = mx;
-        if (mx > mx_max) mx_max = mx;
-        if (my < my_min) my_min = my;
-        if (my > my_max) my_max = my;
-        if (mz < mz_min) mz_min = mz;
-        if (mz > mz_max) mz_max = mz;
-
-        HAL_Delay(3);
+//    HAL_Delay(200);
+//
+//    float mx_min = 1e9, my_min = 1e9, mz_min = 1e9;
+//    float mx_max = -1e9, my_max = -1e9, mz_max = -1e9;
+//    int16_t mx_raw, my_raw, mz_raw;
+//
+//    uint32_t MAG_SAMPLES = 1000;
+//    for (uint32_t i = 0; i < MAG_SAMPLES; i++) {
+//        if (HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_HXL, 1, data_mag, 7, 100) != HAL_OK)
+//            return;
+//
+//        mx_raw = (int16_t)((data_mag[1] << 8) | data_mag[0]);
+//        my_raw = (int16_t)((data_mag[3] << 8) | data_mag[2]);
+//        mz_raw = (int16_t)((data_mag[5] << 8) | data_mag[4]);
+//
+//        float mx = (float)mx_raw * mag_adj[0];
+//        float my = (float)my_raw * mag_adj[1];
+//        float mz = (float)mz_raw * mag_adj[2];
+//
+//        if (mx < mx_min) mx_min = mx;
+//        if (mx > mx_max) mx_max = mx;
+//        if (my < my_min) my_min = my;
+//        if (my > my_max) my_max = my;
+//        if (mz < mz_min) mz_min = mz;
+//        if (mz > mz_max) mz_max = mz;
+//
+//        HAL_Delay(3);
+//    }
+//
+//    imu.moffsetx = ((mx_max + mx_min)/2.0f) * 0.15f;
+//    imu.moffsety = ((my_max + my_min)/2.0f) * 0.15f;
+//    imu.moffsetz = ((mz_max + mz_min)/2.0f) * 0.15f;
+//    float mx_scale = (mx_max - mx_min) / 2.0f;
+//    float my_scale = (my_max - my_min) / 2.0f;
+//    float mz_scale = (mz_max - mz_min) / 2.0f;
+//    float avg_scale = (mx_scale + my_scale + mz_scale) / 3.0f;
+//    imu.mscalex = avg_scale / mx_scale;
+//    imu.mscaley = avg_scale / my_scale;
+//    imu.mscalez = avg_scale / mz_scale;
+//
+//    Serial_Print("Magnetometer calibration done!\r\n");
+//    Serial_Print("Offsets:\r\n");
+//    Serial_Print(" Mx_off=%.2f, My_off=%.2f, Mz_off=%.2f\r\n", imu.moffsetx, imu.moffsety, imu.moffsetz);
+//    Serial_Print("=============================================\r\n");
+}
+float readAccelAverageX(I2C_HandleTypeDef *I2Cx, uint32_t samples){
+    uint8_t data[6];
+    int16_t ax_raw;
+    float sum = 0;
+    for(uint32_t i = 0; i < samples; i++)
+    {
+        HAL_I2C_Mem_Read(I2Cx,
+                         MPU_I2C_ADDR,
+                         MPU9250_ACCEL_XOUT_H,
+                         1,
+                         data,
+                         6,
+                         100);
+        ax_raw = (int16_t)((data[0] << 8) | data[1]);
+        sum += ax_raw;
+        HAL_Delay(2);
     }
-
-    imu.moffsetx = ((mx_max + mx_min)/2.0f) * 0.15f;
-    imu.moffsety = ((my_max + my_min)/2.0f) * 0.15f;
-    imu.moffsetz = ((mz_max + mz_min)/2.0f) * 0.15f;
-    float mx_scale = (mx_max - mx_min) / 2.0f;
-    float my_scale = (my_max - my_min) / 2.0f;
-    float mz_scale = (mz_max - mz_min) / 2.0f;
-    float avg_scale = (mx_scale + my_scale + mz_scale) / 3.0f;
-    imu.mscalex = avg_scale / mx_scale;
-    imu.mscaley = avg_scale / my_scale;
-    imu.mscalez = avg_scale / mz_scale;
-
-    Serial_Print("Magnetometer calibration done!\r\n");
-    Serial_Print("Offsets:\r\n");
-    Serial_Print(" Mx_off=%.2f, My_off=%.2f, Mz_off=%.2f\r\n", imu.moffsetx, imu.moffsety, imu.moffsetz);
-    Serial_Print("=============================================\r\n");
+    return sum / samples;
 }
 
+float readAccelAverageY(I2C_HandleTypeDef *I2Cx, uint32_t samples){
+    uint8_t data[6];
+    int16_t ay_raw;
+    float sum = 0;
+    for(uint32_t i = 0; i < samples; i++)
+    {
+        HAL_I2C_Mem_Read(I2Cx,
+                         MPU_I2C_ADDR,
+                         MPU9250_ACCEL_XOUT_H,
+                         1,
+                         data,
+                         6,
+                         100);
+
+        ay_raw = (int16_t)((data[2] << 8) | data[3]);
+        sum += ay_raw;
+        HAL_Delay(2);
+    }
+    return sum / samples;
+}
+
+float readAccelAverageZ(I2C_HandleTypeDef *I2Cx, uint32_t samples){
+    uint8_t data[6];
+    int16_t az_raw;
+    float sum = 0;
+    for(uint32_t i = 0; i < samples; i++)
+    {
+        HAL_I2C_Mem_Read(I2Cx,
+                         MPU_I2C_ADDR,
+                         MPU9250_ACCEL_XOUT_H,
+                         1,
+                         data,
+                         6,
+                         100);
+
+        az_raw = (int16_t)((data[4] << 8) | data[5]);
+        sum += az_raw;
+        HAL_Delay(2);
+    }
+    return sum / samples;
+}
+
+//void calibrate(I2C_HandleTypeDef *I2Cx)
+//{
+//    const uint32_t SAMPLES = 1000;
+//
+//    // MPU9250 ±8g
+//    const float IDEAL_1G = 4096.0f;
+//
+//    float ax_pos, ax_neg;
+//    float ay_pos, ay_neg;
+//    float az_pos, az_neg;
+//
+//    Serial_Print("\r\n===== ACCEL SCALE CALIBRATION =====\r\n");
+//
+//    // =====================================================
+//    // X AXIS
+//    // =====================================================
+//
+//    Serial_Print("Place +X UP\r\n");
+//    HAL_Delay(5000);
+//
+//    ax_pos = readAccelAverageX(I2Cx, SAMPLES);
+//
+//    Serial_Print("Place -X UP\r\n");
+//    HAL_Delay(5000);
+//
+//    ax_neg = readAccelAverageX(I2Cx, SAMPLES);
+//
+//    // =====================================================
+//    // Y AXIS
+//    // =====================================================
+//
+//    Serial_Print("Place +Y UP\r\n");
+//    HAL_Delay(5000);
+//
+//    ay_pos = readAccelAverageY(I2Cx, SAMPLES);
+//
+//    Serial_Print("Place -Y UP\r\n");
+//    HAL_Delay(5000);
+//
+//    ay_neg = readAccelAverageY(I2Cx, SAMPLES);
+//
+//    // =====================================================
+//    // Z AXIS
+//    // =====================================================
+//
+//    Serial_Print("Place +Z UP\r\n");
+//    HAL_Delay(5000);
+//
+//    az_pos = readAccelAverageZ(I2Cx, SAMPLES);
+//
+//    Serial_Print("Place -Z UP\r\n");
+//    HAL_Delay(5000);
+//
+//    az_neg = readAccelAverageZ(I2Cx, SAMPLES);
+//
+//    // =====================================================
+//    // CALCULATE SCALE
+//    // =====================================================
+//
+//    imu.ascalex =
+//        (2.0f * IDEAL_1G) / (ax_pos - ax_neg);
+//
+//    imu.ascaley =
+//        (2.0f * IDEAL_1G) / (ay_pos - ay_neg);
+//
+//    imu.ascalez =
+//        (2.0f * IDEAL_1G) / (az_pos - az_neg);
+//
+//    // =====================================================
+//    // PRINT
+//    // =====================================================
+//
+//    Serial_Print("\r\nAccel Scale Done!\r\n");
+//
+//    Serial_Print("Scale X = %.6f\r\n", imu.ascalex);
+//    Serial_Print("Scale Y = %.6f\r\n", imu.ascaley);
+//    Serial_Print("Scale Z = %.6f\r\n", imu.ascalez);
+//
+//    Serial_Print("====================================\r\n");
+//}

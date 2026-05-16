@@ -43,24 +43,19 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
-I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c3;
 
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
-DMA_HandleTypeDef hdma_spi1_rx;
 DMA_HandleTypeDef hdma_spi1_tx;
-DMA_HandleTypeDef hdma_spi2_rx;
-DMA_HandleTypeDef hdma_spi2_tx;
 DMA_HandleTypeDef hdma_spi3_tx;
 DMA_HandleTypeDef hdma_spi3_rx;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart6;
-DMA_HandleTypeDef hdma_usart1_rx;
 DMA_HandleTypeDef hdma_usart1_tx;
-DMA_HandleTypeDef hdma_usart2_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
 osThreadId TaskIMUHandle;
@@ -85,7 +80,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_ADC1_Init(void);
-static void MX_I2C1_Init(void);
+static void MX_I2C3_Init(void);
 static void MX_USART6_UART_Init(void);
 void StartTaskIMU(void const * argument);
 void StartTaskGPS(void const * argument);
@@ -142,10 +137,10 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI3_Init();
   MX_ADC1_Init();
-  MX_I2C1_Init();
+  MX_I2C3_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-  TaskIMU_init(&hi2c1);
+  TaskIMU_init(&hi2c3);
   TaskLCD_init();
   /* USER CODE END 2 */
 
@@ -320,36 +315,36 @@ static void MX_ADC1_Init(void)
 }
 
 /**
-  * @brief I2C1 Initialization Function
+  * @brief I2C3 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_I2C1_Init(void)
+static void MX_I2C3_Init(void)
 {
 
-  /* USER CODE BEGIN I2C1_Init 0 */
+  /* USER CODE BEGIN I2C3_Init 0 */
 
-  /* USER CODE END I2C1_Init 0 */
+  /* USER CODE END I2C3_Init 0 */
 
-  /* USER CODE BEGIN I2C1_Init 1 */
+  /* USER CODE BEGIN I2C3_Init 1 */
 
-  /* USER CODE END I2C1_Init 1 */
-  hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 50000;
-  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c1.Init.OwnAddress1 = 0;
-  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c1.Init.OwnAddress2 = 0;
-  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  /* USER CODE END I2C3_Init 1 */
+  hi2c3.Instance = I2C3;
+  hi2c3.Init.ClockSpeed = 100000;
+  hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c3.Init.OwnAddress1 = 0;
+  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c3.Init.OwnAddress2 = 0;
+  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c3) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C1_Init 2 */
+  /* USER CODE BEGIN I2C3_Init 2 */
 
-  /* USER CODE END I2C1_Init 2 */
+  /* USER CODE END I2C3_Init 2 */
 
 }
 
@@ -376,7 +371,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -452,7 +447,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_HARD_OUTPUT;
-  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi3.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
   hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -580,30 +575,15 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
-  /* DMA1_Stream3_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
-  /* DMA1_Stream4_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
   /* DMA1_Stream5_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
-  /* DMA1_Stream6_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
   /* DMA1_Stream7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
-  /* DMA2_Stream0_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
   /* DMA2_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
-  /* DMA2_Stream5_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream5_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream5_IRQn);
   /* DMA2_Stream7_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
@@ -640,8 +620,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA0 PA8 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_8;
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -687,7 +667,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
 //	Serial_Print("call back\n");
-    if (hi2c == &hi2c1)
+    if (hi2c == &hi2c3)
     {
 //    	HAL_DMA_Abort_IT(hi2c->hdmarx);
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
@@ -738,7 +718,7 @@ void StartTaskIMU(void const * argument)
 
     for (;;)
     {
-    	TaskIMU_run(&hi2c1);
+    	TaskIMU_run(&hi2c3);
     }
 
   /* USER CODE END 5 */
@@ -758,64 +738,9 @@ void StartTaskGPS(void const * argument)
 //
 //	//  TickType_t last = xTaskGetTickCount();
 //		Serial_Print("Task GPS Running\n");
-//	double ax_mps2 = 0;
-//	double ay_mps2 = 0;
-//	double az_mps2 = 0;
-//	double baro_alt = 0;
-	while(1){
-		if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
-			Serial_Print("Task GPS\n");
-//			//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
-//				GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
-//			                                  loc_pitch, loc_roll, loc_azi, R_matrix);
-//				is_gps_new = 0;
-//				if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
-//			          GPS_Coordinates_Get(&raw_coordinates);
-//			          is_gps_new = 1;
-//
-//			          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
-//			          if (!kf_start)
-//			          {
-//			              // Set vị trí ban đầu
-//			              kf_gps.x[0] = raw_coordinates.Lat;
-//			              kf_gps.x[1] = raw_coordinates.Lon;
-//			              baro_alt = raw_coordinates.Alt;
-//
-//			              // Nếu dùng Baro thì set độ cao baro làm gốc
-//			              //kf_gps.x[2] = baro_alt;
-//
-//			              // Reset vận tốc về 0
-//			              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
-//			              kf_start = 1;
-//			          }
-//			      }
-//
-//			      if (kf_start)
-//			      {
-//			          GPS_KF_Filter(&kf_gps,
-//			                        raw_coordinates.Lat,
-//			                        raw_coordinates.Lon,
-//			                        baro_alt,
-//			                        is_gps_new);
-//
-//			          loc_gps_lat = kf_gps.x[0];
-//			          loc_gps_lon = kf_gps.x[1];
-//			          loc_gps_alt = kf_gps.x[2];
-//
-//			      }
-//
-//
-//		      double pitch_rad = loc_pitch * M_PI / 180.0;
-//		      double s12 = tag_distance * cos(pitch_rad);
-//
-//		      geod_direct(&g,
-//		        loc_gps_lat, loc_gps_lon, loc_azi,
-//		        s12,
-//		        &tag_gps_lat, &tag_gps_lon, NULL);
-			osSemaphoreRelease(i2cDmaSemHandle);
-		}
 
-		 osDelay(5000);
+	while(1){
+		TaskGPS_run();
     }
 //
 
@@ -834,11 +759,12 @@ void StartTaskLCD(void const * argument)
 {
   /* USER CODE BEGIN StartTaskLCD */
 //  /* Infinite loop */
-//  Serial_Print("TASK LCD RUNNING\n");
+  Serial_Print("TASK LCD RUNNING\n");
   for(;;)
   {
 //	Serial_Print("LCD\n");
 	TaskLCD_run();
+//	  osDelay(10000);
   }
   /* USER CODE END StartTaskLCD */
 }
@@ -854,11 +780,12 @@ void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
-//	TaskBattery_init();
+	TaskBattery_init();
 	for(;;)
 	{
-//		TaskBattery_run();
-		osDelay(10000);
+//		Serial_Print("Battery\n");
+		TaskBattery_run();
+//		osDelay(5000);
 	}
   /* USER CODE END StartTaskBattery */
 }
@@ -874,11 +801,12 @@ void StartLoRaTask(void const * argument)
 {
   /* USER CODE BEGIN StartLoRaTask */
 	/* Infinite loop */
-//	TaskLoRa_init();
+	TaskLoRa_init();
 	  for(;;)
 	  {
-//		  TaskLoRa_run();
-		  osDelay(10000);
+//		  Serial_Print("LoRa\n");
+		  TaskLoRa_run();
+//		  osDelay(10000);
 	  }
   /* USER CODE END StartLoRaTask */
 }
@@ -896,8 +824,9 @@ void StartTaskButton(void const * argument)
 	/* Infinite loop */
 	for(;;)
 	{
-//		TaskButton_run();
-		osDelay(10000);
+//		Serial_Print("Button\n");
+		TaskButton_run();
+//		osDelay(5000);
 	}
   /* USER CODE END StartTaskButton */
 }
@@ -918,6 +847,7 @@ void StartTaskDebug(void const * argument)
 	for(;;)
 	{
 //		TaskDebug_run();
+//		Serial_Print("Debug\n");
 		osDelay(10000);
 	}
   /* USER CODE END StartTaskDebug */

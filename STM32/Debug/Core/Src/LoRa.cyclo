@@ -18,6 +18,3 @@
 ../Core/Src/LoRa.c:513:9:LoRa_receive	4
 ../Core/Src/LoRa.c:546:5:LoRa_getRSSI	1
 ../Core/Src/LoRa.c:562:10:LoRa_init	3
-../Core/Src/LoRa.c:633:9:LoRa_setTX_DMA	4
-../Core/Src/LoRa.c:641:6:LoRa_resetDMA	2
-../Core/Src/LoRa.c:648:9:LoRa_transmit_DMA	4

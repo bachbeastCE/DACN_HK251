@@ -54,8 +54,8 @@ Core/Src/gps.o: ../Core/Src/gps.c ../Core/Inc/gps.h ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Core/Inc/st7735.h ../Core/Inc/fonts.h ../Core/Inc/gps.h \
  ../Core/Inc/button.h ../Core/Inc/main.h ../Core/Inc/imu.h \
- ../Core/Inc/serial.h ../Core/Inc/ukf.h ../Core/Inc/battery.h \
- ../Core/Inc/gps_kf.h ../Core/Inc/LoRa.h ../Core/Inc/micro_aes.h
+ ../Core/Inc/serial.h ../Core/Inc/ukf.h ../Core/Inc/gps_kf.h \
+ ../Core/Inc/battery.h ../Core/Inc/LoRa.h ../Core/Inc/micro_aes.h
 ../Core/Inc/gps.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -121,7 +121,7 @@ Core/Src/gps.o: ../Core/Src/gps.c ../Core/Inc/gps.h ../Core/Inc/main.h \
 ../Core/Inc/imu.h:
 ../Core/Inc/serial.h:
 ../Core/Inc/ukf.h:
-../Core/Inc/battery.h:
 ../Core/Inc/gps_kf.h:
+../Core/Inc/battery.h:
 ../Core/Inc/LoRa.h:
 ../Core/Inc/micro_aes.h:
