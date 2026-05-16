@@ -97,12 +97,14 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 }
 
-//void TaskGPS_init(void){
-//
-//}
+void TaskGPS_init(void){
+	GPS_Init();
+}
+
+
 void TaskGPS_run(void){
 	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
-				Serial_Print("Task GPS\n");
+				Serial_Print("Task GPS\n\r");
 				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
 					GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
 				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
@@ -141,9 +143,13 @@ void TaskGPS_run(void){
 				          loc_gps_lon = kf_gps.x[1];
 				          loc_gps_alt = kf_gps.x[2];
 
+//			              kf_gps.x[0] = raw_coordinates.Lat;
+//			              kf_gps.x[1] = raw_coordinates.Lon;
+//			              baro_alt = raw_coordinates.Alt;
+
 				      }
 
-
+				  loc_gps_alt = 16;
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
 			      double s12 = tag_distance * cos(pitch_rad);
 
@@ -233,18 +239,18 @@ void TaskLoRa_run(void){
 
 
 
-#ifdef LORA_TEST_TRANSFER
-	Serial_Print("[LoRa] Initial test LoRa data\r\n");
-	loc_data_payload.device_id = 0XFFFF;
-	loc_data_payload.gps_hdop = 1.23;
-	loc_data_payload.loc_gps_lon = 106.805482;
-	loc_data_payload.loc_gps_lat = 10.880748;
-	loc_data_payload.loc_gps_alt = 1000;
-	loc_data_payload.tag_gps_lon = 106.798498;
-	loc_data_payload.tag_gps_lat = 10.874163;
-	loc_data_payload.tag_gps_alt = 1000;
-	loc_data_payload.tag_distance = 12345678;
-#endif
+//#ifdef LORA_TEST_TRANSFER
+//	Serial_Print("[LoRa] Initial test LoRa data\r\n");
+//	loc_data_payload.device_id = 0XFFFF;
+//	loc_data_payload.gps_hdop = 1.23;
+//	loc_data_payload.loc_gps_lon = 106.805482;
+//	loc_data_payload.loc_gps_lat = 10.880748;
+//	loc_data_payload.loc_gps_alt = 1000;
+//	loc_data_payload.tag_gps_lon = 106.798498;
+//	loc_data_payload.tag_gps_lat = 10.874163;
+//	loc_data_payload.tag_gps_alt = 1000;
+//	loc_data_payload.tag_distance = 12345678;
+//#endif
 
 	loc_data_header.seq_num++;
 	memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
@@ -281,7 +287,7 @@ void TaskDebug_run(void){
 //	if(isButtonPressed(0)) {
 //		Serial_Print("[Debug] Press Button\n\r");
 //	}
-	Serial_Print("[Debug] Run Debug\n\r");
+	//Serial_Print("[Debug] Run Debug\n\r");
 }
 
 

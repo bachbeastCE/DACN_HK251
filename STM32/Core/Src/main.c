@@ -141,8 +141,10 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
+  TaskGPS_init();
   TaskIMU_init(&hi2c3);
   TaskLCD_init();
+
 
   /* USER CODE END 2 */
 
@@ -179,24 +181,24 @@ int main(void)
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
   /* definition and creation of TaskLCD */
-  osThreadDef(TaskLCD, StartTaskLCD, osPriorityNormal, 0, 512);
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
   TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
   /* definition and creation of TaskBattery */
-  osThreadDef(TaskBattery, StartTaskBattery, osPriorityBelowNormal, 0, 128);
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
   TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
-  osThreadDef(LoRaTask, StartLoRaTask, osPriorityBelowNormal, 0, 128);
+  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
   LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
 
   /* definition and creation of TaskButton */
   osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
   TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
 
-  /* definition and creation of TaskDebug */
-  osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
-  TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
+//  /* definition and creation of TaskDebug */
+//  osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
+//  TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
 //  /* add threads, ... */
@@ -369,7 +371,7 @@ static void MX_I2C3_Init(void)
 
   /* USER CODE END I2C3_Init 1 */
   hi2c3.Instance = I2C3;
-  hi2c3.Init.ClockSpeed = 100000;
+  hi2c3.Init.ClockSpeed = 50000;
   hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c3.Init.OwnAddress1 = 0;
   hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -669,7 +671,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
 void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
-	Serial_Print("call back\n\r");
+	//Serial_Print("call back\n\r");
     if (hi2c == &hi2c3)
     {
 //    	HAL_DMA_Abort_IT(hi2c->hdmarx);
@@ -736,6 +738,7 @@ void StartTaskIMU(void const * argument)
 void StartTaskGPS(void const * argument)
 {
   /* USER CODE BEGIN StartTaskGPS */
+
   /* Infinite loop */
 	Serial_Print("[GPS] Run GPS\n\r");
 	for(;;){
@@ -802,10 +805,10 @@ void StartLoRaTask(void const * argument)
 	osDelay(2000);
 	  for(;;)
 	  {
-		//if(isButtonPressed(0)) {
-		//	Serial_Print("[Button] Press Button\n\r");
+		if(isButtonPressed(0)) {
+			Serial_Print("[LoRa] Press Button\n\r");
 			TaskLoRa_run();
-		//}
+		}
 		  osDelay(2000);
 	  }
   /* USER CODE END StartLoRaTask */
@@ -847,7 +850,7 @@ void StartTaskDebug(void const * argument)
 	for(;;)
 	{
 		TaskDebug_run();
-		osDelay(1000);
+		osDelay(100);
 	}
   /* USER CODE END StartTaskDebug */
 }

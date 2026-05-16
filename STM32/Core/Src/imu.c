@@ -20,7 +20,7 @@ imu_t imu;
 BMP280 bmp;
 
 void I2C_Scan(I2C_HandleTypeDef *I2Cx) {
-	Serial_Print("OK can call this function");
+	Serial_Print("OK can call this function \n\r");
     for (uint8_t addr = 1; addr < 127; addr++) {
         if (HAL_I2C_IsDeviceReady(I2Cx, addr << 1, 1, 10) == HAL_OK) {
             Serial_Print("I2C device found at 0x%02X\r\n", addr);
@@ -84,7 +84,7 @@ static inline void mag_convert()
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Mag_X = %.3f uT; ", imu.mx);
     Serial_Print("Mag_Y = %.3f uT; ", imu.my);
-    Serial_Print("Mag_Z = %.3f uT; \n", imu.mz);
+    Serial_Print("Mag_Z = %.3f uT; \n\r", imu.mz);
     Serial_Print("#\n");
 #endif
 }
@@ -107,7 +107,7 @@ static inline void gyro_convert()
 #if IMU_ENABLE_SERIAL_LOG
     Serial_Print("Gyro_X = %.3f deg/s; ", imu.gx);
     Serial_Print("Gyro_Y = %.3f deg/s; ", imu.gy);
-    Serial_Print("Gyro_Z = %.3f deg/s \n", imu.gz);
+    Serial_Print("Gyro_Z = %.3f deg/s \n\r", imu.gz);
 #endif
 }
 
@@ -120,7 +120,7 @@ static inline void read_all(I2C_HandleTypeDef *I2Cx){
     }
 
     if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK){
-        Serial_Print("ACC OUT\n");
+        Serial_Print("ACC OUT\n\r");
     }
 	if (HAL_I2C_Mem_Read_IT(I2Cx, MPU_I2C_ADDR, MPU9250_GYRO_XOUT_H, 1, data_gyro, 6) != HAL_OK) {
 #if IMU_ENABLE_SERIAL_LOG
@@ -138,7 +138,7 @@ static inline void read_all(I2C_HandleTypeDef *I2Cx){
         return;
     }
     if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) != osOK){
-        Serial_Print("Mag OUT\n");
+        Serial_Print("Mag OUT\n\r");
     }
     baro_read(I2Cx);
     accel_convert();
@@ -169,14 +169,15 @@ void imu_compute_attitude(I2C_HandleTypeDef *I2Cx){
 	float My = imu.my * cosf(roll_rad) - imu.mz * sinf(roll_rad);
 
 	imu.yaw = atan2f(My, Mx) * 180.0f / PI;
-//#if IMU_ENABLE_SERIAL_LOG
+
+#if IMU_ENABLE_SERIAL_LOG
 	    Serial_Print("mea_pitch = %.3f degree; ", imu.pitch);
 	    Serial_Print("mea_yaw = %.3f degree; ", imu.yaw);
 	    Serial_Print("mea_roll = %.3f degree; \n", imu.roll);
 	    Serial_Print("mea_temperature = %.3f degree C; \n", imu.temperature);
 	    Serial_Print("mea_altitude = %.3f m; \n", imu.altitude);
 	    Serial_Print("mea_pressure = %.3f Pa; \n", imu.pressure);
-//#endif
+#endif
 //    Serial_Print("#######################################\n");
 }
 
@@ -199,14 +200,14 @@ void accel_gyro_Init (I2C_HandleTypeDef *I2Cx) {
     	write(MPU9250_ACCEL_CONFIG, ACCE_RANGE_8G, I2Cx, MPU_I2C_ADDR);
     	write(MPU9250_ACCEL_CONFIG_2, ACCE_DLPF_41HZ, I2Cx, MPU_I2C_ADDR);
     	write(INT_PIN_CFG, 0x02, I2Cx, MPU_I2C_ADDR);
-    	Serial_Print("Acce & Gyro wake up \n");
+    	Serial_Print("Acce & Gyro wake up \n\r");
     }
 }
 
 void mag_init (I2C_HandleTypeDef *I2Cx) {
     // check device ID WHO_AM_I
 	HAL_I2C_Mem_Read(I2Cx, AK8963_I2C_ADDR, AK8963_WIA, 1, &chipid, 1, i2c_timeout);
-	Serial_Print("chipid = %d\n", chipid);
+	Serial_Print("chipid = %d\n\r", chipid);
     if (chipid == 0x48)
     {
     	write(AK8963_CNTL2, 0x01, I2Cx, AK8963_I2C_ADDR); //reset all bits
@@ -227,7 +228,7 @@ void mag_init (I2C_HandleTypeDef *I2Cx) {
     	write(AK8963_CNTL1, 0x16, I2Cx, AK8963_I2C_ADDR);  // continous mode
     	HAL_Delay(10);
 
-    	Serial_Print("MAG wake up \n");
+    	Serial_Print("MAG wake up \n\r");
     }
 }
 
@@ -272,7 +273,7 @@ void baro_init (I2C_HandleTypeDef *I2Cx) {
         write(BAR_CONF, 0x50, I2Cx, BAR_ADDR);
         // Ctrl_meas: osrs_t=x16, osrs_p=x16, NORMAL
         write(BAR_CTRL_MEAS, 0xB7, I2Cx, BAR_ADDR);
-        Serial_Print("BARO wake up");
+        Serial_Print("BARO wake up\n\r");
     }
 }
 
@@ -289,7 +290,7 @@ void baro_read(I2C_HandleTypeDef *I2Cx)
     //read press + temp
     if (HAL_I2C_Mem_Read(I2Cx, BAR_ADDR, 0xF7, I2C_MEMADD_SIZE_8BIT, rx_buf, 6, 100) != HAL_OK)
     {
-        Serial_Print("BMP280 read error\n");
+        Serial_Print("BMP280 read error\n\r");
         return;
     }
 

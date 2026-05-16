@@ -74,21 +74,14 @@ uint8_t GPS_Init()
 //    HAL_Delay(100);
 
 	GPS_SendCommand(SET_GGA_SENTENCE_RATE(1));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_GLL_SENTENCE_RATE(0));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_GSA_SENTENCE_RATE(0));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_GSV_SENTENCE_RATE(0));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_RMC_SENTENCE_RATE(1));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_VTG_SENTENCE_RATE(0));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_FIX_RATE(500));
-	HAL_Delay(100);
 	GPS_SendCommand(SET_DECIMAL_PRECISION(3));
-	HAL_Delay(100);
+
     HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
     return 0;
 }

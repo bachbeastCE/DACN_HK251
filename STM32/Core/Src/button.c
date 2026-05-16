@@ -39,7 +39,7 @@ void getKeyInput(){
         KeyReg1[i] = KeyReg0[i];
 
         // Đọc tín hiệu bằng cách gọi mảng Port và Pin tương ứng với index 'i'
-        KeyReg0[i] = HAL_GPIO_ReadPin(Button_Port[i], Button_Pin[i]);
+        KeyReg0[i] = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
 
         if ((KeyReg1[i] == KeyReg0[i]) && (KeyReg1[i] == KeyReg2[i])){
             if (KeyReg2[i] != KeyReg3[i]){
