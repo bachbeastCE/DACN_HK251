@@ -96,7 +96,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 		 osSemaphoreRelease(i2cDmaSemHandle);
 	}
-	osDelay(2000);
+
 
 }
 
@@ -155,8 +155,6 @@ void TaskGPS_run(void){
 			        &tag_gps_lat, &tag_gps_lon, NULL);
 				osSemaphoreRelease(i2cDmaSemHandle);
 			}
-
-			 osDelay(5000);
 }
 
 

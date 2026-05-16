@@ -175,28 +175,28 @@ int main(void)
   TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 
   /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 512);
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
-//  /* definition and creation of TaskLCD */
-//  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
-//  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-//
-//  /* definition and creation of TaskBattery */
-//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-//
-//  /* definition and creation of LoRaTask */
-//  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
-//  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
-//
-//  /* definition and creation of TaskButton */
-//  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
-//  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
-//
-//  /* definition and creation of TaskDebug */
-//  osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
-//  TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
+  /* definition and creation of TaskLCD */
+  osThreadDef(TaskLCD, StartTaskLCD, osPriorityNormal, 0, 512);
+  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
+
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityBelowNormal, 0, 128);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+
+  /* definition and creation of LoRaTask */
+  osThreadDef(LoRaTask, StartLoRaTask, osPriorityBelowNormal, 0, 128);
+  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
+
+  /* definition and creation of TaskButton */
+  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
+  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
+
+  /* definition and creation of TaskDebug */
+  osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
+  TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
 //  /* add threads, ... */
@@ -721,6 +721,7 @@ void StartTaskIMU(void const * argument)
 	    for (;;)
 	    {
 	    	TaskIMU_run(&hi2c3);
+	    	osDelay(20);
 	    }
   /* USER CODE END 5 */
 }
@@ -739,6 +740,7 @@ void StartTaskGPS(void const * argument)
 	Serial_Print("[GPS] Run GPS\n\r");
 	for(;;){
 		TaskGPS_run();
+		osDelay(200);
 	}
   /* USER CODE END StartTaskGPS */
 }
@@ -759,7 +761,7 @@ void StartTaskLCD(void const * argument)
   {
 	  Serial_Print("[LCD] display LCD\n\r");
 	  TaskLCD_run();
-	  osDelay(1000);
+	  osDelay(500);
   }
   /* USER CODE END StartTaskLCD */
 }
