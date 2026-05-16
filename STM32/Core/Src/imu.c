@@ -158,7 +158,7 @@ void imu_compute_attitude(I2C_HandleTypeDef *I2Cx){
 	float pitch_rad = atan2f(-imu.ax, sqrtf(imu.ay * imu.ay + imu.az * imu.az));
 	float roll_rad  = atan2f(imu.ay, sqrtf(imu.ax * imu.ax + imu.az * imu.az));
 
-	imu.pitch = pitch_rad * 180.0f / PI;
+	imu.pitch = (pitch_rad * 180.0f / PI);
 	imu.roll  = roll_rad  * 180.0f / PI;
 	if (imu.pitch > 90.0f) imu.pitch = 90.0f;
 	if (imu.pitch < -90.0f) imu.pitch = -90.0f;

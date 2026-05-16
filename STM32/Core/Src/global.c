@@ -81,14 +81,11 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 		 //         loc_azi = imu.yaw;
 
-		 float yaw_offset = 180.0f - 360.0f;
-		 loc_azi += yaw_offset;
+//		 float yaw_offset = 180.0f - 360.0f;
+		 loc_azi += 100;
 
-		 if (loc_azi < 0)
-			 loc_azi += 360.0f;
-
-		 if (loc_azi >= 360.0f)
-			 loc_azi -= 360.0f;
+		 if (loc_azi < 0) loc_azi += 360.0f;
+		 if (loc_azi >= 360.0f) loc_azi -= 360.0f;
 
 		 //         loc_pitch = imu.pitch;
 		 //         loc_azi   = imu.yaw;
@@ -124,6 +121,7 @@ void TaskGPS_run(void){
 
 				              // Nếu dùng Baro thì set độ cao baro làm gốc
 				              kf_gps.x[2] = baro_alt;
+				              kf_gps.x[2] = 16;
 
 				              // Reset vận tốc về 0
 				              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;

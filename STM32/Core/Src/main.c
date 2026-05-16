@@ -761,7 +761,7 @@ void StartTaskLCD(void const * argument)
   {
 	  Serial_Print("[LCD] display LCD\n\r");
 	  TaskLCD_run();
-	  osDelay(500);
+	  osDelay(80);
   }
   /* USER CODE END StartTaskLCD */
 }
