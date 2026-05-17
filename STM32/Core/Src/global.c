@@ -107,6 +107,7 @@ void TaskGPS_run(void){
 	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
 				Serial_Print("Task GPS\n\r");
 				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+				gps_hdop = GPS_HDOP_Get();
 				GPS_KF_Convert_Acceleration(imu.ax, imu.ay, imu.az,
 				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
 					is_gps_new = 0;
@@ -150,11 +151,8 @@ void TaskGPS_run(void){
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
 			      double s12 = tag_distance * cos(pitch_rad);
 
-			      geod_direct(&g,
-			        loc_gps_lat, loc_gps_lon, loc_azi,
-			        s12,
-			        &tag_gps_lat, &tag_gps_lon, NULL);
-				osSemaphoreRelease(i2cDmaSemHandle);
+			      geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12, &tag_gps_lat, &tag_gps_lon, NULL);
+			      osSemaphoreRelease(i2cDmaSemHandle);
 			}
 }
 
