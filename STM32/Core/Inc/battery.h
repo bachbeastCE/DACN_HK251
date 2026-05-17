@@ -1,7 +1,7 @@
 /*
  * battery.h
  *
- *  Created on: May 1, 2026
+ *  Created on: Nov 5, 2025
  *      Author: NGUYEN DUY BACH
  */
 
@@ -23,13 +23,10 @@ extern ADC_HandleTypeDef BATTERY_HANDLE_ADC;
 #define ADC_SAMPLES 25
 #define BAT_RTOS 1
 
-/* Các hàm API quản lý Pin */
+/* GIỮ NGUYÊN TOÀN BỘ API GỐC */
 void Battery_Init(void);
 void Battery_Run(void);
 float Battery_Get_Voltage(void);
 float Battery_Get_Percent(void);
-
-/* Callback Ngắt */
-void Battery_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc);
 
 #endif /* INC_BATTERY_H_ */
