@@ -100,6 +100,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 void TaskGPS_init(void){
 	GPS_Init();
 	GPS_KF_Init(&kf_gps, 0.05);
+	geod_init(&g, 6378137, 1/298.257223563);
 }
 
 

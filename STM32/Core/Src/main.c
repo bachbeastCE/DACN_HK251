@@ -184,9 +184,9 @@ int main(void)
   osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
   TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
-  /* definition and creation of TaskBattery */
-  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
+//  /* definition and creation of TaskBattery */
+//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
+//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
   osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
