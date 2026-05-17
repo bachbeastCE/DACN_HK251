@@ -8,6 +8,8 @@
 #ifndef GPS_KF_H
 #define GPS_KF_H
 
+#include "main.h"
+
 typedef struct {
     double x[6]; /* State vector: [lat, lon, height, v_lat, v_lon, v_height] */
     double P[6][6]; /* Uncertainty: 6x6 */
@@ -39,6 +41,6 @@ void GPS_KF_Init(GPS_KF *kf, double dt_imu);
 void GPS_KF_Convert_Acceleration(double a_x_meter, double a_y_meter, double a_z_meter,double pitch_deg, double roll_deg, double azi_deg, double R[3][3]);
 
 void GPS_KF_Filter(GPS_KF *kf,
-                   double meas_lat, double meas_lon, double meas_alt, int is_new_meas);
+                   double meas_lat, double meas_lon, double meas_alt, uint8_t is_new_meas);
 
 #endif

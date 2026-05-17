@@ -22,12 +22,12 @@ double gps_hdop = 0.0;
 double ax_mps2 = 0;
 double ay_mps2 = 0;
 double az_mps2 = 0;
-double baro_alt = 0;
+double baro_alt = 16;
 int time = 0;
 uint8_t kf_start = 0;
 double R_matrix[3][3];
 
-int is_gps_new = 0;
+volatile uint8_t is_gps_new = 0;
 
 
 struct geod_geodesic g;
@@ -107,7 +107,7 @@ void TaskGPS_init(void){
 void TaskGPS_run(void){
 	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
 				Serial_Print("Task GPS\n\r");
-				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
+				baro_alt = 16; //
 				gps_hdop = GPS_HDOP_Get();
 				GPS_KF_Convert_Acceleration(imu.ax, imu.ay, imu.az,
 				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
@@ -125,8 +125,7 @@ void TaskGPS_run(void){
 				              //baro_alt = raw_coordinates.Alt;
 
 				              // Nếu dùng Baro thì set độ cao baro làm gốc
-				              //kf_gps.x[2] = baro_alt;
-				              kf_gps.x[2] = 16;
+				              kf_gps.x[2] = baro_alt;
 
 				              // Reset vận tốc về 0
 				              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
@@ -136,7 +135,7 @@ void TaskGPS_run(void){
 
 				      if (kf_start)
 				      {
-				          GPS_KF_Filter(&kf_gps,
+				    	  GPS_KF_Filter(&kf_gps,
 				                        raw_coordinates.Lat,
 				                        raw_coordinates.Lon,
 				                        baro_alt,
@@ -151,6 +150,7 @@ void TaskGPS_run(void){
 				  loc_gps_alt = 16;
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
 			      double s12 = tag_distance * cos(pitch_rad);
+			      tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
 
 			      geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12, &tag_gps_lat, &tag_gps_lon, NULL);
 			      osSemaphoreRelease(i2cDmaSemHandle);

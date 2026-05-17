@@ -8,6 +8,7 @@
 #include "gps_kf.h"
 #include <string.h>
 #include <math.h>
+#include <stdint.h>
 
 /* Constants Definition */
 #ifndef M_PI
@@ -257,7 +258,7 @@ void GPS_KF_Convert_Acceleration(double a_x_meter, double a_y_meter, double a_z_
 
 // ======================== Main Filter Interface ========================
 void GPS_KF_Filter(GPS_KF *kf,
-                   double meas_lat, double meas_lon, double meas_alt, int is_new_meas)
+                   double meas_lat, double meas_lon, double meas_alt, uint8_t is_new_meas)
 {
     // 1. Prediction Step: Always performed at every IMU cycle
     GPS_KF_Predict(kf, enu_acc.a_north, enu_acc.a_east, enu_acc.a_up);
