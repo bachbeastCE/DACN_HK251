@@ -99,6 +99,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 
 void TaskGPS_init(void){
 	GPS_Init();
+	GPS_KF_Init(&kf_gps, 0.05);
 }
 
 
@@ -106,7 +107,7 @@ void TaskGPS_run(void){
 	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
 				Serial_Print("Task GPS\n\r");
 				//IMU_Get_Data(&ax_mps2, &ay_mps2, &az_mps2, &pitch, &roll, &yaw);
-					GPS_KF_Convert_Acceleration(ax_mps2, ay_mps2, az_mps2,
+				GPS_KF_Convert_Acceleration(imu.ax, imu.ay, imu.az,
 				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
 					is_gps_new = 0;
 					if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
@@ -119,10 +120,10 @@ void TaskGPS_run(void){
 				              // Set vị trí ban đầu
 				              kf_gps.x[0] = raw_coordinates.Lat;
 				              kf_gps.x[1] = raw_coordinates.Lon;
-				              baro_alt = raw_coordinates.Alt;
+				              //baro_alt = raw_coordinates.Alt;
 
 				              // Nếu dùng Baro thì set độ cao baro làm gốc
-				              kf_gps.x[2] = baro_alt;
+				              //kf_gps.x[2] = baro_alt;
 				              kf_gps.x[2] = 16;
 
 				              // Reset vận tốc về 0
@@ -133,19 +134,15 @@ void TaskGPS_run(void){
 
 				      if (kf_start)
 				      {
-//				          GPS_KF_Filter(&kf_gps,
-//				                        raw_coordinates.Lat,
-//				                        raw_coordinates.Lon,
-//				                        baro_alt,
-//				                        is_gps_new);
-//
-//				          loc_gps_lat = kf_gps.x[0];
-//				          loc_gps_lon = kf_gps.x[1];
-//				          loc_gps_alt = kf_gps.x[2];
+				          GPS_KF_Filter(&kf_gps,
+				                        raw_coordinates.Lat,
+				                        raw_coordinates.Lon,
+				                        baro_alt,
+				                        is_gps_new);
 
-			              kf_gps.x[0] = raw_coordinates.Lat;
-			              kf_gps.x[1] = raw_coordinates.Lon;
-			              baro_alt = raw_coordinates.Alt;
+				          loc_gps_lat = kf_gps.x[0];
+				          loc_gps_lon = kf_gps.x[1];
+				          loc_gps_alt = kf_gps.x[2];
 
 				      }
 

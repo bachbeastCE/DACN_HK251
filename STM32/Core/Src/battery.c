@@ -154,7 +154,7 @@ void Battery_Run(void)
 float Battery_Get_Voltage(void)
 {
 #if BATTERY_ENABLE_SERIAL_LOG
-	Serial_Print("[Battery] Get Battery voltage: %.2f V \r\n", battery_voltage_tmp);
+	Serial_Print("[Battery] Get Battery voltage: %.2f V \r\n", filtered_batt_voltage);
 #endif
 	return filtered_batt_voltage;
 }
@@ -164,10 +164,7 @@ float Battery_Get_Voltage(void)
  */
 float Battery_Get_Percent(void)
 {
-#if BATTERY_ENABLE_SERIAL_LOG
-	Serial_Print("[Battery] Get Battery percent: %.1f %%\r\n",battery_percent_tmp);
-#endif
-	return battery_percent_tmp;
+	return VoltageToPercent(filtered_batt_voltage);
 }
 
 

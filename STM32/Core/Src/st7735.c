@@ -110,7 +110,7 @@ void ST7735_Run()
 
     snprintf(buffer, sizeof(buffer),
              "Battery:%d%% HDOP:%03.2f",
-			 0, gps_hdop);
+			 (int)Battery_Get_Percent(), gps_hdop);
     ST7735_WriteString(0, y += 10, buffer, Font_7x10, YELLOW, BLACK);
 
     char lon_dir = (loc_gps_lon >= 0) ? 'E' : 'W';

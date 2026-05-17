@@ -743,7 +743,7 @@ void StartTaskGPS(void const * argument)
 	Serial_Print("[GPS] Run GPS\n\r");
 	for(;;){
 		TaskGPS_run();
-		osDelay(200);
+		osDelay(50);
 	}
   /* USER CODE END StartTaskGPS */
 }
@@ -764,7 +764,7 @@ void StartTaskLCD(void const * argument)
   {
 	  Serial_Print("[LCD] display LCD\n\r");
 	  TaskLCD_run();
-	  osDelay(80);
+	  osDelay(100);
   }
   /* USER CODE END StartTaskLCD */
 }
