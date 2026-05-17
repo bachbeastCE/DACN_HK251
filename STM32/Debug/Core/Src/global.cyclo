@@ -6,10 +6,10 @@
 ../Core/Src/global.c:164:6:TaskLCD_init	1
 ../Core/Src/global.c:167:6:TaskLCD_run	1
 ../Core/Src/global.c:171:6:TaskBattery_init	2
-../Core/Src/global.c:187:6:TaskBattery_run	1
-../Core/Src/global.c:191:6:TaskLoRa_init	2
-../Core/Src/global.c:220:6:TaskLoRa_run	2
-../Core/Src/global.c:268:6:TaskButton_init	1
-../Core/Src/global.c:272:6:TaskButton_run	1
-../Core/Src/global.c:277:6:TaskDebug_init	1
-../Core/Src/global.c:282:6:TaskDebug_run	1
+../Core/Src/global.c:191:6:TaskBattery_run	1
+../Core/Src/global.c:197:6:TaskLoRa_init	2
+../Core/Src/global.c:226:6:TaskLoRa_run	2
+../Core/Src/global.c:274:6:TaskButton_init	1
+../Core/Src/global.c:278:6:TaskButton_run	1
+../Core/Src/global.c:283:6:TaskDebug_init	1
+../Core/Src/global.c:288:6:TaskDebug_run	1

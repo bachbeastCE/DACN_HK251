@@ -168,24 +168,30 @@ void TaskLCD_run(){
 	ST7735_Run();
 }
 
-void TaskBattery_init(void){
+void TaskBattery_init(void)
+{
 #if BATTERY_ENABLE_SERIAL_LOG
     Serial_Print("[Battery] Initialize battery ADC\r\n");
 #endif
-	Battery_Init();
 
-	for(int i = 0;i<4 ;i++){
-		Battery_Run();
-		osDelay(1000);
-	}
+    Battery_Init();
+
+    // Mồi bộ lọc 3 lần liên tiếp
+    for (int i = 0; i < 3; i++)
+    {
+        Battery_Run();
+        osDelay(1000);
+    }
 
 #if BATTERY_ENABLE_SERIAL_LOG
     Serial_Print("[Battery] Initialized battery successfully\r\n");
 #endif
 }
 
-void TaskBattery_run(void){
-	Battery_Run();
+void TaskBattery_run(void)
+{
+    Battery_Run();
+    osDelay(10000);
 }
 
 void TaskLoRa_init(void){

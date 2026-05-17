@@ -141,9 +141,9 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-  TaskGPS_init();
-  TaskIMU_init(&hi2c3);
-  TaskLCD_init();
+  //TaskGPS_init();
+  //TaskIMU_init(&hi2c3);
+  //TaskLCD_init();
 
 
   /* USER CODE END 2 */
@@ -172,29 +172,29 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* definition and creation of TaskIMU */
-  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
-  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+//  /* definition and creation of TaskIMU */
+//  osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
+//  TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
+//
+//  /* definition and creation of TaskGPS */
+//  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 512);
+//  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+//
+//  /* definition and creation of TaskLCD */
+//  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
+//  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
-  /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 512);
-  TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
+  /* definition and creation of TaskBattery */
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 512);
+  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
-  /* definition and creation of TaskLCD */
-  osThreadDef(TaskLCD, StartTaskLCD, osPriorityBelowNormal, 0, 512);
-  TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
-
-//  /* definition and creation of TaskBattery */
-//  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
-//  TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
-
-  /* definition and creation of LoRaTask */
-  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
-  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
-
-  /* definition and creation of TaskButton */
-  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
-  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
+//  /* definition and creation of LoRaTask */
+//  osThreadDef(LoRaTask, StartLoRaTask, osPriorityNormal, 0, 128);
+//  LoRaTaskHandle = osThreadCreate(osThread(LoRaTask), NULL);
+//
+//  /* definition and creation of TaskButton */
+//  osThreadDef(TaskButton, StartTaskButton, osPriorityLow, 0, 128);
+//  TaskButtonHandle = osThreadCreate(osThread(TaskButton), NULL);
 
 //  /* definition and creation of TaskDebug */
 //  osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
@@ -683,7 +683,7 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	Battery_ADC_ConvCpltCallback(hadc);
+	 Battery_ADC_ConvCpltCallback(hadc);
 }
 
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
@@ -780,8 +780,8 @@ void StartTaskBattery(void const * argument)
 {
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
-	osDelay(2000);
 	TaskBattery_init();
+	osDelay(2000);
 	for(;;)
 	{
 		TaskBattery_run();
