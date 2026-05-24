@@ -8,8 +8,8 @@
 ../Core/Src/global.c:169:6:TaskBattery_init	2
 ../Core/Src/global.c:189:6:TaskBattery_run	1
 ../Core/Src/global.c:194:6:TaskLoRa_init	2
-../Core/Src/global.c:223:6:TaskLoRa_run	2
-../Core/Src/global.c:271:6:TaskButton_init	1
-../Core/Src/global.c:275:6:TaskButton_run	1
-../Core/Src/global.c:280:6:TaskDebug_init	1
-../Core/Src/global.c:285:6:TaskDebug_run	1
+../Core/Src/global.c:223:6:TaskLoRa_run	3
+../Core/Src/global.c:276:6:TaskButton_init	1
+../Core/Src/global.c:280:6:TaskButton_run	1
+../Core/Src/global.c:285:6:TaskDebug_init	1
+../Core/Src/global.c:290:6:TaskDebug_run	1

@@ -18,8 +18,8 @@
 ../Core/Src/main.c:737:6:StartTaskGPS	1
 ../Core/Src/main.c:757:6:StartTaskLCD	1
 ../Core/Src/main.c:778:6:StartTaskBattery	1
-../Core/Src/main.c:799:6:StartLoRaTask	2
-../Core/Src/main.c:823:6:StartTaskButton	1
-../Core/Src/main.c:844:6:StartTaskDebug	1
-../Core/Src/main.c:865:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:887:6:Error_Handler	1
+../Core/Src/main.c:799:6:StartLoRaTask	1
+../Core/Src/main.c:820:6:StartTaskButton	1
+../Core/Src/main.c:841:6:StartTaskDebug	1
+../Core/Src/main.c:862:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:884:6:Error_Handler	1

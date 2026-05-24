@@ -82,7 +82,7 @@ void TaskIMU_run(I2C_HandleTypeDef *I2Cx){
 		 //         loc_azi = imu.yaw;
 
 //		 float yaw_offset = 180.0f - 360.0f;
-		 loc_azi += 100;
+		 loc_azi += 70;
 
 		 if (loc_azi < 0) loc_azi += 360.0f;
 		 if (loc_azi >= 360.0f) loc_azi -= 360.0f;
@@ -231,10 +231,15 @@ void TaskLoRa_run(void){
 	loc_data_payload.loc_gps_lon = loc_gps_lon;
 	loc_data_payload.loc_gps_lat = loc_gps_lat;
 	loc_data_payload.loc_gps_alt = loc_gps_alt;
-	loc_data_payload.tag_gps_lon = tag_gps_lon;
-	loc_data_payload.tag_gps_lat = tag_gps_lat;
-	loc_data_payload.tag_gps_alt = tag_gps_alt;
-	loc_data_payload.tag_distance = tag_distance;
+
+
+	if(isButtonPressed(0)) {
+		Serial_Print("[LoRa] Press Button\n\r");
+		loc_data_payload.tag_gps_lon = tag_gps_lon;
+		loc_data_payload.tag_gps_lat = tag_gps_lat;
+		loc_data_payload.tag_gps_alt = tag_gps_alt;
+		loc_data_payload.tag_distance = tag_distance;
+	}
 
 
 

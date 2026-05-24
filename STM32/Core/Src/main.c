@@ -804,11 +804,8 @@ void StartLoRaTask(void const * argument)
 	osDelay(2000);
 	  for(;;)
 	  {
-		if(isButtonPressed(0)) {
-			Serial_Print("[LoRa] Press Button\n\r");
 			TaskLoRa_run();
-		}
-		  osDelay(2000);
+			osDelay(5000);
 	  }
   /* USER CODE END StartLoRaTask */
 }
