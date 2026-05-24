@@ -147,7 +147,7 @@ void TaskGPS_run(void){
 
 				      }
 
-				  loc_gps_alt = 16;
+				  loc_gps_alt = 8;
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
 			      double s12 = tag_distance * cos(pitch_rad);
 			      tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);
@@ -232,7 +232,7 @@ void TaskLoRa_run(void){
 	loc_data_payload.loc_gps_lat = loc_gps_lat;
 	loc_data_payload.loc_gps_alt = loc_gps_alt;
 	loc_data_payload.tag_gps_lon = tag_gps_lon;
-	loc_data_payload.tag_gps_lat = tag_gps_lon;
+	loc_data_payload.tag_gps_lat = tag_gps_lat;
 	loc_data_payload.tag_gps_alt = tag_gps_alt;
 	loc_data_payload.tag_distance = tag_distance;
 
