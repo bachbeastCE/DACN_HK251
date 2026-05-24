@@ -8486,7 +8486,7 @@ void TaskGPS_init(void){
  8004fd8:	b580      	push	{r7, lr}
  8004fda:	af00      	add	r7, sp, #0
 	GPS_Init();
- 8004fdc:	f000 fb84 	bl	80056e8 <GPS_Init>
+ 8004fdc:	f000 fb86 	bl	80056ec <GPS_Init>
 	GPS_KF_Init(&kf_gps, 0.05);
  8004fe0:	ed9f 0b07 	vldr	d0, [pc, #28]	@ 8005000 <TaskGPS_init+0x28>
  8004fe4:	480c      	ldr	r0, [pc, #48]	@ (8005018 <TaskGPS_init+0x40>)
@@ -8517,7 +8517,7 @@ void TaskGPS_run(void){
  8005024:	b084      	sub	sp, #16
  8005026:	af00      	add	r7, sp, #0
 	if (osSemaphoreWait(i2cDmaSemHandle, osWaitForever) == osOK){
- 8005028:	4b93      	ldr	r3, [pc, #588]	@ (8005278 <TaskGPS_run+0x258>)
+ 8005028:	4b95      	ldr	r3, [pc, #596]	@ (8005280 <TaskGPS_run+0x260>)
  800502a:	681b      	ldr	r3, [r3, #0]
  800502c:	f04f 31ff 	mov.w	r1, #4294967295
  8005030:	4618      	mov	r0, r3
@@ -8526,45 +8526,45 @@ void TaskGPS_run(void){
  8005038:	2b00      	cmp	r3, #0
  800503a:	f040 8114 	bne.w	8005266 <TaskGPS_run+0x246>
 				Serial_Print("Task GPS\n\r");
- 800503e:	488f      	ldr	r0, [pc, #572]	@ (800527c <TaskGPS_run+0x25c>)
+ 800503e:	4891      	ldr	r0, [pc, #580]	@ (8005284 <TaskGPS_run+0x264>)
  8005040:	f004 fc04 	bl	800984c <Serial_Print>
 				baro_alt = 16; //
- 8005044:	498e      	ldr	r1, [pc, #568]	@ (8005280 <TaskGPS_run+0x260>)
+ 8005044:	4990      	ldr	r1, [pc, #576]	@ (8005288 <TaskGPS_run+0x268>)
  8005046:	f04f 0200 	mov.w	r2, #0
- 800504a:	4b8e      	ldr	r3, [pc, #568]	@ (8005284 <TaskGPS_run+0x264>)
+ 800504a:	4b90      	ldr	r3, [pc, #576]	@ (800528c <TaskGPS_run+0x26c>)
  800504c:	e9c1 2300 	strd	r2, r3, [r1]
 				gps_hdop = GPS_HDOP_Get();
- 8005050:	f000 fede 	bl	8005e10 <GPS_HDOP_Get>
+ 8005050:	f000 fee0 	bl	8005e14 <GPS_HDOP_Get>
  8005054:	eeb0 7a40 	vmov.f32	s14, s0
  8005058:	eef0 7a60 	vmov.f32	s15, s1
- 800505c:	4b8a      	ldr	r3, [pc, #552]	@ (8005288 <TaskGPS_run+0x268>)
+ 800505c:	4b8c      	ldr	r3, [pc, #560]	@ (8005290 <TaskGPS_run+0x270>)
  800505e:	ed83 7b00 	vstr	d7, [r3]
 				GPS_KF_Convert_Acceleration(imu.ax, imu.ay, imu.az,
- 8005062:	4b8a      	ldr	r3, [pc, #552]	@ (800528c <TaskGPS_run+0x26c>)
+ 8005062:	4b8c      	ldr	r3, [pc, #560]	@ (8005294 <TaskGPS_run+0x274>)
  8005064:	681b      	ldr	r3, [r3, #0]
  8005066:	4618      	mov	r0, r3
  8005068:	f7fb fa76 	bl	8000558 <__aeabi_f2d>
  800506c:	4604      	mov	r4, r0
  800506e:	460d      	mov	r5, r1
- 8005070:	4b86      	ldr	r3, [pc, #536]	@ (800528c <TaskGPS_run+0x26c>)
+ 8005070:	4b88      	ldr	r3, [pc, #544]	@ (8005294 <TaskGPS_run+0x274>)
  8005072:	685b      	ldr	r3, [r3, #4]
  8005074:	4618      	mov	r0, r3
  8005076:	f7fb fa6f 	bl	8000558 <__aeabi_f2d>
  800507a:	4680      	mov	r8, r0
  800507c:	4689      	mov	r9, r1
- 800507e:	4b83      	ldr	r3, [pc, #524]	@ (800528c <TaskGPS_run+0x26c>)
+ 800507e:	4b85      	ldr	r3, [pc, #532]	@ (8005294 <TaskGPS_run+0x274>)
  8005080:	689b      	ldr	r3, [r3, #8]
  8005082:	4618      	mov	r0, r3
  8005084:	f7fb fa68 	bl	8000558 <__aeabi_f2d>
  8005088:	4682      	mov	sl, r0
  800508a:	468b      	mov	fp, r1
- 800508c:	4b80      	ldr	r3, [pc, #512]	@ (8005290 <TaskGPS_run+0x270>)
+ 800508c:	4b82      	ldr	r3, [pc, #520]	@ (8005298 <TaskGPS_run+0x278>)
  800508e:	ed93 7b00 	vldr	d7, [r3]
- 8005092:	4b80      	ldr	r3, [pc, #512]	@ (8005294 <TaskGPS_run+0x274>)
+ 8005092:	4b82      	ldr	r3, [pc, #520]	@ (800529c <TaskGPS_run+0x27c>)
  8005094:	ed93 6b00 	vldr	d6, [r3]
- 8005098:	4b7f      	ldr	r3, [pc, #508]	@ (8005298 <TaskGPS_run+0x278>)
+ 8005098:	4b81      	ldr	r3, [pc, #516]	@ (80052a0 <TaskGPS_run+0x280>)
  800509a:	ed93 5b00 	vldr	d5, [r3]
- 800509e:	487f      	ldr	r0, [pc, #508]	@ (800529c <TaskGPS_run+0x27c>)
+ 800509e:	4881      	ldr	r0, [pc, #516]	@ (80052a4 <TaskGPS_run+0x284>)
  80050a0:	eeb0 4a46 	vmov.f32	s8, s12
  80050a4:	eef0 4a66 	vmov.f32	s9, s13
  80050a8:	eeb0 3a47 	vmov.f32	s6, s14
@@ -8575,84 +8575,84 @@ void TaskGPS_run(void){
  80050bc:	f001 feb4 	bl	8006e28 <GPS_KF_Convert_Acceleration>
 				                                  loc_pitch, loc_roll, loc_azi, R_matrix);
 					is_gps_new = 0;
- 80050c0:	4b77      	ldr	r3, [pc, #476]	@ (80052a0 <TaskGPS_run+0x280>)
+ 80050c0:	4b79      	ldr	r3, [pc, #484]	@ (80052a8 <TaskGPS_run+0x288>)
  80050c2:	2200      	movs	r2, #0
  80050c4:	701a      	strb	r2, [r3, #0]
 					if (GPS_Status_Get()){ // Hàm này chỉ kiểm tra cờ, không được delay
- 80050c6:	f000 fe8d 	bl	8005de4 <GPS_Status_Get>
+ 80050c6:	f000 fe8f 	bl	8005de8 <GPS_Status_Get>
  80050ca:	4603      	mov	r3, r0
  80050cc:	2b00      	cmp	r3, #0
  80050ce:	d033      	beq.n	8005138 <TaskGPS_run+0x118>
 				          GPS_Coordinates_Get(&raw_coordinates);
- 80050d0:	4874      	ldr	r0, [pc, #464]	@ (80052a4 <TaskGPS_run+0x284>)
- 80050d2:	f000 fe67 	bl	8005da4 <GPS_Coordinates_Get>
+ 80050d0:	4876      	ldr	r0, [pc, #472]	@ (80052ac <TaskGPS_run+0x28c>)
+ 80050d2:	f000 fe69 	bl	8005da8 <GPS_Coordinates_Get>
 				          is_gps_new = 1;
- 80050d6:	4b72      	ldr	r3, [pc, #456]	@ (80052a0 <TaskGPS_run+0x280>)
+ 80050d6:	4b74      	ldr	r3, [pc, #464]	@ (80052a8 <TaskGPS_run+0x288>)
  80050d8:	2201      	movs	r2, #1
  80050da:	701a      	strb	r2, [r3, #0]
 
 				          // KHỞI TẠO LẦN ĐẦU (Nếu chưa chạy)
 				          if (!kf_start)
- 80050dc:	4b72      	ldr	r3, [pc, #456]	@ (80052a8 <TaskGPS_run+0x288>)
+ 80050dc:	4b74      	ldr	r3, [pc, #464]	@ (80052b0 <TaskGPS_run+0x290>)
  80050de:	781b      	ldrb	r3, [r3, #0]
  80050e0:	2b00      	cmp	r3, #0
  80050e2:	d129      	bne.n	8005138 <TaskGPS_run+0x118>
 				          {
 				              // Set vị trí ban đầu
 				              kf_gps.x[0] = raw_coordinates.Lat;
- 80050e4:	4b6f      	ldr	r3, [pc, #444]	@ (80052a4 <TaskGPS_run+0x284>)
+ 80050e4:	4b71      	ldr	r3, [pc, #452]	@ (80052ac <TaskGPS_run+0x28c>)
  80050e6:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80050ea:	4970      	ldr	r1, [pc, #448]	@ (80052ac <TaskGPS_run+0x28c>)
+ 80050ea:	4972      	ldr	r1, [pc, #456]	@ (80052b4 <TaskGPS_run+0x294>)
  80050ec:	e9c1 2300 	strd	r2, r3, [r1]
 				              kf_gps.x[1] = raw_coordinates.Lon;
- 80050f0:	4b6c      	ldr	r3, [pc, #432]	@ (80052a4 <TaskGPS_run+0x284>)
+ 80050f0:	4b6e      	ldr	r3, [pc, #440]	@ (80052ac <TaskGPS_run+0x28c>)
  80050f2:	e9d3 2302 	ldrd	r2, r3, [r3, #8]
- 80050f6:	496d      	ldr	r1, [pc, #436]	@ (80052ac <TaskGPS_run+0x28c>)
+ 80050f6:	496f      	ldr	r1, [pc, #444]	@ (80052b4 <TaskGPS_run+0x294>)
  80050f8:	e9c1 2302 	strd	r2, r3, [r1, #8]
 				              //baro_alt = raw_coordinates.Alt;
 
 				              // Nếu dùng Baro thì set độ cao baro làm gốc
 				              kf_gps.x[2] = baro_alt;
- 80050fc:	4b60      	ldr	r3, [pc, #384]	@ (8005280 <TaskGPS_run+0x260>)
+ 80050fc:	4b62      	ldr	r3, [pc, #392]	@ (8005288 <TaskGPS_run+0x268>)
  80050fe:	e9d3 2300 	ldrd	r2, r3, [r3]
- 8005102:	496a      	ldr	r1, [pc, #424]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005102:	496c      	ldr	r1, [pc, #432]	@ (80052b4 <TaskGPS_run+0x294>)
  8005104:	e9c1 2304 	strd	r2, r3, [r1, #16]
 
 				              // Reset vận tốc về 0
 				              kf_gps.x[3] = 0; kf_gps.x[4] = 0; kf_gps.x[5] = 0;
- 8005108:	4968      	ldr	r1, [pc, #416]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005108:	496a      	ldr	r1, [pc, #424]	@ (80052b4 <TaskGPS_run+0x294>)
  800510a:	f04f 0200 	mov.w	r2, #0
  800510e:	f04f 0300 	mov.w	r3, #0
  8005112:	e9c1 2306 	strd	r2, r3, [r1, #24]
- 8005116:	4965      	ldr	r1, [pc, #404]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005116:	4967      	ldr	r1, [pc, #412]	@ (80052b4 <TaskGPS_run+0x294>)
  8005118:	f04f 0200 	mov.w	r2, #0
  800511c:	f04f 0300 	mov.w	r3, #0
  8005120:	e9c1 2308 	strd	r2, r3, [r1, #32]
- 8005124:	4961      	ldr	r1, [pc, #388]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005124:	4963      	ldr	r1, [pc, #396]	@ (80052b4 <TaskGPS_run+0x294>)
  8005126:	f04f 0200 	mov.w	r2, #0
  800512a:	f04f 0300 	mov.w	r3, #0
  800512e:	e9c1 230a 	strd	r2, r3, [r1, #40]	@ 0x28
 				              kf_start = 1;
- 8005132:	4b5d      	ldr	r3, [pc, #372]	@ (80052a8 <TaskGPS_run+0x288>)
+ 8005132:	4b5f      	ldr	r3, [pc, #380]	@ (80052b0 <TaskGPS_run+0x290>)
  8005134:	2201      	movs	r2, #1
  8005136:	701a      	strb	r2, [r3, #0]
 				          }
 				      }
 
 				      if (kf_start)
- 8005138:	4b5b      	ldr	r3, [pc, #364]	@ (80052a8 <TaskGPS_run+0x288>)
+ 8005138:	4b5d      	ldr	r3, [pc, #372]	@ (80052b0 <TaskGPS_run+0x290>)
  800513a:	781b      	ldrb	r3, [r3, #0]
  800513c:	2b00      	cmp	r3, #0
  800513e:	d02d      	beq.n	800519c <TaskGPS_run+0x17c>
 				      {
 				    	  GPS_KF_Filter(&kf_gps,
- 8005140:	4b58      	ldr	r3, [pc, #352]	@ (80052a4 <TaskGPS_run+0x284>)
+ 8005140:	4b5a      	ldr	r3, [pc, #360]	@ (80052ac <TaskGPS_run+0x28c>)
  8005142:	ed93 7b00 	vldr	d7, [r3]
- 8005146:	4b57      	ldr	r3, [pc, #348]	@ (80052a4 <TaskGPS_run+0x284>)
+ 8005146:	4b59      	ldr	r3, [pc, #356]	@ (80052ac <TaskGPS_run+0x28c>)
  8005148:	ed93 6b02 	vldr	d6, [r3, #8]
- 800514c:	4b4c      	ldr	r3, [pc, #304]	@ (8005280 <TaskGPS_run+0x260>)
+ 800514c:	4b4e      	ldr	r3, [pc, #312]	@ (8005288 <TaskGPS_run+0x268>)
  800514e:	ed93 5b00 	vldr	d5, [r3]
- 8005152:	4b53      	ldr	r3, [pc, #332]	@ (80052a0 <TaskGPS_run+0x280>)
+ 8005152:	4b55      	ldr	r3, [pc, #340]	@ (80052a8 <TaskGPS_run+0x288>)
  8005154:	781b      	ldrb	r3, [r3, #0]
  8005156:	b2db      	uxtb	r3, r3
  8005158:	4619      	mov	r1, r3
@@ -8662,7 +8662,7 @@ void TaskGPS_run(void){
  8005166:	eef0 1a66 	vmov.f32	s3, s13
  800516a:	eeb0 0a47 	vmov.f32	s0, s14
  800516e:	eef0 0a67 	vmov.f32	s1, s15
- 8005172:	484e      	ldr	r0, [pc, #312]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005172:	4850      	ldr	r0, [pc, #320]	@ (80052b4 <TaskGPS_run+0x294>)
  8005174:	f002 f81e 	bl	80071b4 <GPS_KF_Filter>
 				                        raw_coordinates.Lat,
 				                        raw_coordinates.Lon,
@@ -8670,32 +8670,32 @@ void TaskGPS_run(void){
 				                        is_gps_new);
 
 				          loc_gps_lat = kf_gps.x[0];
- 8005178:	4b4c      	ldr	r3, [pc, #304]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005178:	4b4e      	ldr	r3, [pc, #312]	@ (80052b4 <TaskGPS_run+0x294>)
  800517a:	e9d3 2300 	ldrd	r2, r3, [r3]
- 800517e:	494c      	ldr	r1, [pc, #304]	@ (80052b0 <TaskGPS_run+0x290>)
+ 800517e:	494e      	ldr	r1, [pc, #312]	@ (80052b8 <TaskGPS_run+0x298>)
  8005180:	e9c1 2300 	strd	r2, r3, [r1]
 				          loc_gps_lon = kf_gps.x[1];
- 8005184:	4b49      	ldr	r3, [pc, #292]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005184:	4b4b      	ldr	r3, [pc, #300]	@ (80052b4 <TaskGPS_run+0x294>)
  8005186:	e9d3 2302 	ldrd	r2, r3, [r3, #8]
- 800518a:	494a      	ldr	r1, [pc, #296]	@ (80052b4 <TaskGPS_run+0x294>)
+ 800518a:	494c      	ldr	r1, [pc, #304]	@ (80052bc <TaskGPS_run+0x29c>)
  800518c:	e9c1 2300 	strd	r2, r3, [r1]
 				          loc_gps_alt = kf_gps.x[2];
- 8005190:	4b46      	ldr	r3, [pc, #280]	@ (80052ac <TaskGPS_run+0x28c>)
+ 8005190:	4b48      	ldr	r3, [pc, #288]	@ (80052b4 <TaskGPS_run+0x294>)
  8005192:	e9d3 2304 	ldrd	r2, r3, [r3, #16]
- 8005196:	4948      	ldr	r1, [pc, #288]	@ (80052b8 <TaskGPS_run+0x298>)
+ 8005196:	494a      	ldr	r1, [pc, #296]	@ (80052c0 <TaskGPS_run+0x2a0>)
  8005198:	e9c1 2300 	strd	r2, r3, [r1]
 
 				      }
 
-				  loc_gps_alt = 8;
- 800519c:	4946      	ldr	r1, [pc, #280]	@ (80052b8 <TaskGPS_run+0x298>)
- 800519e:	f04f 0200 	mov.w	r2, #0
- 80051a2:	4b46      	ldr	r3, [pc, #280]	@ (80052bc <TaskGPS_run+0x29c>)
+				  loc_gps_alt = 16.24;
+ 800519c:	4948      	ldr	r1, [pc, #288]	@ (80052c0 <TaskGPS_run+0x2a0>)
+ 800519e:	a334      	add	r3, pc, #208	@ (adr r3, 8005270 <TaskGPS_run+0x250>)
+ 80051a0:	e9d3 2300 	ldrd	r2, r3, [r3]
  80051a4:	e9c1 2300 	strd	r2, r3, [r1]
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
- 80051a8:	4b39      	ldr	r3, [pc, #228]	@ (8005290 <TaskGPS_run+0x270>)
+ 80051a8:	4b3b      	ldr	r3, [pc, #236]	@ (8005298 <TaskGPS_run+0x278>)
  80051aa:	e9d3 0100 	ldrd	r0, r1, [r3]
- 80051ae:	a330      	add	r3, pc, #192	@ (adr r3, 8005270 <TaskGPS_run+0x250>)
+ 80051ae:	a332      	add	r3, pc, #200	@ (adr r3, 8005278 <TaskGPS_run+0x258>)
  80051b0:	e9d3 2300 	ldrd	r2, r3, [r3]
  80051b4:	f7fb fa28 	bl	8000608 <__aeabi_dmul>
  80051b8:	4602      	mov	r2, r0
@@ -8703,7 +8703,7 @@ void TaskGPS_run(void){
  80051bc:	4610      	mov	r0, r2
  80051be:	4619      	mov	r1, r3
  80051c0:	f04f 0200 	mov.w	r2, #0
- 80051c4:	4b3e      	ldr	r3, [pc, #248]	@ (80052c0 <TaskGPS_run+0x2a0>)
+ 80051c4:	4b3f      	ldr	r3, [pc, #252]	@ (80052c4 <TaskGPS_run+0x2a4>)
  80051c6:	f7fb fb49 	bl	800085c <__aeabi_ddiv>
  80051ca:	4602      	mov	r2, r0
  80051cc:	460b      	mov	r3, r1
@@ -8712,7 +8712,7 @@ void TaskGPS_run(void){
  80051d2:	ed97 0b02 	vldr	d0, [r7, #8]
  80051d6:	f017 ff3f 	bl	801d058 <cos>
  80051da:	ec51 0b10 	vmov	r0, r1, d0
- 80051de:	4b39      	ldr	r3, [pc, #228]	@ (80052c4 <TaskGPS_run+0x2a4>)
+ 80051de:	4b3a      	ldr	r3, [pc, #232]	@ (80052c8 <TaskGPS_run+0x2a8>)
  80051e0:	e9d3 2300 	ldrd	r2, r3, [r3]
  80051e4:	f7fb fa10 	bl	8000608 <__aeabi_dmul>
  80051e8:	4602      	mov	r2, r0
@@ -8722,31 +8722,31 @@ void TaskGPS_run(void){
  80051f0:	ed97 0b02 	vldr	d0, [r7, #8]
  80051f4:	f017 ff8c 	bl	801d110 <sin>
  80051f8:	ec51 0b10 	vmov	r0, r1, d0
- 80051fc:	4b31      	ldr	r3, [pc, #196]	@ (80052c4 <TaskGPS_run+0x2a4>)
+ 80051fc:	4b32      	ldr	r3, [pc, #200]	@ (80052c8 <TaskGPS_run+0x2a8>)
  80051fe:	e9d3 2300 	ldrd	r2, r3, [r3]
  8005202:	f7fb fa01 	bl	8000608 <__aeabi_dmul>
  8005206:	4602      	mov	r2, r0
  8005208:	460b      	mov	r3, r1
  800520a:	4610      	mov	r0, r2
  800520c:	4619      	mov	r1, r3
- 800520e:	4b2a      	ldr	r3, [pc, #168]	@ (80052b8 <TaskGPS_run+0x298>)
+ 800520e:	4b2c      	ldr	r3, [pc, #176]	@ (80052c0 <TaskGPS_run+0x2a0>)
  8005210:	e9d3 2300 	ldrd	r2, r3, [r3]
  8005214:	f7fb f842 	bl	800029c <__adddf3>
  8005218:	4602      	mov	r2, r0
  800521a:	460b      	mov	r3, r1
- 800521c:	492a      	ldr	r1, [pc, #168]	@ (80052c8 <TaskGPS_run+0x2a8>)
+ 800521c:	492b      	ldr	r1, [pc, #172]	@ (80052cc <TaskGPS_run+0x2ac>)
  800521e:	e9c1 2300 	strd	r2, r3, [r1]
 
 			      geod_direct(&g, loc_gps_lat, loc_gps_lon, loc_azi, s12, &tag_gps_lat, &tag_gps_lon, NULL);
- 8005222:	4b23      	ldr	r3, [pc, #140]	@ (80052b0 <TaskGPS_run+0x290>)
+ 8005222:	4b25      	ldr	r3, [pc, #148]	@ (80052b8 <TaskGPS_run+0x298>)
  8005224:	ed93 7b00 	vldr	d7, [r3]
- 8005228:	4b22      	ldr	r3, [pc, #136]	@ (80052b4 <TaskGPS_run+0x294>)
+ 8005228:	4b24      	ldr	r3, [pc, #144]	@ (80052bc <TaskGPS_run+0x29c>)
  800522a:	ed93 6b00 	vldr	d6, [r3]
- 800522e:	4b1a      	ldr	r3, [pc, #104]	@ (8005298 <TaskGPS_run+0x278>)
+ 800522e:	4b1c      	ldr	r3, [pc, #112]	@ (80052a0 <TaskGPS_run+0x280>)
  8005230:	ed93 5b00 	vldr	d5, [r3]
  8005234:	2300      	movs	r3, #0
- 8005236:	4a25      	ldr	r2, [pc, #148]	@ (80052cc <TaskGPS_run+0x2ac>)
- 8005238:	4925      	ldr	r1, [pc, #148]	@ (80052d0 <TaskGPS_run+0x2b0>)
+ 8005236:	4a26      	ldr	r2, [pc, #152]	@ (80052d0 <TaskGPS_run+0x2b0>)
+ 8005238:	4926      	ldr	r1, [pc, #152]	@ (80052d4 <TaskGPS_run+0x2b4>)
  800523a:	ed97 3b00 	vldr	d3, [r7]
  800523e:	eeb0 2a45 	vmov.f32	s4, s10
  8005242:	eef0 2a65 	vmov.f32	s5, s11
@@ -8754,10 +8754,10 @@ void TaskGPS_run(void){
  800524a:	eef0 1a66 	vmov.f32	s3, s13
  800524e:	eeb0 0a47 	vmov.f32	s0, s14
  8005252:	eef0 0a67 	vmov.f32	s1, s15
- 8005256:	481f      	ldr	r0, [pc, #124]	@ (80052d4 <TaskGPS_run+0x2b4>)
+ 8005256:	4820      	ldr	r0, [pc, #128]	@ (80052d8 <TaskGPS_run+0x2b8>)
  8005258:	f7ff f98c 	bl	8004574 <geod_direct>
 			      osSemaphoreRelease(i2cDmaSemHandle);
- 800525c:	4b06      	ldr	r3, [pc, #24]	@ (8005278 <TaskGPS_run+0x258>)
+ 800525c:	4b08      	ldr	r3, [pc, #32]	@ (8005280 <TaskGPS_run+0x260>)
  800525e:	681b      	ldr	r3, [r3, #0]
  8005260:	4618      	mov	r0, r3
  8005262:	f010 f811 	bl	8015288 <osSemaphoreRelease>
@@ -8767,1464 +8767,1464 @@ void TaskGPS_run(void){
  8005268:	3710      	adds	r7, #16
  800526a:	46bd      	mov	sp, r7
  800526c:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
- 8005270:	54442d18 	.word	0x54442d18
- 8005274:	400921fb 	.word	0x400921fb
- 8005278:	20000938 	.word	0x20000938
- 800527c:	0802098c 	.word	0x0802098c
- 8005280:	20000090 	.word	0x20000090
- 8005284:	40300000 	.word	0x40300000
- 8005288:	20000608 	.word	0x20000608
- 800528c:	20000e4c 	.word	0x20000e4c
- 8005290:	20000078 	.word	0x20000078
- 8005294:	20000080 	.word	0x20000080
- 8005298:	20000070 	.word	0x20000070
- 800529c:	20000618 	.word	0x20000618
- 80052a0:	20000660 	.word	0x20000660
- 80052a4:	20000800 	.word	0x20000800
- 80052a8:	20000610 	.word	0x20000610
- 80052ac:	20000b48 	.word	0x20000b48
- 80052b0:	200005e0 	.word	0x200005e0
- 80052b4:	200005d8 	.word	0x200005d8
- 80052b8:	200005e8 	.word	0x200005e8
- 80052bc:	40200000 	.word	0x40200000
- 80052c0:	40668000 	.word	0x40668000
- 80052c4:	20000088 	.word	0x20000088
- 80052c8:	20000600 	.word	0x20000600
- 80052cc:	200005f0 	.word	0x200005f0
- 80052d0:	200005f8 	.word	0x200005f8
- 80052d4:	20000668 	.word	0x20000668
+ 8005270:	a3d70a3d 	.word	0xa3d70a3d
+ 8005274:	40303d70 	.word	0x40303d70
+ 8005278:	54442d18 	.word	0x54442d18
+ 800527c:	400921fb 	.word	0x400921fb
+ 8005280:	20000938 	.word	0x20000938
+ 8005284:	0802098c 	.word	0x0802098c
+ 8005288:	20000090 	.word	0x20000090
+ 800528c:	40300000 	.word	0x40300000
+ 8005290:	20000608 	.word	0x20000608
+ 8005294:	20000e4c 	.word	0x20000e4c
+ 8005298:	20000078 	.word	0x20000078
+ 800529c:	20000080 	.word	0x20000080
+ 80052a0:	20000070 	.word	0x20000070
+ 80052a4:	20000618 	.word	0x20000618
+ 80052a8:	20000660 	.word	0x20000660
+ 80052ac:	20000800 	.word	0x20000800
+ 80052b0:	20000610 	.word	0x20000610
+ 80052b4:	20000b48 	.word	0x20000b48
+ 80052b8:	200005e0 	.word	0x200005e0
+ 80052bc:	200005d8 	.word	0x200005d8
+ 80052c0:	200005e8 	.word	0x200005e8
+ 80052c4:	40668000 	.word	0x40668000
+ 80052c8:	20000088 	.word	0x20000088
+ 80052cc:	20000600 	.word	0x20000600
+ 80052d0:	200005f0 	.word	0x200005f0
+ 80052d4:	200005f8 	.word	0x200005f8
+ 80052d8:	20000668 	.word	0x20000668
 
-080052d8 <TaskLCD_init>:
+080052dc <TaskLCD_init>:
 
 
 
 void TaskLCD_init(){
- 80052d8:	b580      	push	{r7, lr}
- 80052da:	af00      	add	r7, sp, #0
+ 80052dc:	b580      	push	{r7, lr}
+ 80052de:	af00      	add	r7, sp, #0
 	ST7735_init();
- 80052dc:	f004 fe44 	bl	8009f68 <ST7735_init>
+ 80052e0:	f004 fe42 	bl	8009f68 <ST7735_init>
 }
- 80052e0:	bf00      	nop
- 80052e2:	bd80      	pop	{r7, pc}
+ 80052e4:	bf00      	nop
+ 80052e6:	bd80      	pop	{r7, pc}
 
-080052e4 <TaskLCD_run>:
+080052e8 <TaskLCD_run>:
 void TaskLCD_run(){
- 80052e4:	b580      	push	{r7, lr}
- 80052e6:	af00      	add	r7, sp, #0
+ 80052e8:	b580      	push	{r7, lr}
+ 80052ea:	af00      	add	r7, sp, #0
 	ST7735_Run();
- 80052e8:	f004 fc40 	bl	8009b6c <ST7735_Run>
+ 80052ec:	f004 fc3e 	bl	8009b6c <ST7735_Run>
 }
- 80052ec:	bf00      	nop
- 80052ee:	bd80      	pop	{r7, pc}
+ 80052f0:	bf00      	nop
+ 80052f2:	bd80      	pop	{r7, pc}
 
-080052f0 <TaskBattery_init>:
+080052f4 <TaskBattery_init>:
 
 void TaskBattery_init(void)
 {
- 80052f0:	b580      	push	{r7, lr}
- 80052f2:	b082      	sub	sp, #8
- 80052f4:	af00      	add	r7, sp, #0
+ 80052f4:	b580      	push	{r7, lr}
+ 80052f6:	b082      	sub	sp, #8
+ 80052f8:	af00      	add	r7, sp, #0
 #if BATTERY_ENABLE_SERIAL_LOG
     Serial_Print("[Battery] Initialize battery ADC\r\n");
 #endif
 
     Battery_Init();
- 80052f6:	f7fc fc03 	bl	8001b00 <Battery_Init>
+ 80052fa:	f7fc fc01 	bl	8001b00 <Battery_Init>
 
     // Mồi bộ lọc 3 lần liên tiếp
     for (int i = 0; i < 3; i++)
- 80052fa:	2300      	movs	r3, #0
- 80052fc:	607b      	str	r3, [r7, #4]
- 80052fe:	e008      	b.n	8005312 <TaskBattery_init+0x22>
+ 80052fe:	2300      	movs	r3, #0
+ 8005300:	607b      	str	r3, [r7, #4]
+ 8005302:	e008      	b.n	8005316 <TaskBattery_init+0x22>
     {
         Battery_Run();
- 8005300:	f7fc fca8 	bl	8001c54 <Battery_Run>
+ 8005304:	f7fc fca6 	bl	8001c54 <Battery_Run>
         osDelay(1000);
- 8005304:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
- 8005308:	f00f ff11 	bl	801512e <osDelay>
+ 8005308:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
+ 800530c:	f00f ff0f 	bl	801512e <osDelay>
     for (int i = 0; i < 3; i++)
- 800530c:	687b      	ldr	r3, [r7, #4]
- 800530e:	3301      	adds	r3, #1
- 8005310:	607b      	str	r3, [r7, #4]
- 8005312:	687b      	ldr	r3, [r7, #4]
- 8005314:	2b02      	cmp	r3, #2
- 8005316:	ddf3      	ble.n	8005300 <TaskBattery_init+0x10>
+ 8005310:	687b      	ldr	r3, [r7, #4]
+ 8005312:	3301      	adds	r3, #1
+ 8005314:	607b      	str	r3, [r7, #4]
+ 8005316:	687b      	ldr	r3, [r7, #4]
+ 8005318:	2b02      	cmp	r3, #2
+ 800531a:	ddf3      	ble.n	8005304 <TaskBattery_init+0x10>
     }
 
 #if BATTERY_ENABLE_SERIAL_LOG
     Serial_Print("[Battery] Initialized battery successfully\r\n");
 #endif
 }
- 8005318:	bf00      	nop
- 800531a:	bf00      	nop
- 800531c:	3708      	adds	r7, #8
- 800531e:	46bd      	mov	sp, r7
- 8005320:	bd80      	pop	{r7, pc}
+ 800531c:	bf00      	nop
+ 800531e:	bf00      	nop
+ 8005320:	3708      	adds	r7, #8
+ 8005322:	46bd      	mov	sp, r7
+ 8005324:	bd80      	pop	{r7, pc}
 
-08005322 <TaskBattery_run>:
+08005326 <TaskBattery_run>:
 
 void TaskBattery_run(void)
 {
- 8005322:	b580      	push	{r7, lr}
- 8005324:	af00      	add	r7, sp, #0
+ 8005326:	b580      	push	{r7, lr}
+ 8005328:	af00      	add	r7, sp, #0
     Battery_Run();
- 8005326:	f7fc fc95 	bl	8001c54 <Battery_Run>
+ 800532a:	f7fc fc93 	bl	8001c54 <Battery_Run>
 }
- 800532a:	bf00      	nop
- 800532c:	bd80      	pop	{r7, pc}
+ 800532e:	bf00      	nop
+ 8005330:	bd80      	pop	{r7, pc}
 	...
 
-08005330 <TaskLoRa_init>:
+08005334 <TaskLoRa_init>:
 
 void TaskLoRa_init(void){
- 8005330:	b5b0      	push	{r4, r5, r7, lr}
- 8005332:	b08e      	sub	sp, #56	@ 0x38
- 8005334:	af02      	add	r7, sp, #8
+ 8005334:	b5b0      	push	{r4, r5, r7, lr}
+ 8005336:	b08e      	sub	sp, #56	@ 0x38
+ 8005338:	af02      	add	r7, sp, #8
 		Serial_Print("[LoRa] Initialize LoRa\n\r");
- 8005336:	482e      	ldr	r0, [pc, #184]	@ (80053f0 <TaskLoRa_init+0xc0>)
- 8005338:	f004 fa88 	bl	800984c <Serial_Print>
+ 800533a:	482e      	ldr	r0, [pc, #184]	@ (80053f4 <TaskLoRa_init+0xc0>)
+ 800533c:	f004 fa86 	bl	800984c <Serial_Print>
 		myLoRa = LoRa_create(GPIOA, GPIO_PIN_15, GPIOA, GPIO_PIN_10, &hspi3); //PA4 SPI3 CS, PA10 RESET
- 800533c:	4c2d      	ldr	r4, [pc, #180]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 800533e:	4638      	mov	r0, r7
- 8005340:	4b2d      	ldr	r3, [pc, #180]	@ (80053f8 <TaskLoRa_init+0xc8>)
- 8005342:	9301      	str	r3, [sp, #4]
- 8005344:	f44f 6380 	mov.w	r3, #1024	@ 0x400
- 8005348:	9300      	str	r3, [sp, #0]
- 800534a:	4b2c      	ldr	r3, [pc, #176]	@ (80053fc <TaskLoRa_init+0xcc>)
- 800534c:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
- 8005350:	492a      	ldr	r1, [pc, #168]	@ (80053fc <TaskLoRa_init+0xcc>)
- 8005352:	f7fb ffcb 	bl	80012ec <LoRa_create>
- 8005356:	4625      	mov	r5, r4
- 8005358:	463c      	mov	r4, r7
- 800535a:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
- 800535c:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005340:	4c2d      	ldr	r4, [pc, #180]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005342:	4638      	mov	r0, r7
+ 8005344:	4b2d      	ldr	r3, [pc, #180]	@ (80053fc <TaskLoRa_init+0xc8>)
+ 8005346:	9301      	str	r3, [sp, #4]
+ 8005348:	f44f 6380 	mov.w	r3, #1024	@ 0x400
+ 800534c:	9300      	str	r3, [sp, #0]
+ 800534e:	4b2c      	ldr	r3, [pc, #176]	@ (8005400 <TaskLoRa_init+0xcc>)
+ 8005350:	f44f 4200 	mov.w	r2, #32768	@ 0x8000
+ 8005354:	492a      	ldr	r1, [pc, #168]	@ (8005400 <TaskLoRa_init+0xcc>)
+ 8005356:	f7fb ffc9 	bl	80012ec <LoRa_create>
+ 800535a:	4625      	mov	r5, r4
+ 800535c:	463c      	mov	r4, r7
  800535e:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
  8005360:	c50f      	stmia	r5!, {r0, r1, r2, r3}
- 8005362:	e894 0003 	ldmia.w	r4, {r0, r1}
- 8005366:	e885 0003 	stmia.w	r5, {r0, r1}
+ 8005362:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+ 8005364:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005366:	e894 0003 	ldmia.w	r4, {r0, r1}
+ 800536a:	e885 0003 	stmia.w	r5, {r0, r1}
 		myLoRa.frequency             = 434;							  // default = 433 MHz
- 800536a:	4b22      	ldr	r3, [pc, #136]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 800536c:	f44f 72d9 	mov.w	r2, #434	@ 0x1b2
- 8005370:	61da      	str	r2, [r3, #28]
+ 800536e:	4b22      	ldr	r3, [pc, #136]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005370:	f44f 72d9 	mov.w	r2, #434	@ 0x1b2
+ 8005374:	61da      	str	r2, [r3, #28]
 		myLoRa.spredingFactor        = SF_7;							// default = SF_7
- 8005372:	4b20      	ldr	r3, [pc, #128]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 8005374:	2207      	movs	r2, #7
- 8005376:	f883 2020 	strb.w	r2, [r3, #32]
+ 8005376:	4b20      	ldr	r3, [pc, #128]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005378:	2207      	movs	r2, #7
+ 800537a:	f883 2020 	strb.w	r2, [r3, #32]
 		myLoRa.bandWidth			 = BW_125KHz;				  // default = BW_125KHz
- 800537a:	4b1e      	ldr	r3, [pc, #120]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 800537c:	2207      	movs	r2, #7
- 800537e:	f883 2021 	strb.w	r2, [r3, #33]	@ 0x21
+ 800537e:	4b1e      	ldr	r3, [pc, #120]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005380:	2207      	movs	r2, #7
+ 8005382:	f883 2021 	strb.w	r2, [r3, #33]	@ 0x21
 		myLoRa.crcRate				 = CR_4_5;						// default = CR_4_5
- 8005382:	4b1c      	ldr	r3, [pc, #112]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 8005384:	2201      	movs	r2, #1
- 8005386:	f883 2022 	strb.w	r2, [r3, #34]	@ 0x22
+ 8005386:	4b1c      	ldr	r3, [pc, #112]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005388:	2201      	movs	r2, #1
+ 800538a:	f883 2022 	strb.w	r2, [r3, #34]	@ 0x22
 		myLoRa.power				= POWER_20db;				// default = 20db
- 800538a:	4b1a      	ldr	r3, [pc, #104]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 800538c:	22ff      	movs	r2, #255	@ 0xff
- 800538e:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
+ 800538e:	4b1a      	ldr	r3, [pc, #104]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005390:	22ff      	movs	r2, #255	@ 0xff
+ 8005392:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
 		myLoRa.overCurrentProtection = 120; 							// default = 100 mA
- 8005392:	4b18      	ldr	r3, [pc, #96]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 8005394:	2278      	movs	r2, #120	@ 0x78
- 8005396:	f883 2027 	strb.w	r2, [r3, #39]	@ 0x27
+ 8005396:	4b18      	ldr	r3, [pc, #96]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 8005398:	2278      	movs	r2, #120	@ 0x78
+ 800539a:	f883 2027 	strb.w	r2, [r3, #39]	@ 0x27
 		myLoRa.preamble				       = 10;		  					// default = 8;
- 800539a:	4b16      	ldr	r3, [pc, #88]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 800539c:	220a      	movs	r2, #10
- 800539e:	849a      	strh	r2, [r3, #36]	@ 0x24
+ 800539e:	4b16      	ldr	r3, [pc, #88]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 80053a0:	220a      	movs	r2, #10
+ 80053a2:	849a      	strh	r2, [r3, #36]	@ 0x24
 
 		Serial_Print("[LoRa] Reset LoRa\n\r");
- 80053a0:	4817      	ldr	r0, [pc, #92]	@ (8005400 <TaskLoRa_init+0xd0>)
- 80053a2:	f004 fa53 	bl	800984c <Serial_Print>
+ 80053a4:	4817      	ldr	r0, [pc, #92]	@ (8005404 <TaskLoRa_init+0xd0>)
+ 80053a6:	f004 fa51 	bl	800984c <Serial_Print>
 		LoRa_reset(&myLoRa);
- 80053a6:	4813      	ldr	r0, [pc, #76]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 80053a8:	f7fb ffdc 	bl	8001364 <LoRa_reset>
+ 80053aa:	4813      	ldr	r0, [pc, #76]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 80053ac:	f7fb ffda 	bl	8001364 <LoRa_reset>
 
 
 		if(LoRa_init(&myLoRa)  == LORA_OK){
- 80053ac:	4811      	ldr	r0, [pc, #68]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 80053ae:	f7fc faff 	bl	80019b0 <LoRa_init>
- 80053b2:	4603      	mov	r3, r0
- 80053b4:	2bc8      	cmp	r3, #200	@ 0xc8
- 80053b6:	d107      	bne.n	80053c8 <TaskLoRa_init+0x98>
+ 80053b0:	4811      	ldr	r0, [pc, #68]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 80053b2:	f7fc fafd 	bl	80019b0 <LoRa_init>
+ 80053b6:	4603      	mov	r3, r0
+ 80053b8:	2bc8      	cmp	r3, #200	@ 0xc8
+ 80053ba:	d107      	bne.n	80053cc <TaskLoRa_init+0x98>
 			LoRa_setSyncWord(&myLoRa, 0xF1);
- 80053b8:	21f1      	movs	r1, #241	@ 0xf1
- 80053ba:	480e      	ldr	r0, [pc, #56]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 80053bc:	f7fc fa7b 	bl	80018b6 <LoRa_setSyncWord>
+ 80053bc:	21f1      	movs	r1, #241	@ 0xf1
+ 80053be:	480e      	ldr	r0, [pc, #56]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 80053c0:	f7fc fa79 	bl	80018b6 <LoRa_setSyncWord>
 			Serial_Print("[LoRa] Initialize LoRa successfully\n\r");
- 80053c0:	4810      	ldr	r0, [pc, #64]	@ (8005404 <TaskLoRa_init+0xd4>)
- 80053c2:	f004 fa43 	bl	800984c <Serial_Print>
- 80053c6:	e002      	b.n	80053ce <TaskLoRa_init+0x9e>
+ 80053c4:	4810      	ldr	r0, [pc, #64]	@ (8005408 <TaskLoRa_init+0xd4>)
+ 80053c6:	f004 fa41 	bl	800984c <Serial_Print>
+ 80053ca:	e002      	b.n	80053d2 <TaskLoRa_init+0x9e>
 		}
 		else{
 			Serial_Print("[LoRa] Initialize LoRa failed\n\r");
- 80053c8:	480f      	ldr	r0, [pc, #60]	@ (8005408 <TaskLoRa_init+0xd8>)
- 80053ca:	f004 fa3f 	bl	800984c <Serial_Print>
+ 80053cc:	480f      	ldr	r0, [pc, #60]	@ (800540c <TaskLoRa_init+0xd8>)
+ 80053ce:	f004 fa3d 	bl	800984c <Serial_Print>
 		}
 
 		uint8_t ver = LoRa_read(&myLoRa, 0x42);
- 80053ce:	2142      	movs	r1, #66	@ 0x42
- 80053d0:	4808      	ldr	r0, [pc, #32]	@ (80053f4 <TaskLoRa_init+0xc4>)
- 80053d2:	f7fb fff5 	bl	80013c0 <LoRa_read>
- 80053d6:	4603      	mov	r3, r0
- 80053d8:	f887 302f 	strb.w	r3, [r7, #47]	@ 0x2f
+ 80053d2:	2142      	movs	r1, #66	@ 0x42
+ 80053d4:	4808      	ldr	r0, [pc, #32]	@ (80053f8 <TaskLoRa_init+0xc4>)
+ 80053d6:	f7fb fff3 	bl	80013c0 <LoRa_read>
+ 80053da:	4603      	mov	r3, r0
+ 80053dc:	f887 302f 	strb.w	r3, [r7, #47]	@ 0x2f
 				Serial_Print("[LoRa] Version: 0x%02X\r\n", ver);
- 80053dc:	f897 302f 	ldrb.w	r3, [r7, #47]	@ 0x2f
- 80053e0:	4619      	mov	r1, r3
- 80053e2:	480a      	ldr	r0, [pc, #40]	@ (800540c <TaskLoRa_init+0xdc>)
- 80053e4:	f004 fa32 	bl	800984c <Serial_Print>
+ 80053e0:	f897 302f 	ldrb.w	r3, [r7, #47]	@ 0x2f
+ 80053e4:	4619      	mov	r1, r3
+ 80053e6:	480a      	ldr	r0, [pc, #40]	@ (8005410 <TaskLoRa_init+0xdc>)
+ 80053e8:	f004 fa30 	bl	800984c <Serial_Print>
 
 
 }
- 80053e8:	bf00      	nop
- 80053ea:	3730      	adds	r7, #48	@ 0x30
- 80053ec:	46bd      	mov	sp, r7
- 80053ee:	bdb0      	pop	{r4, r5, r7, pc}
- 80053f0:	08020998 	.word	0x08020998
- 80053f4:	20000818 	.word	0x20000818
- 80053f8:	20001170 	.word	0x20001170
- 80053fc:	40020000 	.word	0x40020000
- 8005400:	080209b4 	.word	0x080209b4
- 8005404:	080209c8 	.word	0x080209c8
- 8005408:	080209f0 	.word	0x080209f0
- 800540c:	08020a10 	.word	0x08020a10
+ 80053ec:	bf00      	nop
+ 80053ee:	3730      	adds	r7, #48	@ 0x30
+ 80053f0:	46bd      	mov	sp, r7
+ 80053f2:	bdb0      	pop	{r4, r5, r7, pc}
+ 80053f4:	08020998 	.word	0x08020998
+ 80053f8:	20000818 	.word	0x20000818
+ 80053fc:	20001170 	.word	0x20001170
+ 8005400:	40020000 	.word	0x40020000
+ 8005404:	080209b4 	.word	0x080209b4
+ 8005408:	080209c8 	.word	0x080209c8
+ 800540c:	080209f0 	.word	0x080209f0
+ 8005410:	08020a10 	.word	0x08020a10
 
-08005410 <TaskLoRa_run>:
+08005414 <TaskLoRa_run>:
 
 void TaskLoRa_run(void){
- 8005410:	b5f0      	push	{r4, r5, r6, r7, lr}
- 8005412:	b085      	sub	sp, #20
- 8005414:	af04      	add	r7, sp, #16
+ 8005414:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 8005416:	b085      	sub	sp, #20
+ 8005418:	af04      	add	r7, sp, #16
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfer starting\r\n");
- 8005416:	484d      	ldr	r0, [pc, #308]	@ (800554c <TaskLoRa_run+0x13c>)
- 8005418:	f004 fa18 	bl	800984c <Serial_Print>
+ 800541a:	484d      	ldr	r0, [pc, #308]	@ (8005550 <TaskLoRa_run+0x13c>)
+ 800541c:	f004 fa16 	bl	800984c <Serial_Print>
 #endif
 
 	loc_data_payload.device_id = LORA_DEVICE_ID;
- 800541c:	4b4c      	ldr	r3, [pc, #304]	@ (8005550 <TaskLoRa_run+0x140>)
- 800541e:	f24f 2246 	movw	r2, #62022	@ 0xf246
- 8005422:	601a      	str	r2, [r3, #0]
+ 8005420:	4b4c      	ldr	r3, [pc, #304]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005422:	f24f 2246 	movw	r2, #62022	@ 0xf246
+ 8005426:	601a      	str	r2, [r3, #0]
 	loc_data_payload.gps_hdop = gps_hdop;
- 8005424:	4b4b      	ldr	r3, [pc, #300]	@ (8005554 <TaskLoRa_run+0x144>)
- 8005426:	e9d3 2300 	ldrd	r2, r3, [r3]
- 800542a:	4610      	mov	r0, r2
- 800542c:	4619      	mov	r1, r3
- 800542e:	f7fb fbe3 	bl	8000bf8 <__aeabi_d2f>
- 8005432:	4603      	mov	r3, r0
- 8005434:	4a46      	ldr	r2, [pc, #280]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005436:	6053      	str	r3, [r2, #4]
+ 8005428:	4b4b      	ldr	r3, [pc, #300]	@ (8005558 <TaskLoRa_run+0x144>)
+ 800542a:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 800542e:	4610      	mov	r0, r2
+ 8005430:	4619      	mov	r1, r3
+ 8005432:	f7fb fbe1 	bl	8000bf8 <__aeabi_d2f>
+ 8005436:	4603      	mov	r3, r0
+ 8005438:	4a46      	ldr	r2, [pc, #280]	@ (8005554 <TaskLoRa_run+0x140>)
+ 800543a:	6053      	str	r3, [r2, #4]
 	loc_data_payload.loc_gps_lon = loc_gps_lon;
- 8005438:	4b47      	ldr	r3, [pc, #284]	@ (8005558 <TaskLoRa_run+0x148>)
- 800543a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800543e:	4b44      	ldr	r3, [pc, #272]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005440:	4602      	mov	r2, r0
- 8005442:	609a      	str	r2, [r3, #8]
- 8005444:	460a      	mov	r2, r1
- 8005446:	60da      	str	r2, [r3, #12]
+ 800543c:	4b47      	ldr	r3, [pc, #284]	@ (800555c <TaskLoRa_run+0x148>)
+ 800543e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005442:	4b44      	ldr	r3, [pc, #272]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005444:	4602      	mov	r2, r0
+ 8005446:	609a      	str	r2, [r3, #8]
+ 8005448:	460a      	mov	r2, r1
+ 800544a:	60da      	str	r2, [r3, #12]
 	loc_data_payload.loc_gps_lat = loc_gps_lat;
- 8005448:	4b44      	ldr	r3, [pc, #272]	@ (800555c <TaskLoRa_run+0x14c>)
- 800544a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800544e:	4b40      	ldr	r3, [pc, #256]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005450:	4602      	mov	r2, r0
- 8005452:	611a      	str	r2, [r3, #16]
- 8005454:	460a      	mov	r2, r1
- 8005456:	615a      	str	r2, [r3, #20]
+ 800544c:	4b44      	ldr	r3, [pc, #272]	@ (8005560 <TaskLoRa_run+0x14c>)
+ 800544e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005452:	4b40      	ldr	r3, [pc, #256]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005454:	4602      	mov	r2, r0
+ 8005456:	611a      	str	r2, [r3, #16]
+ 8005458:	460a      	mov	r2, r1
+ 800545a:	615a      	str	r2, [r3, #20]
 	loc_data_payload.loc_gps_alt = loc_gps_alt;
- 8005458:	4b41      	ldr	r3, [pc, #260]	@ (8005560 <TaskLoRa_run+0x150>)
- 800545a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800545e:	4b3c      	ldr	r3, [pc, #240]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005460:	4602      	mov	r2, r0
- 8005462:	619a      	str	r2, [r3, #24]
- 8005464:	460a      	mov	r2, r1
- 8005466:	61da      	str	r2, [r3, #28]
+ 800545c:	4b41      	ldr	r3, [pc, #260]	@ (8005564 <TaskLoRa_run+0x150>)
+ 800545e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005462:	4b3c      	ldr	r3, [pc, #240]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005464:	4602      	mov	r2, r0
+ 8005466:	619a      	str	r2, [r3, #24]
+ 8005468:	460a      	mov	r2, r1
+ 800546a:	61da      	str	r2, [r3, #28]
 	loc_data_payload.tag_gps_lon = tag_gps_lon;
- 8005468:	4b3e      	ldr	r3, [pc, #248]	@ (8005564 <TaskLoRa_run+0x154>)
- 800546a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800546e:	4b38      	ldr	r3, [pc, #224]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005470:	4602      	mov	r2, r0
- 8005472:	621a      	str	r2, [r3, #32]
- 8005474:	460a      	mov	r2, r1
- 8005476:	625a      	str	r2, [r3, #36]	@ 0x24
+ 800546c:	4b3e      	ldr	r3, [pc, #248]	@ (8005568 <TaskLoRa_run+0x154>)
+ 800546e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005472:	4b38      	ldr	r3, [pc, #224]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005474:	4602      	mov	r2, r0
+ 8005476:	621a      	str	r2, [r3, #32]
+ 8005478:	460a      	mov	r2, r1
+ 800547a:	625a      	str	r2, [r3, #36]	@ 0x24
 	loc_data_payload.tag_gps_lat = tag_gps_lat;
- 8005478:	4b3b      	ldr	r3, [pc, #236]	@ (8005568 <TaskLoRa_run+0x158>)
- 800547a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800547e:	4b34      	ldr	r3, [pc, #208]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005480:	4602      	mov	r2, r0
- 8005482:	629a      	str	r2, [r3, #40]	@ 0x28
- 8005484:	460a      	mov	r2, r1
- 8005486:	62da      	str	r2, [r3, #44]	@ 0x2c
+ 800547c:	4b3b      	ldr	r3, [pc, #236]	@ (800556c <TaskLoRa_run+0x158>)
+ 800547e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005482:	4b34      	ldr	r3, [pc, #208]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005484:	4602      	mov	r2, r0
+ 8005486:	629a      	str	r2, [r3, #40]	@ 0x28
+ 8005488:	460a      	mov	r2, r1
+ 800548a:	62da      	str	r2, [r3, #44]	@ 0x2c
 	loc_data_payload.tag_gps_alt = tag_gps_alt;
- 8005488:	4b38      	ldr	r3, [pc, #224]	@ (800556c <TaskLoRa_run+0x15c>)
- 800548a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800548e:	4b30      	ldr	r3, [pc, #192]	@ (8005550 <TaskLoRa_run+0x140>)
- 8005490:	4602      	mov	r2, r0
- 8005492:	631a      	str	r2, [r3, #48]	@ 0x30
- 8005494:	460a      	mov	r2, r1
- 8005496:	635a      	str	r2, [r3, #52]	@ 0x34
+ 800548c:	4b38      	ldr	r3, [pc, #224]	@ (8005570 <TaskLoRa_run+0x15c>)
+ 800548e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 8005492:	4b30      	ldr	r3, [pc, #192]	@ (8005554 <TaskLoRa_run+0x140>)
+ 8005494:	4602      	mov	r2, r0
+ 8005496:	631a      	str	r2, [r3, #48]	@ 0x30
+ 8005498:	460a      	mov	r2, r1
+ 800549a:	635a      	str	r2, [r3, #52]	@ 0x34
 	loc_data_payload.tag_distance = tag_distance;
- 8005498:	4b35      	ldr	r3, [pc, #212]	@ (8005570 <TaskLoRa_run+0x160>)
- 800549a:	e9d3 0100 	ldrd	r0, r1, [r3]
- 800549e:	4b2c      	ldr	r3, [pc, #176]	@ (8005550 <TaskLoRa_run+0x140>)
- 80054a0:	4602      	mov	r2, r0
- 80054a2:	639a      	str	r2, [r3, #56]	@ 0x38
- 80054a4:	460a      	mov	r2, r1
- 80054a6:	63da      	str	r2, [r3, #60]	@ 0x3c
+ 800549c:	4b35      	ldr	r3, [pc, #212]	@ (8005574 <TaskLoRa_run+0x160>)
+ 800549e:	e9d3 0100 	ldrd	r0, r1, [r3]
+ 80054a2:	4b2c      	ldr	r3, [pc, #176]	@ (8005554 <TaskLoRa_run+0x140>)
+ 80054a4:	4602      	mov	r2, r0
+ 80054a6:	639a      	str	r2, [r3, #56]	@ 0x38
+ 80054a8:	460a      	mov	r2, r1
+ 80054aa:	63da      	str	r2, [r3, #60]	@ 0x3c
 //	loc_data_payload.tag_gps_lat = 10.874163;
 //	loc_data_payload.tag_gps_alt = 1000;
 //	loc_data_payload.tag_distance = 12345678;
 //#endif
 
 	loc_data_header.seq_num++;
- 80054a8:	4932      	ldr	r1, [pc, #200]	@ (8005574 <TaskLoRa_run+0x164>)
- 80054aa:	680a      	ldr	r2, [r1, #0]
- 80054ac:	684b      	ldr	r3, [r1, #4]
- 80054ae:	1c54      	adds	r4, r2, #1
- 80054b0:	f143 0500 	adc.w	r5, r3, #0
- 80054b4:	4b2f      	ldr	r3, [pc, #188]	@ (8005574 <TaskLoRa_run+0x164>)
- 80054b6:	4622      	mov	r2, r4
- 80054b8:	601a      	str	r2, [r3, #0]
- 80054ba:	462a      	mov	r2, r5
- 80054bc:	605a      	str	r2, [r3, #4]
+ 80054ac:	4932      	ldr	r1, [pc, #200]	@ (8005578 <TaskLoRa_run+0x164>)
+ 80054ae:	680a      	ldr	r2, [r1, #0]
+ 80054b0:	684b      	ldr	r3, [r1, #4]
+ 80054b2:	1c54      	adds	r4, r2, #1
+ 80054b4:	f143 0500 	adc.w	r5, r3, #0
+ 80054b8:	4b2f      	ldr	r3, [pc, #188]	@ (8005578 <TaskLoRa_run+0x164>)
+ 80054ba:	4622      	mov	r2, r4
+ 80054bc:	601a      	str	r2, [r3, #0]
+ 80054be:	462a      	mov	r2, r5
+ 80054c0:	605a      	str	r2, [r3, #4]
 	memcpy(plain_text_buffer,&loc_data_header, sizeof(LOC_DATA_HEADER));
- 80054be:	4b2e      	ldr	r3, [pc, #184]	@ (8005578 <TaskLoRa_run+0x168>)
- 80054c0:	4a2c      	ldr	r2, [pc, #176]	@ (8005574 <TaskLoRa_run+0x164>)
- 80054c2:	e892 0003 	ldmia.w	r2, {r0, r1}
- 80054c6:	e883 0003 	stmia.w	r3, {r0, r1}
+ 80054c2:	4b2e      	ldr	r3, [pc, #184]	@ (800557c <TaskLoRa_run+0x168>)
+ 80054c4:	4a2c      	ldr	r2, [pc, #176]	@ (8005578 <TaskLoRa_run+0x164>)
+ 80054c6:	e892 0003 	ldmia.w	r2, {r0, r1}
+ 80054ca:	e883 0003 	stmia.w	r3, {r0, r1}
 	memcpy(plain_text_buffer+8,&loc_data_payload, sizeof(LOC_DATA_PAYLOAD));
- 80054ca:	4b2c      	ldr	r3, [pc, #176]	@ (800557c <TaskLoRa_run+0x16c>)
- 80054cc:	4a20      	ldr	r2, [pc, #128]	@ (8005550 <TaskLoRa_run+0x140>)
- 80054ce:	4614      	mov	r4, r2
- 80054d0:	469c      	mov	ip, r3
- 80054d2:	f104 0e40 	add.w	lr, r4, #64	@ 0x40
- 80054d6:	4665      	mov	r5, ip
- 80054d8:	4626      	mov	r6, r4
- 80054da:	ce0f      	ldmia	r6!, {r0, r1, r2, r3}
- 80054dc:	6028      	str	r0, [r5, #0]
- 80054de:	6069      	str	r1, [r5, #4]
- 80054e0:	60aa      	str	r2, [r5, #8]
- 80054e2:	60eb      	str	r3, [r5, #12]
- 80054e4:	3410      	adds	r4, #16
- 80054e6:	f10c 0c10 	add.w	ip, ip, #16
- 80054ea:	4574      	cmp	r4, lr
- 80054ec:	d1f3      	bne.n	80054d6 <TaskLoRa_run+0xc6>
+ 80054ce:	4b2c      	ldr	r3, [pc, #176]	@ (8005580 <TaskLoRa_run+0x16c>)
+ 80054d0:	4a20      	ldr	r2, [pc, #128]	@ (8005554 <TaskLoRa_run+0x140>)
+ 80054d2:	4614      	mov	r4, r2
+ 80054d4:	469c      	mov	ip, r3
+ 80054d6:	f104 0e40 	add.w	lr, r4, #64	@ 0x40
+ 80054da:	4665      	mov	r5, ip
+ 80054dc:	4626      	mov	r6, r4
+ 80054de:	ce0f      	ldmia	r6!, {r0, r1, r2, r3}
+ 80054e0:	6028      	str	r0, [r5, #0]
+ 80054e2:	6069      	str	r1, [r5, #4]
+ 80054e4:	60aa      	str	r2, [r5, #8]
+ 80054e6:	60eb      	str	r3, [r5, #12]
+ 80054e8:	3410      	adds	r4, #16
+ 80054ea:	f10c 0c10 	add.w	ip, ip, #16
+ 80054ee:	4574      	cmp	r4, lr
+ 80054f0:	d1f3      	bne.n	80054da <TaskLoRa_run+0xc6>
 	memset(gcm_nonce, 0,  GCM_NONCE_LEN);
- 80054ee:	220c      	movs	r2, #12
- 80054f0:	2100      	movs	r1, #0
- 80054f2:	4823      	ldr	r0, [pc, #140]	@ (8005580 <TaskLoRa_run+0x170>)
- 80054f4:	f014 fa24 	bl	8019940 <memset>
+ 80054f2:	220c      	movs	r2, #12
+ 80054f4:	2100      	movs	r1, #0
+ 80054f6:	4823      	ldr	r0, [pc, #140]	@ (8005584 <TaskLoRa_run+0x170>)
+ 80054f8:	f014 fa22 	bl	8019940 <memset>
 	memcpy(gcm_nonce, &loc_data_header, sizeof(LOC_DATA_HEADER)); //Copy 8 bytes from header to gcm_nonce to create specific nonce of one time tranfer
- 80054f8:	4b21      	ldr	r3, [pc, #132]	@ (8005580 <TaskLoRa_run+0x170>)
- 80054fa:	4a1e      	ldr	r2, [pc, #120]	@ (8005574 <TaskLoRa_run+0x164>)
- 80054fc:	e892 0003 	ldmia.w	r2, {r0, r1}
- 8005500:	e883 0003 	stmia.w	r3, {r0, r1}
+ 80054fc:	4b21      	ldr	r3, [pc, #132]	@ (8005584 <TaskLoRa_run+0x170>)
+ 80054fe:	4a1e      	ldr	r2, [pc, #120]	@ (8005578 <TaskLoRa_run+0x164>)
+ 8005500:	e892 0003 	ldmia.w	r2, {r0, r1}
+ 8005504:	e883 0003 	stmia.w	r3, {r0, r1}
 	memcpy(cipher_text_buffer, (uint8_t*)&loc_data_header, sizeof(LOC_DATA_HEADER));
- 8005504:	4b1f      	ldr	r3, [pc, #124]	@ (8005584 <TaskLoRa_run+0x174>)
- 8005506:	4a1b      	ldr	r2, [pc, #108]	@ (8005574 <TaskLoRa_run+0x164>)
- 8005508:	e892 0003 	ldmia.w	r2, {r0, r1}
- 800550c:	e883 0003 	stmia.w	r3, {r0, r1}
+ 8005508:	4b1f      	ldr	r3, [pc, #124]	@ (8005588 <TaskLoRa_run+0x174>)
+ 800550a:	4a1b      	ldr	r2, [pc, #108]	@ (8005578 <TaskLoRa_run+0x164>)
+ 800550c:	e892 0003 	ldmia.w	r2, {r0, r1}
+ 8005510:	e883 0003 	stmia.w	r3, {r0, r1}
 	AES_GCM_encrypt(key, gcm_nonce, &loc_data_header, LOC_DATA_HEADER_SIZE , &loc_data_payload, LOC_DATA_PAYLOAD_SIZE, cipher_text_buffer + sizeof(LOC_DATA_HEADER));
- 8005510:	4b1d      	ldr	r3, [pc, #116]	@ (8005588 <TaskLoRa_run+0x178>)
- 8005512:	9302      	str	r3, [sp, #8]
- 8005514:	2340      	movs	r3, #64	@ 0x40
- 8005516:	9301      	str	r3, [sp, #4]
- 8005518:	4b0d      	ldr	r3, [pc, #52]	@ (8005550 <TaskLoRa_run+0x140>)
- 800551a:	9300      	str	r3, [sp, #0]
- 800551c:	2308      	movs	r3, #8
- 800551e:	4a15      	ldr	r2, [pc, #84]	@ (8005574 <TaskLoRa_run+0x164>)
- 8005520:	4917      	ldr	r1, [pc, #92]	@ (8005580 <TaskLoRa_run+0x170>)
- 8005522:	481a      	ldr	r0, [pc, #104]	@ (800558c <TaskLoRa_run+0x17c>)
- 8005524:	f004 f938 	bl	8009798 <AES_GCM_encrypt>
+ 8005514:	4b1d      	ldr	r3, [pc, #116]	@ (800558c <TaskLoRa_run+0x178>)
+ 8005516:	9302      	str	r3, [sp, #8]
+ 8005518:	2340      	movs	r3, #64	@ 0x40
+ 800551a:	9301      	str	r3, [sp, #4]
+ 800551c:	4b0d      	ldr	r3, [pc, #52]	@ (8005554 <TaskLoRa_run+0x140>)
+ 800551e:	9300      	str	r3, [sp, #0]
+ 8005520:	2308      	movs	r3, #8
+ 8005522:	4a15      	ldr	r2, [pc, #84]	@ (8005578 <TaskLoRa_run+0x164>)
+ 8005524:	4917      	ldr	r1, [pc, #92]	@ (8005584 <TaskLoRa_run+0x170>)
+ 8005526:	481a      	ldr	r0, [pc, #104]	@ (8005590 <TaskLoRa_run+0x17c>)
+ 8005528:	f004 f936 	bl	8009798 <AES_GCM_encrypt>
 	//LoRa_transmit_DMA(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
 	Serial_Print("[LoRa] transferring\r\n");
- 8005528:	4819      	ldr	r0, [pc, #100]	@ (8005590 <TaskLoRa_run+0x180>)
- 800552a:	f004 f98f 	bl	800984c <Serial_Print>
+ 800552c:	4819      	ldr	r0, [pc, #100]	@ (8005594 <TaskLoRa_run+0x180>)
+ 800552e:	f004 f98d 	bl	800984c <Serial_Print>
 	LoRa_transmit(&myLoRa, cipher_text_buffer, sizeof(cipher_text_buffer), 400);
- 800552e:	f44f 73c8 	mov.w	r3, #400	@ 0x190
- 8005532:	2258      	movs	r2, #88	@ 0x58
- 8005534:	4913      	ldr	r1, [pc, #76]	@ (8005584 <TaskLoRa_run+0x174>)
- 8005536:	4817      	ldr	r0, [pc, #92]	@ (8005594 <TaskLoRa_run+0x184>)
- 8005538:	f7fc f9d0 	bl	80018dc <LoRa_transmit>
+ 8005532:	f44f 73c8 	mov.w	r3, #400	@ 0x190
+ 8005536:	2258      	movs	r2, #88	@ 0x58
+ 8005538:	4913      	ldr	r1, [pc, #76]	@ (8005588 <TaskLoRa_run+0x174>)
+ 800553a:	4817      	ldr	r0, [pc, #92]	@ (8005598 <TaskLoRa_run+0x184>)
+ 800553c:	f7fc f9ce 	bl	80018dc <LoRa_transmit>
 
 #ifdef LORA_ENABLE_SERIAL_LOG
 	Serial_Print("[LoRa] transfered success\r\n");
- 800553c:	4816      	ldr	r0, [pc, #88]	@ (8005598 <TaskLoRa_run+0x188>)
- 800553e:	f004 f985 	bl	800984c <Serial_Print>
+ 8005540:	4816      	ldr	r0, [pc, #88]	@ (800559c <TaskLoRa_run+0x188>)
+ 8005542:	f004 f983 	bl	800984c <Serial_Print>
 #endif
 
 }
- 8005542:	bf00      	nop
- 8005544:	3704      	adds	r7, #4
- 8005546:	46bd      	mov	sp, r7
- 8005548:	bdf0      	pop	{r4, r5, r6, r7, pc}
- 800554a:	bf00      	nop
- 800554c:	08020a2c 	.word	0x08020a2c
- 8005550:	20000840 	.word	0x20000840
- 8005554:	20000608 	.word	0x20000608
- 8005558:	200005d8 	.word	0x200005d8
- 800555c:	200005e0 	.word	0x200005e0
- 8005560:	200005e8 	.word	0x200005e8
- 8005564:	200005f0 	.word	0x200005f0
- 8005568:	200005f8 	.word	0x200005f8
- 800556c:	20000600 	.word	0x20000600
- 8005570:	20000088 	.word	0x20000088
- 8005574:	20000880 	.word	0x20000880
- 8005578:	20000894 	.word	0x20000894
- 800557c:	2000089c 	.word	0x2000089c
- 8005580:	20000888 	.word	0x20000888
- 8005584:	200008dc 	.word	0x200008dc
- 8005588:	200008e4 	.word	0x200008e4
- 800558c:	20000098 	.word	0x20000098
- 8005590:	08020a48 	.word	0x08020a48
- 8005594:	20000818 	.word	0x20000818
- 8005598:	08020a60 	.word	0x08020a60
+ 8005546:	bf00      	nop
+ 8005548:	3704      	adds	r7, #4
+ 800554a:	46bd      	mov	sp, r7
+ 800554c:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 800554e:	bf00      	nop
+ 8005550:	08020a2c 	.word	0x08020a2c
+ 8005554:	20000840 	.word	0x20000840
+ 8005558:	20000608 	.word	0x20000608
+ 800555c:	200005d8 	.word	0x200005d8
+ 8005560:	200005e0 	.word	0x200005e0
+ 8005564:	200005e8 	.word	0x200005e8
+ 8005568:	200005f0 	.word	0x200005f0
+ 800556c:	200005f8 	.word	0x200005f8
+ 8005570:	20000600 	.word	0x20000600
+ 8005574:	20000088 	.word	0x20000088
+ 8005578:	20000880 	.word	0x20000880
+ 800557c:	20000894 	.word	0x20000894
+ 8005580:	2000089c 	.word	0x2000089c
+ 8005584:	20000888 	.word	0x20000888
+ 8005588:	200008dc 	.word	0x200008dc
+ 800558c:	200008e4 	.word	0x200008e4
+ 8005590:	20000098 	.word	0x20000098
+ 8005594:	08020a48 	.word	0x08020a48
+ 8005598:	20000818 	.word	0x20000818
+ 800559c:	08020a60 	.word	0x08020a60
 
-0800559c <TaskButton_init>:
+080055a0 <TaskButton_init>:
 
 void TaskButton_init(void){
- 800559c:	b580      	push	{r7, lr}
- 800559e:	af00      	add	r7, sp, #0
+ 80055a0:	b580      	push	{r7, lr}
+ 80055a2:	af00      	add	r7, sp, #0
 	Serial_Print("[Button] Intitial button\n\r");
- 80055a0:	4802      	ldr	r0, [pc, #8]	@ (80055ac <TaskButton_init+0x10>)
- 80055a2:	f004 f953 	bl	800984c <Serial_Print>
+ 80055a4:	4802      	ldr	r0, [pc, #8]	@ (80055b0 <TaskButton_init+0x10>)
+ 80055a6:	f004 f951 	bl	800984c <Serial_Print>
 }
- 80055a6:	bf00      	nop
- 80055a8:	bd80      	pop	{r7, pc}
  80055aa:	bf00      	nop
- 80055ac:	08020a7c 	.word	0x08020a7c
+ 80055ac:	bd80      	pop	{r7, pc}
+ 80055ae:	bf00      	nop
+ 80055b0:	08020a7c 	.word	0x08020a7c
 
-080055b0 <TaskButton_run>:
+080055b4 <TaskButton_run>:
 
 void TaskButton_run(void){
- 80055b0:	b580      	push	{r7, lr}
- 80055b2:	af00      	add	r7, sp, #0
+ 80055b4:	b580      	push	{r7, lr}
+ 80055b6:	af00      	add	r7, sp, #0
 	getKeyInput();
- 80055b4:	f7fc fc2c 	bl	8001e10 <getKeyInput>
+ 80055b8:	f7fc fc2a 	bl	8001e10 <getKeyInput>
 }
- 80055b8:	bf00      	nop
- 80055ba:	bd80      	pop	{r7, pc}
+ 80055bc:	bf00      	nop
+ 80055be:	bd80      	pop	{r7, pc}
 
-080055bc <TaskDebug_init>:
+080055c0 <TaskDebug_init>:
 
 
 void TaskDebug_init(void){
- 80055bc:	b580      	push	{r7, lr}
- 80055be:	af00      	add	r7, sp, #0
+ 80055c0:	b580      	push	{r7, lr}
+ 80055c2:	af00      	add	r7, sp, #0
 	Serial_Print("[Debug] Intitial Debug\n\r");
- 80055c0:	4802      	ldr	r0, [pc, #8]	@ (80055cc <TaskDebug_init+0x10>)
- 80055c2:	f004 f943 	bl	800984c <Serial_Print>
+ 80055c4:	4802      	ldr	r0, [pc, #8]	@ (80055d0 <TaskDebug_init+0x10>)
+ 80055c6:	f004 f941 	bl	800984c <Serial_Print>
 };
- 80055c6:	bf00      	nop
- 80055c8:	bd80      	pop	{r7, pc}
  80055ca:	bf00      	nop
- 80055cc:	08020a98 	.word	0x08020a98
+ 80055cc:	bd80      	pop	{r7, pc}
+ 80055ce:	bf00      	nop
+ 80055d0:	08020a98 	.word	0x08020a98
 
-080055d0 <TaskDebug_run>:
+080055d4 <TaskDebug_run>:
 
 
 void TaskDebug_run(void){
- 80055d0:	b480      	push	{r7}
- 80055d2:	af00      	add	r7, sp, #0
+ 80055d4:	b480      	push	{r7}
+ 80055d6:	af00      	add	r7, sp, #0
 //	if(isButtonPressed(0)) {
 //		Serial_Print("[Debug] Press Button\n\r");
 //	}
 	//Serial_Print("[Debug] Run Debug\n\r");
 }
- 80055d4:	bf00      	nop
- 80055d6:	46bd      	mov	sp, r7
- 80055d8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80055dc:	4770      	bx	lr
+ 80055d8:	bf00      	nop
+ 80055da:	46bd      	mov	sp, r7
+ 80055dc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80055e0:	4770      	bx	lr
 
-080055de <GPS_CaculateChecksum>:
+080055e2 <GPS_CaculateChecksum>:
 static GGA_t gga_tmp = {0};
 static RMC_t rmc_tmp = {0};
 
 
 static uint8_t GPS_CaculateChecksum(const char *sentence)
 {
- 80055de:	b480      	push	{r7}
- 80055e0:	b085      	sub	sp, #20
- 80055e2:	af00      	add	r7, sp, #0
- 80055e4:	6078      	str	r0, [r7, #4]
+ 80055e2:	b480      	push	{r7}
+ 80055e4:	b085      	sub	sp, #20
+ 80055e6:	af00      	add	r7, sp, #0
+ 80055e8:	6078      	str	r0, [r7, #4]
     uint8_t checksum = 0;
- 80055e6:	2300      	movs	r3, #0
- 80055e8:	73fb      	strb	r3, [r7, #15]
-    int i = 0;
  80055ea:	2300      	movs	r3, #0
- 80055ec:	60bb      	str	r3, [r7, #8]
+ 80055ec:	73fb      	strb	r3, [r7, #15]
+    int i = 0;
+ 80055ee:	2300      	movs	r3, #0
+ 80055f0:	60bb      	str	r3, [r7, #8]
 
     // If begin letter is '$' then continue
     if (sentence[0] == '$')
- 80055ee:	687b      	ldr	r3, [r7, #4]
- 80055f0:	781b      	ldrb	r3, [r3, #0]
- 80055f2:	2b24      	cmp	r3, #36	@ 0x24
- 80055f4:	d10d      	bne.n	8005612 <GPS_CaculateChecksum+0x34>
+ 80055f2:	687b      	ldr	r3, [r7, #4]
+ 80055f4:	781b      	ldrb	r3, [r3, #0]
+ 80055f6:	2b24      	cmp	r3, #36	@ 0x24
+ 80055f8:	d10d      	bne.n	8005616 <GPS_CaculateChecksum+0x34>
         sentence++;
- 80055f6:	687b      	ldr	r3, [r7, #4]
- 80055f8:	3301      	adds	r3, #1
- 80055fa:	607b      	str	r3, [r7, #4]
+ 80055fa:	687b      	ldr	r3, [r7, #4]
+ 80055fc:	3301      	adds	r3, #1
+ 80055fe:	607b      	str	r3, [r7, #4]
 
     // XOR all letter until meet '*' or end of string
     while (sentence[i] != '\0' && sentence[i] != '*')
- 80055fc:	e009      	b.n	8005612 <GPS_CaculateChecksum+0x34>
+ 8005600:	e009      	b.n	8005616 <GPS_CaculateChecksum+0x34>
     {
         checksum ^= (uint8_t)sentence[i];
- 80055fe:	68bb      	ldr	r3, [r7, #8]
- 8005600:	687a      	ldr	r2, [r7, #4]
- 8005602:	4413      	add	r3, r2
- 8005604:	781a      	ldrb	r2, [r3, #0]
- 8005606:	7bfb      	ldrb	r3, [r7, #15]
- 8005608:	4053      	eors	r3, r2
- 800560a:	73fb      	strb	r3, [r7, #15]
+ 8005602:	68bb      	ldr	r3, [r7, #8]
+ 8005604:	687a      	ldr	r2, [r7, #4]
+ 8005606:	4413      	add	r3, r2
+ 8005608:	781a      	ldrb	r2, [r3, #0]
+ 800560a:	7bfb      	ldrb	r3, [r7, #15]
+ 800560c:	4053      	eors	r3, r2
+ 800560e:	73fb      	strb	r3, [r7, #15]
         i++;
- 800560c:	68bb      	ldr	r3, [r7, #8]
- 800560e:	3301      	adds	r3, #1
- 8005610:	60bb      	str	r3, [r7, #8]
+ 8005610:	68bb      	ldr	r3, [r7, #8]
+ 8005612:	3301      	adds	r3, #1
+ 8005614:	60bb      	str	r3, [r7, #8]
     while (sentence[i] != '\0' && sentence[i] != '*')
- 8005612:	68bb      	ldr	r3, [r7, #8]
- 8005614:	687a      	ldr	r2, [r7, #4]
- 8005616:	4413      	add	r3, r2
- 8005618:	781b      	ldrb	r3, [r3, #0]
- 800561a:	2b00      	cmp	r3, #0
- 800561c:	d005      	beq.n	800562a <GPS_CaculateChecksum+0x4c>
- 800561e:	68bb      	ldr	r3, [r7, #8]
- 8005620:	687a      	ldr	r2, [r7, #4]
- 8005622:	4413      	add	r3, r2
- 8005624:	781b      	ldrb	r3, [r3, #0]
- 8005626:	2b2a      	cmp	r3, #42	@ 0x2a
- 8005628:	d1e9      	bne.n	80055fe <GPS_CaculateChecksum+0x20>
+ 8005616:	68bb      	ldr	r3, [r7, #8]
+ 8005618:	687a      	ldr	r2, [r7, #4]
+ 800561a:	4413      	add	r3, r2
+ 800561c:	781b      	ldrb	r3, [r3, #0]
+ 800561e:	2b00      	cmp	r3, #0
+ 8005620:	d005      	beq.n	800562e <GPS_CaculateChecksum+0x4c>
+ 8005622:	68bb      	ldr	r3, [r7, #8]
+ 8005624:	687a      	ldr	r2, [r7, #4]
+ 8005626:	4413      	add	r3, r2
+ 8005628:	781b      	ldrb	r3, [r3, #0]
+ 800562a:	2b2a      	cmp	r3, #42	@ 0x2a
+ 800562c:	d1e9      	bne.n	8005602 <GPS_CaculateChecksum+0x20>
     }
     return checksum;
- 800562a:	7bfb      	ldrb	r3, [r7, #15]
+ 800562e:	7bfb      	ldrb	r3, [r7, #15]
 }
- 800562c:	4618      	mov	r0, r3
- 800562e:	3714      	adds	r7, #20
- 8005630:	46bd      	mov	sp, r7
- 8005632:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8005636:	4770      	bx	lr
+ 8005630:	4618      	mov	r0, r3
+ 8005632:	3714      	adds	r7, #20
+ 8005634:	46bd      	mov	sp, r7
+ 8005636:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800563a:	4770      	bx	lr
 
-08005638 <GPS_SendCommand>:
+0800563c <GPS_SendCommand>:
 
 uint8_t GPS_SendCommand(const char *data)
 {
- 8005638:	b580      	push	{r7, lr}
- 800563a:	b0c6      	sub	sp, #280	@ 0x118
- 800563c:	af02      	add	r7, sp, #8
- 800563e:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 8005642:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 8005646:	6018      	str	r0, [r3, #0]
+ 800563c:	b580      	push	{r7, lr}
+ 800563e:	b0c6      	sub	sp, #280	@ 0x118
+ 8005640:	af02      	add	r7, sp, #8
+ 8005642:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 8005646:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 800564a:	6018      	str	r0, [r3, #0]
     char buffer[128];
     uint8_t checksum;
     int len;
 
     // If string doesn't have '$', we add it
     if (data[0] != '$')
- 8005648:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 800564c:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 8005650:	681b      	ldr	r3, [r3, #0]
- 8005652:	781b      	ldrb	r3, [r3, #0]
- 8005654:	2b24      	cmp	r3, #36	@ 0x24
- 8005656:	d011      	beq.n	800567c <GPS_SendCommand+0x44>
+ 800564c:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 8005650:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 8005654:	681b      	ldr	r3, [r3, #0]
+ 8005656:	781b      	ldrb	r3, [r3, #0]
+ 8005658:	2b24      	cmp	r3, #36	@ 0x24
+ 800565a:	d011      	beq.n	8005680 <GPS_SendCommand+0x44>
     {
         snprintf(buffer, sizeof(buffer), "$%s", data);
- 8005658:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 800565c:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 8005660:	f107 0088 	add.w	r0, r7, #136	@ 0x88
- 8005664:	681b      	ldr	r3, [r3, #0]
- 8005666:	4a1d      	ldr	r2, [pc, #116]	@ (80056dc <GPS_SendCommand+0xa4>)
- 8005668:	2180      	movs	r1, #128	@ 0x80
- 800566a:	f014 f863 	bl	8019734 <sniprintf>
+ 800565c:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 8005660:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 8005664:	f107 0088 	add.w	r0, r7, #136	@ 0x88
+ 8005668:	681b      	ldr	r3, [r3, #0]
+ 800566a:	4a1d      	ldr	r2, [pc, #116]	@ (80056e0 <GPS_SendCommand+0xa4>)
+ 800566c:	2180      	movs	r1, #128	@ 0x80
+ 800566e:	f014 f861 	bl	8019734 <sniprintf>
         data = buffer; // point to new buffer
- 800566e:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 8005672:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 8005676:	f107 0288 	add.w	r2, r7, #136	@ 0x88
- 800567a:	601a      	str	r2, [r3, #0]
+ 8005672:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 8005676:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 800567a:	f107 0288 	add.w	r2, r7, #136	@ 0x88
+ 800567e:	601a      	str	r2, [r3, #0]
     }
 
     // check sum for command
     checksum = GPS_CaculateChecksum(data);
- 800567c:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 8005680:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 8005684:	6818      	ldr	r0, [r3, #0]
- 8005686:	f7ff ffaa 	bl	80055de <GPS_CaculateChecksum>
- 800568a:	4603      	mov	r3, r0
- 800568c:	f887 310f 	strb.w	r3, [r7, #271]	@ 0x10f
+ 8005680:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 8005684:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 8005688:	6818      	ldr	r0, [r3, #0]
+ 800568a:	f7ff ffaa 	bl	80055e2 <GPS_CaculateChecksum>
+ 800568e:	4603      	mov	r3, r0
+ 8005690:	f887 310f 	strb.w	r3, [r7, #271]	@ 0x10f
 
     // Complete command: <command>*<checksum>\r\n
     char finalCmd[128];
     len = snprintf(finalCmd, sizeof(finalCmd), "%s*%02X\r\n", data, checksum);
- 8005690:	f897 210f 	ldrb.w	r2, [r7, #271]	@ 0x10f
- 8005694:	f507 7388 	add.w	r3, r7, #272	@ 0x110
- 8005698:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
- 800569c:	f107 0008 	add.w	r0, r7, #8
- 80056a0:	9200      	str	r2, [sp, #0]
- 80056a2:	681b      	ldr	r3, [r3, #0]
- 80056a4:	4a0e      	ldr	r2, [pc, #56]	@ (80056e0 <GPS_SendCommand+0xa8>)
- 80056a6:	2180      	movs	r1, #128	@ 0x80
- 80056a8:	f014 f844 	bl	8019734 <sniprintf>
- 80056ac:	f8c7 0108 	str.w	r0, [r7, #264]	@ 0x108
+ 8005694:	f897 210f 	ldrb.w	r2, [r7, #271]	@ 0x10f
+ 8005698:	f507 7388 	add.w	r3, r7, #272	@ 0x110
+ 800569c:	f5a3 7386 	sub.w	r3, r3, #268	@ 0x10c
+ 80056a0:	f107 0008 	add.w	r0, r7, #8
+ 80056a4:	9200      	str	r2, [sp, #0]
+ 80056a6:	681b      	ldr	r3, [r3, #0]
+ 80056a8:	4a0e      	ldr	r2, [pc, #56]	@ (80056e4 <GPS_SendCommand+0xa8>)
+ 80056aa:	2180      	movs	r1, #128	@ 0x80
+ 80056ac:	f014 f842 	bl	8019734 <sniprintf>
+ 80056b0:	f8c7 0108 	str.w	r0, [r7, #264]	@ 0x108
 
     // Send it via UART
     if (HAL_UART_Transmit(&GPS_UART_PORT, (uint8_t *)finalCmd, len, 1000) == HAL_OK)
- 80056b0:	f8d7 3108 	ldr.w	r3, [r7, #264]	@ 0x108
- 80056b4:	b29a      	uxth	r2, r3
- 80056b6:	f107 0108 	add.w	r1, r7, #8
- 80056ba:	f44f 737a 	mov.w	r3, #1000	@ 0x3e8
- 80056be:	4809      	ldr	r0, [pc, #36]	@ (80056e4 <GPS_SendCommand+0xac>)
- 80056c0:	f00e face 	bl	8013c60 <HAL_UART_Transmit>
- 80056c4:	4603      	mov	r3, r0
- 80056c6:	2b00      	cmp	r3, #0
- 80056c8:	d101      	bne.n	80056ce <GPS_SendCommand+0x96>
+ 80056b4:	f8d7 3108 	ldr.w	r3, [r7, #264]	@ 0x108
+ 80056b8:	b29a      	uxth	r2, r3
+ 80056ba:	f107 0108 	add.w	r1, r7, #8
+ 80056be:	f44f 737a 	mov.w	r3, #1000	@ 0x3e8
+ 80056c2:	4809      	ldr	r0, [pc, #36]	@ (80056e8 <GPS_SendCommand+0xac>)
+ 80056c4:	f00e facc 	bl	8013c60 <HAL_UART_Transmit>
+ 80056c8:	4603      	mov	r3, r0
+ 80056ca:	2b00      	cmp	r3, #0
+ 80056cc:	d101      	bne.n	80056d2 <GPS_SendCommand+0x96>
         return 0;
- 80056ca:	2300      	movs	r3, #0
- 80056cc:	e000      	b.n	80056d0 <GPS_SendCommand+0x98>
+ 80056ce:	2300      	movs	r3, #0
+ 80056d0:	e000      	b.n	80056d4 <GPS_SendCommand+0x98>
     else
         return 1;
- 80056ce:	2301      	movs	r3, #1
+ 80056d2:	2301      	movs	r3, #1
 }
- 80056d0:	4618      	mov	r0, r3
- 80056d2:	f507 7788 	add.w	r7, r7, #272	@ 0x110
- 80056d6:	46bd      	mov	sp, r7
- 80056d8:	bd80      	pop	{r7, pc}
- 80056da:	bf00      	nop
- 80056dc:	08020ab4 	.word	0x08020ab4
- 80056e0:	08020ab8 	.word	0x08020ab8
- 80056e4:	200012d0 	.word	0x200012d0
+ 80056d4:	4618      	mov	r0, r3
+ 80056d6:	f507 7788 	add.w	r7, r7, #272	@ 0x110
+ 80056da:	46bd      	mov	sp, r7
+ 80056dc:	bd80      	pop	{r7, pc}
+ 80056de:	bf00      	nop
+ 80056e0:	08020ab4 	.word	0x08020ab4
+ 80056e4:	08020ab8 	.word	0x08020ab8
+ 80056e8:	200012d0 	.word	0x200012d0
 
-080056e8 <GPS_Init>:
+080056ec <GPS_Init>:
 
 uint8_t GPS_Init()
 {
- 80056e8:	b580      	push	{r7, lr}
- 80056ea:	af00      	add	r7, sp, #0
+ 80056ec:	b580      	push	{r7, lr}
+ 80056ee:	af00      	add	r7, sp, #0
 //    HAL_Delay(100);
 //
 //    GPS_SendCommand("$PAIR062,5,0");
 //    HAL_Delay(100);
 
 	GPS_SendCommand(SET_GGA_SENTENCE_RATE(1));
- 80056ec:	4810      	ldr	r0, [pc, #64]	@ (8005730 <GPS_Init+0x48>)
- 80056ee:	f7ff ffa3 	bl	8005638 <GPS_SendCommand>
+ 80056f0:	4810      	ldr	r0, [pc, #64]	@ (8005734 <GPS_Init+0x48>)
+ 80056f2:	f7ff ffa3 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_GLL_SENTENCE_RATE(0));
- 80056f2:	4810      	ldr	r0, [pc, #64]	@ (8005734 <GPS_Init+0x4c>)
- 80056f4:	f7ff ffa0 	bl	8005638 <GPS_SendCommand>
+ 80056f6:	4810      	ldr	r0, [pc, #64]	@ (8005738 <GPS_Init+0x4c>)
+ 80056f8:	f7ff ffa0 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_GSA_SENTENCE_RATE(0));
- 80056f8:	480f      	ldr	r0, [pc, #60]	@ (8005738 <GPS_Init+0x50>)
- 80056fa:	f7ff ff9d 	bl	8005638 <GPS_SendCommand>
+ 80056fc:	480f      	ldr	r0, [pc, #60]	@ (800573c <GPS_Init+0x50>)
+ 80056fe:	f7ff ff9d 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_GSV_SENTENCE_RATE(0));
- 80056fe:	480f      	ldr	r0, [pc, #60]	@ (800573c <GPS_Init+0x54>)
- 8005700:	f7ff ff9a 	bl	8005638 <GPS_SendCommand>
+ 8005702:	480f      	ldr	r0, [pc, #60]	@ (8005740 <GPS_Init+0x54>)
+ 8005704:	f7ff ff9a 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_RMC_SENTENCE_RATE(1));
- 8005704:	480e      	ldr	r0, [pc, #56]	@ (8005740 <GPS_Init+0x58>)
- 8005706:	f7ff ff97 	bl	8005638 <GPS_SendCommand>
+ 8005708:	480e      	ldr	r0, [pc, #56]	@ (8005744 <GPS_Init+0x58>)
+ 800570a:	f7ff ff97 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_VTG_SENTENCE_RATE(0));
- 800570a:	480e      	ldr	r0, [pc, #56]	@ (8005744 <GPS_Init+0x5c>)
- 800570c:	f7ff ff94 	bl	8005638 <GPS_SendCommand>
+ 800570e:	480e      	ldr	r0, [pc, #56]	@ (8005748 <GPS_Init+0x5c>)
+ 8005710:	f7ff ff94 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_FIX_RATE(500));
- 8005710:	480d      	ldr	r0, [pc, #52]	@ (8005748 <GPS_Init+0x60>)
- 8005712:	f7ff ff91 	bl	8005638 <GPS_SendCommand>
+ 8005714:	480d      	ldr	r0, [pc, #52]	@ (800574c <GPS_Init+0x60>)
+ 8005716:	f7ff ff91 	bl	800563c <GPS_SendCommand>
 	GPS_SendCommand(SET_DECIMAL_PRECISION(3));
- 8005716:	480d      	ldr	r0, [pc, #52]	@ (800574c <GPS_Init+0x64>)
- 8005718:	f7ff ff8e 	bl	8005638 <GPS_SendCommand>
+ 800571a:	480d      	ldr	r0, [pc, #52]	@ (8005750 <GPS_Init+0x64>)
+ 800571c:	f7ff ff8e 	bl	800563c <GPS_SendCommand>
 
     HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
- 800571c:	f44f 7280 	mov.w	r2, #256	@ 0x100
- 8005720:	490b      	ldr	r1, [pc, #44]	@ (8005750 <GPS_Init+0x68>)
- 8005722:	480c      	ldr	r0, [pc, #48]	@ (8005754 <GPS_Init+0x6c>)
- 8005724:	f00e fb27 	bl	8013d76 <HAL_UARTEx_ReceiveToIdle_DMA>
+ 8005720:	f44f 7280 	mov.w	r2, #256	@ 0x100
+ 8005724:	490b      	ldr	r1, [pc, #44]	@ (8005754 <GPS_Init+0x68>)
+ 8005726:	480c      	ldr	r0, [pc, #48]	@ (8005758 <GPS_Init+0x6c>)
+ 8005728:	f00e fb25 	bl	8013d76 <HAL_UARTEx_ReceiveToIdle_DMA>
     return 0;
- 8005728:	2300      	movs	r3, #0
+ 800572c:	2300      	movs	r3, #0
 }
- 800572a:	4618      	mov	r0, r3
- 800572c:	bd80      	pop	{r7, pc}
- 800572e:	bf00      	nop
- 8005730:	08020ac4 	.word	0x08020ac4
- 8005734:	08020ad4 	.word	0x08020ad4
- 8005738:	08020ae4 	.word	0x08020ae4
- 800573c:	08020af4 	.word	0x08020af4
- 8005740:	08020b04 	.word	0x08020b04
- 8005744:	08020b14 	.word	0x08020b14
- 8005748:	08020b24 	.word	0x08020b24
- 800574c:	08020b34 	.word	0x08020b34
- 8005750:	2000093c 	.word	0x2000093c
- 8005754:	200012d0 	.word	0x200012d0
+ 800572e:	4618      	mov	r0, r3
+ 8005730:	bd80      	pop	{r7, pc}
+ 8005732:	bf00      	nop
+ 8005734:	08020ac4 	.word	0x08020ac4
+ 8005738:	08020ad4 	.word	0x08020ad4
+ 800573c:	08020ae4 	.word	0x08020ae4
+ 8005740:	08020af4 	.word	0x08020af4
+ 8005744:	08020b04 	.word	0x08020b04
+ 8005748:	08020b14 	.word	0x08020b14
+ 800574c:	08020b24 	.word	0x08020b24
+ 8005750:	08020b34 	.word	0x08020b34
+ 8005754:	2000093c 	.word	0x2000093c
+ 8005758:	200012d0 	.word	0x200012d0
 
-08005758 <parseRMC>:
+0800575c <parseRMC>:
 
 static RMC_t parseRMC(const char* sentence) {
- 8005758:	e92d 4fb0 	stmdb	sp!, {r4, r5, r7, r8, r9, sl, fp, lr}
- 800575c:	b0be      	sub	sp, #248	@ 0xf8
- 800575e:	af0a      	add	r7, sp, #40	@ 0x28
- 8005760:	6078      	str	r0, [r7, #4]
- 8005762:	6039      	str	r1, [r7, #0]
+ 800575c:	e92d 4fb0 	stmdb	sp!, {r4, r5, r7, r8, r9, sl, fp, lr}
+ 8005760:	b0be      	sub	sp, #248	@ 0xf8
+ 8005762:	af0a      	add	r7, sp, #40	@ 0x28
+ 8005764:	6078      	str	r0, [r7, #4]
+ 8005766:	6039      	str	r1, [r7, #0]
     RMC_t data = {0};
- 8005764:	f107 0348 	add.w	r3, r7, #72	@ 0x48
- 8005768:	2250      	movs	r2, #80	@ 0x50
- 800576a:	2100      	movs	r1, #0
- 800576c:	4618      	mov	r0, r3
- 800576e:	f014 f8e7 	bl	8019940 <memset>
+ 8005768:	f107 0348 	add.w	r3, r7, #72	@ 0x48
+ 800576c:	2250      	movs	r2, #80	@ 0x50
+ 800576e:	2100      	movs	r1, #0
+ 8005770:	4618      	mov	r0, r3
+ 8005772:	f014 f8e5 	bl	8019940 <memset>
     char timeStr[11] = {0}, latStr[15] = {0}, lonStr[15] = {0}, dateStr[7] = {0};
- 8005772:	f107 033c 	add.w	r3, r7, #60	@ 0x3c
- 8005776:	2200      	movs	r2, #0
- 8005778:	601a      	str	r2, [r3, #0]
- 800577a:	605a      	str	r2, [r3, #4]
- 800577c:	f8c3 2007 	str.w	r2, [r3, #7]
- 8005780:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
- 8005784:	2200      	movs	r2, #0
- 8005786:	601a      	str	r2, [r3, #0]
- 8005788:	605a      	str	r2, [r3, #4]
- 800578a:	609a      	str	r2, [r3, #8]
- 800578c:	f8c3 200b 	str.w	r2, [r3, #11]
- 8005790:	f107 031c 	add.w	r3, r7, #28
- 8005794:	2200      	movs	r2, #0
- 8005796:	601a      	str	r2, [r3, #0]
- 8005798:	605a      	str	r2, [r3, #4]
- 800579a:	609a      	str	r2, [r3, #8]
- 800579c:	f8c3 200b 	str.w	r2, [r3, #11]
- 80057a0:	f107 0314 	add.w	r3, r7, #20
- 80057a4:	2200      	movs	r2, #0
- 80057a6:	601a      	str	r2, [r3, #0]
- 80057a8:	f8c3 2003 	str.w	r2, [r3, #3]
+ 8005776:	f107 033c 	add.w	r3, r7, #60	@ 0x3c
+ 800577a:	2200      	movs	r2, #0
+ 800577c:	601a      	str	r2, [r3, #0]
+ 800577e:	605a      	str	r2, [r3, #4]
+ 8005780:	f8c3 2007 	str.w	r2, [r3, #7]
+ 8005784:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
+ 8005788:	2200      	movs	r2, #0
+ 800578a:	601a      	str	r2, [r3, #0]
+ 800578c:	605a      	str	r2, [r3, #4]
+ 800578e:	609a      	str	r2, [r3, #8]
+ 8005790:	f8c3 200b 	str.w	r2, [r3, #11]
+ 8005794:	f107 031c 	add.w	r3, r7, #28
+ 8005798:	2200      	movs	r2, #0
+ 800579a:	601a      	str	r2, [r3, #0]
+ 800579c:	605a      	str	r2, [r3, #4]
+ 800579e:	609a      	str	r2, [r3, #8]
+ 80057a0:	f8c3 200b 	str.w	r2, [r3, #11]
+ 80057a4:	f107 0314 	add.w	r3, r7, #20
+ 80057a8:	2200      	movs	r2, #0
+ 80057aa:	601a      	str	r2, [r3, #0]
+ 80057ac:	f8c3 2003 	str.w	r2, [r3, #3]
     char latArea=0, lonArea=0, status=0, modeInd=0, navStatus=0;
- 80057ac:	2300      	movs	r3, #0
- 80057ae:	74fb      	strb	r3, [r7, #19]
  80057b0:	2300      	movs	r3, #0
- 80057b2:	74bb      	strb	r3, [r7, #18]
+ 80057b2:	74fb      	strb	r3, [r7, #19]
  80057b4:	2300      	movs	r3, #0
- 80057b6:	747b      	strb	r3, [r7, #17]
+ 80057b6:	74bb      	strb	r3, [r7, #18]
  80057b8:	2300      	movs	r3, #0
- 80057ba:	743b      	strb	r3, [r7, #16]
+ 80057ba:	747b      	strb	r3, [r7, #17]
  80057bc:	2300      	movs	r3, #0
- 80057be:	73fb      	strb	r3, [r7, #15]
+ 80057be:	743b      	strb	r3, [r7, #16]
+ 80057c0:	2300      	movs	r3, #0
+ 80057c2:	73fb      	strb	r3, [r7, #15]
 
     // Parse TalkerID + các trường quan trọng
     sscanf(sentence, "$%2sRMC,%10[^,],%c,%14[^,],%c,%14[^,],%c,%lf,%lf,%6[^,],,,%c,%c",
- 80057c0:	f107 013c 	add.w	r1, r7, #60	@ 0x3c
- 80057c4:	f107 0248 	add.w	r2, r7, #72	@ 0x48
- 80057c8:	f107 030f 	add.w	r3, r7, #15
- 80057cc:	9309      	str	r3, [sp, #36]	@ 0x24
- 80057ce:	f107 0310 	add.w	r3, r7, #16
- 80057d2:	9308      	str	r3, [sp, #32]
- 80057d4:	f107 0314 	add.w	r3, r7, #20
- 80057d8:	9307      	str	r3, [sp, #28]
- 80057da:	f107 0348 	add.w	r3, r7, #72	@ 0x48
- 80057de:	3338      	adds	r3, #56	@ 0x38
- 80057e0:	9306      	str	r3, [sp, #24]
- 80057e2:	f107 0348 	add.w	r3, r7, #72	@ 0x48
- 80057e6:	3330      	adds	r3, #48	@ 0x30
- 80057e8:	9305      	str	r3, [sp, #20]
- 80057ea:	f107 0312 	add.w	r3, r7, #18
- 80057ee:	9304      	str	r3, [sp, #16]
- 80057f0:	f107 031c 	add.w	r3, r7, #28
- 80057f4:	9303      	str	r3, [sp, #12]
- 80057f6:	f107 0313 	add.w	r3, r7, #19
- 80057fa:	9302      	str	r3, [sp, #8]
- 80057fc:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
- 8005800:	9301      	str	r3, [sp, #4]
- 8005802:	f107 0311 	add.w	r3, r7, #17
- 8005806:	9300      	str	r3, [sp, #0]
- 8005808:	460b      	mov	r3, r1
- 800580a:	498b      	ldr	r1, [pc, #556]	@ (8005a38 <parseRMC+0x2e0>)
- 800580c:	6838      	ldr	r0, [r7, #0]
- 800580e:	f013 ffe9 	bl	80197e4 <siscanf>
+ 80057c4:	f107 013c 	add.w	r1, r7, #60	@ 0x3c
+ 80057c8:	f107 0248 	add.w	r2, r7, #72	@ 0x48
+ 80057cc:	f107 030f 	add.w	r3, r7, #15
+ 80057d0:	9309      	str	r3, [sp, #36]	@ 0x24
+ 80057d2:	f107 0310 	add.w	r3, r7, #16
+ 80057d6:	9308      	str	r3, [sp, #32]
+ 80057d8:	f107 0314 	add.w	r3, r7, #20
+ 80057dc:	9307      	str	r3, [sp, #28]
+ 80057de:	f107 0348 	add.w	r3, r7, #72	@ 0x48
+ 80057e2:	3338      	adds	r3, #56	@ 0x38
+ 80057e4:	9306      	str	r3, [sp, #24]
+ 80057e6:	f107 0348 	add.w	r3, r7, #72	@ 0x48
+ 80057ea:	3330      	adds	r3, #48	@ 0x30
+ 80057ec:	9305      	str	r3, [sp, #20]
+ 80057ee:	f107 0312 	add.w	r3, r7, #18
+ 80057f2:	9304      	str	r3, [sp, #16]
+ 80057f4:	f107 031c 	add.w	r3, r7, #28
+ 80057f8:	9303      	str	r3, [sp, #12]
+ 80057fa:	f107 0313 	add.w	r3, r7, #19
+ 80057fe:	9302      	str	r3, [sp, #8]
+ 8005800:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
+ 8005804:	9301      	str	r3, [sp, #4]
+ 8005806:	f107 0311 	add.w	r3, r7, #17
+ 800580a:	9300      	str	r3, [sp, #0]
+ 800580c:	460b      	mov	r3, r1
+ 800580e:	498b      	ldr	r1, [pc, #556]	@ (8005a3c <parseRMC+0x2e0>)
+ 8005810:	6838      	ldr	r0, [r7, #0]
+ 8005812:	f013 ffe7 	bl	80197e4 <siscanf>
            data.TalkerID, timeStr, &status, latStr, &latArea, lonStr, &lonArea,
            &data.SOG, &data.COG, dateStr, &modeInd, &navStatus);
 
     data.Status = status;
- 8005812:	7c7b      	ldrb	r3, [r7, #17]
- 8005814:	f887 3058 	strb.w	r3, [r7, #88]	@ 0x58
+ 8005816:	7c7b      	ldrb	r3, [r7, #17]
+ 8005818:	f887 3058 	strb.w	r3, [r7, #88]	@ 0x58
     data.ModeInd = modeInd;
- 8005818:	7c3b      	ldrb	r3, [r7, #16]
- 800581a:	f887 3094 	strb.w	r3, [r7, #148]	@ 0x94
+ 800581c:	7c3b      	ldrb	r3, [r7, #16]
+ 800581e:	f887 3094 	strb.w	r3, [r7, #148]	@ 0x94
     data.NavStatus = navStatus;
- 800581e:	7bfb      	ldrb	r3, [r7, #15]
- 8005820:	f887 3095 	strb.w	r3, [r7, #149]	@ 0x95
+ 8005822:	7bfb      	ldrb	r3, [r7, #15]
+ 8005824:	f887 3095 	strb.w	r3, [r7, #149]	@ 0x95
 
     // Thời gian
     int timeInt = atoi(timeStr);
- 8005824:	f107 033c 	add.w	r3, r7, #60	@ 0x3c
- 8005828:	4618      	mov	r0, r3
- 800582a:	f012 f908 	bl	8017a3e <atoi>
- 800582e:	f8c7 00cc 	str.w	r0, [r7, #204]	@ 0xcc
+ 8005828:	f107 033c 	add.w	r3, r7, #60	@ 0x3c
+ 800582c:	4618      	mov	r0, r3
+ 800582e:	f012 f906 	bl	8017a3e <atoi>
+ 8005832:	f8c7 00cc 	str.w	r0, [r7, #204]	@ 0xcc
     data.Time_H = timeInt / 10000;
- 8005832:	f8d7 30cc 	ldr.w	r3, [r7, #204]	@ 0xcc
- 8005836:	4a81      	ldr	r2, [pc, #516]	@ (8005a3c <parseRMC+0x2e4>)
- 8005838:	fb82 1203 	smull	r1, r2, r2, r3
- 800583c:	1312      	asrs	r2, r2, #12
- 800583e:	17db      	asrs	r3, r3, #31
- 8005840:	1ad3      	subs	r3, r2, r3
- 8005842:	64fb      	str	r3, [r7, #76]	@ 0x4c
+ 8005836:	f8d7 30cc 	ldr.w	r3, [r7, #204]	@ 0xcc
+ 800583a:	4a81      	ldr	r2, [pc, #516]	@ (8005a40 <parseRMC+0x2e4>)
+ 800583c:	fb82 1203 	smull	r1, r2, r2, r3
+ 8005840:	1312      	asrs	r2, r2, #12
+ 8005842:	17db      	asrs	r3, r3, #31
+ 8005844:	1ad3      	subs	r3, r2, r3
+ 8005846:	64fb      	str	r3, [r7, #76]	@ 0x4c
     data.Time_M = (timeInt / 100) % 100;
- 8005844:	f8d7 30cc 	ldr.w	r3, [r7, #204]	@ 0xcc
- 8005848:	4a7d      	ldr	r2, [pc, #500]	@ (8005a40 <parseRMC+0x2e8>)
- 800584a:	fb82 1203 	smull	r1, r2, r2, r3
- 800584e:	1152      	asrs	r2, r2, #5
- 8005850:	17db      	asrs	r3, r3, #31
- 8005852:	1ad2      	subs	r2, r2, r3
- 8005854:	4b7a      	ldr	r3, [pc, #488]	@ (8005a40 <parseRMC+0x2e8>)
- 8005856:	fb83 1302 	smull	r1, r3, r3, r2
- 800585a:	1159      	asrs	r1, r3, #5
- 800585c:	17d3      	asrs	r3, r2, #31
- 800585e:	1acb      	subs	r3, r1, r3
- 8005860:	2164      	movs	r1, #100	@ 0x64
- 8005862:	fb01 f303 	mul.w	r3, r1, r3
- 8005866:	1ad3      	subs	r3, r2, r3
- 8005868:	653b      	str	r3, [r7, #80]	@ 0x50
+ 8005848:	f8d7 30cc 	ldr.w	r3, [r7, #204]	@ 0xcc
+ 800584c:	4a7d      	ldr	r2, [pc, #500]	@ (8005a44 <parseRMC+0x2e8>)
+ 800584e:	fb82 1203 	smull	r1, r2, r2, r3
+ 8005852:	1152      	asrs	r2, r2, #5
+ 8005854:	17db      	asrs	r3, r3, #31
+ 8005856:	1ad2      	subs	r2, r2, r3
+ 8005858:	4b7a      	ldr	r3, [pc, #488]	@ (8005a44 <parseRMC+0x2e8>)
+ 800585a:	fb83 1302 	smull	r1, r3, r3, r2
+ 800585e:	1159      	asrs	r1, r3, #5
+ 8005860:	17d3      	asrs	r3, r2, #31
+ 8005862:	1acb      	subs	r3, r1, r3
+ 8005864:	2164      	movs	r1, #100	@ 0x64
+ 8005866:	fb01 f303 	mul.w	r3, r1, r3
+ 800586a:	1ad3      	subs	r3, r2, r3
+ 800586c:	653b      	str	r3, [r7, #80]	@ 0x50
     data.Time_S = timeInt % 100;
- 800586a:	f8d7 20cc 	ldr.w	r2, [r7, #204]	@ 0xcc
- 800586e:	4b74      	ldr	r3, [pc, #464]	@ (8005a40 <parseRMC+0x2e8>)
- 8005870:	fb83 1302 	smull	r1, r3, r3, r2
- 8005874:	1159      	asrs	r1, r3, #5
- 8005876:	17d3      	asrs	r3, r2, #31
- 8005878:	1acb      	subs	r3, r1, r3
- 800587a:	2164      	movs	r1, #100	@ 0x64
- 800587c:	fb01 f303 	mul.w	r3, r1, r3
- 8005880:	1ad3      	subs	r3, r2, r3
- 8005882:	657b      	str	r3, [r7, #84]	@ 0x54
+ 800586e:	f8d7 20cc 	ldr.w	r2, [r7, #204]	@ 0xcc
+ 8005872:	4b74      	ldr	r3, [pc, #464]	@ (8005a44 <parseRMC+0x2e8>)
+ 8005874:	fb83 1302 	smull	r1, r3, r3, r2
+ 8005878:	1159      	asrs	r1, r3, #5
+ 800587a:	17d3      	asrs	r3, r2, #31
+ 800587c:	1acb      	subs	r3, r1, r3
+ 800587e:	2164      	movs	r1, #100	@ 0x64
+ 8005880:	fb01 f303 	mul.w	r3, r1, r3
+ 8005884:	1ad3      	subs	r3, r2, r3
+ 8005886:	657b      	str	r3, [r7, #84]	@ 0x54
 
     //Area
     data.Lat_area = latArea;    // 'N' hoặc 'S'
- 8005884:	7cfb      	ldrb	r3, [r7, #19]
- 8005886:	f887 3070 	strb.w	r3, [r7, #112]	@ 0x70
+ 8005888:	7cfb      	ldrb	r3, [r7, #19]
+ 800588a:	f887 3070 	strb.w	r3, [r7, #112]	@ 0x70
     data.Lon_area = lonArea;    // 'E' hoặc 'W'
- 800588a:	7cbb      	ldrb	r3, [r7, #18]
- 800588c:	f887 3071 	strb.w	r3, [r7, #113]	@ 0x71
+ 800588e:	7cbb      	ldrb	r3, [r7, #18]
+ 8005890:	f887 3071 	strb.w	r3, [r7, #113]	@ 0x71
 
     // Latitude
     double lat = atof(latStr);
- 8005890:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
- 8005894:	4618      	mov	r0, r3
- 8005896:	f012 f8cf 	bl	8017a38 <atof>
- 800589a:	ed87 0b30 	vstr	d0, [r7, #192]	@ 0xc0
+ 8005894:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
+ 8005898:	4618      	mov	r0, r3
+ 800589a:	f012 f8cd 	bl	8017a38 <atof>
+ 800589e:	ed87 0b30 	vstr	d0, [r7, #192]	@ 0xc0
     int latDeg = (int)(lat / 100);
- 800589e:	f04f 0200 	mov.w	r2, #0
- 80058a2:	4b68      	ldr	r3, [pc, #416]	@ (8005a44 <parseRMC+0x2ec>)
- 80058a4:	e9d7 0130 	ldrd	r0, r1, [r7, #192]	@ 0xc0
- 80058a8:	f7fa ffd8 	bl	800085c <__aeabi_ddiv>
- 80058ac:	4602      	mov	r2, r0
- 80058ae:	460b      	mov	r3, r1
- 80058b0:	4610      	mov	r0, r2
- 80058b2:	4619      	mov	r1, r3
- 80058b4:	f7fb f958 	bl	8000b68 <__aeabi_d2iz>
- 80058b8:	4603      	mov	r3, r0
- 80058ba:	f8c7 30bc 	str.w	r3, [r7, #188]	@ 0xbc
+ 80058a2:	f04f 0200 	mov.w	r2, #0
+ 80058a6:	4b68      	ldr	r3, [pc, #416]	@ (8005a48 <parseRMC+0x2ec>)
+ 80058a8:	e9d7 0130 	ldrd	r0, r1, [r7, #192]	@ 0xc0
+ 80058ac:	f7fa ffd6 	bl	800085c <__aeabi_ddiv>
+ 80058b0:	4602      	mov	r2, r0
+ 80058b2:	460b      	mov	r3, r1
+ 80058b4:	4610      	mov	r0, r2
+ 80058b6:	4619      	mov	r1, r3
+ 80058b8:	f7fb f956 	bl	8000b68 <__aeabi_d2iz>
+ 80058bc:	4603      	mov	r3, r0
+ 80058be:	f8c7 30bc 	str.w	r3, [r7, #188]	@ 0xbc
     double latMin = lat - latDeg * 100;
- 80058be:	f8d7 30bc 	ldr.w	r3, [r7, #188]	@ 0xbc
- 80058c2:	2264      	movs	r2, #100	@ 0x64
- 80058c4:	fb02 f303 	mul.w	r3, r2, r3
- 80058c8:	4618      	mov	r0, r3
- 80058ca:	f7fa fe33 	bl	8000534 <__aeabi_i2d>
- 80058ce:	4602      	mov	r2, r0
- 80058d0:	460b      	mov	r3, r1
- 80058d2:	e9d7 0130 	ldrd	r0, r1, [r7, #192]	@ 0xc0
- 80058d6:	f7fa fcdf 	bl	8000298 <__aeabi_dsub>
- 80058da:	4602      	mov	r2, r0
- 80058dc:	460b      	mov	r3, r1
- 80058de:	e9c7 232c 	strd	r2, r3, [r7, #176]	@ 0xb0
+ 80058c2:	f8d7 30bc 	ldr.w	r3, [r7, #188]	@ 0xbc
+ 80058c6:	2264      	movs	r2, #100	@ 0x64
+ 80058c8:	fb02 f303 	mul.w	r3, r2, r3
+ 80058cc:	4618      	mov	r0, r3
+ 80058ce:	f7fa fe31 	bl	8000534 <__aeabi_i2d>
+ 80058d2:	4602      	mov	r2, r0
+ 80058d4:	460b      	mov	r3, r1
+ 80058d6:	e9d7 0130 	ldrd	r0, r1, [r7, #192]	@ 0xc0
+ 80058da:	f7fa fcdd 	bl	8000298 <__aeabi_dsub>
+ 80058de:	4602      	mov	r2, r0
+ 80058e0:	460b      	mov	r3, r1
+ 80058e2:	e9c7 232c 	strd	r2, r3, [r7, #176]	@ 0xb0
     data.Lat = latDeg + latMin / 60.0;
- 80058e2:	f8d7 00bc 	ldr.w	r0, [r7, #188]	@ 0xbc
- 80058e6:	f7fa fe25 	bl	8000534 <__aeabi_i2d>
- 80058ea:	4682      	mov	sl, r0
- 80058ec:	468b      	mov	fp, r1
- 80058ee:	f04f 0200 	mov.w	r2, #0
- 80058f2:	4b55      	ldr	r3, [pc, #340]	@ (8005a48 <parseRMC+0x2f0>)
- 80058f4:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
- 80058f8:	f7fa ffb0 	bl	800085c <__aeabi_ddiv>
- 80058fc:	4602      	mov	r2, r0
- 80058fe:	460b      	mov	r3, r1
- 8005900:	4650      	mov	r0, sl
- 8005902:	4659      	mov	r1, fp
- 8005904:	f7fa fcca 	bl	800029c <__adddf3>
- 8005908:	4602      	mov	r2, r0
- 800590a:	460b      	mov	r3, r1
- 800590c:	e9c7 2318 	strd	r2, r3, [r7, #96]	@ 0x60
+ 80058e6:	f8d7 00bc 	ldr.w	r0, [r7, #188]	@ 0xbc
+ 80058ea:	f7fa fe23 	bl	8000534 <__aeabi_i2d>
+ 80058ee:	4682      	mov	sl, r0
+ 80058f0:	468b      	mov	fp, r1
+ 80058f2:	f04f 0200 	mov.w	r2, #0
+ 80058f6:	4b55      	ldr	r3, [pc, #340]	@ (8005a4c <parseRMC+0x2f0>)
+ 80058f8:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
+ 80058fc:	f7fa ffae 	bl	800085c <__aeabi_ddiv>
+ 8005900:	4602      	mov	r2, r0
+ 8005902:	460b      	mov	r3, r1
+ 8005904:	4650      	mov	r0, sl
+ 8005906:	4659      	mov	r1, fp
+ 8005908:	f7fa fcc8 	bl	800029c <__adddf3>
+ 800590c:	4602      	mov	r2, r0
+ 800590e:	460b      	mov	r3, r1
+ 8005910:	e9c7 2318 	strd	r2, r3, [r7, #96]	@ 0x60
     if(latArea == 'S') data.Lat = -data.Lat;
- 8005910:	7cfb      	ldrb	r3, [r7, #19]
- 8005912:	2b53      	cmp	r3, #83	@ 0x53
- 8005914:	d106      	bne.n	8005924 <parseRMC+0x1cc>
- 8005916:	e9d7 2318 	ldrd	r2, r3, [r7, #96]	@ 0x60
- 800591a:	4690      	mov	r8, r2
- 800591c:	f083 4900 	eor.w	r9, r3, #2147483648	@ 0x80000000
- 8005920:	e9c7 8918 	strd	r8, r9, [r7, #96]	@ 0x60
+ 8005914:	7cfb      	ldrb	r3, [r7, #19]
+ 8005916:	2b53      	cmp	r3, #83	@ 0x53
+ 8005918:	d106      	bne.n	8005928 <parseRMC+0x1cc>
+ 800591a:	e9d7 2318 	ldrd	r2, r3, [r7, #96]	@ 0x60
+ 800591e:	4690      	mov	r8, r2
+ 8005920:	f083 4900 	eor.w	r9, r3, #2147483648	@ 0x80000000
+ 8005924:	e9c7 8918 	strd	r8, r9, [r7, #96]	@ 0x60
 
     // Longitude
     double lon = atof(lonStr);
- 8005924:	f107 031c 	add.w	r3, r7, #28
- 8005928:	4618      	mov	r0, r3
- 800592a:	f012 f885 	bl	8017a38 <atof>
- 800592e:	ed87 0b2a 	vstr	d0, [r7, #168]	@ 0xa8
+ 8005928:	f107 031c 	add.w	r3, r7, #28
+ 800592c:	4618      	mov	r0, r3
+ 800592e:	f012 f883 	bl	8017a38 <atof>
+ 8005932:	ed87 0b2a 	vstr	d0, [r7, #168]	@ 0xa8
     int lonDeg = (int)(lon / 100);
- 8005932:	f04f 0200 	mov.w	r2, #0
- 8005936:	4b43      	ldr	r3, [pc, #268]	@ (8005a44 <parseRMC+0x2ec>)
- 8005938:	e9d7 012a 	ldrd	r0, r1, [r7, #168]	@ 0xa8
- 800593c:	f7fa ff8e 	bl	800085c <__aeabi_ddiv>
- 8005940:	4602      	mov	r2, r0
- 8005942:	460b      	mov	r3, r1
- 8005944:	4610      	mov	r0, r2
- 8005946:	4619      	mov	r1, r3
- 8005948:	f7fb f90e 	bl	8000b68 <__aeabi_d2iz>
- 800594c:	4603      	mov	r3, r0
- 800594e:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
+ 8005936:	f04f 0200 	mov.w	r2, #0
+ 800593a:	4b43      	ldr	r3, [pc, #268]	@ (8005a48 <parseRMC+0x2ec>)
+ 800593c:	e9d7 012a 	ldrd	r0, r1, [r7, #168]	@ 0xa8
+ 8005940:	f7fa ff8c 	bl	800085c <__aeabi_ddiv>
+ 8005944:	4602      	mov	r2, r0
+ 8005946:	460b      	mov	r3, r1
+ 8005948:	4610      	mov	r0, r2
+ 800594a:	4619      	mov	r1, r3
+ 800594c:	f7fb f90c 	bl	8000b68 <__aeabi_d2iz>
+ 8005950:	4603      	mov	r3, r0
+ 8005952:	f8c7 30a4 	str.w	r3, [r7, #164]	@ 0xa4
     double lonMin = lon - lonDeg * 100;
- 8005952:	f8d7 30a4 	ldr.w	r3, [r7, #164]	@ 0xa4
- 8005956:	2264      	movs	r2, #100	@ 0x64
- 8005958:	fb02 f303 	mul.w	r3, r2, r3
- 800595c:	4618      	mov	r0, r3
- 800595e:	f7fa fde9 	bl	8000534 <__aeabi_i2d>
- 8005962:	4602      	mov	r2, r0
- 8005964:	460b      	mov	r3, r1
- 8005966:	e9d7 012a 	ldrd	r0, r1, [r7, #168]	@ 0xa8
- 800596a:	f7fa fc95 	bl	8000298 <__aeabi_dsub>
- 800596e:	4602      	mov	r2, r0
- 8005970:	460b      	mov	r3, r1
- 8005972:	e9c7 2326 	strd	r2, r3, [r7, #152]	@ 0x98
+ 8005956:	f8d7 30a4 	ldr.w	r3, [r7, #164]	@ 0xa4
+ 800595a:	2264      	movs	r2, #100	@ 0x64
+ 800595c:	fb02 f303 	mul.w	r3, r2, r3
+ 8005960:	4618      	mov	r0, r3
+ 8005962:	f7fa fde7 	bl	8000534 <__aeabi_i2d>
+ 8005966:	4602      	mov	r2, r0
+ 8005968:	460b      	mov	r3, r1
+ 800596a:	e9d7 012a 	ldrd	r0, r1, [r7, #168]	@ 0xa8
+ 800596e:	f7fa fc93 	bl	8000298 <__aeabi_dsub>
+ 8005972:	4602      	mov	r2, r0
+ 8005974:	460b      	mov	r3, r1
+ 8005976:	e9c7 2326 	strd	r2, r3, [r7, #152]	@ 0x98
     data.Lon = lonDeg + lonMin / 60.0;
- 8005976:	f8d7 00a4 	ldr.w	r0, [r7, #164]	@ 0xa4
- 800597a:	f7fa fddb 	bl	8000534 <__aeabi_i2d>
- 800597e:	4680      	mov	r8, r0
- 8005980:	4689      	mov	r9, r1
- 8005982:	f04f 0200 	mov.w	r2, #0
- 8005986:	4b30      	ldr	r3, [pc, #192]	@ (8005a48 <parseRMC+0x2f0>)
- 8005988:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
- 800598c:	f7fa ff66 	bl	800085c <__aeabi_ddiv>
- 8005990:	4602      	mov	r2, r0
- 8005992:	460b      	mov	r3, r1
- 8005994:	4640      	mov	r0, r8
- 8005996:	4649      	mov	r1, r9
- 8005998:	f7fa fc80 	bl	800029c <__adddf3>
- 800599c:	4602      	mov	r2, r0
- 800599e:	460b      	mov	r3, r1
- 80059a0:	e9c7 231a 	strd	r2, r3, [r7, #104]	@ 0x68
+ 800597a:	f8d7 00a4 	ldr.w	r0, [r7, #164]	@ 0xa4
+ 800597e:	f7fa fdd9 	bl	8000534 <__aeabi_i2d>
+ 8005982:	4680      	mov	r8, r0
+ 8005984:	4689      	mov	r9, r1
+ 8005986:	f04f 0200 	mov.w	r2, #0
+ 800598a:	4b30      	ldr	r3, [pc, #192]	@ (8005a4c <parseRMC+0x2f0>)
+ 800598c:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
+ 8005990:	f7fa ff64 	bl	800085c <__aeabi_ddiv>
+ 8005994:	4602      	mov	r2, r0
+ 8005996:	460b      	mov	r3, r1
+ 8005998:	4640      	mov	r0, r8
+ 800599a:	4649      	mov	r1, r9
+ 800599c:	f7fa fc7e 	bl	800029c <__adddf3>
+ 80059a0:	4602      	mov	r2, r0
+ 80059a2:	460b      	mov	r3, r1
+ 80059a4:	e9c7 231a 	strd	r2, r3, [r7, #104]	@ 0x68
     if(lonArea == 'W') data.Lon = -data.Lon;
- 80059a4:	7cbb      	ldrb	r3, [r7, #18]
- 80059a6:	2b57      	cmp	r3, #87	@ 0x57
- 80059a8:	d106      	bne.n	80059b8 <parseRMC+0x260>
- 80059aa:	e9d7 231a 	ldrd	r2, r3, [r7, #104]	@ 0x68
- 80059ae:	4614      	mov	r4, r2
- 80059b0:	f083 4500 	eor.w	r5, r3, #2147483648	@ 0x80000000
- 80059b4:	e9c7 451a 	strd	r4, r5, [r7, #104]	@ 0x68
+ 80059a8:	7cbb      	ldrb	r3, [r7, #18]
+ 80059aa:	2b57      	cmp	r3, #87	@ 0x57
+ 80059ac:	d106      	bne.n	80059bc <parseRMC+0x260>
+ 80059ae:	e9d7 231a 	ldrd	r2, r3, [r7, #104]	@ 0x68
+ 80059b2:	4614      	mov	r4, r2
+ 80059b4:	f083 4500 	eor.w	r5, r3, #2147483648	@ 0x80000000
+ 80059b8:	e9c7 451a 	strd	r4, r5, [r7, #104]	@ 0x68
 
     // Date DD/MM/YYYY
     if(strlen(dateStr) == 6){
- 80059b8:	f107 0314 	add.w	r3, r7, #20
- 80059bc:	4618      	mov	r0, r3
- 80059be:	f7fa fc5f 	bl	8000280 <strlen>
- 80059c2:	4603      	mov	r3, r0
- 80059c4:	2b06      	cmp	r3, #6
- 80059c6:	d12a      	bne.n	8005a1e <parseRMC+0x2c6>
+ 80059bc:	f107 0314 	add.w	r3, r7, #20
+ 80059c0:	4618      	mov	r0, r3
+ 80059c2:	f7fa fc5d 	bl	8000280 <strlen>
+ 80059c6:	4603      	mov	r3, r0
+ 80059c8:	2b06      	cmp	r3, #6
+ 80059ca:	d12a      	bne.n	8005a22 <parseRMC+0x2c6>
         char temp[3] = {0};
- 80059c8:	f107 030c 	add.w	r3, r7, #12
- 80059cc:	2100      	movs	r1, #0
- 80059ce:	460a      	mov	r2, r1
- 80059d0:	801a      	strh	r2, [r3, #0]
+ 80059cc:	f107 030c 	add.w	r3, r7, #12
+ 80059d0:	2100      	movs	r1, #0
  80059d2:	460a      	mov	r2, r1
- 80059d4:	709a      	strb	r2, [r3, #2]
+ 80059d4:	801a      	strh	r2, [r3, #0]
+ 80059d6:	460a      	mov	r2, r1
+ 80059d8:	709a      	strb	r2, [r3, #2]
         temp[0] = dateStr[0]; temp[1] = dateStr[1];
- 80059d6:	7d3b      	ldrb	r3, [r7, #20]
- 80059d8:	733b      	strb	r3, [r7, #12]
- 80059da:	7d7b      	ldrb	r3, [r7, #21]
- 80059dc:	737b      	strb	r3, [r7, #13]
+ 80059da:	7d3b      	ldrb	r3, [r7, #20]
+ 80059dc:	733b      	strb	r3, [r7, #12]
+ 80059de:	7d7b      	ldrb	r3, [r7, #21]
+ 80059e0:	737b      	strb	r3, [r7, #13]
         data.Day = atoi(temp);
- 80059de:	f107 030c 	add.w	r3, r7, #12
- 80059e2:	4618      	mov	r0, r3
- 80059e4:	f012 f82b 	bl	8017a3e <atoi>
- 80059e8:	4603      	mov	r3, r0
- 80059ea:	f8c7 3088 	str.w	r3, [r7, #136]	@ 0x88
+ 80059e2:	f107 030c 	add.w	r3, r7, #12
+ 80059e6:	4618      	mov	r0, r3
+ 80059e8:	f012 f829 	bl	8017a3e <atoi>
+ 80059ec:	4603      	mov	r3, r0
+ 80059ee:	f8c7 3088 	str.w	r3, [r7, #136]	@ 0x88
         temp[0] = dateStr[2]; temp[1] = dateStr[3];
- 80059ee:	7dbb      	ldrb	r3, [r7, #22]
- 80059f0:	733b      	strb	r3, [r7, #12]
- 80059f2:	7dfb      	ldrb	r3, [r7, #23]
- 80059f4:	737b      	strb	r3, [r7, #13]
+ 80059f2:	7dbb      	ldrb	r3, [r7, #22]
+ 80059f4:	733b      	strb	r3, [r7, #12]
+ 80059f6:	7dfb      	ldrb	r3, [r7, #23]
+ 80059f8:	737b      	strb	r3, [r7, #13]
         data.Month = atoi(temp);
- 80059f6:	f107 030c 	add.w	r3, r7, #12
- 80059fa:	4618      	mov	r0, r3
- 80059fc:	f012 f81f 	bl	8017a3e <atoi>
- 8005a00:	4603      	mov	r3, r0
- 8005a02:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
+ 80059fa:	f107 030c 	add.w	r3, r7, #12
+ 80059fe:	4618      	mov	r0, r3
+ 8005a00:	f012 f81d 	bl	8017a3e <atoi>
+ 8005a04:	4603      	mov	r3, r0
+ 8005a06:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
         temp[0] = dateStr[4]; temp[1] = dateStr[5];
- 8005a06:	7e3b      	ldrb	r3, [r7, #24]
- 8005a08:	733b      	strb	r3, [r7, #12]
- 8005a0a:	7e7b      	ldrb	r3, [r7, #25]
- 8005a0c:	737b      	strb	r3, [r7, #13]
+ 8005a0a:	7e3b      	ldrb	r3, [r7, #24]
+ 8005a0c:	733b      	strb	r3, [r7, #12]
+ 8005a0e:	7e7b      	ldrb	r3, [r7, #25]
+ 8005a10:	737b      	strb	r3, [r7, #13]
         data.Year = atoi(temp);
- 8005a0e:	f107 030c 	add.w	r3, r7, #12
- 8005a12:	4618      	mov	r0, r3
- 8005a14:	f012 f813 	bl	8017a3e <atoi>
- 8005a18:	4603      	mov	r3, r0
- 8005a1a:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
+ 8005a12:	f107 030c 	add.w	r3, r7, #12
+ 8005a16:	4618      	mov	r0, r3
+ 8005a18:	f012 f811 	bl	8017a3e <atoi>
+ 8005a1c:	4603      	mov	r3, r0
+ 8005a1e:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
     }
 
     return data;
- 8005a1e:	687b      	ldr	r3, [r7, #4]
- 8005a20:	4618      	mov	r0, r3
- 8005a22:	f107 0348 	add.w	r3, r7, #72	@ 0x48
- 8005a26:	2250      	movs	r2, #80	@ 0x50
- 8005a28:	4619      	mov	r1, r3
- 8005a2a:	f014 f89e 	bl	8019b6a <memcpy>
+ 8005a22:	687b      	ldr	r3, [r7, #4]
+ 8005a24:	4618      	mov	r0, r3
+ 8005a26:	f107 0348 	add.w	r3, r7, #72	@ 0x48
+ 8005a2a:	2250      	movs	r2, #80	@ 0x50
+ 8005a2c:	4619      	mov	r1, r3
+ 8005a2e:	f014 f89c 	bl	8019b6a <memcpy>
 }
- 8005a2e:	6878      	ldr	r0, [r7, #4]
- 8005a30:	37d0      	adds	r7, #208	@ 0xd0
- 8005a32:	46bd      	mov	sp, r7
- 8005a34:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
- 8005a38:	08020b40 	.word	0x08020b40
- 8005a3c:	68db8bad 	.word	0x68db8bad
- 8005a40:	51eb851f 	.word	0x51eb851f
- 8005a44:	40590000 	.word	0x40590000
- 8005a48:	404e0000 	.word	0x404e0000
+ 8005a32:	6878      	ldr	r0, [r7, #4]
+ 8005a34:	37d0      	adds	r7, #208	@ 0xd0
+ 8005a36:	46bd      	mov	sp, r7
+ 8005a38:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
+ 8005a3c:	08020b40 	.word	0x08020b40
+ 8005a40:	68db8bad 	.word	0x68db8bad
+ 8005a44:	51eb851f 	.word	0x51eb851f
+ 8005a48:	40590000 	.word	0x40590000
+ 8005a4c:	404e0000 	.word	0x404e0000
 
-08005a4c <parseGGA>:
+08005a50 <parseGGA>:
 
 static GGA_t parseGGA(const char* sentence) {
- 8005a4c:	e92d 4fb0 	stmdb	sp!, {r4, r5, r7, r8, r9, sl, fp, lr}
- 8005a50:	b0b6      	sub	sp, #216	@ 0xd8
- 8005a52:	af08      	add	r7, sp, #32
- 8005a54:	6078      	str	r0, [r7, #4]
- 8005a56:	6039      	str	r1, [r7, #0]
+ 8005a50:	e92d 4fb0 	stmdb	sp!, {r4, r5, r7, r8, r9, sl, fp, lr}
+ 8005a54:	b0b6      	sub	sp, #216	@ 0xd8
+ 8005a56:	af08      	add	r7, sp, #32
+ 8005a58:	6078      	str	r0, [r7, #4]
+ 8005a5a:	6039      	str	r1, [r7, #0]
     GGA_t data = {0};
- 8005a58:	f107 0350 	add.w	r3, r7, #80	@ 0x50
- 8005a5c:	2238      	movs	r2, #56	@ 0x38
- 8005a5e:	2100      	movs	r1, #0
- 8005a60:	4618      	mov	r0, r3
- 8005a62:	f013 ff6d 	bl	8019940 <memset>
+ 8005a5c:	f107 0350 	add.w	r3, r7, #80	@ 0x50
+ 8005a60:	2238      	movs	r2, #56	@ 0x38
+ 8005a62:	2100      	movs	r1, #0
+ 8005a64:	4618      	mov	r0, r3
+ 8005a66:	f013 ff6b 	bl	8019940 <memset>
     char latStr[15]={0}, lonStr[15]={0};
- 8005a66:	f107 0340 	add.w	r3, r7, #64	@ 0x40
- 8005a6a:	2200      	movs	r2, #0
- 8005a6c:	601a      	str	r2, [r3, #0]
- 8005a6e:	605a      	str	r2, [r3, #4]
- 8005a70:	609a      	str	r2, [r3, #8]
- 8005a72:	f8c3 200b 	str.w	r2, [r3, #11]
- 8005a76:	f107 0330 	add.w	r3, r7, #48	@ 0x30
- 8005a7a:	2200      	movs	r2, #0
- 8005a7c:	601a      	str	r2, [r3, #0]
- 8005a7e:	605a      	str	r2, [r3, #4]
- 8005a80:	609a      	str	r2, [r3, #8]
- 8005a82:	f8c3 200b 	str.w	r2, [r3, #11]
+ 8005a6a:	f107 0340 	add.w	r3, r7, #64	@ 0x40
+ 8005a6e:	2200      	movs	r2, #0
+ 8005a70:	601a      	str	r2, [r3, #0]
+ 8005a72:	605a      	str	r2, [r3, #4]
+ 8005a74:	609a      	str	r2, [r3, #8]
+ 8005a76:	f8c3 200b 	str.w	r2, [r3, #11]
+ 8005a7a:	f107 0330 	add.w	r3, r7, #48	@ 0x30
+ 8005a7e:	2200      	movs	r2, #0
+ 8005a80:	601a      	str	r2, [r3, #0]
+ 8005a82:	605a      	str	r2, [r3, #4]
+ 8005a84:	609a      	str	r2, [r3, #8]
+ 8005a86:	f8c3 200b 	str.w	r2, [r3, #11]
 
     int fix = 0, numSV = 0;
- 8005a86:	2300      	movs	r3, #0
- 8005a88:	62fb      	str	r3, [r7, #44]	@ 0x2c
  8005a8a:	2300      	movs	r3, #0
- 8005a8c:	62bb      	str	r3, [r7, #40]	@ 0x28
+ 8005a8c:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 8005a8e:	2300      	movs	r3, #0
+ 8005a90:	62bb      	str	r3, [r7, #40]	@ 0x28
     double hdop=0.0, alt=0.0, geoid=0.0;
- 8005a8e:	f04f 0200 	mov.w	r2, #0
- 8005a92:	f04f 0300 	mov.w	r3, #0
- 8005a96:	e9c7 2308 	strd	r2, r3, [r7, #32]
- 8005a9a:	f04f 0200 	mov.w	r2, #0
- 8005a9e:	f04f 0300 	mov.w	r3, #0
- 8005aa2:	e9c7 2306 	strd	r2, r3, [r7, #24]
- 8005aa6:	f04f 0200 	mov.w	r2, #0
- 8005aaa:	f04f 0300 	mov.w	r3, #0
- 8005aae:	e9c7 2304 	strd	r2, r3, [r7, #16]
+ 8005a92:	f04f 0200 	mov.w	r2, #0
+ 8005a96:	f04f 0300 	mov.w	r3, #0
+ 8005a9a:	e9c7 2308 	strd	r2, r3, [r7, #32]
+ 8005a9e:	f04f 0200 	mov.w	r2, #0
+ 8005aa2:	f04f 0300 	mov.w	r3, #0
+ 8005aa6:	e9c7 2306 	strd	r2, r3, [r7, #24]
+ 8005aaa:	f04f 0200 	mov.w	r2, #0
+ 8005aae:	f04f 0300 	mov.w	r3, #0
+ 8005ab2:	e9c7 2304 	strd	r2, r3, [r7, #16]
     char latArea=0, lonArea=0;
- 8005ab2:	2300      	movs	r3, #0
- 8005ab4:	73fb      	strb	r3, [r7, #15]
  8005ab6:	2300      	movs	r3, #0
- 8005ab8:	73bb      	strb	r3, [r7, #14]
+ 8005ab8:	73fb      	strb	r3, [r7, #15]
+ 8005aba:	2300      	movs	r3, #0
+ 8005abc:	73bb      	strb	r3, [r7, #14]
 
     // Parse data fields
     sscanf(sentence, "$%*2sGGA,%*[^,],%14[^,],%c,%14[^,],%c,%d,%d,%lf,%lf,%*c,%lf,%*c",
- 8005aba:	f107 010f 	add.w	r1, r7, #15
- 8005abe:	f107 0240 	add.w	r2, r7, #64	@ 0x40
- 8005ac2:	f107 0310 	add.w	r3, r7, #16
- 8005ac6:	9306      	str	r3, [sp, #24]
- 8005ac8:	f107 0318 	add.w	r3, r7, #24
- 8005acc:	9305      	str	r3, [sp, #20]
- 8005ace:	f107 0320 	add.w	r3, r7, #32
- 8005ad2:	9304      	str	r3, [sp, #16]
- 8005ad4:	f107 0328 	add.w	r3, r7, #40	@ 0x28
- 8005ad8:	9303      	str	r3, [sp, #12]
- 8005ada:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
- 8005ade:	9302      	str	r3, [sp, #8]
- 8005ae0:	f107 030e 	add.w	r3, r7, #14
- 8005ae4:	9301      	str	r3, [sp, #4]
- 8005ae6:	f107 0330 	add.w	r3, r7, #48	@ 0x30
- 8005aea:	9300      	str	r3, [sp, #0]
- 8005aec:	460b      	mov	r3, r1
- 8005aee:	4960      	ldr	r1, [pc, #384]	@ (8005c70 <parseGGA+0x224>)
- 8005af0:	6838      	ldr	r0, [r7, #0]
- 8005af2:	f013 fe77 	bl	80197e4 <siscanf>
+ 8005abe:	f107 010f 	add.w	r1, r7, #15
+ 8005ac2:	f107 0240 	add.w	r2, r7, #64	@ 0x40
+ 8005ac6:	f107 0310 	add.w	r3, r7, #16
+ 8005aca:	9306      	str	r3, [sp, #24]
+ 8005acc:	f107 0318 	add.w	r3, r7, #24
+ 8005ad0:	9305      	str	r3, [sp, #20]
+ 8005ad2:	f107 0320 	add.w	r3, r7, #32
+ 8005ad6:	9304      	str	r3, [sp, #16]
+ 8005ad8:	f107 0328 	add.w	r3, r7, #40	@ 0x28
+ 8005adc:	9303      	str	r3, [sp, #12]
+ 8005ade:	f107 032c 	add.w	r3, r7, #44	@ 0x2c
+ 8005ae2:	9302      	str	r3, [sp, #8]
+ 8005ae4:	f107 030e 	add.w	r3, r7, #14
+ 8005ae8:	9301      	str	r3, [sp, #4]
+ 8005aea:	f107 0330 	add.w	r3, r7, #48	@ 0x30
+ 8005aee:	9300      	str	r3, [sp, #0]
+ 8005af0:	460b      	mov	r3, r1
+ 8005af2:	4960      	ldr	r1, [pc, #384]	@ (8005c74 <parseGGA+0x224>)
+ 8005af4:	6838      	ldr	r0, [r7, #0]
+ 8005af6:	f013 fe75 	bl	80197e4 <siscanf>
            latStr, &latArea, lonStr, &lonArea, &fix, &numSV, &hdop, &alt, &geoid);
 
     data.FixQuality = fix;
- 8005af6:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
- 8005af8:	667b      	str	r3, [r7, #100]	@ 0x64
+ 8005afa:	6afb      	ldr	r3, [r7, #44]	@ 0x2c
+ 8005afc:	667b      	str	r3, [r7, #100]	@ 0x64
     data.NumSV = numSV;
- 8005afa:	6abb      	ldr	r3, [r7, #40]	@ 0x28
- 8005afc:	66bb      	str	r3, [r7, #104]	@ 0x68
+ 8005afe:	6abb      	ldr	r3, [r7, #40]	@ 0x28
+ 8005b00:	66bb      	str	r3, [r7, #104]	@ 0x68
     data.HDOP = hdop;
- 8005afe:	e9d7 2308 	ldrd	r2, r3, [r7, #32]
- 8005b02:	e9c7 231c 	strd	r2, r3, [r7, #112]	@ 0x70
+ 8005b02:	e9d7 2308 	ldrd	r2, r3, [r7, #32]
+ 8005b06:	e9c7 231c 	strd	r2, r3, [r7, #112]	@ 0x70
     data.Altitude = alt;
- 8005b06:	e9d7 2306 	ldrd	r2, r3, [r7, #24]
- 8005b0a:	e9c7 231e 	strd	r2, r3, [r7, #120]	@ 0x78
+ 8005b0a:	e9d7 2306 	ldrd	r2, r3, [r7, #24]
+ 8005b0e:	e9c7 231e 	strd	r2, r3, [r7, #120]	@ 0x78
     data.GeoidSep = geoid;
- 8005b0e:	e9d7 2304 	ldrd	r2, r3, [r7, #16]
- 8005b12:	e9c7 2320 	strd	r2, r3, [r7, #128]	@ 0x80
+ 8005b12:	e9d7 2304 	ldrd	r2, r3, [r7, #16]
+ 8005b16:	e9c7 2320 	strd	r2, r3, [r7, #128]	@ 0x80
     data.Lat_area = latArea;
- 8005b16:	7bfb      	ldrb	r3, [r7, #15]
- 8005b18:	f887 3060 	strb.w	r3, [r7, #96]	@ 0x60
+ 8005b1a:	7bfb      	ldrb	r3, [r7, #15]
+ 8005b1c:	f887 3060 	strb.w	r3, [r7, #96]	@ 0x60
     data.Lon_area = lonArea;
- 8005b1c:	7bbb      	ldrb	r3, [r7, #14]
- 8005b1e:	f887 3061 	strb.w	r3, [r7, #97]	@ 0x61
+ 8005b20:	7bbb      	ldrb	r3, [r7, #14]
+ 8005b22:	f887 3061 	strb.w	r3, [r7, #97]	@ 0x61
 
     // Convert latitude sang decimal degree
     double lat = atof(latStr);
- 8005b22:	f107 0340 	add.w	r3, r7, #64	@ 0x40
- 8005b26:	4618      	mov	r0, r3
- 8005b28:	f011 ff86 	bl	8017a38 <atof>
- 8005b2c:	ed87 0b2c 	vstr	d0, [r7, #176]	@ 0xb0
+ 8005b26:	f107 0340 	add.w	r3, r7, #64	@ 0x40
+ 8005b2a:	4618      	mov	r0, r3
+ 8005b2c:	f011 ff84 	bl	8017a38 <atof>
+ 8005b30:	ed87 0b2c 	vstr	d0, [r7, #176]	@ 0xb0
     int latDeg = (int)(lat / 100);
- 8005b30:	f04f 0200 	mov.w	r2, #0
- 8005b34:	4b4f      	ldr	r3, [pc, #316]	@ (8005c74 <parseGGA+0x228>)
- 8005b36:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
- 8005b3a:	f7fa fe8f 	bl	800085c <__aeabi_ddiv>
- 8005b3e:	4602      	mov	r2, r0
- 8005b40:	460b      	mov	r3, r1
- 8005b42:	4610      	mov	r0, r2
- 8005b44:	4619      	mov	r1, r3
- 8005b46:	f7fb f80f 	bl	8000b68 <__aeabi_d2iz>
- 8005b4a:	4603      	mov	r3, r0
- 8005b4c:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
+ 8005b34:	f04f 0200 	mov.w	r2, #0
+ 8005b38:	4b4f      	ldr	r3, [pc, #316]	@ (8005c78 <parseGGA+0x228>)
+ 8005b3a:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
+ 8005b3e:	f7fa fe8d 	bl	800085c <__aeabi_ddiv>
+ 8005b42:	4602      	mov	r2, r0
+ 8005b44:	460b      	mov	r3, r1
+ 8005b46:	4610      	mov	r0, r2
+ 8005b48:	4619      	mov	r1, r3
+ 8005b4a:	f7fb f80d 	bl	8000b68 <__aeabi_d2iz>
+ 8005b4e:	4603      	mov	r3, r0
+ 8005b50:	f8c7 30ac 	str.w	r3, [r7, #172]	@ 0xac
     double latMin = lat - latDeg*100;
- 8005b50:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
- 8005b54:	2264      	movs	r2, #100	@ 0x64
- 8005b56:	fb02 f303 	mul.w	r3, r2, r3
- 8005b5a:	4618      	mov	r0, r3
- 8005b5c:	f7fa fcea 	bl	8000534 <__aeabi_i2d>
- 8005b60:	4602      	mov	r2, r0
- 8005b62:	460b      	mov	r3, r1
- 8005b64:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
- 8005b68:	f7fa fb96 	bl	8000298 <__aeabi_dsub>
- 8005b6c:	4602      	mov	r2, r0
- 8005b6e:	460b      	mov	r3, r1
- 8005b70:	e9c7 2328 	strd	r2, r3, [r7, #160]	@ 0xa0
+ 8005b54:	f8d7 30ac 	ldr.w	r3, [r7, #172]	@ 0xac
+ 8005b58:	2264      	movs	r2, #100	@ 0x64
+ 8005b5a:	fb02 f303 	mul.w	r3, r2, r3
+ 8005b5e:	4618      	mov	r0, r3
+ 8005b60:	f7fa fce8 	bl	8000534 <__aeabi_i2d>
+ 8005b64:	4602      	mov	r2, r0
+ 8005b66:	460b      	mov	r3, r1
+ 8005b68:	e9d7 012c 	ldrd	r0, r1, [r7, #176]	@ 0xb0
+ 8005b6c:	f7fa fb94 	bl	8000298 <__aeabi_dsub>
+ 8005b70:	4602      	mov	r2, r0
+ 8005b72:	460b      	mov	r3, r1
+ 8005b74:	e9c7 2328 	strd	r2, r3, [r7, #160]	@ 0xa0
     data.Lat = latDeg + latMin/60.0;
- 8005b74:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
- 8005b78:	f7fa fcdc 	bl	8000534 <__aeabi_i2d>
- 8005b7c:	4682      	mov	sl, r0
- 8005b7e:	468b      	mov	fp, r1
- 8005b80:	f04f 0200 	mov.w	r2, #0
- 8005b84:	4b3c      	ldr	r3, [pc, #240]	@ (8005c78 <parseGGA+0x22c>)
- 8005b86:	e9d7 0128 	ldrd	r0, r1, [r7, #160]	@ 0xa0
- 8005b8a:	f7fa fe67 	bl	800085c <__aeabi_ddiv>
- 8005b8e:	4602      	mov	r2, r0
- 8005b90:	460b      	mov	r3, r1
- 8005b92:	4650      	mov	r0, sl
- 8005b94:	4659      	mov	r1, fp
- 8005b96:	f7fa fb81 	bl	800029c <__adddf3>
- 8005b9a:	4602      	mov	r2, r0
- 8005b9c:	460b      	mov	r3, r1
- 8005b9e:	e9c7 2314 	strd	r2, r3, [r7, #80]	@ 0x50
+ 8005b78:	f8d7 00ac 	ldr.w	r0, [r7, #172]	@ 0xac
+ 8005b7c:	f7fa fcda 	bl	8000534 <__aeabi_i2d>
+ 8005b80:	4682      	mov	sl, r0
+ 8005b82:	468b      	mov	fp, r1
+ 8005b84:	f04f 0200 	mov.w	r2, #0
+ 8005b88:	4b3c      	ldr	r3, [pc, #240]	@ (8005c7c <parseGGA+0x22c>)
+ 8005b8a:	e9d7 0128 	ldrd	r0, r1, [r7, #160]	@ 0xa0
+ 8005b8e:	f7fa fe65 	bl	800085c <__aeabi_ddiv>
+ 8005b92:	4602      	mov	r2, r0
+ 8005b94:	460b      	mov	r3, r1
+ 8005b96:	4650      	mov	r0, sl
+ 8005b98:	4659      	mov	r1, fp
+ 8005b9a:	f7fa fb7f 	bl	800029c <__adddf3>
+ 8005b9e:	4602      	mov	r2, r0
+ 8005ba0:	460b      	mov	r3, r1
+ 8005ba2:	e9c7 2314 	strd	r2, r3, [r7, #80]	@ 0x50
     if(latArea=='S') data.Lat = -data.Lat;
- 8005ba2:	7bfb      	ldrb	r3, [r7, #15]
- 8005ba4:	2b53      	cmp	r3, #83	@ 0x53
- 8005ba6:	d106      	bne.n	8005bb6 <parseGGA+0x16a>
- 8005ba8:	e9d7 2314 	ldrd	r2, r3, [r7, #80]	@ 0x50
- 8005bac:	4690      	mov	r8, r2
- 8005bae:	f083 4900 	eor.w	r9, r3, #2147483648	@ 0x80000000
- 8005bb2:	e9c7 8914 	strd	r8, r9, [r7, #80]	@ 0x50
+ 8005ba6:	7bfb      	ldrb	r3, [r7, #15]
+ 8005ba8:	2b53      	cmp	r3, #83	@ 0x53
+ 8005baa:	d106      	bne.n	8005bba <parseGGA+0x16a>
+ 8005bac:	e9d7 2314 	ldrd	r2, r3, [r7, #80]	@ 0x50
+ 8005bb0:	4690      	mov	r8, r2
+ 8005bb2:	f083 4900 	eor.w	r9, r3, #2147483648	@ 0x80000000
+ 8005bb6:	e9c7 8914 	strd	r8, r9, [r7, #80]	@ 0x50
 
     // Convert longitude sang decimal degree
     double lon = atof(lonStr);
- 8005bb6:	f107 0330 	add.w	r3, r7, #48	@ 0x30
- 8005bba:	4618      	mov	r0, r3
- 8005bbc:	f011 ff3c 	bl	8017a38 <atof>
- 8005bc0:	ed87 0b26 	vstr	d0, [r7, #152]	@ 0x98
+ 8005bba:	f107 0330 	add.w	r3, r7, #48	@ 0x30
+ 8005bbe:	4618      	mov	r0, r3
+ 8005bc0:	f011 ff3a 	bl	8017a38 <atof>
+ 8005bc4:	ed87 0b26 	vstr	d0, [r7, #152]	@ 0x98
     int lonDeg = (int)(lon / 100);
- 8005bc4:	f04f 0200 	mov.w	r2, #0
- 8005bc8:	4b2a      	ldr	r3, [pc, #168]	@ (8005c74 <parseGGA+0x228>)
- 8005bca:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
- 8005bce:	f7fa fe45 	bl	800085c <__aeabi_ddiv>
- 8005bd2:	4602      	mov	r2, r0
- 8005bd4:	460b      	mov	r3, r1
- 8005bd6:	4610      	mov	r0, r2
- 8005bd8:	4619      	mov	r1, r3
- 8005bda:	f7fa ffc5 	bl	8000b68 <__aeabi_d2iz>
- 8005bde:	4603      	mov	r3, r0
- 8005be0:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
+ 8005bc8:	f04f 0200 	mov.w	r2, #0
+ 8005bcc:	4b2a      	ldr	r3, [pc, #168]	@ (8005c78 <parseGGA+0x228>)
+ 8005bce:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
+ 8005bd2:	f7fa fe43 	bl	800085c <__aeabi_ddiv>
+ 8005bd6:	4602      	mov	r2, r0
+ 8005bd8:	460b      	mov	r3, r1
+ 8005bda:	4610      	mov	r0, r2
+ 8005bdc:	4619      	mov	r1, r3
+ 8005bde:	f7fa ffc3 	bl	8000b68 <__aeabi_d2iz>
+ 8005be2:	4603      	mov	r3, r0
+ 8005be4:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
     double lonMin = lon - lonDeg*100;
- 8005be4:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005be8:	2264      	movs	r2, #100	@ 0x64
- 8005bea:	fb02 f303 	mul.w	r3, r2, r3
- 8005bee:	4618      	mov	r0, r3
- 8005bf0:	f7fa fca0 	bl	8000534 <__aeabi_i2d>
- 8005bf4:	4602      	mov	r2, r0
- 8005bf6:	460b      	mov	r3, r1
- 8005bf8:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
- 8005bfc:	f7fa fb4c 	bl	8000298 <__aeabi_dsub>
- 8005c00:	4602      	mov	r2, r0
- 8005c02:	460b      	mov	r3, r1
- 8005c04:	e9c7 2322 	strd	r2, r3, [r7, #136]	@ 0x88
+ 8005be8:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005bec:	2264      	movs	r2, #100	@ 0x64
+ 8005bee:	fb02 f303 	mul.w	r3, r2, r3
+ 8005bf2:	4618      	mov	r0, r3
+ 8005bf4:	f7fa fc9e 	bl	8000534 <__aeabi_i2d>
+ 8005bf8:	4602      	mov	r2, r0
+ 8005bfa:	460b      	mov	r3, r1
+ 8005bfc:	e9d7 0126 	ldrd	r0, r1, [r7, #152]	@ 0x98
+ 8005c00:	f7fa fb4a 	bl	8000298 <__aeabi_dsub>
+ 8005c04:	4602      	mov	r2, r0
+ 8005c06:	460b      	mov	r3, r1
+ 8005c08:	e9c7 2322 	strd	r2, r3, [r7, #136]	@ 0x88
     data.Lon = lonDeg + lonMin/60.0;
- 8005c08:	f8d7 0094 	ldr.w	r0, [r7, #148]	@ 0x94
- 8005c0c:	f7fa fc92 	bl	8000534 <__aeabi_i2d>
- 8005c10:	4680      	mov	r8, r0
- 8005c12:	4689      	mov	r9, r1
- 8005c14:	f04f 0200 	mov.w	r2, #0
- 8005c18:	4b17      	ldr	r3, [pc, #92]	@ (8005c78 <parseGGA+0x22c>)
- 8005c1a:	e9d7 0122 	ldrd	r0, r1, [r7, #136]	@ 0x88
- 8005c1e:	f7fa fe1d 	bl	800085c <__aeabi_ddiv>
- 8005c22:	4602      	mov	r2, r0
- 8005c24:	460b      	mov	r3, r1
- 8005c26:	4640      	mov	r0, r8
- 8005c28:	4649      	mov	r1, r9
- 8005c2a:	f7fa fb37 	bl	800029c <__adddf3>
- 8005c2e:	4602      	mov	r2, r0
- 8005c30:	460b      	mov	r3, r1
- 8005c32:	e9c7 2316 	strd	r2, r3, [r7, #88]	@ 0x58
+ 8005c0c:	f8d7 0094 	ldr.w	r0, [r7, #148]	@ 0x94
+ 8005c10:	f7fa fc90 	bl	8000534 <__aeabi_i2d>
+ 8005c14:	4680      	mov	r8, r0
+ 8005c16:	4689      	mov	r9, r1
+ 8005c18:	f04f 0200 	mov.w	r2, #0
+ 8005c1c:	4b17      	ldr	r3, [pc, #92]	@ (8005c7c <parseGGA+0x22c>)
+ 8005c1e:	e9d7 0122 	ldrd	r0, r1, [r7, #136]	@ 0x88
+ 8005c22:	f7fa fe1b 	bl	800085c <__aeabi_ddiv>
+ 8005c26:	4602      	mov	r2, r0
+ 8005c28:	460b      	mov	r3, r1
+ 8005c2a:	4640      	mov	r0, r8
+ 8005c2c:	4649      	mov	r1, r9
+ 8005c2e:	f7fa fb35 	bl	800029c <__adddf3>
+ 8005c32:	4602      	mov	r2, r0
+ 8005c34:	460b      	mov	r3, r1
+ 8005c36:	e9c7 2316 	strd	r2, r3, [r7, #88]	@ 0x58
     if(lonArea=='W') data.Lon = -data.Lon;
- 8005c36:	7bbb      	ldrb	r3, [r7, #14]
- 8005c38:	2b57      	cmp	r3, #87	@ 0x57
- 8005c3a:	d106      	bne.n	8005c4a <parseGGA+0x1fe>
- 8005c3c:	e9d7 2316 	ldrd	r2, r3, [r7, #88]	@ 0x58
- 8005c40:	4614      	mov	r4, r2
- 8005c42:	f083 4500 	eor.w	r5, r3, #2147483648	@ 0x80000000
- 8005c46:	e9c7 4516 	strd	r4, r5, [r7, #88]	@ 0x58
+ 8005c3a:	7bbb      	ldrb	r3, [r7, #14]
+ 8005c3c:	2b57      	cmp	r3, #87	@ 0x57
+ 8005c3e:	d106      	bne.n	8005c4e <parseGGA+0x1fe>
+ 8005c40:	e9d7 2316 	ldrd	r2, r3, [r7, #88]	@ 0x58
+ 8005c44:	4614      	mov	r4, r2
+ 8005c46:	f083 4500 	eor.w	r5, r3, #2147483648	@ 0x80000000
+ 8005c4a:	e9c7 4516 	strd	r4, r5, [r7, #88]	@ 0x58
 
     return data;
- 8005c4a:	687b      	ldr	r3, [r7, #4]
- 8005c4c:	461d      	mov	r5, r3
- 8005c4e:	f107 0450 	add.w	r4, r7, #80	@ 0x50
- 8005c52:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
- 8005c54:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005c4e:	687b      	ldr	r3, [r7, #4]
+ 8005c50:	461d      	mov	r5, r3
+ 8005c52:	f107 0450 	add.w	r4, r7, #80	@ 0x50
  8005c56:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
  8005c58:	c50f      	stmia	r5!, {r0, r1, r2, r3}
  8005c5a:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
  8005c5c:	c50f      	stmia	r5!, {r0, r1, r2, r3}
- 8005c5e:	e894 0003 	ldmia.w	r4, {r0, r1}
- 8005c62:	e885 0003 	stmia.w	r5, {r0, r1}
+ 8005c5e:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+ 8005c60:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005c62:	e894 0003 	ldmia.w	r4, {r0, r1}
+ 8005c66:	e885 0003 	stmia.w	r5, {r0, r1}
 }
- 8005c66:	6878      	ldr	r0, [r7, #4]
- 8005c68:	37b8      	adds	r7, #184	@ 0xb8
- 8005c6a:	46bd      	mov	sp, r7
- 8005c6c:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
- 8005c70:	08020b80 	.word	0x08020b80
- 8005c74:	40590000 	.word	0x40590000
- 8005c78:	404e0000 	.word	0x404e0000
+ 8005c6a:	6878      	ldr	r0, [r7, #4]
+ 8005c6c:	37b8      	adds	r7, #184	@ 0xb8
+ 8005c6e:	46bd      	mov	sp, r7
+ 8005c70:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
+ 8005c74:	08020b80 	.word	0x08020b80
+ 8005c78:	40590000 	.word	0x40590000
+ 8005c7c:	404e0000 	.word	0x404e0000
 
-08005c7c <GPS_Data_Update>:
+08005c80 <GPS_Data_Update>:
 
 uint8_t GPS_Data_Update() {
- 8005c7c:	b5b0      	push	{r4, r5, r7, lr}
- 8005c7e:	b0a6      	sub	sp, #152	@ 0x98
- 8005c80:	af00      	add	r7, sp, #0
+ 8005c80:	b5b0      	push	{r4, r5, r7, lr}
+ 8005c82:	b0a6      	sub	sp, #152	@ 0x98
+ 8005c84:	af00      	add	r7, sp, #0
 	const char *p;
 	const char *start;
 	p = (char*)gps_uart_rx_buffer;
- 8005c82:	4b42      	ldr	r3, [pc, #264]	@ (8005d8c <GPS_Data_Update+0x110>)
- 8005c84:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
+ 8005c86:	4b42      	ldr	r3, [pc, #264]	@ (8005d90 <GPS_Data_Update+0x110>)
+ 8005c88:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
 	start = (char*)gps_uart_rx_buffer;
- 8005c88:	4b40      	ldr	r3, [pc, #256]	@ (8005d8c <GPS_Data_Update+0x110>)
- 8005c8a:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
+ 8005c8c:	4b40      	ldr	r3, [pc, #256]	@ (8005d90 <GPS_Data_Update+0x110>)
+ 8005c8e:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
 
     while (*p) {
- 8005c8e:	e072      	b.n	8005d76 <GPS_Data_Update+0xfa>
+ 8005c92:	e072      	b.n	8005d7a <GPS_Data_Update+0xfa>
         if (*p == '\r' && *(p+1) == '\n') {
- 8005c90:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005c94:	781b      	ldrb	r3, [r3, #0]
- 8005c96:	2b0d      	cmp	r3, #13
- 8005c98:	d168      	bne.n	8005d6c <GPS_Data_Update+0xf0>
- 8005c9a:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005c9e:	3301      	adds	r3, #1
- 8005ca0:	781b      	ldrb	r3, [r3, #0]
- 8005ca2:	2b0a      	cmp	r3, #10
- 8005ca4:	d162      	bne.n	8005d6c <GPS_Data_Update+0xf0>
+ 8005c94:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005c98:	781b      	ldrb	r3, [r3, #0]
+ 8005c9a:	2b0d      	cmp	r3, #13
+ 8005c9c:	d168      	bne.n	8005d70 <GPS_Data_Update+0xf0>
+ 8005c9e:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005ca2:	3301      	adds	r3, #1
+ 8005ca4:	781b      	ldrb	r3, [r3, #0]
+ 8005ca6:	2b0a      	cmp	r3, #10
+ 8005ca8:	d162      	bne.n	8005d70 <GPS_Data_Update+0xf0>
             int len = p - start;
- 8005ca6:	f8d7 2094 	ldr.w	r2, [r7, #148]	@ 0x94
- 8005caa:	f8d7 3090 	ldr.w	r3, [r7, #144]	@ 0x90
- 8005cae:	1ad3      	subs	r3, r2, r3
- 8005cb0:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
+ 8005caa:	f8d7 2094 	ldr.w	r2, [r7, #148]	@ 0x94
+ 8005cae:	f8d7 3090 	ldr.w	r3, [r7, #144]	@ 0x90
+ 8005cb2:	1ad3      	subs	r3, r2, r3
+ 8005cb4:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
             if (len <= 0) { p += 2; start = p; continue; }
- 8005cb4:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
- 8005cb8:	2b00      	cmp	r3, #0
- 8005cba:	dc09      	bgt.n	8005cd0 <GPS_Data_Update+0x54>
- 8005cbc:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005cc0:	3302      	adds	r3, #2
- 8005cc2:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
- 8005cc6:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005cca:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
- 8005cce:	e052      	b.n	8005d76 <GPS_Data_Update+0xfa>
+ 8005cb8:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
+ 8005cbc:	2b00      	cmp	r3, #0
+ 8005cbe:	dc09      	bgt.n	8005cd4 <GPS_Data_Update+0x54>
+ 8005cc0:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005cc4:	3302      	adds	r3, #2
+ 8005cc6:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
+ 8005cca:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005cce:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
+ 8005cd2:	e052      	b.n	8005d7a <GPS_Data_Update+0xfa>
 
             if (len >= (int)sizeof(sentence)) len = sizeof(sentence) - 1;
- 8005cd0:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
- 8005cd4:	2b7f      	cmp	r3, #127	@ 0x7f
- 8005cd6:	dd02      	ble.n	8005cde <GPS_Data_Update+0x62>
- 8005cd8:	237f      	movs	r3, #127	@ 0x7f
- 8005cda:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
+ 8005cd4:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
+ 8005cd8:	2b7f      	cmp	r3, #127	@ 0x7f
+ 8005cda:	dd02      	ble.n	8005ce2 <GPS_Data_Update+0x62>
+ 8005cdc:	237f      	movs	r3, #127	@ 0x7f
+ 8005cde:	f8c7 308c 	str.w	r3, [r7, #140]	@ 0x8c
 
             memcpy(sentence, start, len);
- 8005cde:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
- 8005ce2:	461a      	mov	r2, r3
- 8005ce4:	f8d7 1090 	ldr.w	r1, [r7, #144]	@ 0x90
- 8005ce8:	4829      	ldr	r0, [pc, #164]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005cea:	f013 ff3e 	bl	8019b6a <memcpy>
+ 8005ce2:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
+ 8005ce6:	461a      	mov	r2, r3
+ 8005ce8:	f8d7 1090 	ldr.w	r1, [r7, #144]	@ 0x90
+ 8005cec:	4829      	ldr	r0, [pc, #164]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005cee:	f013 ff3c 	bl	8019b6a <memcpy>
             sentence[len] = '\0';
- 8005cee:	4a28      	ldr	r2, [pc, #160]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005cf0:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
- 8005cf4:	4413      	add	r3, r2
- 8005cf6:	2200      	movs	r2, #0
- 8005cf8:	701a      	strb	r2, [r3, #0]
+ 8005cf2:	4a28      	ldr	r2, [pc, #160]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005cf4:	f8d7 308c 	ldr.w	r3, [r7, #140]	@ 0x8c
+ 8005cf8:	4413      	add	r3, r2
+ 8005cfa:	2200      	movs	r2, #0
+ 8005cfc:	701a      	strb	r2, [r3, #0]
 
             // Kiểm tra loại câu
             if (strstr(sentence, "GGA")) {
- 8005cfa:	4926      	ldr	r1, [pc, #152]	@ (8005d94 <GPS_Data_Update+0x118>)
- 8005cfc:	4824      	ldr	r0, [pc, #144]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005cfe:	f013 fe39 	bl	8019974 <strstr>
- 8005d02:	4603      	mov	r3, r0
- 8005d04:	2b00      	cmp	r3, #0
- 8005d06:	d014      	beq.n	8005d32 <GPS_Data_Update+0xb6>
+ 8005cfe:	4926      	ldr	r1, [pc, #152]	@ (8005d98 <GPS_Data_Update+0x118>)
+ 8005d00:	4824      	ldr	r0, [pc, #144]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005d02:	f013 fe37 	bl	8019974 <strstr>
+ 8005d06:	4603      	mov	r3, r0
+ 8005d08:	2b00      	cmp	r3, #0
+ 8005d0a:	d014      	beq.n	8005d36 <GPS_Data_Update+0xb6>
                 gga_tmp = parseGGA(sentence);
- 8005d08:	4c23      	ldr	r4, [pc, #140]	@ (8005d98 <GPS_Data_Update+0x11c>)
- 8005d0a:	f107 0350 	add.w	r3, r7, #80	@ 0x50
- 8005d0e:	4920      	ldr	r1, [pc, #128]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005d10:	4618      	mov	r0, r3
- 8005d12:	f7ff fe9b 	bl	8005a4c <parseGGA>
- 8005d16:	4625      	mov	r5, r4
- 8005d18:	f107 0450 	add.w	r4, r7, #80	@ 0x50
- 8005d1c:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
- 8005d1e:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005d0c:	4c23      	ldr	r4, [pc, #140]	@ (8005d9c <GPS_Data_Update+0x11c>)
+ 8005d0e:	f107 0350 	add.w	r3, r7, #80	@ 0x50
+ 8005d12:	4920      	ldr	r1, [pc, #128]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005d14:	4618      	mov	r0, r3
+ 8005d16:	f7ff fe9b 	bl	8005a50 <parseGGA>
+ 8005d1a:	4625      	mov	r5, r4
+ 8005d1c:	f107 0450 	add.w	r4, r7, #80	@ 0x50
  8005d20:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
  8005d22:	c50f      	stmia	r5!, {r0, r1, r2, r3}
  8005d24:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
  8005d26:	c50f      	stmia	r5!, {r0, r1, r2, r3}
- 8005d28:	e894 0003 	ldmia.w	r4, {r0, r1}
- 8005d2c:	e885 0003 	stmia.w	r5, {r0, r1}
- 8005d30:	e012      	b.n	8005d58 <GPS_Data_Update+0xdc>
+ 8005d28:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+ 8005d2a:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+ 8005d2c:	e894 0003 	ldmia.w	r4, {r0, r1}
+ 8005d30:	e885 0003 	stmia.w	r5, {r0, r1}
+ 8005d34:	e012      	b.n	8005d5c <GPS_Data_Update+0xdc>
             } else if (strstr(sentence, "RMC")) {
- 8005d32:	491a      	ldr	r1, [pc, #104]	@ (8005d9c <GPS_Data_Update+0x120>)
- 8005d34:	4816      	ldr	r0, [pc, #88]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005d36:	f013 fe1d 	bl	8019974 <strstr>
- 8005d3a:	4603      	mov	r3, r0
- 8005d3c:	2b00      	cmp	r3, #0
- 8005d3e:	d00b      	beq.n	8005d58 <GPS_Data_Update+0xdc>
+ 8005d36:	491a      	ldr	r1, [pc, #104]	@ (8005da0 <GPS_Data_Update+0x120>)
+ 8005d38:	4816      	ldr	r0, [pc, #88]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005d3a:	f013 fe1b 	bl	8019974 <strstr>
+ 8005d3e:	4603      	mov	r3, r0
+ 8005d40:	2b00      	cmp	r3, #0
+ 8005d42:	d00b      	beq.n	8005d5c <GPS_Data_Update+0xdc>
                 rmc_tmp = parseRMC(sentence);
- 8005d40:	4c17      	ldr	r4, [pc, #92]	@ (8005da0 <GPS_Data_Update+0x124>)
- 8005d42:	463b      	mov	r3, r7
- 8005d44:	4912      	ldr	r1, [pc, #72]	@ (8005d90 <GPS_Data_Update+0x114>)
- 8005d46:	4618      	mov	r0, r3
- 8005d48:	f7ff fd06 	bl	8005758 <parseRMC>
- 8005d4c:	4620      	mov	r0, r4
- 8005d4e:	463b      	mov	r3, r7
- 8005d50:	2250      	movs	r2, #80	@ 0x50
- 8005d52:	4619      	mov	r1, r3
- 8005d54:	f013 ff09 	bl	8019b6a <memcpy>
+ 8005d44:	4c17      	ldr	r4, [pc, #92]	@ (8005da4 <GPS_Data_Update+0x124>)
+ 8005d46:	463b      	mov	r3, r7
+ 8005d48:	4912      	ldr	r1, [pc, #72]	@ (8005d94 <GPS_Data_Update+0x114>)
+ 8005d4a:	4618      	mov	r0, r3
+ 8005d4c:	f7ff fd06 	bl	800575c <parseRMC>
+ 8005d50:	4620      	mov	r0, r4
+ 8005d52:	463b      	mov	r3, r7
+ 8005d54:	2250      	movs	r2, #80	@ 0x50
+ 8005d56:	4619      	mov	r1, r3
+ 8005d58:	f013 ff07 	bl	8019b6a <memcpy>
             }
 
             // bỏ qua \r\n
             p += 2;
- 8005d58:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005d5c:	3302      	adds	r3, #2
- 8005d5e:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
+ 8005d5c:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005d60:	3302      	adds	r3, #2
+ 8005d62:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
             start = p;
- 8005d62:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005d66:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
+ 8005d66:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005d6a:	f8c7 3090 	str.w	r3, [r7, #144]	@ 0x90
         if (*p == '\r' && *(p+1) == '\n') {
- 8005d6a:	e004      	b.n	8005d76 <GPS_Data_Update+0xfa>
+ 8005d6e:	e004      	b.n	8005d7a <GPS_Data_Update+0xfa>
         } else {
             p++;
- 8005d6c:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005d70:	3301      	adds	r3, #1
- 8005d72:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
+ 8005d70:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005d74:	3301      	adds	r3, #1
+ 8005d76:	f8c7 3094 	str.w	r3, [r7, #148]	@ 0x94
     while (*p) {
- 8005d76:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
- 8005d7a:	781b      	ldrb	r3, [r3, #0]
- 8005d7c:	2b00      	cmp	r3, #0
- 8005d7e:	d187      	bne.n	8005c90 <GPS_Data_Update+0x14>
+ 8005d7a:	f8d7 3094 	ldr.w	r3, [r7, #148]	@ 0x94
+ 8005d7e:	781b      	ldrb	r3, [r3, #0]
+ 8005d80:	2b00      	cmp	r3, #0
+ 8005d82:	d187      	bne.n	8005c94 <GPS_Data_Update+0x14>
         }
     }
     return 0;
- 8005d80:	2300      	movs	r3, #0
+ 8005d84:	2300      	movs	r3, #0
 }
- 8005d82:	4618      	mov	r0, r3
- 8005d84:	3798      	adds	r7, #152	@ 0x98
- 8005d86:	46bd      	mov	sp, r7
- 8005d88:	bdb0      	pop	{r4, r5, r7, pc}
- 8005d8a:	bf00      	nop
- 8005d8c:	2000093c 	.word	0x2000093c
- 8005d90:	20000a3c 	.word	0x20000a3c
- 8005d94:	08020bc0 	.word	0x08020bc0
- 8005d98:	20000ac0 	.word	0x20000ac0
- 8005d9c:	08020bc4 	.word	0x08020bc4
- 8005da0:	20000af8 	.word	0x20000af8
+ 8005d86:	4618      	mov	r0, r3
+ 8005d88:	3798      	adds	r7, #152	@ 0x98
+ 8005d8a:	46bd      	mov	sp, r7
+ 8005d8c:	bdb0      	pop	{r4, r5, r7, pc}
+ 8005d8e:	bf00      	nop
+ 8005d90:	2000093c 	.word	0x2000093c
+ 8005d94:	20000a3c 	.word	0x20000a3c
+ 8005d98:	08020bc0 	.word	0x08020bc0
+ 8005d9c:	20000ac0 	.word	0x20000ac0
+ 8005da0:	08020bc4 	.word	0x08020bc4
+ 8005da4:	20000af8 	.word	0x20000af8
 
-08005da4 <GPS_Coordinates_Get>:
+08005da8 <GPS_Coordinates_Get>:
 uint8_t  GPS_GGA_Get(GGA_t *result){
     *result = gga_tmp;
     return 0;
 }
 
 uint8_t GPS_Coordinates_Get (COORDINATES_t *result){
- 8005da4:	b480      	push	{r7}
- 8005da6:	b083      	sub	sp, #12
- 8005da8:	af00      	add	r7, sp, #0
- 8005daa:	6078      	str	r0, [r7, #4]
+ 8005da8:	b480      	push	{r7}
+ 8005daa:	b083      	sub	sp, #12
+ 8005dac:	af00      	add	r7, sp, #0
+ 8005dae:	6078      	str	r0, [r7, #4]
 	result->Lat = gga_tmp.Lat;
- 8005dac:	4b0c      	ldr	r3, [pc, #48]	@ (8005de0 <GPS_Coordinates_Get+0x3c>)
- 8005dae:	e9d3 2300 	ldrd	r2, r3, [r3]
- 8005db2:	6879      	ldr	r1, [r7, #4]
- 8005db4:	e9c1 2300 	strd	r2, r3, [r1]
+ 8005db0:	4b0c      	ldr	r3, [pc, #48]	@ (8005de4 <GPS_Coordinates_Get+0x3c>)
+ 8005db2:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 8005db6:	6879      	ldr	r1, [r7, #4]
+ 8005db8:	e9c1 2300 	strd	r2, r3, [r1]
 	result->Lon = gga_tmp.Lon;
- 8005db8:	4b09      	ldr	r3, [pc, #36]	@ (8005de0 <GPS_Coordinates_Get+0x3c>)
- 8005dba:	e9d3 2302 	ldrd	r2, r3, [r3, #8]
- 8005dbe:	6879      	ldr	r1, [r7, #4]
- 8005dc0:	e9c1 2302 	strd	r2, r3, [r1, #8]
+ 8005dbc:	4b09      	ldr	r3, [pc, #36]	@ (8005de4 <GPS_Coordinates_Get+0x3c>)
+ 8005dbe:	e9d3 2302 	ldrd	r2, r3, [r3, #8]
+ 8005dc2:	6879      	ldr	r1, [r7, #4]
+ 8005dc4:	e9c1 2302 	strd	r2, r3, [r1, #8]
 	result->Alt = gga_tmp.Altitude;
- 8005dc4:	4b06      	ldr	r3, [pc, #24]	@ (8005de0 <GPS_Coordinates_Get+0x3c>)
- 8005dc6:	e9d3 230a 	ldrd	r2, r3, [r3, #40]	@ 0x28
- 8005dca:	6879      	ldr	r1, [r7, #4]
- 8005dcc:	e9c1 2304 	strd	r2, r3, [r1, #16]
+ 8005dc8:	4b06      	ldr	r3, [pc, #24]	@ (8005de4 <GPS_Coordinates_Get+0x3c>)
+ 8005dca:	e9d3 230a 	ldrd	r2, r3, [r3, #40]	@ 0x28
+ 8005dce:	6879      	ldr	r1, [r7, #4]
+ 8005dd0:	e9c1 2304 	strd	r2, r3, [r1, #16]
     return 0;
- 8005dd0:	2300      	movs	r3, #0
+ 8005dd4:	2300      	movs	r3, #0
 }
- 8005dd2:	4618      	mov	r0, r3
- 8005dd4:	370c      	adds	r7, #12
- 8005dd6:	46bd      	mov	sp, r7
- 8005dd8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8005ddc:	4770      	bx	lr
- 8005dde:	bf00      	nop
- 8005de0:	20000ac0 	.word	0x20000ac0
+ 8005dd6:	4618      	mov	r0, r3
+ 8005dd8:	370c      	adds	r7, #12
+ 8005dda:	46bd      	mov	sp, r7
+ 8005ddc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8005de0:	4770      	bx	lr
+ 8005de2:	bf00      	nop
+ 8005de4:	20000ac0 	.word	0x20000ac0
 
-08005de4 <GPS_Status_Get>:
+08005de8 <GPS_Status_Get>:
 
 uint8_t GPS_Status_Get(){
- 8005de4:	b580      	push	{r7, lr}
- 8005de6:	af00      	add	r7, sp, #0
+ 8005de8:	b580      	push	{r7, lr}
+ 8005dea:	af00      	add	r7, sp, #0
 	if(gga_tmp.HDOP != 0) return 1;
- 8005de8:	4b08      	ldr	r3, [pc, #32]	@ (8005e0c <GPS_Status_Get+0x28>)
- 8005dea:	e9d3 0108 	ldrd	r0, r1, [r3, #32]
- 8005dee:	f04f 0200 	mov.w	r2, #0
- 8005df2:	f04f 0300 	mov.w	r3, #0
- 8005df6:	f7fa fe6f 	bl	8000ad8 <__aeabi_dcmpeq>
- 8005dfa:	4603      	mov	r3, r0
- 8005dfc:	2b00      	cmp	r3, #0
- 8005dfe:	d101      	bne.n	8005e04 <GPS_Status_Get+0x20>
- 8005e00:	2301      	movs	r3, #1
- 8005e02:	e000      	b.n	8005e06 <GPS_Status_Get+0x22>
+ 8005dec:	4b08      	ldr	r3, [pc, #32]	@ (8005e10 <GPS_Status_Get+0x28>)
+ 8005dee:	e9d3 0108 	ldrd	r0, r1, [r3, #32]
+ 8005df2:	f04f 0200 	mov.w	r2, #0
+ 8005df6:	f04f 0300 	mov.w	r3, #0
+ 8005dfa:	f7fa fe6d 	bl	8000ad8 <__aeabi_dcmpeq>
+ 8005dfe:	4603      	mov	r3, r0
+ 8005e00:	2b00      	cmp	r3, #0
+ 8005e02:	d101      	bne.n	8005e08 <GPS_Status_Get+0x20>
+ 8005e04:	2301      	movs	r3, #1
+ 8005e06:	e000      	b.n	8005e0a <GPS_Status_Get+0x22>
 	else return 0;
- 8005e04:	2300      	movs	r3, #0
+ 8005e08:	2300      	movs	r3, #0
 }
- 8005e06:	4618      	mov	r0, r3
- 8005e08:	bd80      	pop	{r7, pc}
- 8005e0a:	bf00      	nop
- 8005e0c:	20000ac0 	.word	0x20000ac0
+ 8005e0a:	4618      	mov	r0, r3
+ 8005e0c:	bd80      	pop	{r7, pc}
+ 8005e0e:	bf00      	nop
+ 8005e10:	20000ac0 	.word	0x20000ac0
 
-08005e10 <GPS_HDOP_Get>:
+08005e14 <GPS_HDOP_Get>:
 
 double GPS_HDOP_Get(){
- 8005e10:	b480      	push	{r7}
- 8005e12:	af00      	add	r7, sp, #0
+ 8005e14:	b480      	push	{r7}
+ 8005e16:	af00      	add	r7, sp, #0
 	return gga_tmp.HDOP;
- 8005e14:	4b06      	ldr	r3, [pc, #24]	@ (8005e30 <GPS_HDOP_Get+0x20>)
- 8005e16:	e9d3 2308 	ldrd	r2, r3, [r3, #32]
- 8005e1a:	ec43 2b17 	vmov	d7, r2, r3
+ 8005e18:	4b06      	ldr	r3, [pc, #24]	@ (8005e34 <GPS_HDOP_Get+0x20>)
+ 8005e1a:	e9d3 2308 	ldrd	r2, r3, [r3, #32]
+ 8005e1e:	ec43 2b17 	vmov	d7, r2, r3
 }
- 8005e1e:	eeb0 0a47 	vmov.f32	s0, s14
- 8005e22:	eef0 0a67 	vmov.f32	s1, s15
- 8005e26:	46bd      	mov	sp, r7
- 8005e28:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8005e2c:	4770      	bx	lr
- 8005e2e:	bf00      	nop
- 8005e30:	20000ac0 	.word	0x20000ac0
- 8005e34:	00000000 	.word	0x00000000
+ 8005e22:	eeb0 0a47 	vmov.f32	s0, s14
+ 8005e26:	eef0 0a67 	vmov.f32	s1, s15
+ 8005e2a:	46bd      	mov	sp, r7
+ 8005e2c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8005e30:	4770      	bx	lr
+ 8005e32:	bf00      	nop
+ 8005e34:	20000ac0 	.word	0x20000ac0
 
 08005e38 <mat3_inv>:
 GPS_KF kf_gps;
@@ -14524,7 +14524,7 @@ int main(void)
  80085a2:	484e      	ldr	r0, [pc, #312]	@ (80086dc <main+0x174>)
  80085a4:	f7fc fc70 	bl	8004e88 <TaskIMU_init>
   TaskLCD_init();
- 80085a8:	f7fc fe96 	bl	80052d8 <TaskLCD_init>
+ 80085a8:	f7fc fe98 	bl	80052dc <TaskLCD_init>
 
   /* USER CODE END 2 */
 
@@ -15783,7 +15783,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
  8008d14:	d111      	bne.n	8008d3a <HAL_UARTEx_RxEventCallback+0x3a>
     {
         GPS_Data_Update();
- 8008d16:	f7fc ffb1 	bl	8005c7c <GPS_Data_Update>
+ 8008d16:	f7fc ffb3 	bl	8005c80 <GPS_Data_Update>
         HAL_UARTEx_ReceiveToIdle_DMA(&GPS_UART_PORT, gps_uart_rx_buffer, GPS_UART_BUFFER_SIZE);
  8008d1a:	f44f 7280 	mov.w	r2, #256	@ 0x100
  8008d1e:	490a      	ldr	r1, [pc, #40]	@ (8008d48 <HAL_UARTEx_RxEventCallback+0x48>)
@@ -16037,7 +16037,7 @@ void StartTaskLCD(void const * argument)
   {
 	  //Serial_Print("[LCD] display LCD\n\r");
 	  TaskLCD_run();
- 8008eae:	f7fc fa19 	bl	80052e4 <TaskLCD_run>
+ 8008eae:	f7fc fa1b 	bl	80052e8 <TaskLCD_run>
 	  osDelay(100);
  8008eb2:	2064      	movs	r0, #100	@ 0x64
  8008eb4:	f00c f93b 	bl	801512e <osDelay>
@@ -16060,14 +16060,14 @@ void StartTaskBattery(void const * argument)
   /* USER CODE BEGIN StartTaskBattery */
 	/* Infinite loop */
 	TaskBattery_init();
- 8008ec8:	f7fc fa12 	bl	80052f0 <TaskBattery_init>
+ 8008ec8:	f7fc fa14 	bl	80052f4 <TaskBattery_init>
 	osDelay(2000);
  8008ecc:	f44f 60fa 	mov.w	r0, #2000	@ 0x7d0
  8008ed0:	f00c f92d 	bl	801512e <osDelay>
 	for(;;)
 	{
 		TaskBattery_run();
- 8008ed4:	f7fc fa25 	bl	8005322 <TaskBattery_run>
+ 8008ed4:	f7fc fa27 	bl	8005326 <TaskBattery_run>
 		osDelay(10000);
  8008ed8:	f242 7010 	movw	r0, #10000	@ 0x2710
  8008edc:	f00c f927 	bl	801512e <osDelay>
@@ -16089,7 +16089,7 @@ void StartLoRaTask(void const * argument)
   /* USER CODE BEGIN StartLoRaTask */
 	/* Infinite loop */
 	TaskLoRa_init();
- 8008eec:	f7fc fa20 	bl	8005330 <TaskLoRa_init>
+ 8008eec:	f7fc fa22 	bl	8005334 <TaskLoRa_init>
 	osDelay(2000);
  8008ef0:	f44f 60fa 	mov.w	r0, #2000	@ 0x7d0
  8008ef4:	f00c f91b 	bl	801512e <osDelay>
@@ -16105,7 +16105,7 @@ void StartLoRaTask(void const * argument)
  8008f04:	4804      	ldr	r0, [pc, #16]	@ (8008f18 <StartLoRaTask+0x34>)
  8008f06:	f000 fca1 	bl	800984c <Serial_Print>
 			TaskLoRa_run();
- 8008f0a:	f7fc fa81 	bl	8005410 <TaskLoRa_run>
+ 8008f0a:	f7fc fa83 	bl	8005414 <TaskLoRa_run>
 		}
 		  osDelay(2000);
  8008f0e:	f44f 60fa 	mov.w	r0, #2000	@ 0x7d0
@@ -16128,14 +16128,14 @@ void StartTaskButton(void const * argument)
   /* USER CODE BEGIN StartTaskButton */
 	/* Infinite loop */
 	TaskButton_init();
- 8008f24:	f7fc fb3a 	bl	800559c <TaskButton_init>
+ 8008f24:	f7fc fb3c 	bl	80055a0 <TaskButton_init>
 	osDelay(2000);
  8008f28:	f44f 60fa 	mov.w	r0, #2000	@ 0x7d0
  8008f2c:	f00c f8ff 	bl	801512e <osDelay>
 	for(;;)
 	{
 		TaskButton_run();
- 8008f30:	f7fc fb3e 	bl	80055b0 <TaskButton_run>
+ 8008f30:	f7fc fb40 	bl	80055b4 <TaskButton_run>
 		osDelay(20);
  8008f34:	2014      	movs	r0, #20
  8008f36:	f00c f8fa 	bl	801512e <osDelay>
@@ -16156,12 +16156,12 @@ void StartTaskDebug(void const * argument)
  8008f44:	6078      	str	r0, [r7, #4]
   /* USER CODE BEGIN StartTaskDebug */
 	TaskDebug_init();
- 8008f46:	f7fc fb39 	bl	80055bc <TaskDebug_init>
+ 8008f46:	f7fc fb3b 	bl	80055c0 <TaskDebug_init>
   /* Infinite loop */
 	for(;;)
 	{
 		TaskDebug_run();
- 8008f4a:	f7fc fb41 	bl	80055d0 <TaskDebug_run>
+ 8008f4a:	f7fc fb43 	bl	80055d4 <TaskDebug_run>
 		osDelay(100);
  8008f4e:	2064      	movs	r0, #100	@ 0x64
  8008f50:	f00c f8ed 	bl	801512e <osDelay>

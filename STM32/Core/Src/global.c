@@ -147,7 +147,7 @@ void TaskGPS_run(void){
 
 				      }
 
-				  loc_gps_alt = 8;
+				  loc_gps_alt = 16.24;
 			      double pitch_rad = loc_pitch * M_PI / 180.0;
 			      double s12 = tag_distance * cos(pitch_rad);
 			      tag_gps_alt = loc_gps_alt + tag_distance * sin(pitch_rad);

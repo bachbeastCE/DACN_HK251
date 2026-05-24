@@ -8555,64 +8555,63 @@ LOAD C:/Program Files/STMicroelectronics/STM32CubeIDE_1.19.0/STM32CubeIDE/plugin
                 0x08004fd8       0x48 ./Core/Src/global.o
                 0x08004fd8                TaskGPS_init
  .text.TaskGPS_run
-                0x08005020      0x2b8 ./Core/Src/global.o
+                0x08005020      0x2bc ./Core/Src/global.o
                 0x08005020                TaskGPS_run
  .text.TaskLCD_init
-                0x080052d8        0xc ./Core/Src/global.o
-                0x080052d8                TaskLCD_init
+                0x080052dc        0xc ./Core/Src/global.o
+                0x080052dc                TaskLCD_init
  .text.TaskLCD_run
-                0x080052e4        0xc ./Core/Src/global.o
-                0x080052e4                TaskLCD_run
+                0x080052e8        0xc ./Core/Src/global.o
+                0x080052e8                TaskLCD_run
  .text.TaskBattery_init
-                0x080052f0       0x32 ./Core/Src/global.o
-                0x080052f0                TaskBattery_init
+                0x080052f4       0x32 ./Core/Src/global.o
+                0x080052f4                TaskBattery_init
  .text.TaskBattery_run
-                0x08005322        0xc ./Core/Src/global.o
-                0x08005322                TaskBattery_run
- *fill*         0x0800532e        0x2 
+                0x08005326        0xc ./Core/Src/global.o
+                0x08005326                TaskBattery_run
+ *fill*         0x08005332        0x2 
  .text.TaskLoRa_init
-                0x08005330       0xe0 ./Core/Src/global.o
-                0x08005330                TaskLoRa_init
+                0x08005334       0xe0 ./Core/Src/global.o
+                0x08005334                TaskLoRa_init
  .text.TaskLoRa_run
-                0x08005410      0x18c ./Core/Src/global.o
-                0x08005410                TaskLoRa_run
+                0x08005414      0x18c ./Core/Src/global.o
+                0x08005414                TaskLoRa_run
  .text.TaskButton_init
-                0x0800559c       0x14 ./Core/Src/global.o
-                0x0800559c                TaskButton_init
+                0x080055a0       0x14 ./Core/Src/global.o
+                0x080055a0                TaskButton_init
  .text.TaskButton_run
-                0x080055b0        0xc ./Core/Src/global.o
-                0x080055b0                TaskButton_run
+                0x080055b4        0xc ./Core/Src/global.o
+                0x080055b4                TaskButton_run
  .text.TaskDebug_init
-                0x080055bc       0x14 ./Core/Src/global.o
-                0x080055bc                TaskDebug_init
+                0x080055c0       0x14 ./Core/Src/global.o
+                0x080055c0                TaskDebug_init
  .text.TaskDebug_run
-                0x080055d0        0xe ./Core/Src/global.o
-                0x080055d0                TaskDebug_run
+                0x080055d4        0xe ./Core/Src/global.o
+                0x080055d4                TaskDebug_run
  .text.GPS_CaculateChecksum
-                0x080055de       0x5a ./Core/Src/gps.o
+                0x080055e2       0x5a ./Core/Src/gps.o
  .text.GPS_SendCommand
-                0x08005638       0xb0 ./Core/Src/gps.o
-                0x08005638                GPS_SendCommand
+                0x0800563c       0xb0 ./Core/Src/gps.o
+                0x0800563c                GPS_SendCommand
  .text.GPS_Init
-                0x080056e8       0x70 ./Core/Src/gps.o
-                0x080056e8                GPS_Init
+                0x080056ec       0x70 ./Core/Src/gps.o
+                0x080056ec                GPS_Init
  .text.parseRMC
-                0x08005758      0x2f4 ./Core/Src/gps.o
+                0x0800575c      0x2f4 ./Core/Src/gps.o
  .text.parseGGA
-                0x08005a4c      0x230 ./Core/Src/gps.o
+                0x08005a50      0x230 ./Core/Src/gps.o
  .text.GPS_Data_Update
-                0x08005c7c      0x128 ./Core/Src/gps.o
-                0x08005c7c                GPS_Data_Update
+                0x08005c80      0x128 ./Core/Src/gps.o
+                0x08005c80                GPS_Data_Update
  .text.GPS_Coordinates_Get
-                0x08005da4       0x40 ./Core/Src/gps.o
-                0x08005da4                GPS_Coordinates_Get
+                0x08005da8       0x40 ./Core/Src/gps.o
+                0x08005da8                GPS_Coordinates_Get
  .text.GPS_Status_Get
-                0x08005de4       0x2c ./Core/Src/gps.o
-                0x08005de4                GPS_Status_Get
+                0x08005de8       0x2c ./Core/Src/gps.o
+                0x08005de8                GPS_Status_Get
  .text.GPS_HDOP_Get
-                0x08005e10       0x24 ./Core/Src/gps.o
-                0x08005e10                GPS_HDOP_Get
- *fill*         0x08005e34        0x4 
+                0x08005e14       0x24 ./Core/Src/gps.o
+                0x08005e14                GPS_HDOP_Get
  .text.mat3_inv
                 0x08005e38      0x43c ./Core/Src/gps_kf.o
  *fill*         0x08006274        0x4 
