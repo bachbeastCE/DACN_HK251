@@ -51,7 +51,7 @@ extern uint8_t kf_start;
 extern double tag_gps_lon; 	//GPS TAGGET  LONGTITUDE
 extern double tag_gps_lat; 	//GPS TAGGET LATITUDE
 extern double tag_gps_alt; 	//GPS TAGGET ALTITUDE
-extern double tag_distance; //TAGGET DISTANCE
+extern volatile double tag_distance; //TAGGET DISTANCE
 extern double gps_hdop; 	//GPS_HDOP
 extern uint16_t battery_percent;
 

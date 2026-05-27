@@ -66,7 +66,12 @@ osThreadId TaskBatteryHandle;
 osThreadId LoRaTaskHandle;
 osThreadId TaskButtonHandle;
 osThreadId TaskDebugHandle;
+osThreadId RangefinderTaskHandle;
 osMutexId button_mutexHandle;
+
+uint8_t rxByte;
+char    rxBuf[32];
+uint8_t rxIdx = 0;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -90,6 +95,7 @@ void StartTaskBattery(void const * argument);
 void StartLoRaTask(void const * argument);
 void StartTaskButton(void const * argument);
 void StartTaskDebug(void const * argument);
+void StartTaskRangefinder(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -172,12 +178,12 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-//  /* definition and creation of TaskIMU */
+  /* definition and creation of TaskIMU */
   osThreadDef(TaskIMU, StartTaskIMU, osPriorityHigh, 0, 1024);
   TaskIMUHandle = osThreadCreate(osThread(TaskIMU), NULL);
 
   /* definition and creation of TaskGPS */
-  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 512);
+  osThreadDef(TaskGPS, StartTaskGPS, osPriorityAboveNormal, 0, 128);
   TaskGPSHandle = osThreadCreate(osThread(TaskGPS), NULL);
 
   /* definition and creation of TaskLCD */
@@ -185,7 +191,7 @@ int main(void)
   TaskLCDHandle = osThreadCreate(osThread(TaskLCD), NULL);
 
   /* definition and creation of TaskBattery */
-  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 512);
+  osThreadDef(TaskBattery, StartTaskBattery, osPriorityNormal, 0, 128);
   TaskBatteryHandle = osThreadCreate(osThread(TaskBattery), NULL);
 
   /* definition and creation of LoRaTask */
@@ -199,6 +205,10 @@ int main(void)
   /* definition and creation of TaskDebug */
   osThreadDef(TaskDebug, StartTaskDebug, osPriorityLow, 0, 128);
   TaskDebugHandle = osThreadCreate(osThread(TaskDebug), NULL);
+
+  /* definition and creation of RangefinderTask */
+  osThreadDef(RangefinderTask, StartTaskRangefinder, osPriorityNormal, 0, 256);
+  RangefinderTaskHandle = osThreadCreate(osThread(RangefinderTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
 //  /* add threads, ... */
@@ -704,6 +714,31 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     }
 
 }
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART1) {
+
+        if (rxByte == '\r' || rxByte == '\n') {
+            if (rxIdx > 0) {
+                rxBuf[rxIdx] = '\0';
+
+                for (int i = 0; i < rxIdx; i++)
+                    if (rxBuf[i] == ',') rxBuf[i] = '.';
+
+
+                tag_distance = strtof(rxBuf, NULL);
+
+                rxIdx = 0;
+                memset(rxBuf, 0, sizeof(rxBuf));
+            }
+        } else if ((rxByte >= '0' && rxByte <= '9') ||
+                    rxByte == '.' || rxByte == ',' || rxByte == '-') {
+            rxBuf[rxIdx++] = rxByte;
+        }
+
+        HAL_UART_Receive_IT(&huart1, &rxByte, 1);
+    }
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartTaskIMU */
@@ -849,6 +884,24 @@ void StartTaskDebug(void const * argument)
 		osDelay(100);
 	}
   /* USER CODE END StartTaskDebug */
+}
+
+/* USER CODE BEGIN Header_StartTaskRangefinder */
+/**
+* @brief Function implementing the RangefinderTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskRangefinder */
+void StartTaskRangefinder(void const * argument)
+{
+  /* USER CODE BEGIN StartTaskRangefinder */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1000);
+  }
+  /* USER CODE END StartTaskRangefinder */
 }
 
 /**
