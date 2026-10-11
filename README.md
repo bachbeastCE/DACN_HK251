@@ -15,18 +15,59 @@ High-Performance I/O: * Optimized communication peripherals (UART/SPI) using DMA
 - ST-Link debugger
 
 ## Pin Mapping
-| Device pin     | STM32 pin |
-|----------------|-----------|
-| LCD_SPI SDA    | PA7       |
-| LCD_SPI SCL    | PA5       |
-| LCD_SPI CS     | PA4       |
-| LCD_RESET      | PB0       |
-| LCD_DC         | PB1       |
-| GPS_TX         | PA3       |
-| GPS_RX         | PA2       |
-| IMU_I2C SCL    | PB10      |
-| IMU_I2C SDA    | PB9       |
-| POWER ADC      | PA1       |
+
+### STM32 (Tracker Node)
+
+#### LCD (SPI1)
+
+| Device pin  | STM32 pin | Description        |
+|-------------|-----------|--------------------|
+| LCD_SPI SDA | PA7       | SPI MOSI           |
+| LCD_SPI SCL | PA5       | SPI clock          |
+| LCD_SPI CS  | PA4       | Chip select        |
+| LCD_RESET   | PB0       | Reset              |
+| LCD_DC      | PB1       | Data/Command       |
+
+#### GPS (UART2)
+
+| Device pin | STM32 pin |
+|------------|-----------|
+| GPS_TX     | PA3       |
+| GPS_RX     | PA2       |
+
+#### IMU (I2C)
+
+| Device pin   | STM32 pin |
+|--------------|-----------|
+| IMU_I2C SCL  | PB10      |
+| IMU_I2C SDA  | PB9       |
+
+#### Power Monitor
+
+| Device pin | STM32 pin |
+|------------|-----------|
+| POWER ADC  | PA1       |
+
+#### LoRa (SPI)
+
+| LoRa pin | STM32 pin | Description                 |
+|----------|-----------|-----------------------------|
+| MOSI     | PB5       | Data Master → Slave         |
+| MISO     | PB4       | Data Slave → Master         |
+| SCK      | PB3       | SPI clock                   |
+| NSS      | PA15      | Chip select                 |
+| RESET    | PA10      | Reset module                |
+
+### Raspberry Pi 5 ↔ LoRa
+
+| RPi 5 pin | RPi 5 GPIO | LoRa pin | Description                  |
+|-----------|------------|----------|------------------------------|
+| Pin 19    | MOSI       | MOSI     | Data Master → Slave          |
+| Pin 21    | MISO       | MISO     | Data Slave → Master          |
+| Pin 23    | SCLK       | SCK      | SPI clock                    |
+| Pin 24    | CE0        | NSS      | Chip select                  |
+| Pin 15    | GPIO22     | RESET    | Reset module                 |
+| Pin 13    | GPIO27     | DIO0     | Interrupt on data received   |
 
 ## Installation
 
@@ -66,12 +107,12 @@ To open:
 Connect ST-Link and click Run → Debug or Run on STM32CubeProgrammer
 
 ## Test
-Detailed testing procedures and evaluation results are described in **REPORT_GD1**, Chapter 5: *System Implementation and Evaluation*.
-REPORT_GD1.pdf: https://github.com/bachbeastCE/DACN_HK251/blob/main/REPORT_GD1.pdf
 
-## Future
-RTOS Integration: Migrating the firmware to FreeRTOS for better task scheduling, priority management, and deterministic system behavior.
-Long-Range Telemetry: Expanding the communication range by implementing a dedicated LoRa Gateway to transmit data to a remote management station.
-Power Optimization: Implementing Low Power modes for the STM32 and peripheral sleep cycles to extend battery life for field operations.
-Security: Integrated AES-128-GCM encryption using TinyAES to provide data confidentiality and integrity on resource-constrained MCUs. 
+Detailed testing procedures and evaluation results are described in
+[**REPORT_GD1**](./REPORT_GD1.pdf), Chapter 5: *System Implementation and Evaluation*.
+
+## Documentation
+
+The complete project documentation is available at:
+[**HK252_1.143_LVTN_DATN_Finish_2210022_2210185**](./HK252_1.143_LVTN_DATN_Finish_2210022_2210185)
 
