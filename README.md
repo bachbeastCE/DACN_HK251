@@ -1,11 +1,11 @@
 # Target Localization Module using GPS, IMU and LoRa
 An embedded system that estimates target coordinates based on measured distance and current device position. The system integrates GPS, IMU and LoRa communication for remote localization.
 
-##Key Features
-Precision Navigation: Implementing Karney’s Algorithm to solve the inverse geodesic problem, providing highly accurate distance and azimuth calculations on an ellipsoidal Earth model.
-Advanced Sensor Fusion: * Utilizing an Extended Kalman Filter (UKF) and (KF) to fuse data from GPS and IMU (10-axis).
-Real-time determination of Observation Posture (Attitude) and precise Target Localization.
-High-Performance I/O: * Optimized communication peripherals (UART/SPI) using DMA (Direct Memory Access) and Interrupts. Minimizing CPU overhead to ensure stable high-frequency sensor sampling.
+## Key Features
+
+- **Precision Navigation:** Implementing Karney’s Algorithm to solve the inverse geodesic problem, providing highly accurate distance and azimuth calculations on an ellipsoidal Earth model.
+- **Advanced Sensor Fusion:** Utilizing an Extended Kalman Filter (UKF) and a Kalman Filter (KF) to fuse GPS and 10-axis IMU data. This enables real-time determination of observation posture (attitude) and precise target localization.
+- **High-Performance I/O:** Optimizing communication peripherals (UART/SPI) with DMA (Direct Memory Access) and interrupts to minimize CPU overhead and ensure stable, high-frequency sensor sampling.
 
 ## Hardware
 - MCU: STM32F411CEU6
